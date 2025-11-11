@@ -1,4 +1,4 @@
-// --------- YENİ SCRIPT.JS (Bölüm 2: TAM DERS MOTORU) ---------
+// --------- SCRIPT.JS (Bölüm 3: TAM SÜRÜM - Can Sistemi Dahil) ---------
 
 // --- 1. GLOBAL DEĞİŞKENLER VE SABİTLER ---
 // Audio
@@ -24,6 +24,7 @@ let progressFill,
   completeMessage,
   btnNextLesson,
   btnMenuAfterComplete;
+let heartDisplaySpans = []; // Kalp <span> elemanlarını burada tutacağız
 
 // HTML Elemanları (Menü)
 let btnLesson1, btnLesson2;
@@ -47,6 +48,10 @@ let currentLessonId = null;
 let lessonPlan = [];
 let currentQuestionIndex = 0;
 let totalQuestions = 0;
+let lessonActive = false; // Dersin aktif olup olmadığını (can bitince false olur)
+const MAX_HEARTS = 5;
+let currentHearts = 5;
+
 let userProgress = {
   unlockedLessons: ["lesson1"], // Başlangıçta sadece 'lesson1' açık
 };
@@ -64,7 +69,6 @@ const MORSE_CODE = {
   O: "---",
   R: ".-.",
   D: "-..",
-  // Buraya alfabe eklenebilir
 };
 
 const LESSON_DATA = {
@@ -93,10 +97,20 @@ const LESSON_DATA = {
   },
 };
 
-// --- 3. SES MOTORU (AUDIO ENGINE) ---
-// (Önceki adımlardan birleştirilmiş ses motoru)
+// YENİ EKLENEN YARDIMCI FONKSİYON
+// Kodu harfe çevirir (örn: '.-' -> 'A')
+function getLetterFromCode(code) {
+  // MORSE_CODE sözlüğünde 'key' (harf) ve 'value' (kod) olarak döner
+  for (const [letter, morseCode] of Object.entries(MORSE_CODE)) {
+    if (morseCode === code) {
+      return letter;
+    }
+  }
+  return "??"; // Eşleşme bulunamazsa
+}
 
-// 'Dinle' modülü için (Alıştırma 1'den)
+// --- 3. SES MOTORU (AUDIO ENGINE) ---
+
 function playSound(durationInMs) {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -129,7 +143,6 @@ async function playSequence(code) {
   }
 }
 
-// 'Vur' modülü için (Alıştırma 2'den)
 function startTone() {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -154,7 +167,6 @@ function stopTone() {
   const pressDuration = Date.now() - pressStartTime;
   const tappedSymbol = pressDuration < DIT_DAH_THRESHOLD_MS ? "." : "-";
 
-  // Vurma ekranındaki vuruşları güncelle
   const currentTaps = tap_userTapsDisplay.textContent;
   tap_userTapsDisplay.textContent =
     currentTaps === "_" ? tappedSymbol : currentTaps + tappedSymbol;
@@ -162,13 +174,11 @@ function stopTone() {
 
 // --- 4. VERİ YÖNETİMİ (localStorage) ---
 function saveProgress() {
-  // 'morseLingoProgress' adıyla not defterine (localStorage) kaydet
   localStorage.setItem("morseLingoProgress", JSON.stringify(userProgress));
   console.log("İlerleme kaydedildi:", userProgress);
 }
 
 function loadProgress() {
-  // Kayıtlı notu (progress) bulmaya çalış
   const savedData = localStorage.getItem("morseLingoProgress");
   if (savedData) {
     userProgress = JSON.parse(savedData);
@@ -180,12 +190,10 @@ function loadProgress() {
 
 // --- 5. EKRAN YÖNETİMİ (ROUTER) ---
 function showScreen(screenId) {
-  // Tüm ekranları gizle
   screenMenu.classList.add("hidden");
   screenExercise.classList.add("hidden");
   screenComplete.classList.add("hidden");
 
-  // İstenen ekranı göster
   const activeScreen = document.getElementById(screenId);
   if (activeScreen) {
     activeScreen.classList.remove("hidden");
@@ -194,19 +202,15 @@ function showScreen(screenId) {
 
 // --- 6. ARAYÜZ GÜNCELLEME (UI RENDER) ---
 function renderMenuState() {
-  // Hafızadan ilerlemeyi yükle
   loadProgress();
 
-  // 'Ders 2' butonunu bul
   const btnLesson2 = document.getElementById("btnLesson2");
 
-  // Eğer 'lesson2' kilidi açılmışsa
   if (userProgress.unlockedLessons.includes("lesson2")) {
     btnLesson2.classList.remove("locked");
   } else {
     btnLesson2.classList.add("locked");
   }
-  // Buraya 'btnLesson3' vb. için kontroller eklenebilir
 }
 
 function updateProgress() {
@@ -223,6 +227,11 @@ function startLesson(lessonId) {
   totalQuestions = lessonPlan.length;
   currentQuestionIndex = 0;
 
+  // Canları ve ders durumunu sıfırla
+  currentHearts = MAX_HEARTS;
+  lessonActive = true;
+  renderHearts(); // Kalp arayüzünü güncelle
+
   // 1. Alıştırma ekranını göster
   showScreen("screenExercise");
 
@@ -232,102 +241,129 @@ function startLesson(lessonId) {
 }
 
 function showQuestion() {
-  // 1. Mevcut soruyu plandan al
   const question = lessonPlan[currentQuestionIndex];
 
-  // 2. Geri bildirim alanlarını temizle
   listen_pFeedback.textContent = "";
   tap_pFeedback.textContent = "";
 
-  // 3. Soru tipine göre doğru modülü göster
   if (question.type === "listen") {
     moduleListen.classList.remove("hidden");
     moduleTap.classList.add("hidden");
 
-    // 'Dinle' modülünü hazırla
     listen_inputGuess.value = "";
     listen_inputGuess.focus();
 
-    // Sesi otomatik çal
-    // Butonları geçici olarak kilitle (ses çalarken basılmasın)
     listen_btnPlaySound.disabled = true;
     listen_btnCheckAnswer.disabled = true;
     playSequence(MORSE_CODE[question.letter]).then(() => {
-      listen_btnPlaySound.disabled = false;
-      listen_btnCheckAnswer.disabled = false;
+      if (lessonActive) {
+        // Can bitmemişse butonları aç
+        listen_btnPlaySound.disabled = false;
+        listen_btnCheckAnswer.disabled = false;
+      }
     });
   } else if (question.type === "tap") {
     moduleListen.classList.add("hidden");
     moduleTap.classList.remove("hidden");
 
-    // 'Vur' modülünü hazırla
     tap_letterDisplay.textContent = question.letter;
-    tap_userTapsDisplay.textContent = "_"; // Vuruşları sıfırla
+    tap_userTapsDisplay.textContent = "_";
   }
 }
 
-// Kullanıcı bir cevabı kontrol ettiğinde bu fonksiyon çalışır
 function handleAnswerCheck(type) {
+  if (!lessonActive) return; // Can bittiyse kontrol etme
+
   const question = lessonPlan[currentQuestionIndex];
   let isCorrect = false;
+  let details = {}; // Detayları tutmak için boş nesne
 
   if (type === "listen") {
     const userGuess = listen_inputGuess.value.toUpperCase();
+    details = { userGuess: userGuess, correctLetter: question.letter }; // Detayları hazırla
     if (userGuess === question.letter) {
       isCorrect = true;
     }
   } else if (type === "tap") {
     const correctCode = MORSE_CODE[question.letter];
     const userTaps = tap_userTapsDisplay.textContent;
+    details = {
+      userTaps: userTaps,
+      correctCode: correctCode,
+      correctLetter: question.letter,
+    }; // Detayları hazırla
     if (userTaps === correctCode) {
       isCorrect = true;
     }
   }
 
-  // Geri bildirimi ver
-  showFeedback(isCorrect, type);
+  showFeedback(isCorrect, type, details); // Detayları gönder
 }
 
-function showFeedback(isCorrect, type) {
+function showFeedback(isCorrect, type, details) {
+  // 'details' parametresini ekle
+  if (!lessonActive) return;
+
   const feedbackEl = type === "listen" ? listen_pFeedback : tap_pFeedback;
 
   if (isCorrect) {
     feedbackEl.textContent = "Doğru!";
     feedbackEl.className = "feedback-area feedback-correct";
 
-    // Doğruysa, 1 saniye bekle ve sıradaki soruya geç
-    setTimeout(nextQuestion, 1000);
+    setTimeout(nextQuestion, 1000); // 1 saniye sonra sıradaki soru
   } else {
-    feedbackEl.textContent = "Yanlış! Tekrar dene.";
+    // --- YANLIŞ CEVAP (DETAYLI GERİ BİLDİRİM) ---
+
+    if (type === "listen") {
+      // 'Dinle' alıştırması için daha iyi geri bildirim
+      feedbackEl.textContent = `Yanlış! Doğru cevap '${details.correctLetter}' olacaktı.`;
+    } else if (type === "tap") {
+      // 'Vur' alıştırması için detaylı geri bildirim
+      const userLetter = getLetterFromCode(details.userTaps);
+      feedbackEl.textContent = `Yanlış! Sen '${details.userTaps}' (${userLetter}) vurdun. Doğrusu '${details.correctCode}' (${details.correctLetter}) olacaktı.`;
+    }
+
     feedbackEl.className = "feedback-area feedback-wrong";
 
-    // 'Vur' modülündeyse, yanlışsa vuruşları temizle
-    if (type === "tap") {
+    loseLife(); // Can kaybet
+
+    // Hatanın okunması için bekleme süresini artır
+    if (lessonActive && type === "tap") {
       setTimeout(() => {
-        tap_userTapsDisplay.textContent = "_";
-        feedbackEl.textContent = "";
-      }, 1500);
+        if (lessonActive) {
+          tap_userTapsDisplay.textContent = "_"; // Vuruşları temizle
+          feedbackEl.textContent = ""; // Mesajı temizle
+        }
+      }, 3000); // Süreyi 1.5s'den 3s'ye çıkar
+    } else if (lessonActive && type === "listen") {
+      // Dinleme alıştırmasında da yanlışsa alanı temizle
+      setTimeout(() => {
+        if (lessonActive) {
+          listen_inputGuess.value = ""; // Metin kutusunu temizle
+          feedbackEl.textContent = ""; // Mesajı temizle
+        }
+      }, 3000);
     }
   }
 }
 
 function nextQuestion() {
-  currentQuestionIndex++; // Soru indeksini artır
-  updateProgress(); // İlerleme çubuğunu güncelle
+  if (!lessonActive) return; // Can bittiyse devam etme
+
+  currentQuestionIndex++;
+  updateProgress();
 
   if (currentQuestionIndex < totalQuestions) {
-    // Hâlâ soru varsa, sıradakini göster
     showQuestion();
   } else {
-    // Ders bittiyse
     completeLesson();
   }
 }
 
 function completeLesson() {
+  lessonActive = false; // Dersi bitir, girdileri kapa
   console.log(`${currentLessonId} tamamlandı!`);
 
-  // 1. 'lesson2'nin kilidini aç (eğer 'lesson1' bittiyse)
   if (
     currentLessonId === "lesson1" &&
     !userProgress.unlockedLessons.includes("lesson2")
@@ -339,10 +375,7 @@ function completeLesson() {
     completeMessage.textContent = `${LESSON_DATA[currentLessonId].title} tamamlandı!`;
   }
 
-  // 2. İlerlemeyi tarayıcıya kaydet
   saveProgress();
-
-  // 3. "Tamamlandı" ekranını göster
   showScreen("screenComplete");
 }
 
@@ -357,7 +390,7 @@ function init() {
   screenExercise = document.getElementById("screenExercise");
   screenComplete = document.getElementById("screenComplete");
 
-  // Alıştırma modüllerini bul
+  // Alıştırma modülleri
   moduleListen = document.getElementById("exerciseListen");
   moduleTap = document.getElementById("exerciseTap");
 
@@ -365,13 +398,14 @@ function init() {
   btnLesson1 = document.getElementById("btnLesson1");
   btnLesson2 = document.getElementById("btnLesson2");
 
-  // Alıştırma ekranı butonları
+  // Alıştırma ekranı
   btnBackToMenu = document.getElementById("btnBackToMenu");
   progressFill = document.getElementById("progressFill");
+  heartDisplaySpans = document.querySelectorAll("#heartDisplay .heart"); // Kalpleri bul
 
-  // Tamamlandı ekranı butonları
+  // Tamamlandı ekranı
   completeMessage = document.getElementById("completeMessage");
-  btnNextLesson = document.getElementById("btnNextLesson"); // (Bu butona henüz işlev atamadık, şimdilik duruyor)
+  btnNextLesson = document.getElementById("btnNextLesson");
   btnMenuAfterComplete = document.getElementById("btnMenuAfterComplete");
 
   // 'Dinle' modülü elemanları
@@ -402,37 +436,47 @@ function init() {
 
   // Alıştırma Ekranı
   btnBackToMenu.addEventListener("click", () => {
-    // Menüye dönmeden önce ana menünün durumunu güncelle (kilitleri kontrol et)
+    lessonActive = false; // Dersten çıkılıyor
     renderMenuState();
     showScreen("screenMenu");
   });
 
   // Tamamlandı Ekranı
   btnMenuAfterComplete.addEventListener("click", () => {
-    // Menüye dönmeden önce ana menünün durumunu güncelle (kilitleri kontrol et)
     renderMenuState();
     showScreen("screenMenu");
   });
 
   // 'Dinle' Modülü Olayları
   listen_btnPlaySound.addEventListener("click", () => {
+    if (!lessonActive) return; // Can bittiyse çalışma
     const question = lessonPlan[currentQuestionIndex];
     playSequence(MORSE_CODE[question.letter]);
   });
-  listen_btnCheckAnswer.addEventListener("click", () =>
-    handleAnswerCheck("listen")
-  );
+  listen_btnCheckAnswer.addEventListener("click", () => {
+    if (!lessonActive) return;
+    handleAnswerCheck("listen");
+  });
 
   // 'Vur' Modülü Olayları
-  tap_btnMorseKey.addEventListener("mousedown", startTone);
-  tap_btnMorseKey.addEventListener("mouseup", stopTone);
-  tap_btnMorseKey.addEventListener("mouseleave", () => {
+  tap_btnMorseKey.addEventListener("mousedown", (e) => {
+    if (!lessonActive) return;
+    e.preventDefault();
+    startTone();
+  });
+  tap_btnMorseKey.addEventListener("mouseup", (e) => {
+    if (!lessonActive) return;
+    e.preventDefault();
+    stopTone();
+  });
+  tap_btnMorseKey.addEventListener("mouseleave", (e) => {
+    if (!lessonActive) return;
     if (currentOscillator) stopTone();
   });
-  // Dokunmatik cihazlar için
   tap_btnMorseKey.addEventListener(
     "touchstart",
     (e) => {
+      if (!lessonActive) return;
       e.preventDefault();
       startTone();
     },
@@ -441,20 +485,68 @@ function init() {
   tap_btnMorseKey.addEventListener(
     "touchend",
     (e) => {
+      if (!lessonActive) return;
       e.preventDefault();
       stopTone();
     },
     { passive: false }
   );
 
-  tap_btnCheckAnswer.addEventListener("click", () => handleAnswerCheck("tap"));
+  tap_btnCheckAnswer.addEventListener("click", () => {
+    if (!lessonActive) return;
+    handleAnswerCheck("tap");
+  });
   tap_btnClear.addEventListener("click", () => {
+    if (!lessonActive) return;
     tap_userTapsDisplay.textContent = "_";
   });
 
   // --- UYGULAMAYI BAŞLAT ---
-  // Başlangıçta Ana Menüyü göster
   renderMenuState(); // Kilit durumlarını yükle
   showScreen("screenMenu"); // Ana menüyü göster
-  console.log("Uygulama hazır!");
+  console.log("Uygulama hazır! (v3 - Can Sistemi Aktif)");
+}
+
+// --- 9. CAN SİSTEMİ FONKSİYONLARI ---
+
+// Kalp arayüzünü güncelleyen fonksiyon
+function renderHearts() {
+  for (let i = 0; i < heartDisplaySpans.length; i++) {
+    if (i < currentHearts) {
+      heartDisplaySpans[i].classList.remove("lost");
+    } else {
+      heartDisplaySpans[i].classList.add("lost");
+    }
+  }
+}
+
+// Can kaybetme mantığı
+function loseLife() {
+  if (currentHearts <= 0) return;
+
+  currentHearts--;
+  console.log(`Can kaybedildi! Kalan: ${currentHearts}`);
+  renderHearts();
+
+  if (currentHearts <= 0) {
+    failLesson();
+  }
+}
+
+// Ders başarısız olma fonksiyonu
+function failLesson() {
+  console.log("Ders Başarısız! Canlar bitti.");
+  lessonActive = false; // Tüm girdileri durdur
+
+  const question = lessonPlan[currentQuestionIndex];
+  const feedbackEl =
+    question.type === "listen" ? listen_pFeedback : tap_pFeedback;
+
+  feedbackEl.textContent = "Canların bitti! Tekrar dene.";
+  feedbackEl.className = "feedback-area feedback-failed";
+
+  setTimeout(() => {
+    renderMenuState();
+    showScreen("screenMenu");
+  }, 2500);
 }

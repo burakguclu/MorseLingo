@@ -220,3 +220,30 @@ h2 {
     cursor: pointer;
 }
 #btnMenuAfterComplete { background-color: #007bff; }
+
+/* --- 6. YENİ EKLENEN STİLLER: CAN SİSTEMİ --- */
+
+.heart-display {
+    display: flex;
+    gap: 4px; /* Kalpler arası boşluk */
+    margin: 0 15px; /* Sağ ve sol boşluk */
+}
+
+.heart {
+    font-size: 24px;
+    opacity: 1; /* Başlangıçta tam görünür */
+    transition: all 0.2s;
+}
+
+/* Can kaybedildiğinde bu sınıf eklenecek */
+.heart.lost {
+    opacity: 0.2;
+    transform: scale(0.9); /* Hafifçe küçülsün */
+}
+
+/* Ders başarısız olduğunda kullanılacak mesaj stili */
+.feedback-failed {
+    color: #dc3545; /* Kırmızı */
+    font-weight: bold;
+    font-size: 20px !important;
+}
