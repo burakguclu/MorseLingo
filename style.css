@@ -1,72 +1,199 @@
+/* --- 1. TEMEL VE GENEL STİLLER --- */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f4f8;
     color: #333;
+    margin: 0;
+    padding: 0;
+    /* Dokunmatik cihazlarda seçimi engelle */
+    user-select: none;
+}
+
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    /* Dokunmatik cihazlarda bas-çek yaparken ekranın seçilmesini engelle */
-    user-select: none; 
+    padding: 20px;
+}
+
+.main-header {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 2px solid #e0e0e0;
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 h1 {
     color: #005a9c;
+    margin: 0;
 }
 
-.exercise-area {
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* --- 2. EKRAN YÖNETİMİ --- */
+/* Bir 'ekran'ın temel stili */
+.screen {
+    width: 100%;
+    max-width: 500px;
     background-color: #ffffff;
     border-radius: 8px;
     padding: 25px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    width: 300px;
 }
 
-/* Soru (örn: "A") ve Kullanıcı Vuruşları (`.-`) için stiller */
-.question-display, .taps-display {
-    margin-bottom: 20px;
+/* Bu sınıf, bir ekranı GİZLEMEK için kullanılacak */
+.hidden {
+    display: none;
+}
+
+/* --- 3. EKRAN 1: ANA MENÜ STİLLERİ --- */
+.lesson-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lesson-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 20px;
+    border-radius: 8px;
     font-size: 18px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s, transform 0.2s;
+    border-bottom: 4px solid #0056b3;
 }
-#letterToTap, #userTapsDisplay {
-    display: block;
-    font-size: 48px;
+.lesson-button:hover {
+    background-color: #0069d9;
+    transform: translateY(-2px);
+}
+.lesson-button .lesson-title {
     font-weight: bold;
-    color: #005a9c;
-    margin-top: 10px;
-    /* Vuruşlar gösterilirken harf aralığı olsun */
-    letter-spacing: 2px;
-    min-height: 50px; /* Boşken zıplamasın */
+    display: block;
+    font-size: 20px;
+}
+.lesson-button .lesson-content {
+    font-size: 16px;
+    opacity: 0.9;
 }
 
-/* --- SANAL MORS TUŞU (MANİPLE) --- */
-#btnMorseKey {
+/* Kilitli ders stili */
+.lesson-button.locked {
+    background-color: #b0c4de; /* Soluk mavi */
+    color: #666;
+    border-bottom: 4px solid #8a9aaa;
+    cursor: not-allowed;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
+    background-repeat: no-repeat;
+    background-position: center right 20px;
+}
+.lesson-button.locked:hover {
+    background-color: #b0c4de;
+    transform: none;
+}
+
+/* --- 4. EKRAN 2: ALIŞTIRMA STİLLERİ --- */
+.lesson-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#btnBackToMenu {
+    background: none;
+    border: 2px solid #ccc;
+    color: #555;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 15px;
+}
+#btnBackToMenu:hover { background-color: #f0f0f0; }
+
+.progress-bar {
+    flex-grow: 1; /* Kalan tüm alanı kapla */
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    width: 0%; /* Başlangıçta %0 dolu */
+    background-color: #28a745;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Geri bildirim alanı (ortak) */
+.feedback-area {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+    height: 20px;
+}
+.feedback-correct { color: #28a745; }
+.feedback-wrong { color: #dc3545; }
+
+/* --- 4a. ALIŞTIRMA 1: DİNLE & YAZ --- */
+#exerciseListen {
+    text-align: center;
+}
+#exerciseListen button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+#listen_btnPlaySound { background-color: #28a745; }
+#listen_inputGuess {
+    font-size: 24px;
+    padding: 10px;
+    width: 80px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-transform: uppercase; 
+}
+
+/* --- 4b. ALIŞTIRMA 2: GÖR & VUR --- */
+#exerciseTap {
+    text-align: center;
+}
+#tap_btnMorseKey {
     width: 200px;
     height: 200px;
-    background-color: #dc3545; /* Kırmızı */
+    background-color: #dc3545;
     color: white;
     font-size: 24px;
     font-weight: bold;
     border: 5px solid #a0202e;
-    border-radius: 50%; /* Tamamen yuvarlak */
+    border-radius: 50%;
     cursor: pointer;
     margin-bottom: 20px;
     transition: all 0.1s;
-    /* Basılı tutarken çıkacak varsayılan menüleri engelle */
     touch-action: manipulation;
 }
-
-/* Tuşa "basarken" (active state) */
-#btnMorseKey:active {
+#tap_btnMorseKey:active {
     background-color: #ff475a;
-    transform: scale(0.95); /* Hafifçe küçülsün */
+    transform: scale(0.95);
     border-width: 8px;
 }
-
-/* Kontrol Butonları (Kontrol Et, Temizle) */
-.controls button {
+#exerciseTap .controls button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -76,23 +203,20 @@ h1 {
     font-size: 16px;
     cursor: pointer;
 }
-.controls button:hover {
-    background-color: #0056b3;
-}
-/* Temizle butonu biraz farklı olsun */
-#btnClear {
-    background-color: #6c757d;
-}
-#btnClear:hover {
-    background-color: #5a6268;
-}
+#tap_btnClear { background-color: #6c757d; }
 
-/* Geri bildirim mesajı */
-#pFeedback {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 15px;
-    height: 20px;
+/* --- 5. EKRAN 3: TAMAMLAMA EKRANI --- */
+#screenComplete {
+    text-align: center;
 }
-.feedback-correct { color: #28a745; }
-.feedback-wrong { color: #dc3545; }
+#screenComplete button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+#btnMenuAfterComplete { background-color: #007bff; }

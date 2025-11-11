@@ -3,33 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MorseLingo - Alıştırma 2</title>
+    <title>MorseLingo - Ana Menü</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>MorseLingo</h1>
-    <p>Alıştırma 2: Gör ve Vur</p>
+    <header class="main-header">
+      <h1>MorseLingo</h1>
+    </header>
 
-    <div class="exercise-area">
-      <div class="question-display">
-        Vurman gereken harf:
-        <span id="letterToTap">A</span>
+    <main>
+      <div id="screenMenu" class="screen">
+        <h2>Dersler</h2>
+        <div class="lesson-list">
+          <button
+            id="btnLesson1"
+            class="lesson-button"
+            data-lesson-id="lesson1"
+          >
+            <span class="lesson-title">Ders 1: Temel Harfler</span>
+            <span class="lesson-content">E, T, I, A, N, M</span>
+          </button>
+
+          <button
+            id="btnLesson2"
+            class="lesson-button locked"
+            data-lesson-id="lesson2"
+          >
+            <span class="lesson-title">Ders 2: Yeni Harfler</span>
+            <span class="lesson-content">S, O, R, D</span>
+          </button>
+        </div>
       </div>
 
-      <button id="btnMorseKey">MORS TUŞU</button>
+      <div id="screenExercise" class="screen hidden">
+        <div class="lesson-header">
+          <button id="btnBackToMenu">← Menüye Dön</button>
+          <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+        </div>
 
-      <div class="taps-display">
-        Senin vuruşların:
-        <span id="userTapsDisplay">...</span>
+        <div id="exerciseListen" class="exercise-module hidden">
+          <p class="exercise-instruction">Duyduğun harfi buraya yaz:</p>
+          <button id="listen_btnPlaySound">Sesi Çal</button>
+          <input type="text" id="listen_inputGuess" maxlength="1" />
+          <button id="listen_btnCheckAnswer">Kontrol Et</button>
+          <p id="listen_pFeedback" class="feedback-area"></p>
+        </div>
+
+        <div id="exerciseTap" class="exercise-module hidden">
+          <div class="question-display">
+            Vurman gereken harf:
+            <span id="tap_letterToTap">A</span>
+          </div>
+          <button id="tap_btnMorseKey">MORS TUŞU</button>
+          <div class="taps-display">
+            Senin vuruşların:
+            <span id="tap_userTapsDisplay">...</span>
+          </div>
+          <div class="controls">
+            <button id="tap_btnCheckAnswer">Kontrol Et</button>
+            <button id="tap_btnClear">Temizle</button>
+          </div>
+          <p id="tap_pFeedback" class="feedback-area"></p>
+        </div>
       </div>
-
-      <div class="controls">
-        <button id="btnCheckAnswer">Kontrol Et</button>
-        <button id="btnClear">Temizle</button>
+      <div id="screenComplete" class="screen hidden">
+        <h2>Harika!</h2>
+        <p id="completeMessage">Ders 1'i tamamladın!</p>
+        <button id="btnNextLesson">Sıradaki Derse Geç</button>
+        <button id="btnMenuAfterComplete">Ana Menüye Dön</button>
       </div>
-
-      <p id="pFeedback"></p>
-    </div>
+    </main>
 
     <script src="script.js"></script>
   </body>
