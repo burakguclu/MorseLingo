@@ -1,0 +1,289 @@
+{
+  "MORSE_CODE": {
+    "A": ".-",
+    "B": "-...",
+    "C": "-.-.",
+    "D": "-..",
+    "E": ".",
+    "F": "..-.",
+    "G": "--.",
+    "H": "....",
+    "I": "..",
+    "J": ".---",
+    "K": "-.-",
+    "L": ".-..",
+    "M": "--",
+    "N": "-.",
+    "O": "---",
+    "P": ".--.",
+    "Q": "--.-",
+    "R": ".-.",
+    "S": "...",
+    "T": "-",
+    "U": "..-",
+    "V": "...-",
+    "W": ".--",
+    "X": "-..-",
+    "Y": "-.--",
+    "Z": "--..",
+    "0": "-----",
+    "1": ".----",
+    "2": "..---",
+    "3": "...--",
+    "4": "....-",
+    "5": ".....",
+    "6": "-....",
+    "7": "--...",
+    "8": "---..",
+    "9": "----."
+  },
+  "LESSON_DATA": {
+    "lesson1": {
+      "title": "Ders 1: En Temeller",
+      "content": "E, T",
+      "questions": [
+        { "type": "listen", "item": "E" },
+        { "type": "tap", "item": "E" },
+        { "type": "listen", "item": "T" },
+        { "type": "tap", "item": "T" },
+        { "type": "listen", "item": "E" },
+        { "type": "listen", "item": "T" }
+      ]
+    },
+    "lesson2": {
+      "title": "Ders 2: Kısa Zıtlar",
+      "content": "I, M",
+      "questions": [
+        { "type": "listen", "item": "I" },
+        { "type": "tap", "item": "I" },
+        { "type": "listen", "item": "M" },
+        { "type": "tap", "item": "M" },
+        { "type": "listen", "item": "T" },
+        { "type": "tap", "item": "E" },
+        { "type": "listen", "item": "M" }
+      ]
+    },
+    "lesson3": {
+      "title": "Ders 3: Uzun Zıtlar",
+      "content": "A, N",
+      "questions": [
+        { "type": "listen", "item": "A" },
+        { "type": "tap", "item": "N" },
+        { "type": "listen", "item": "N" },
+        { "type": "tap", "item": "A" },
+        { "type": "listen", "item": "M" },
+        { "type": "tap", "item": "I" },
+        { "type": "listen", "item": "A" }
+      ]
+    },
+    "lesson4": {
+      "title": "Kelime Pratiği 1",
+      "content": "ME, IN, MAN, NET, EAT",
+      "questions": [
+        { "type": "listen", "item": "IN" },
+        { "type": "tap", "item": "IN" },
+        { "type": "listen", "item": "EAT" },
+        { "type": "tap", "item": "EAT" },
+        { "type": "listen", "item": "MAN" },
+        { "type": "tap", "item": "NET" },
+        { "type": "listen", "item": "ME" }
+      ]
+    },
+    "lesson5": {
+      "title": "Ders 5: Sadece Noktalar/Çizgiler",
+      "content": "S, O",
+      "questions": [
+        { "type": "listen", "item": "S" },
+        { "type": "tap", "item": "S" },
+        { "type": "listen", "item": "O" },
+        { "type": "tap", "item": "O" },
+        { "type": "listen", "item": "A" },
+        { "type": "tap", "item": "S" },
+        { "type": "listen", "item": "O" }
+      ]
+    },
+    "lesson6": {
+      "title": "Kelime Pratiği 2",
+      "content": "SO, SOS, SON, ON, NO, SOON",
+      "questions": [
+        { "type": "listen", "item": "SOS" },
+        { "type": "tap", "item": "SO" },
+        { "type": "listen", "item": "ON" },
+        { "type": "tap", "item": "SOS" },
+        { "type": "listen", "item": "NO" },
+        { "type": "tap", "item": "SOON" },
+        { "type": "listen", "item": "SON" }
+      ]
+    },
+    "lesson7": {
+      "title": "Ders 7: Ayna Görüntüleri",
+      "content": "R, U, D, K",
+      "questions": [
+        { "type": "listen", "item": "R" },
+        { "type": "tap", "item": "U" },
+        { "type": "listen", "item": "D" },
+        { "type": "tap", "item": "K" },
+        { "type": "listen", "item": "R" },
+        { "type": "tap", "item": "D" },
+        { "type": "listen", "item": "K" }
+      ]
+    },
+    "lesson8": {
+      "title": "Kelime Pratiği 3",
+      "content": "RUN, USE, RED, DARK, END",
+      "questions": [
+        { "type": "listen", "item": "RUN" },
+        { "type": "tap", "item": "RUN" },
+        { "type": "listen", "item": "RED" },
+        { "type": "tap", "item": "USE" },
+        { "type": "listen", "item": "END" },
+        { "type": "tap", "item": "DARK" }
+      ]
+    },
+    "lesson9": {
+      "title": "Ders 9: Başı Çizgili",
+      "content": "G, W, P, B",
+      "questions": [
+        { "type": "listen", "item": "G" },
+        { "type": "tap", "item": "W" },
+        { "type": "listen", "item": "P" },
+        { "type": "tap", "item": "B" },
+        { "type": "listen", "item": "G" },
+        { "type": "tap", "item": "P" }
+      ]
+    },
+    "lesson10": {
+      "title": "Kelime Pratiği 4",
+      "content": "GO, WE, BIG, UP, BED, WAR",
+      "questions": [
+        { "type": "listen", "item": "GO" },
+        { "type": "tap", "item": "WE" },
+        { "type": "listen", "item": "UP" },
+        { "type": "tap", "item": "BED" },
+        { "type": "listen", "item": "WAR" },
+        { "type": "tap", "item": "BIG" }
+      ]
+    },
+    "lesson11": {
+      "title": "Ders 11: Dört Vuruşlular",
+      "content": "H, V, F, L",
+      "questions": [
+        { "type": "listen", "item": "H" },
+        { "type": "tap", "item": "V" },
+        { "type": "listen", "item": "F" },
+        { "type": "tap", "item": "L" },
+        { "type": "listen", "item": "H" },
+        { "type": "tap", "item": "F" }
+      ]
+    },
+    "lesson12": {
+      "title": "Kelime Pratiği 5",
+      "content": "HAVE, FIVE, LIFE, FEEL",
+      "questions": [
+        { "type": "listen", "item": "HAVE" },
+        { "type": "tap", "item": "HAVE" },
+        { "type": "listen", "item": "FIVE" },
+        { "type": "tap", "item": "LIFE" },
+        { "type": "listen", "item": "FEEL" },
+        { "type": "tap", "item": "FEEL" }
+      ]
+    },
+    "lesson13": {
+      "title": "Ders 13: Geri Kalanlar 1",
+      "content": "J, Y",
+      "questions": [
+        { "type": "listen", "item": "J" },
+        { "type": "tap", "item": "J" },
+        { "type": "listen", "item": "Y" },
+        { "type": "tap", "item": "Y" },
+        { "type": "listen", "item": "J" }
+      ]
+    },
+    "lesson14": {
+      "title": "Ders 14: Geri Kalanlar 2",
+      "content": "Q, Z",
+      "questions": [
+        { "type": "listen", "item": "Q" },
+        { "type": "tap", "item": "Q" },
+        { "type": "listen", "item": "Z" },
+        { "type": "tap", "item": "Z" },
+        { "type": "listen", "item": "Q" }
+      ]
+    },
+    "lesson15": {
+      "title": "Ders 15: Geri Kalanlar 3",
+      "content": "X, C",
+      "questions": [
+        { "type": "listen", "item": "X" },
+        { "type": "tap", "item": "X" },
+        { "type": "listen", "item": "C" },
+        { "type": "tap", "item": "C" },
+        { "type": "listen", "item": "X" }
+      ]
+    },
+    "lesson16": {
+      "title": "Kelime Pratiği 6 (Zor)",
+      "content": "YES, YOU, ZONE, QUIZ, FOX",
+      "questions": [
+        { "type": "listen", "item": "YES" },
+        { "type": "tap", "item": "YES" },
+        { "type": "listen", "item": "ZONE" },
+        { "type": "tap", "item": "FOX" },
+        { "type": "listen", "item": "QUIZ" },
+        { "type": "tap", "item": "QUIZ" }
+      ]
+    },
+    "lesson17": {
+      "title": "Ders 17: Rakamlar 1",
+      "content": "1, 2, 3, 4, 5",
+      "questions": [
+        { "type": "listen", "item": "1" },
+        { "type": "tap", "item": "2" },
+        { "type": "listen", "item": "3" },
+        { "type": "tap", "item": "4" },
+        { "type": "listen", "item": "5" },
+        { "type": "tap", "item": "1" }
+      ]
+    },
+    "lesson18": {
+      "title": "Ders 18: Rakamlar 2",
+      "content": "6, 7, 8, 9, 0",
+      "questions": [
+        { "type": "listen", "item": "6" },
+        { "type": "tap", "item": "7" },
+        { "type": "listen", "item": "8" },
+        { "type": "tap", "item": "9" },
+        { "type": "listen", "item": "0" },
+        { "type": "tap", "item": "6" }
+      ]
+    },
+    "lesson19": {
+      "title": "Kelime Pratiği 7 (Rakamlar)",
+      "content": "10, 25, 73, 198, 2024",
+      "questions": [
+        { "type": "listen", "item": "10" },
+        { "type": "tap", "item": "10" },
+        { "type": "listen", "item": "25" },
+        { "type": "tap", "item": "73" },
+        { "type": "listen", "item": "198" },
+        { "type": "tap", "item": "198" }
+      ]
+    },
+    "lesson20": {
+      "title": "Final Sınavı",
+      "content": "Tüm harf ve kelimelerle karışık",
+      "questions": [
+        { "type": "listen", "item": "HELLO" },
+        { "type": "tap", "item": "WORLD" },
+        { "type": "listen", "item": "QUICK" },
+        { "type": "tap", "item": "BROWN" },
+        { "type": "listen", "item": "FOX" },
+        { "type": "tap", "item": "JUMPS" },
+        { "type": "listen", "item": "OVER" },
+        { "type": "tap", "item": "LAZY" },
+        { "type": "listen", "item": "DOG" },
+        { "type": "tap", "item": "SOS" }
+      ]
+    }
+  }
+}

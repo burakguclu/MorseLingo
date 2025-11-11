@@ -19,7 +19,6 @@
             Sıfırla
           </button>
         </div>
-
         <div id="lessonList" class="lesson-list"></div>
       </div>
 
@@ -37,7 +36,6 @@
             <div id="progressFill" class="progress-fill"></div>
           </div>
         </div>
-
         <div id="exerciseListen" class="exercise-module hidden">
           <p id="listen_instruction" class="exercise-instruction">
             Duyduğunu buraya yaz:
@@ -47,16 +45,19 @@
           <button id="listen_btnCheckAnswer">Kontrol Et</button>
           <p id="listen_pFeedback" class="feedback-area"></p>
         </div>
-
         <div id="exerciseTap" class="exercise-module hidden">
           <div class="question-display">
             Vurman gereken:
-            <span id="tap_challenge">A</span>
+            <span id="tap_challenge" class="tap-display-box">A</span>
           </div>
           <button id="tap_btnMorseKey">MORS TUŞU</button>
           <div class="taps-display">
-            Senin vuruşların:
-            <span id="tap_userTapsDisplay">...</span>
+            Mevcut vuruş (Harf):
+            <span id="tap_currentTapsDisplay" class="tap-display-box">_</span>
+          </div>
+          <div class="taps-display">
+            Tamamlanan vuruşlar (Kelime):
+            <span id="tap_committedWordDisplay" class="tap-display-box">_</span>
           </div>
           <div class="controls">
             <button id="tap_btnCheckAnswer">Kontrol Et</button>
@@ -65,6 +66,7 @@
           <p id="tap_pFeedback" class="feedback-area"></p>
         </div>
       </div>
+
       <div id="screenComplete" class="screen hidden">
         <h2>Harika!</h2>
         <p id="completeMessage">Dersi tamamladın!</p>
@@ -73,6 +75,6 @@
       </div>
     </main>
 
-    <script src="script.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

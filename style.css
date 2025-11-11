@@ -50,8 +50,8 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    max-height: 60vh; /* Liste çok uzarsa kaydırma çubuğu çıkar */
-    overflow-y: auto; /* Dikey kaydırma */
+    max-height: 60vh;
+    overflow-y: auto;
 }
 .lesson-button {
     background-color: #007bff;
@@ -64,7 +64,7 @@ h2 {
     text-align: left;
     transition: background-color 0.2s, transform 0.2s;
     border-bottom: 4px solid #0056b3;
-    display: flex; /* Başlık ve içeriği ayırmak için */
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -72,7 +72,7 @@ h2 {
     background-color: #0069d9;
     transform: translateY(-2px);
 }
-.lesson-button div { /* Buton içindeki metin grubu */
+.lesson-button div {
     flex-grow: 1;
 }
 .lesson-button .lesson-title {
@@ -91,8 +91,6 @@ h2 {
     color: rgba(255, 255, 255, 0.5);
     margin-right: 20px;
 }
-
-/* Kilitli ders stili */
 .lesson-button.locked {
     background-color: #b0c4de;
     color: #666;
@@ -181,34 +179,57 @@ h2 {
     text-transform: uppercase; 
 }
 
-/* --- 4b. ALIŞTIRMA 2: GÖR & VUR --- */
+/* --- 4b. ALIŞTIRMA 2: GÖR & VUR (STİLLER GÜNCELLENDİ) --- */
 #exerciseTap {
     text-align: center;
 }
-#exerciseTap .question-display, #exerciseTap .taps-display {
-    margin-bottom: 20px;
+#exerciseTap .question-display {
+    margin-bottom: 15px;
     font-size: 18px;
 }
-#exerciseTap #tap_challenge, #exerciseTap #tap_userTapsDisplay {
+/* Ayrı vuruş alanları için */
+.taps-display {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+/* Soru ve cevap kutuları için ortak stil */
+#tap_challenge, .tap-display-box {
     display: block;
     font-size: 36px;
     font-weight: bold;
     color: #005a9c;
-    margin-top: 10px;
+    margin-top: 5px;
     letter-spacing: 2px;
     min-height: 50px;
+    background-color: #f0f4f8; /* Arka plan rengi */
+    padding: 10px;
+    border-radius: 5px;
+    /* Kelimelerin sığması için */
+    word-break: break-all;
+}
+/* Mevcut vuruş (daha az belirgin) */
+#tap_currentTapsDisplay {
+    color: #007bff;
+    font-size: 28px;
+    min-height: 40px;
+}
+/* Tamamlanan vuruşlar (daha belirgin) */
+#tap_committedWordDisplay {
+     color: #005a9c;
 }
 #tap_btnMorseKey {
-    width: 200px;
-    height: 200px;
+    width: 150px; /* Butonu biraz küçülttük */
+    height: 150px;
     background-color: #dc3545;
     color: white;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     border: 5px solid #a0202e;
     border-radius: 50%;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     transition: all 0.1s;
     touch-action: manipulation;
 }
