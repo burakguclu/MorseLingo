@@ -1,4 +1,4 @@
-// --------- SCRIPT.JS (Bölüm 3: TAM SÜRÜM - Can Sistemi Dahil) ---------
+// --------- SCRIPT.JS (Son Hali: v4 - Detaylı Geri Bildirim & Sıfırlama) ---------
 
 // --- 1. GLOBAL DEĞİŞKENLER VE SABİTLER ---
 // Audio
@@ -27,7 +27,7 @@ let progressFill,
 let heartDisplaySpans = []; // Kalp <span> elemanlarını burada tutacağız
 
 // HTML Elemanları (Menü)
-let btnLesson1, btnLesson2;
+let btnLesson1, btnLesson2, btnResetProgress;
 
 // HTML Elemanları (Alıştırma 1: Dinle)
 let listen_btnPlaySound,
@@ -69,6 +69,7 @@ const MORSE_CODE = {
   O: "---",
   R: ".-.",
   D: "-..",
+  // Harfler eklendikçe burası ve LESSON_DATA genişletilmeli
 };
 
 const LESSON_DATA = {
@@ -97,10 +98,8 @@ const LESSON_DATA = {
   },
 };
 
-// YENİ EKLENEN YARDIMCI FONKSİYON
 // Kodu harfe çevirir (örn: '.-' -> 'A')
 function getLetterFromCode(code) {
-  // MORSE_CODE sözlüğünde 'key' (harf) ve 'value' (kod) olarak döner
   for (const [letter, morseCode] of Object.entries(MORSE_CODE)) {
     if (morseCode === code) {
       return letter;
@@ -211,6 +210,7 @@ function renderMenuState() {
   } else {
     btnLesson2.classList.add("locked");
   }
+  // Yeni dersler eklendiğinde buraya benzer 'if' blokları eklenecek
 }
 
 function updateProgress() {
@@ -315,10 +315,8 @@ function showFeedback(isCorrect, type, details) {
     // --- YANLIŞ CEVAP (DETAYLI GERİ BİLDİRİM) ---
 
     if (type === "listen") {
-      // 'Dinle' alıştırması için daha iyi geri bildirim
       feedbackEl.textContent = `Yanlış! Doğru cevap '${details.correctLetter}' olacaktı.`;
     } else if (type === "tap") {
-      // 'Vur' alıştırması için detaylı geri bildirim
       const userLetter = getLetterFromCode(details.userTaps);
       feedbackEl.textContent = `Yanlış! Sen '${details.userTaps}' (${userLetter}) vurdun. Doğrusu '${details.correctCode}' (${details.correctLetter}) olacaktı.`;
     }
@@ -327,16 +325,15 @@ function showFeedback(isCorrect, type, details) {
 
     loseLife(); // Can kaybet
 
-    // Hatanın okunması için bekleme süresini artır
+    // Hatanın okunması için bekleme süresini ayarla
     if (lessonActive && type === "tap") {
       setTimeout(() => {
         if (lessonActive) {
           tap_userTapsDisplay.textContent = "_"; // Vuruşları temizle
           feedbackEl.textContent = ""; // Mesajı temizle
         }
-      }, 3000); // Süreyi 1.5s'den 3s'ye çıkar
+      }, 3000);
     } else if (lessonActive && type === "listen") {
-      // Dinleme alıştırmasında da yanlışsa alanı temizle
       setTimeout(() => {
         if (lessonActive) {
           listen_inputGuess.value = ""; // Metin kutusunu temizle
@@ -397,6 +394,7 @@ function init() {
   // Menü butonları
   btnLesson1 = document.getElementById("btnLesson1");
   btnLesson2 = document.getElementById("btnLesson2");
+  btnResetProgress = document.getElementById("btnResetProgress"); // Sıfırla butonu
 
   // Alıştırma ekranı
   btnBackToMenu = document.getElementById("btnBackToMenu");
@@ -431,6 +429,11 @@ function init() {
       startLesson("lesson2");
     } else {
       alert("Bu ders kilitli! Önce Ders 1'i tamamlamalısın.");
+    }
+  });
+  btnResetProgress.addEventListener("click", () => {
+    if (confirm("Emin misin? Tüm ilerlemen (açılan kilitler) silinecek!")) {
+      resetProgress();
     }
   });
 
@@ -504,12 +507,11 @@ function init() {
   // --- UYGULAMAYI BAŞLAT ---
   renderMenuState(); // Kilit durumlarını yükle
   showScreen("screenMenu"); // Ana menüyü göster
-  console.log("Uygulama hazır! (v3 - Can Sistemi Aktif)");
+  console.log("Uygulama hazır! (v4 - Detaylı Geri Bildirim & Sıfırlama)");
 }
 
 // --- 9. CAN SİSTEMİ FONKSİYONLARI ---
 
-// Kalp arayüzünü güncelleyen fonksiyon
 function renderHearts() {
   for (let i = 0; i < heartDisplaySpans.length; i++) {
     if (i < currentHearts) {
@@ -520,7 +522,6 @@ function renderHearts() {
   }
 }
 
-// Can kaybetme mantığı
 function loseLife() {
   if (currentHearts <= 0) return;
 
@@ -533,7 +534,6 @@ function loseLife() {
   }
 }
 
-// Ders başarısız olma fonksiyonu
 function failLesson() {
   console.log("Ders Başarısız! Canlar bitti.");
   lessonActive = false; // Tüm girdileri durdur
@@ -549,4 +549,26 @@ function failLesson() {
     renderMenuState();
     showScreen("screenMenu");
   }, 2500);
+}
+
+// --- 10. İLERLEME SIFIRLAMA FONKSİYONU ---
+
+function resetProgress() {
+  console.log("İlerleme sıfırlanıyor...");
+
+  // 1. Tarayıcı hafızasındaki kaydı sil
+  localStorage.removeItem("morseLingoProgress");
+
+  // 2. Hafızadaki 'userProgress' değişkenini varsayılana döndür
+  userProgress = {
+    unlockedLessons: ["lesson1"],
+  };
+
+  // 3. Menü arayüzünü bu yeni (boş) veriye göre yeniden çiz
+  renderMenuState();
+
+  alert("İlerleme sıfırlandı.");
+
+  // 4. Değişikliklerin tam olarak yansıması için sayfayı yenile
+  window.location.reload();
 }

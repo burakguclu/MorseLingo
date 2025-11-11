@@ -140,6 +140,10 @@ h2 {
     font-weight: bold;
     margin-top: 15px;
     height: 20px;
+    min-height: 2.5em; /* Detaylı hata mesajları için yer aç */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .feedback-correct { color: #28a745; }
 .feedback-wrong { color: #dc3545; }
@@ -173,6 +177,19 @@ h2 {
 /* --- 4b. ALIŞTIRMA 2: GÖR & VUR --- */
 #exerciseTap {
     text-align: center;
+}
+#exerciseTap .question-display, #exerciseTap .taps-display {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+#exerciseTap #tap_letterToTap, #exerciseTap #tap_userTapsDisplay {
+    display: block;
+    font-size: 48px;
+    font-weight: bold;
+    color: #005a9c;
+    margin-top: 10px;
+    letter-spacing: 2px;
+    min-height: 50px;
 }
 #tap_btnMorseKey {
     width: 200px;
@@ -221,8 +238,8 @@ h2 {
 }
 #btnMenuAfterComplete { background-color: #007bff; }
 
-/* --- 6. YENİ EKLENEN STİLLER: CAN SİSTEMİ --- */
 
+/* --- 6. CAN SİSTEMİ STİLLERİ --- */
 .heart-display {
     display: flex;
     gap: 4px; /* Kalpler arası boşluk */
@@ -246,4 +263,32 @@ h2 {
     color: #dc3545; /* Kırmızı */
     font-weight: bold;
     font-size: 20px !important;
+}
+
+
+/* --- 7. SIFIRLAMA BUTONU STİLLERİ --- */
+.menu-header {
+    display: flex;
+    justify-content: space-between; /* İki uca yasla */
+    align-items: center;
+    margin-bottom: 15px; /* Ders listesiyle arasına boşluk koy */
+}
+
+.menu-header h2 {
+    margin: 0; /* Başlığın varsayılan boşluğunu kaldır */
+}
+
+#btnResetProgress {
+    background-color: #dc3545; /* Kırmızı */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+#btnResetProgress:hover {
+    background-color: #c82333; /* Koyu kırmızı */
 }
