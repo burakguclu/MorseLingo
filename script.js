@@ -1,11 +1,10 @@
-// 1. Stüdyomuzu (AudioContext) başlatalım.
-// Tarayıcılar, kullanıcı bir yere tıklamadan sesi başlatmanızı engeller.
-// Biz bu yüzden stüdyoyu "uykuda" başlatıp, tıklama olunca "uyandıracağız".
-let audioCtx;
+// --------- YENİ SCRIPT.JS (SADELEŞTİRİLMİŞ VERSİYON) ---------
 
-// 2. Ses üretme motorumuz (fonksiyonumuz)
-// Bu fonksiyon, ne kadar süre (duration) ses çalacağımızı parametre alır.
-function playSound(durationInSeconds) {
+let audioCtx; // Stüdyomuzu (AudioContext) burada tutacağız
+
+// Fonksiyonumuzu sadeleştirdik.
+// 1. parametre: frekans (ton), 2. parametre: süre (saniye)
+function playSound(frequency, durationInSeconds) {
   // Eğer stüdyo (audioCtx) henüz uyanmadıysa (ilk tıklama), uyandıralım.
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -14,46 +13,45 @@ function playSound(durationInSeconds) {
   // 1. Enstrümanı (Oscillator) oluştur
   const oscillator = audioCtx.createOscillator();
 
-  // 2. Ses Düğmesini (GainNode) oluştur (sesi aniden kesmek için)
-  const gainNode = audioCtx.createGain();
+  // 2. TONU AYARLA
+  oscillator.type = "sine"; // Sesin dalga tipi
+  oscillator.frequency.value = frequency; // Parametreden gelen frekansı (tonu) ayarla
 
-  // 3. Enstrümanın ayarlarını yap
-  oscillator.type = "sine"; // Sesin dalga tipi (sinüs, en yumuşak sestir)
-  oscillator.frequency.setValueAtTime(700, audioCtx.currentTime); // Frekans (Hz). 700Hz mors için idealdir.
+  // 3. Hoparlöre bağla (Aradaki mikseri kaldırdık)
+  oscillator.connect(audioCtx.destination);
 
-  // 4. Bağlantıları yap:
-  // Enstrüman -> Ses Düğmesi -> Hoparlör
-  oscillator.connect(gainNode);
-  gainNode.connect(audioCtx.destination);
-
-  // 5. Sesi başlat ve bitir
+  // 4. Sesi ne zaman başlatıp biteceğini planla
   const now = audioCtx.currentTime;
-
-  gainNode.gain.setValueAtTime(1, now); // Sesi aç
-  oscillator.start(now); // Çalmaya başla
-
-  // Sesi ne zaman durduracağımızı planla
-  gainNode.gain.exponentialRampToValueAtTime(0.001, now + durationInSeconds); // Sesi yavaşça kıs (tıkırtıyı engeller)
-  oscillator.stop(now + durationInSeconds); // Belirtilen süre sonunda enstrümanı sustur
+  oscillator.start(now); // Şimdi çalmaya başla
+  oscillator.stop(now + durationInSeconds); // Tam olarak süre sonunda durdur
 }
 
-// 3. HTML'deki butonlarımızı bulalım
+// --- AYARLARIMIZ ---
+// Bu ayarları kolayca görebilmek için en üste taşıdık
+const MORSE_TONE = 700; // İkisi için de KULLANILACAK TON (700Hz)
+const DIT_DURATION = 0.1; // Kısa süre (100ms)
+const DAH_DURATION = 0.3; // Uzun süre (300ms)
+
+// --- HTML Butonlarını Bulma ve Olay Ekleme ---
+
+// 1. HTML'deki 'btnDit' id'li butonu bul
 const ditButton = document.getElementById("btnDit");
+
+// 2. 'btnDit' butonuna tıklanınca ne olacağını söyle
+ditButton.addEventListener("click", () => {
+  console.log(`Çalınıyor: Ton=${MORSE_TONE}Hz, Süre=${DIT_DURATION}s`);
+  // playSound fonksiyonunu 700Hz ton ve 0.1s süre ile çağır
+  playSound(MORSE_TONE, DIT_DURATION);
+});
+
+// 3. HTML'deki 'btnDah' id'li butonu bul
 const dahButton = document.getElementById("btnDah");
 
-// 4. Mors Alfabesi zamanlama kuralları (saniye cinsinden)
-const DIT_DURATION = 0.1; // Kısa ses (100ms)
-const DAH_DURATION = 0.3; // Uzun ses (300ms - kural: Dit'in 3 katı)
-
-// 5. Butonlara tıklama olaylarını (event) ekleyelim
-ditButton.addEventListener("click", () => {
-  console.log("Dit çalınıyor...");
-  playSound(DIT_DURATION);
-});
-
+// 4. 'btnDah' butonuna tıklanınca ne olacağını söyle
 dahButton.addEventListener("click", () => {
-  console.log("Dah çalınıyor...");
-  playSound(DAH_DURATION);
+  console.log(`Çalınıyor: Ton=${MORSE_TONE}Hz, Süre=${DAH_DURATION}s`);
+  // playSound fonksiyonunu 700Hz ton ve 0.3s süre ile çağır
+  playSound(MORSE_TONE, DAH_DURATION);
 });
 
-console.log("MorseLingo beyni yüklendi!");
+console.log("MorseLingo beyni yüklendi! (Versiyon 2 - Sadeleştirilmiş)");
