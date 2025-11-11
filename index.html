@@ -20,31 +20,12 @@
           </button>
         </div>
 
-        <div class="lesson-list">
-          <button
-            id="btnLesson1"
-            class="lesson-button"
-            data-lesson-id="lesson1"
-          >
-            <span class="lesson-title">Ders 1: Temel Harfler</span>
-            <span class="lesson-content">E, T, I, A, N, M</span>
-          </button>
-
-          <button
-            id="btnLesson2"
-            class="lesson-button locked"
-            data-lesson-id="lesson2"
-          >
-            <span class="lesson-title">Ders 2: Yeni Harfler</span>
-            <span class="lesson-content">S, O, R, D</span>
-          </button>
-        </div>
+        <div id="lessonList" class="lesson-list"></div>
       </div>
 
       <div id="screenExercise" class="screen hidden">
         <div class="lesson-header">
           <button id="btnBackToMenu">← Menüye Dön</button>
-
           <div id="heartDisplay" class="heart-display">
             <span class="heart">❤️</span>
             <span class="heart">❤️</span>
@@ -58,17 +39,19 @@
         </div>
 
         <div id="exerciseListen" class="exercise-module hidden">
-          <p class="exercise-instruction">Duyduğun harfi buraya yaz:</p>
+          <p id="listen_instruction" class="exercise-instruction">
+            Duyduğunu buraya yaz:
+          </p>
           <button id="listen_btnPlaySound">Sesi Çal</button>
-          <input type="text" id="listen_inputGuess" maxlength="1" />
+          <input type="text" id="listen_input" placeholder="Harf veya kelime" />
           <button id="listen_btnCheckAnswer">Kontrol Et</button>
           <p id="listen_pFeedback" class="feedback-area"></p>
         </div>
 
         <div id="exerciseTap" class="exercise-module hidden">
           <div class="question-display">
-            Vurman gereken harf:
-            <span id="tap_letterToTap">A</span>
+            Vurman gereken:
+            <span id="tap_challenge">A</span>
           </div>
           <button id="tap_btnMorseKey">MORS TUŞU</button>
           <div class="taps-display">
@@ -84,7 +67,7 @@
       </div>
       <div id="screenComplete" class="screen hidden">
         <h2>Harika!</h2>
-        <p id="completeMessage">Ders 1'i tamamladın!</p>
+        <p id="completeMessage">Dersi tamamladın!</p>
         <button id="btnNextLesson">Sıradaki Derse Geç</button>
         <button id="btnMenuAfterComplete">Ana Menüye Dön</button>
       </div>

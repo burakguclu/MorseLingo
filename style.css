@@ -5,10 +5,8 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    /* Dokunmatik cihazlarda seçimi engelle */
     user-select: none;
 }
-
 main {
     display: flex;
     flex-direction: column;
@@ -16,7 +14,6 @@ main {
     justify-content: center;
     padding: 20px;
 }
-
 .main-header {
     width: 100%;
     background-color: #ffffff;
@@ -25,19 +22,16 @@ main {
     padding: 10px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-
 h1 {
     color: #005a9c;
     margin: 0;
 }
-
 h2 {
     text-align: center;
     color: #333;
 }
 
 /* --- 2. EKRAN YÖNETİMİ --- */
-/* Bir 'ekran'ın temel stili */
 .screen {
     width: 100%;
     max-width: 500px;
@@ -45,9 +39,8 @@ h2 {
     border-radius: 8px;
     padding: 25px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
 }
-
-/* Bu sınıf, bir ekranı GİZLEMEK için kullanılacak */
 .hidden {
     display: none;
 }
@@ -57,8 +50,9 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    max-height: 60vh; /* Liste çok uzarsa kaydırma çubuğu çıkar */
+    overflow-y: auto; /* Dikey kaydırma */
 }
-
 .lesson-button {
     background-color: #007bff;
     color: white;
@@ -70,10 +64,16 @@ h2 {
     text-align: left;
     transition: background-color 0.2s, transform 0.2s;
     border-bottom: 4px solid #0056b3;
+    display: flex; /* Başlık ve içeriği ayırmak için */
+    justify-content: space-between;
+    align-items: center;
 }
 .lesson-button:hover {
     background-color: #0069d9;
     transform: translateY(-2px);
+}
+.lesson-button div { /* Buton içindeki metin grubu */
+    flex-grow: 1;
 }
 .lesson-button .lesson-title {
     font-weight: bold;
@@ -83,11 +83,18 @@ h2 {
 .lesson-button .lesson-content {
     font-size: 16px;
     opacity: 0.9;
+    margin-top: 5px;
+}
+.lesson-button .lesson-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.5);
+    margin-right: 20px;
 }
 
 /* Kilitli ders stili */
 .lesson-button.locked {
-    background-color: #b0c4de; /* Soluk mavi */
+    background-color: #b0c4de;
     color: #666;
     border-bottom: 4px solid #8a9aaa;
     cursor: not-allowed;
@@ -99,6 +106,9 @@ h2 {
     background-color: #b0c4de;
     transform: none;
 }
+.lesson-button.locked .lesson-number {
+    color: rgba(0, 0, 0, 0.3);
+}
 
 /* --- 4. EKRAN 2: ALIŞTIRMA STİLLERİ --- */
 .lesson-header {
@@ -106,7 +116,6 @@ h2 {
     align-items: center;
     margin-bottom: 20px;
 }
-
 #btnBackToMenu {
     background: none;
     border: 2px solid #ccc;
@@ -118,9 +127,8 @@ h2 {
     margin-right: 15px;
 }
 #btnBackToMenu:hover { background-color: #f0f0f0; }
-
 .progress-bar {
-    flex-grow: 1; /* Kalan tüm alanı kapla */
+    flex-grow: 1;
     height: 20px;
     background-color: #e0e0e0;
     border-radius: 10px;
@@ -128,22 +136,20 @@ h2 {
 }
 .progress-fill {
     height: 100%;
-    width: 0%; /* Başlangıçta %0 dolu */
+    width: 0%;
     background-color: #28a745;
     border-radius: 10px;
     transition: width 0.3s ease-in-out;
 }
-
-/* Geri bildirim alanı (ortak) */
 .feedback-area {
     font-size: 18px;
     font-weight: bold;
     margin-top: 15px;
-    height: 20px;
-    min-height: 2.5em; /* Detaylı hata mesajları için yer aç */
+    min-height: 2.5em;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 .feedback-correct { color: #28a745; }
 .feedback-wrong { color: #dc3545; }
@@ -163,10 +169,12 @@ h2 {
     cursor: pointer;
 }
 #listen_btnPlaySound { background-color: #28a745; }
-#listen_inputGuess {
+#listen_input {
     font-size: 24px;
     padding: 10px;
-    width: 80px;
+    /* GÜNCELLENDİ: Kelimeler için genişletildi */
+    width: 90%;
+    max-width: 250px;
     text-align: center;
     border: 2px solid #ccc;
     border-radius: 5px;
@@ -182,9 +190,10 @@ h2 {
     margin-bottom: 20px;
     font-size: 18px;
 }
-#exerciseTap #tap_letterToTap, #exerciseTap #tap_userTapsDisplay {
+#exerciseTap #tap_challenge, #exerciseTap #tap_userTapsDisplay {
     display: block;
-    font-size: 48px;
+    /* GÜNCELLENDİ: Kelimeler için küçültüldü */
+    font-size: 36px;
     font-weight: bold;
     color: #005a9c;
     margin-top: 10px;
@@ -238,48 +247,39 @@ h2 {
 }
 #btnMenuAfterComplete { background-color: #007bff; }
 
-
 /* --- 6. CAN SİSTEMİ STİLLERİ --- */
 .heart-display {
     display: flex;
-    gap: 4px; /* Kalpler arası boşluk */
-    margin: 0 15px; /* Sağ ve sol boşluk */
+    gap: 4px;
+    margin: 0 15px;
 }
-
 .heart {
     font-size: 24px;
-    opacity: 1; /* Başlangıçta tam görünür */
+    opacity: 1;
     transition: all 0.2s;
 }
-
-/* Can kaybedildiğinde bu sınıf eklenecek */
 .heart.lost {
     opacity: 0.2;
-    transform: scale(0.9); /* Hafifçe küçülsün */
+    transform: scale(0.9);
 }
-
-/* Ders başarısız olduğunda kullanılacak mesaj stili */
 .feedback-failed {
-    color: #dc3545; /* Kırmızı */
+    color: #dc3545;
     font-weight: bold;
     font-size: 20px !important;
 }
 
-
 /* --- 7. SIFIRLAMA BUTONU STİLLERİ --- */
 .menu-header {
     display: flex;
-    justify-content: space-between; /* İki uca yasla */
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px; /* Ders listesiyle arasına boşluk koy */
+    margin-bottom: 15px;
 }
-
 .menu-header h2 {
-    margin: 0; /* Başlığın varsayılan boşluğunu kaldır */
+    margin: 0;
 }
-
 #btnResetProgress {
-    background-color: #dc3545; /* Kırmızı */
+    background-color: #dc3545;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -290,5 +290,5 @@ h2 {
     transition: background-color 0.2s;
 }
 #btnResetProgress:hover {
-    background-color: #c82333; /* Koyu kırmızı */
+    background-color: #c82333;
 }
