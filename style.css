@@ -1,0 +1,44 @@
+/* Bütün sayfaya uygulanacak temel stiller */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Başlık stilleri */
+h1 {
+    color: #005a9c;
+}
+
+/* Ses test alanının kutusu */
+.test-alani {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+/* Buton stilleri */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer; /* Fare üzerine gelince el işareti çıksın */
+    transition: background-color 0.2s; /* Renk değişimi yumuşak olsun */
+}
+
+/* Fare butonun üzerine gelince rengi değişsin */
+button:hover {
+    background-color: #0056b3;
+}
