@@ -3,21 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MorseLingo - Alıştırma 1</title>
+    <title>MorseLingo - Alıştırma 2</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>MorseLingo</h1>
-    <p>Alıştırma 1: Dinle ve Yaz</p>
+    <p>Alıştırma 2: Gör ve Vur</p>
 
     <div class="exercise-area">
-      <button id="btnPlaySound">Sesi Çal</button>
+      <div class="question-display">
+        Vurman gereken harf:
+        <span id="letterToTap">A</span>
+      </div>
 
-      <p>Duyduğun harfi buraya yaz:</p>
+      <button id="btnMorseKey">MORS TUŞU</button>
 
-      <input type="text" id="inputGuess" maxlength="1" />
+      <div class="taps-display">
+        Senin vuruşların:
+        <span id="userTapsDisplay">...</span>
+      </div>
 
-      <button id="btnCheckAnswer">Kontrol Et</button>
+      <div class="controls">
+        <button id="btnCheckAnswer">Kontrol Et</button>
+        <button id="btnClear">Temizle</button>
+      </div>
 
       <p id="pFeedback"></p>
     </div>
