@@ -1,4 +1,4 @@
-// --------- SCRIPT.JS (Son Hali: v5 - 20 Derslik Dinamik Plan) ---------
+// --------- SCRIPT.JS (Son Hali: v6 - 'Sıradaki Ders' Butonu Düzeltildi) ---------
 
 // --- 1. GLOBAL DEĞİŞKENLER VE SABİTLER ---
 // Audio
@@ -45,9 +45,10 @@ let totalQuestions = 0;
 let lessonActive = false;
 const MAX_HEARTS = 5;
 let currentHearts = 5;
+let nextLessonIdToStart = null; // Gidilecek sıradaki dersi tutar
 
 let userProgress = {
-  unlockedLessons: ["lesson1"], // Başlangıçta sadece 'lesson1' açık
+  unlockedLessons: ["lesson1"],
 };
 
 // --- 2. VERİ: MORS SÖZLÜĞÜ VE 20 DERSLİK PLAN ---
@@ -372,18 +373,16 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// GÜNCELLENDİ: Artık kelimeleri de çalabiliyor ('playSequence' yerine)
 async function playMorseItem(item) {
-  const letters = item.split(""); // "SOS" -> ['S', 'O', 'S']
+  const letters = item.split("");
 
   for (let i = 0; i < letters.length; i++) {
     const letter = letters[i];
     const code = MORSE_CODE[letter];
-    if (!code) continue; // Harf sözlükte yoksa atla
+    if (!code) continue;
 
-    const symbols = code.split(""); // "..." -> ['.', '.', '.']
+    const symbols = code.split("");
 
-    // Harfin kodunu çal (semboller arası SYMBOL_GAP ile)
     for (let j = 0; j < symbols.length; j++) {
       const symbol = symbols[j];
       if (symbol === ".") {
@@ -393,13 +392,11 @@ async function playMorseItem(item) {
         playSound(DAH_DURATION);
         await sleep(DAH_DURATION);
       }
-      // Semboller arası bekle (harfin son sembolü değilse)
       if (j < symbols.length - 1) {
         await sleep(SYMBOL_GAP);
       }
     }
 
-    // Harfler arası bekle (kelimenin son harfi değilse)
     if (i < letters.length - 1) {
       await sleep(LETTER_GAP);
     }
@@ -448,7 +445,6 @@ function loadProgress() {
     console.log("İlerleme yüklendi:", userProgress);
   } else {
     console.log("Kayıtlı ilerleme bulunamadı, varsayılan kullanılıyor.");
-    // Varsayılanı kaydet
     saveProgress();
   }
 }
@@ -467,8 +463,6 @@ function showScreen(screenId) {
 
 // --- 6. ARAYÜZ GÜNCELLEME (UI RENDER) ---
 
-// GÜNCELLENDİ: Artık 'renderMenuState' yerine 'renderLessonMenu'
-// Bu fonksiyon, ders listesini 'LESSON_DATA'ya göre dinamik olarak oluşturur
 function renderLessonMenu() {
   loadProgress();
 
@@ -481,18 +475,15 @@ function renderLessonMenu() {
     const lesson = LESSON_DATA[lessonId];
     const lessonNumber = i + 1;
 
-    // 1. Buton elemanını oluştur
     const button = document.createElement("button");
     button.id = lessonId;
     button.className = "lesson-button";
 
-    // 2. Kilit durumunu kontrol et
     const isLocked = !userProgress.unlockedLessons.includes(lessonId);
     if (isLocked) {
       button.classList.add("locked");
     }
 
-    // 3. Butonun içeriğini (HTML) oluştur
     button.innerHTML = `
             <span class="lesson-number">${lessonNumber}</span>
             <div>
@@ -501,7 +492,6 @@ function renderLessonMenu() {
             </div>
         `;
 
-    // 4. Tıklama olayını ekle
     button.addEventListener("click", () => {
       if (isLocked) {
         alert("Bu ders kilitli! Önceki dersleri tamamlamalısın.");
@@ -510,7 +500,6 @@ function renderLessonMenu() {
       }
     });
 
-    // 5. Listeye ekle
     lessonListContainer.appendChild(button);
   }
 }
@@ -538,9 +527,8 @@ function startLesson(lessonId) {
   showQuestion();
 }
 
-// GÜNCELLENDİ: Kelimeleri ve harfleri yönetecek şekilde
 function showQuestion() {
-  const question = lessonPlan[currentQuestionIndex]; // örn: { type: 'listen', item: 'SOS' }
+  const question = lessonPlan[currentQuestionIndex];
 
   listen_pFeedback.textContent = "";
   tap_pFeedback.textContent = "";
@@ -552,7 +540,6 @@ function showQuestion() {
     listen_input.value = "";
     listen_input.focus();
 
-    // Kelime mi, harf mi olduğunu anlayıp 'placeholder'ı ayarla
     if (question.item.length > 1) {
       listen_input.placeholder = "Kelimeyi yaz";
       listen_instruction.textContent = "Duyduğun kelimeyi buraya yaz:";
@@ -573,17 +560,16 @@ function showQuestion() {
     moduleListen.classList.add("hidden");
     moduleTap.classList.remove("hidden");
 
-    tap_challenge.textContent = question.item; // 'A' veya 'SOS' göster
+    tap_challenge.textContent = question.item;
     tap_userTapsDisplay.textContent = "_";
   }
 }
 
-// GÜNCELLENDİ: Kelimeleri ve harfleri yönetecek şekilde
 function handleAnswerCheck(type) {
   if (!lessonActive) return;
 
   const question = lessonPlan[currentQuestionIndex];
-  const correctItem = question.item; // 'A' veya 'SOS'
+  const correctItem = question.item;
   let isCorrect = false;
   let details = {};
 
@@ -594,7 +580,6 @@ function handleAnswerCheck(type) {
       isCorrect = true;
     }
   } else if (type === "tap") {
-    // Doğru kodu oluştur (örn: 'SOS' -> '...---...')
     let correctCode = "";
     const letters = correctItem.split("");
     for (const letter of letters) {
@@ -615,7 +600,6 @@ function handleAnswerCheck(type) {
   showFeedback(isCorrect, type, details);
 }
 
-// GÜNCELLENDİ: Kelimeler ve harfler için geri bildirim
 function showFeedback(isCorrect, type, details) {
   if (!lessonActive) return;
 
@@ -630,11 +614,9 @@ function showFeedback(isCorrect, type, details) {
     if (type === "listen") {
       feedbackEl.textContent = `Yanlış! Doğru cevap '${details.correctItem}' olacaktı.`;
     } else if (type === "tap") {
-      // Kelimeyse, kullanıcının vurduğu harfi tahmin etmeye çalışma, sadece kodu göster
       if (details.correctItem.length > 1) {
         feedbackEl.textContent = `Yanlış! Sen '${details.userTaps}' vurdun. Doğrusu '${details.correctCode}' (${details.correctItem}) olacaktı.`;
       } else {
-        // Harfse, tahmin et
         const userLetter = getLetterFromCode(details.userTaps);
         feedbackEl.textContent = `Yanlış! Sen '${details.userTaps}' (${userLetter}) vurdun. Doğrusu '${details.correctCode}' (${details.correctItem}) olacaktı.`;
       }
@@ -643,7 +625,7 @@ function showFeedback(isCorrect, type, details) {
     feedbackEl.className = "feedback-area feedback-wrong";
     loseLife();
 
-    const clearDelay = 3000; // Hata mesajının okunması için 3sn bekle
+    const clearDelay = 3000;
     if (lessonActive && type === "tap") {
       setTimeout(() => {
         if (lessonActive) {
@@ -675,22 +657,33 @@ function nextQuestion() {
   }
 }
 
-// GÜNCELLENDİ: Bir sonraki dersin kilidini dinamik olarak aç
+// GÜNCELLENDİ: 'Sıradaki Derse Geç' butonunu yönetecek şekilde
 function completeLesson() {
   lessonActive = false;
   console.log(`${currentLessonId} tamamlandı!`);
 
   const lessonKeys = Object.keys(LESSON_DATA);
   const currentLessonIndex = lessonKeys.indexOf(currentLessonId);
-  const nextLessonId = lessonKeys[currentLessonIndex + 1]; // Bir sonraki dersin ID'si
+
+  // Sıradaki dersin ID'sini bul
+  nextLessonIdToStart = lessonKeys[currentLessonIndex + 1];
 
   let completeText = `${LESSON_DATA[currentLessonId].title} tamamlandı!`;
 
-  // Eğer bir sonraki ders varsa ve kilidi zaten açık değilse
-  if (nextLessonId && !userProgress.unlockedLessons.includes(nextLessonId)) {
-    userProgress.unlockedLessons.push(nextLessonId);
-    const nextLessonNumber = currentLessonIndex + 2;
-    completeText = `Harika! Ders ${nextLessonNumber}'nin kilidi açıldı!`;
+  // Eğer bir sonraki ders varsa ('nextLessonIdToStart' tanımsız değilse)
+  if (nextLessonIdToStart) {
+    // Ve bu dersin kilidi zaten açık değilse
+    if (!userProgress.unlockedLessons.includes(nextLessonIdToStart)) {
+      userProgress.unlockedLessons.push(nextLessonIdToStart);
+      const nextLessonNumber = currentLessonIndex + 2;
+      completeText = `Harika! Ders ${nextLessonNumber}'nin kilidi açıldı!`;
+    }
+    // 'Sıradaki Derse Geç' butonunu göster
+    btnNextLesson.classList.remove("hidden");
+  } else {
+    // Bu son dersti
+    completeText = "Tebrikler! Tüm dersleri tamamladın!";
+    btnNextLesson.classList.add("hidden"); // Butonu gizle
   }
 
   completeMessage.textContent = completeText;
@@ -702,7 +695,7 @@ function completeLesson() {
 window.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  console.log("MorseLingo Uygulaması Başlatılıyor (v5 - Dinamik Dersler)");
+  console.log("MorseLingo Uygulaması Başlatılıyor (v6 - Buton Düzeltildi)");
 
   // Ekranlar
   screenMenu = document.getElementById("screenMenu");
@@ -724,7 +717,7 @@ function init() {
 
   // Tamamlandı Ekranı
   completeMessage = document.getElementById("completeMessage");
-  btnNextLesson = document.getElementById("btnNextLesson"); // Not: Bu butona henüz işlev atanmadı
+  btnNextLesson = document.getElementById("btnNextLesson"); // Butonu bul
   btnMenuAfterComplete = document.getElementById("btnMenuAfterComplete");
 
   // 'Dinle' Modülü
@@ -754,14 +747,26 @@ function init() {
   // Alıştırma Ekranı
   btnBackToMenu.addEventListener("click", () => {
     lessonActive = false;
-    renderLessonMenu(); // Menüye dönmeden listeyi güncelle
+    renderLessonMenu();
     showScreen("screenMenu");
   });
 
   // Tamamlandı Ekranı
   btnMenuAfterComplete.addEventListener("click", () => {
-    renderLessonMenu(); // Menüye dönmeden listeyi güncelle
+    renderLessonMenu();
     showScreen("screenMenu");
+  });
+
+  // YENİ EKLENEN OLAY DİNLEYİCİSİ
+  btnNextLesson.addEventListener("click", () => {
+    if (nextLessonIdToStart) {
+      // Kaydedilen sıradaki ders ID'si ile dersi başlat
+      startLesson(nextLessonIdToStart);
+    } else {
+      // Hata durumu: Ana menüye dön
+      renderLessonMenu();
+      showScreen("screenMenu");
+    }
   });
 
   // 'Dinle' Modülü
@@ -774,7 +779,6 @@ function init() {
     if (!lessonActive) return;
     handleAnswerCheck("listen");
   });
-  // 'Enter' tuşu ile kontrol et
   listen_input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       if (!lessonActive) return;
@@ -827,7 +831,7 @@ function init() {
   // --- UYGULAMAYI BAŞLAT ---
   renderLessonMenu(); // Menü listesini oluştur
   showScreen("screenMenu"); // Ana menüyü göster
-  console.log("Uygulama hazır! (v5 - 20 Dinamik Ders)");
+  console.log("Uygulama hazır! (v6 - Buton Düzeltildi)");
 }
 
 // --- 9. CAN SİSTEMİ FONKSİYONLARI ---
@@ -863,7 +867,7 @@ function failLesson() {
   feedbackEl.className = "feedback-area feedback-failed";
 
   setTimeout(() => {
-    renderLessonMenu(); // Menüyü yeniden çiz
+    renderLessonMenu();
     showScreen("screenMenu");
   }, 2500);
 }
@@ -873,15 +877,12 @@ function failLesson() {
 function resetProgress() {
   console.log("İlerleme sıfırlanıyor...");
 
-  // 1. Hafızayı sil
   localStorage.removeItem("morseLingoProgress");
 
-  // 2. Değişkeni sıfırla
   userProgress = {
     unlockedLessons: ["lesson1"],
   };
 
-  // 3. Değişiklikleri kaydet ve sayfayı yeniden yükle
   saveProgress();
   alert("İlerleme sıfırlandı.");
   window.location.reload();
