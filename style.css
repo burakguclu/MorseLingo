@@ -1,4 +1,4 @@
-/* Bütün sayfaya uygulanacak temel stiller */
+/* Temel sayfa stilleri (Aynısı) */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f4f8;
@@ -11,34 +11,72 @@ body {
     margin: 0;
 }
 
-/* Başlık stilleri */
 h1 {
     color: #005a9c;
 }
 
-/* Ses test alanının kutusu */
-.test-alani {
+/* Alıştırma kutumuz */
+.exercise-area {
     background-color: #ffffff;
     border-radius: 8px;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     text-align: center;
+    width: 300px;
 }
 
-/* Buton stilleri */
+/* Buton stilleri (Biraz daha büyük) */
 button {
     background-color: #007bff;
     color: white;
     border: none;
     padding: 12px 20px;
-    margin: 10px;
+    margin: 10px 5px; /* Üst/alt 10px, sağ/sol 5px */
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer; /* Fare üzerine gelince el işareti çıksın */
-    transition: background-color 0.2s; /* Renk değişimi yumuşak olsun */
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-/* Fare butonun üzerine gelince rengi değişsin */
 button:hover {
     background-color: #0056b3;
+}
+
+/* "Sesi Çal" butonu daha belirgin olsun */
+#btnPlaySound {
+    background-color: #28a745; /* Yeşil */
+    width: 90%; /* Kutunun çoğunu kaplasın */
+}
+#btnPlaySound:hover {
+    background-color: #218838;
+}
+
+/* Metin giriş kutusu */
+#inputGuess {
+    font-size: 24px;
+    padding: 10px;
+    width: 80px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-top: 15px;
+    /* Girilen harf büyük olsun */
+    text-transform: uppercase; 
+}
+
+/* Geri bildirim mesajı (Başlangıçta görünmez) */
+#pFeedback {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+    height: 20px; /* Boşken bile yer kaplasın, zıplama yapmasın */
+}
+
+/* Geri bildirime dinamik olarak ekleyeceğimiz sınıflar */
+.feedback-correct {
+    color: #28a745; /* Yeşil */
+}
+
+.feedback-wrong {
+    color: #dc3545; /* Kırmızı */
 }

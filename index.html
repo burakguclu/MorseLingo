@@ -3,19 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MorseLingo - Alıştırma</title>
+    <title>MorseLingo - Alıştırma 1</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>MorseLingo</h1>
-    <p>Mors Alfabesi Öğrenme Uygulaması</p>
+    <p>Alıştırma 1: Dinle ve Yaz</p>
 
-    <div class="test-alani">
-      <h2>Ses Testi</h2>
-      <p>Butonlara basarak mors seslerini ("dit" ve "dah") duyabilmelisin.</p>
+    <div class="exercise-area">
+      <button id="btnPlaySound">Sesi Çal</button>
 
-      <button id="btnDit">Kısa Çal (Dit)</button>
-      <button id="btnDah">Uzun Çal (Dah)</button>
+      <p>Duyduğun harfi buraya yaz:</p>
+
+      <input type="text" id="inputGuess" maxlength="1" />
+
+      <button id="btnCheckAnswer">Kontrol Et</button>
+
+      <p id="pFeedback"></p>
     </div>
 
     <script src="script.js"></script>
