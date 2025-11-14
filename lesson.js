@@ -11,7 +11,6 @@ let domElements;
 let MORSE_DATA;
 let LESSON_DATA_MAP;
 
-// Aktif dersin durumu
 let currentLesson = {
   id: null,
   plan: [],
@@ -21,6 +20,11 @@ let currentLesson = {
   hearts: config.MAX_HEARTS,
 };
 let nextLessonIdToStart = null;
+
+// YENİ: 0.5sn beklemek için yardımcı fonksiyon
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 /**
  * Lesson modülünü başlatır ve DOM/veri'yi alır.
@@ -52,7 +56,6 @@ export function startLesson(lessonId) {
 
 /**
  * Sıradaki soruyu gösterir.
- * BUG 3 DÜZELTMESİ: Ses çaldıktan sonra butonları etkinleştirir.
  */
 function showQuestion() {
   if (!currentLesson.isActive) return;
@@ -62,23 +65,21 @@ function showQuestion() {
   ui.showFeedback(domElements, true, "", "tap");
 
   if (question.type === "listen") {
-    ui.setupListenUI(domElements, question.item); // Bu, butonları 'disabled' yapar
+    ui.setupListenUI(domElements, question.item);
     audio.playMorseItem(question.item, MORSE_DATA).then(() => {
       if (currentLesson.isActive) {
-        // Ses bittiğinde butonları etkinleştir
         ui.setExerciseControlsDisabled(domElements, "listen", false);
         domElements.listen.input.focus();
       }
     });
   } else if (question.type === "tap") {
-    resetTapState(); // 'Vur' modülü durumunu sıfırla
-    ui.setupTapUI(domElements, question.item); // Bu, butonları 'enabled' yapar
+    resetTapState();
+    ui.setupTapUI(domElements, question.item);
   }
 }
 
 /**
  * Kullanıcının cevabını kontrol eder.
- * BUG 3 DÜZELTMESİ: Cevap işlenirken butonları kilitler.
  */
 export async function handleAnswerCheck(e) {
   if (e) e.preventDefault();
@@ -87,7 +88,6 @@ export async function handleAnswerCheck(e) {
   const question = currentLesson.plan[currentLesson.questionIndex];
   const type = question.type;
 
-  // Cevap işlenirken butonları devre dışı bırak
   ui.setExerciseControlsDisabled(domElements, type, true);
 
   const correctItem = question.item;
@@ -101,7 +101,7 @@ export async function handleAnswerCheck(e) {
       ? "Doğru!"
       : `Yanlış! Doğru cevap '${correctItem}' olacaktı.`;
   } else if (type === "tap") {
-    const userTaps = getCommittedTaps(); // 'tap-input' modülünden onayla ve al
+    const userTaps = getCommittedTaps();
     let correctCode = correctItem
       .split("")
       .map((letter) => MORSE_DATA[letter])
@@ -111,8 +111,7 @@ export async function handleAnswerCheck(e) {
     if (isCorrect) {
       feedbackMessage = "Doğru!";
     } else {
-      const userLetter =
-        correctItem.length === 1 ? getLetterFromCode(userTaps) : "??";
+      const userLetter = getLetterFromCode(userTaps);
       feedbackMessage = `Yanlış! Sen '${userTaps}' (${userLetter}) vurdun. Doğrusu '${correctCode}' (${correctItem}) olacaktı.`;
     }
   }
@@ -185,16 +184,16 @@ async function completeLesson() {
 
 /**
  * Can kaybeder.
- * BUG 3 DÜZELTMESİ: Hata sonrası butonları tekrar etkinleştirir.
+ * YENİ ÖZELLİK: Yanlışsa 0.5sn bekler ve sesi tekrar çalar.
  */
-function loseLife(type) {
+async function loseLife(type) {
+  // Fonksiyon 'async' olarak güncellendi
   if (currentLesson.hearts <= 0) return;
   currentLesson.hearts--;
   ui.renderHearts(domElements, currentLesson.hearts, config.MAX_HEARTS);
 
   const clearDelay = config.FEEDBACK_WRONG_DELAY;
   if (currentLesson.hearts > 0) {
-    // Hata sonrası butonları tekrar etkinleştir
     if (type === "tap") {
       setTimeout(() => {
         if (currentLesson.isActive) {
@@ -205,14 +204,23 @@ function loseLife(type) {
         }
       }, clearDelay);
     } else if (type === "listen") {
-      setTimeout(() => {
-        if (currentLesson.isActive) {
-          domElements.listen.input.value = "";
-          ui.showFeedback(domElements, false, "", "listen");
-          ui.setExerciseControlsDisabled(domElements, "listen", false);
-          domElements.listen.input.focus();
-        }
-      }, clearDelay);
+      // YENİ ÖZELLİK MANTIĞI
+      ui.showFeedback(domElements, false, "Yanlış! Tekrar dinle...", "listen");
+
+      // 0.5 saniye bekle
+      await sleep(500);
+      if (!currentLesson.isActive) return; // Ders bu arada bittiyse dur
+
+      const question = currentLesson.plan[currentLesson.questionIndex];
+      await audio.playMorseItem(question.item, MORSE_DATA);
+
+      // Ses bittikten sonra
+      if (currentLesson.isActive) {
+        domElements.listen.input.value = "";
+        ui.showFeedback(domElements, false, "", "listen");
+        ui.setExerciseControlsDisabled(domElements, "listen", false);
+        domElements.listen.input.focus();
+      }
     }
   }
 
@@ -290,17 +298,14 @@ export function startNextLesson() {
 }
 
 /**
- * YENİ FONKSİYON (BUG 3 DÜZELTMESİ)
  * 'Sesi Tekrar Çal' butonuna basıldığında çalışır.
  */
 export function handlePlaySound() {
   if (!currentLesson.isActive) return;
   const question = currentLesson.plan[currentLesson.questionIndex];
   if (question.type === "listen") {
-    // Butonları geçici olarak kilitle
     ui.setExerciseControlsDisabled(domElements, "listen", true);
     audio.playMorseItem(question.item, MORSE_DATA).then(() => {
-      // Ses bitince geri aç
       if (currentLesson.isActive) {
         ui.setExerciseControlsDisabled(domElements, "listen", false);
         domElements.listen.input.focus();

@@ -1,0 +1,66 @@
+/* --- 4. GİRİŞ/KAYIT EKRANLARI --- */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.auth-form input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #007bff;
+    margin-top: 5px;
+}
+#screenLogin .auth-form button {
+    background-color: #007bff;
+}
+#screenRegister .auth-form button {
+    background-color: #28a745;
+}
+.separator {
+    text-align: center;
+    color: #888;
+    margin: 15px 0;
+}
+#btnLoginGoogle {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#btnLoginGoogle::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE3LjY0IDkuMjA0YTAgMCAwIDAgMC0uNDE4SC0uMDAydi0uMDAxSDkuMzg4VjYuNTUyaDQuNzU3YTEgMSAwIDAgMS0uNTE1IDIuNTUxIDEgMSAwIDAgMS0xLjcxMS43MzdBNS4yNiA1LjI2IDAgMCAxIDUuMjUgOS45YTUuMjYgNS4yNiAwIDAgMSAyLjkwMi00Ljc5IDEgMSAwIDAgMSAuOTQ4LS4wMDIgMSAxIDAgMCAxIC43MDguOTUgMy4zMyAzLjMzIDAgMCAxIDMuMTA4IDIuODk1aC4wMDJ6IiBmaWxsPSIjRkJCQzA1Ii8+PHBhdGggZD0iTTkuMzg4IDE4YTkuMTUgOS4xNSAwIDAgMC4wMS04Ljk5M2gtLjAwMlY2LjU1MmwtNC43NTcgMS40MDhhMSAxIDAgMCAwLS41MTUgMi41NTEgNS4yNiA1LjI2IDAgMCAwIDAgNi4wMDRBMSAxIDAgMCAwIDQuMTIgMTcuMDIgMSAxIDAgMCAwIDUuMjUgMTcuNWE1LjI2IDUuMjYgMCAwIDAgNC4xMzgtMy4yNDl6IiBmaWxsPSIjM0E4OUU5Ii8+PHBhdGggZD0iTTkuMzg4IDE4YTkuMTUgOS4xNSAwIDAgMS0uMDEtOC45OTMgMSAxIDAgMCAxIDEuMjIgMS4xODQgNS4yNiA1LjI2IDAgMCAwIDMuNDY1IDEuMTA5IDEgMSAwIDAgMSAxLjIyIDEuMTg0IDkgOSAwIDAgMS01Ljg5NSA1LjUxem0tLjAwMi04LjY3NGExIDEgMCAwIDEgMS42Ni0uNzg4IDUgNSAwIDAgMCAzLjc5Mi0zLjQ2NSAxIDEgMCAwIDEgMS43MS0uNTE1IDkgOSAwIDAgMS03LjE2MiA0Ljc2OHoiIGZpbGw9IiNFMTQzMzUiLz48cGF0aCBkPSJNMCA4LjY2N2ExIDEgMCAwIDAgLjc0OCAxLjI5OEE1LjI2IDUuMjYgMCAwIDAgNC4xMiAxNy4wMiA5IDkgMCAwIDAgMCA4LjY2N3oiIGZpbGw9IiM0Mjg1RjQiLz48L3N2Zz4=');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.auth-link-container {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+.auth-link {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}

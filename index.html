@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MorseLingo</title>
-    <link rel="stylesheet" href="style.css" />
+
+    <link rel="stylesheet" href="css/1-main.css" />
+    <link rel="stylesheet" href="css/2-auth.css" />
+    <link rel="stylesheet" href="css/3-menu.css" />
+    <link rel="stylesheet" href="css/4-exercise.css" />
+    <link rel="stylesheet" href="css/5-tap-module.css" />
+    <link rel="stylesheet" href="css/6-mobile.css" />
   </head>
   <body>
     <header class="main-header">
@@ -37,12 +43,9 @@
           />
           <button id="btnLoginEmail" type="submit">Giriş Yap</button>
         </form>
-
         <p class="separator">veya</p>
-
         <button id="btnLoginGoogle">Google ile Giriş Yap</button>
         <p id="loginAuthError" class="feedback-area feedback-wrong"></p>
-
         <p class="auth-link-container">
           Hesabın yok mu?
           <span id="linkToRegister" class="auth-link">Kayıt Ol</span>
@@ -75,9 +78,7 @@
           />
           <button id="btnRegisterEmail" type="submit">Kayıt Ol</button>
         </form>
-
         <p id="registerAuthError" class="feedback-area feedback-wrong"></p>
-
         <p class="auth-link-container">
           Zaten hesabın var mı?
           <span id="linkToLogin" class="auth-link">Giriş Yap</span>
@@ -96,12 +97,13 @@
 
       <div id="screenExercise" class="screen hidden">
         <div class="lesson-header">
-          <button id="btnBackToMenu">← Menüye Dön</button>
+          <button id="btnBackToMenu" title="Menüye Dön">←</button>
           <div id="heartDisplay" class="heart-display"></div>
           <div class="progress-bar">
             <div id="progressFill" class="progress-fill"></div>
           </div>
         </div>
+
         <div id="exerciseListen" class="exercise-module hidden">
           <p id="listen_instruction" class="exercise-instruction">
             Duyduğunu buraya yaz:
@@ -111,28 +113,35 @@
           <button id="listen_btnCheckAnswer">Kontrol Et</button>
           <p id="listen_pFeedback" class="feedback-area"></p>
         </div>
+
         <div id="exerciseTap" class="exercise-module hidden">
-          <div class="question-display">
-            Vurman gereken:
-            <span id="tap_challenge" class="tap-display-box">A</span>
+          <div class="tap-info-group">
+            <div class="question-display">
+              Vurman gereken:
+              <span id="tap_challenge" class="tap-display-box">A</span>
+            </div>
+            <div class="taps-display">
+              Mevcut vuruş (Harf):
+              <span id="tap_currentTapsDisplay" class="tap-display-box">_</span>
+            </div>
+            <div class="taps-display">
+              Tamamlanan vuruşlar (Kelime):
+              <span id="tap_committedWordDisplay" class="tap-display-box"
+                >_</span
+              >
+            </div>
           </div>
-          <button id="tap_btnMorseKey">MORS TUŞU</button>
-          <div class="taps-display">
-            Mevcut vuruş (Harf):
-            <span id="tap_currentTapsDisplay" class="tap-display-box">_</span>
-          </div>
-          <div class="taps-display">
-            Tamamlanan vuruşlar (Kelime):
-            <span id="tap_committedWordDisplay" class="tap-display-box">_</span>
-          </div>
+
           <div class="controls">
-            <button id="tap_btnCheckAnswer">Kontrol Et</button>
             <button id="tap_btnClear">Temizle</button>
+            <button id="tap_btnCheckAnswer">Kontrol Et</button>
           </div>
+
           <p id="tap_pFeedback" class="feedback-area"></p>
+
+          <button id="tap_btnMorseKey">MORS TUŞU</button>
         </div>
       </div>
-
       <div id="screenComplete" class="screen hidden">
         <h2>Harika!</h2>
         <p id="completeMessage">Dersi tamamladın!</p>

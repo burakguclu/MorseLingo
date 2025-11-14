@@ -1,0 +1,130 @@
+/* -------------------------------------------------
+--- 10. MOBİL UYUMLULUK (Responsive Design) ---
+-------------------------------------------------
+*/
+
+/* 600px'den küçük ekranlar için (Telefonlar) */
+@media (max-width: 600px) {
+    main {
+        padding: 10px 5px 0 5px;
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    .screen {
+        padding: 15px;
+        margin-bottom: 0;
+        flex-grow: 1;
+        border-radius: 8px 8px 0 0;
+        height: 100%;
+        overflow: hidden;
+    }
+        
+    .main-header {
+        padding: 10px 15px;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .user-profile {
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    h1 {
+        font-size: 22px;
+    }
+    
+    .lesson-button {
+        padding: 15px;
+    }
+    .lesson-button .lesson-title {
+        font-size: 18px;
+    }
+    .lesson-button .lesson-content {
+        font-size: 14px;
+    }
+    
+    .lesson-header {
+        gap: 10px;
+        margin-bottom: 15px;
+        flex-shrink: 0;
+    }
+    #btnBackToMenu {
+        margin-right: 0;
+        padding: 8px 12px;
+        font-size: 20px;
+        line-height: 1;
+    }
+    .heart {
+        font-size: 20px;
+    }
+    .heart-display {
+        margin: 0 5px;
+        gap: 2px;
+    }
+    
+    /* VURMA MODÜLÜ (YENİ MOBİL YERLEŞİM) */
+    #exerciseTap {
+        height: 100%;
+        flex-grow: 1;
+        justify-content: flex-start;
+        padding-bottom: 15px;
+        overflow: hidden;
+    }
+    .tap-info-group {
+        flex-shrink: 0;
+    }
+    #tap_challenge, .tap-display-box {
+        font-size: 24px;
+        min-height: 30px;
+        padding: 5px 8px;
+    }
+    #tap_currentTapsDisplay {
+        font-size: 22px;
+        min-height: 30px;
+    }
+    
+    #exerciseTap .controls {
+        flex-shrink: 0;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    #exerciseTap .controls button {
+        width: 48%;
+        padding: 10px 10px; 
+        font-size: 18px;
+    }
+
+    #exerciseTap .feedback-area {
+        flex-shrink: 0;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    
+    /* .tap-spacer kuralı kaldırıldı */
+
+    #tap_btnMorseKey {
+        width: 85%;
+        max-width: 150px; 
+        height: auto;
+        aspect-ratio: 1 / 1;
+        font-size: 18px; 
+        flex-grow: 0;
+        flex-shrink: 0;
+        /* DÜZELTME: 'auto' tuşu aşağı iter, '70px' sizin istediğiniz boşluk */
+        margin: auto auto 70px auto; 
+    }
+    
+    /* DİNLEME MODÜLÜ */
+    #exerciseListen {
+        flex-grow: 1;
+        justify-content: flex-start; 
+        padding-top: 20px;
+    }
+    #listen_input {
+        width: 95%;
+        font-size: 20px;
+    }
+}

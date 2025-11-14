@@ -1,0 +1,131 @@
+/* --- 6. EKRAN 2: ALIŞTIRMA STİLLERİ --- */
+#screenExercise {
+    flex-grow: 1; 
+    padding-bottom: 15px;
+}
+.lesson-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+#btnBackToMenu {
+    background: none;
+    border: 2px solid #ccc;
+    color: #555;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+#btnBackToMenu:hover { background-color: #f0f0f0; }
+.progress-bar {
+    flex-grow: 1;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #28a745;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+}
+.feedback-area {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+    min-height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-shrink: 0;
+}
+.feedback-correct { color: #28a745; }
+.feedback-wrong { color: #dc3545; }
+
+/* --- 6a. ALIŞTIRMA 1: DİNLE & YAZ --- */
+#exerciseListen {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    /* DÜZELTME: Üste yaslandı */
+    justify-content: flex-start; 
+    padding-top: 20px;
+    align-items: center;
+}
+#exerciseListen button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+#listen_btnPlaySound { background-color: #28a745; }
+#listen_input {
+    font-size: 24px;
+    padding: 10px;
+    width: 90%;
+    max-width: 250px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-transform: uppercase; 
+}
+#listen_input:disabled {
+    background-color: #eee;
+    opacity: 0.7;
+}
+
+/* --- 7. EKRAN 3: TAMAMLAMA EKRANI --- */
+#screenComplete {
+    text-align: center;
+}
+#screenComplete button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+#btnMenuAfterComplete { background-color: #007bff; }
+.xp-gained {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+}
+
+/* --- 8. CAN SİSTEMİ STİLLERİ --- */
+.heart-display {
+    display: flex;
+    gap: 4px;
+    margin: 0 15px;
+    flex-shrink: 0;
+}
+.heart {
+    font-size: 24px;
+    opacity: 1;
+    transition: all 0.2s;
+}
+.heart.lost {
+    opacity: 0.2;
+    transform: scale(0.9);
+}
+.feedback-failed {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 20px !important;
+}

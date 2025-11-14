@@ -1,0 +1,76 @@
+/* --- 1. TEMEL VE GENEL STİLLER --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    touch-action: manipulation;
+}
+/* YENİ: Mobil görünüm için */
+html, body {
+    height: 100%;
+    /* YENİ: Kaydırmayı engelle */
+    overflow: hidden;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* İçeriği üste yasla */
+    padding: 20px;
+    width: 100%;
+    /* YENİ: Ekranın tamamını kapla */
+    height: 100vh;
+    box-sizing: border-box;
+}
+.main-header {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 2px solid #e0e0e0;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    flex-shrink: 0; 
+}
+h1 {
+    color: #005a9c;
+    margin: 0;
+    font-size: 24px;
+}
+h2 {
+    text-align: center;
+    color: #333;
+    margin-top: 0;
+}
+button {
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+}
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* --- 2. EKRAN YÖNETİMİ --- */
+.screen {
+    width: 100%;
+    max-width: 500px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+/* Çıkış yapma hatasını düzelten !important */
+.hidden {
+    display: none !important;
+}
