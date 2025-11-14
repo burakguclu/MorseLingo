@@ -118,10 +118,12 @@ export async function handleAnswerCheck(e) {
   ui.showFeedback(domElements, isCorrect, feedbackMessage, type);
 
   if (isCorrect) {
+    audio.playEffect("correct");
     ui.triggerAnimation(domElements, type, "animate-correct");
     await store.addXP(config.XP_PER_ANSWER);
     setTimeout(nextQuestion, config.FEEDBACK_CORRECT_DELAY);
   } else {
+    audio.playEffect("wrong");
     ui.triggerAnimation(domElements, type, "animate-wrong");
     loseLife(type);
   }
@@ -147,7 +149,7 @@ function nextQuestion() {
 
 /**
  * Dersi başarıyla tamamlar.
- * DÜZELTME: Konfeti eklendi.
+ * DÜZELTME: 'complete' sesini çalar (İstek 1)
  */
 async function completeLesson() {
   currentLesson.isActive = false;
@@ -182,22 +184,25 @@ async function completeLesson() {
   }
 
   ui.showCompleteScreen(domElements, completeText, xpMessage, hasNextLesson);
-
-  // YENİ: Konfetiyi patlat!
   ui.triggerConfetti();
+
+  // 'correct' yerine 'complete' sesini çal
+  audio.playEffect("complete");
 }
 
 /**
  * Can kaybeder.
+ * DÜZELTME: 'Vur' modu için daha kısa gecikme kullanır (İstek 2)
  */
 async function loseLife(type) {
   if (currentLesson.hearts <= 0) return;
   currentLesson.hearts--;
   ui.renderHearts(domElements, currentLesson.hearts, config.MAX_HEARTS);
 
-  const clearDelay = config.FEEDBACK_WRONG_DELAY;
   if (currentLesson.hearts > 0) {
     if (type === "tap") {
+      // İSTEK 2: 'Vur' modu için daha kısa gecikme
+      const clearDelay = config.FEEDBACK_WRONG_DELAY_TAP; // 1500ms
       setTimeout(() => {
         if (currentLesson.isActive) {
           ui.clearTapUI(domElements);
@@ -207,9 +212,10 @@ async function loseLife(type) {
         }
       }, clearDelay);
     } else if (type === "listen") {
+      // İSTEK 3: Akış (buzz -> 0.5s bekle -> sesi çal)
       ui.showFeedback(domElements, false, "Yanlış! Tekrar dinle...", "listen");
 
-      await sleep(500);
+      await sleep(500); // Sesten sonraki 0.5sn bekleme
       if (!currentLesson.isActive) return;
 
       const question = currentLesson.plan[currentLesson.questionIndex];
@@ -231,6 +237,7 @@ async function loseLife(type) {
 
 /**
  * Derste başarısız olur.
+ * DÜZELTME: 'failed' sesini çalar (İstek 1)
  */
 function failLesson(type) {
   currentLesson.isActive = false;
@@ -238,6 +245,8 @@ function failLesson(type) {
   resetTapState();
 
   ui.showFailScreen(domElements, type);
+  // 'wrong' yerine 'failed' sesini çal
+  audio.playEffect("failed");
 
   setTimeout(() => {
     let userProgress = store.getUserProgress();

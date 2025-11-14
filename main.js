@@ -17,10 +17,6 @@ let domElements = {};
 
 // --- 2. AUTH GERİ BİLDİRİMLERİ (Callbacks) ---
 
-/**
- * Kullanıcı giriş yaptığında çalışır (auth.js tarafından tetiklenir).
- * @param {object} user - Firebase kullanıcı nesnesi
- */
 async function onUserLogin(user) {
   store.setCurrentUser(user);
   await store.loadProgress();
@@ -36,22 +32,14 @@ async function onUserLogin(user) {
   ui.showScreen(domElements, "screenMenu");
 }
 
-/**
- * Kullanıcı çıkış yaptığında çalışır (auth.js tarafından tetiklenir).
- */
 function onUserLogout() {
   store.setCurrentUser(null);
-  let userProgress = store.getNewUserProgress(); // Varsayılan ilerlemeyi al
+  let userProgress = store.getNewUserProgress();
 
-  ui.showUserUI(domElements, null, userProgress); // Profili gizle
+  ui.showUserUI(domElements, null, userProgress);
   ui.showScreen(domElements, "screenLogin");
 }
 
-/**
- * Menüden ders seçildiğinde çalışır (ui.js tarafından tetiklenir).
- * @param {string} lessonId
- * @param {boolean} isLocked
- */
 function onLessonSelect(lessonId, isLocked) {
   if (isLocked) {
     alert("Bu ders kilitli! Önceki dersleri tamamlamalısın.");
@@ -89,7 +77,6 @@ function bindEventListeners() {
   // Menü Butonları
   domElements.btnResetProgress.addEventListener("click", async () => {
     await store.resetProgress();
-    // Menüyü yeniden çiz
     let userProgress = store.getUserProgress();
     ui.renderLessonMenu(
       domElements,
@@ -107,7 +94,6 @@ function bindEventListeners() {
   domElements.btnNextLesson.addEventListener("click", lesson.startNextLesson);
 
   // 'Dinle' Modülü Olayları
-  // BUG 3 DÜZELTMESİ: 'lesson.handlePlaySound()' çağrılıyor
   domElements.listen.btnPlaySound.addEventListener(
     "click",
     lesson.handlePlaySound
@@ -153,7 +139,10 @@ async function init() {
   // 1. DOM elemanlarını bul
   domElements = ui.initDOMElements(config.MAX_HEARTS);
 
-  // 2. JSON verisini çek
+  // 2. YENİ: Ses efektlerini DOM'a bağla
+  audio.initAudioEffects();
+
+  // 3. JSON verisini çek
   try {
     const response = await fetch("./data.json");
     if (!response.ok) throw new Error(`HTTP hatası! ${response.status}`);
@@ -166,16 +155,16 @@ async function init() {
     return;
   }
 
-  // 3. Modülleri DOM ve Veri ile başlat
+  // 4. Modülleri DOM ve Veri ile başlat
   auth.initAuth(domElements);
   store.initStore(domElements);
   lesson.initLesson(domElements, MORSE_DATA, LESSON_DATA_MAP);
   tapInput.initTapInput(domElements);
 
-  // 4. Olay dinleyicilerini bağla
+  // 5. Olay dinleyicilerini bağla
   bindEventListeners();
 
-  // 5. Auth durumunu dinlemeye başla (Bu, uygulamayı tetikler)
+  // 6. Auth durumunu dinlemeye başla
   auth.listenForAuthChanges(onUserLogin, onUserLogout);
 }
 

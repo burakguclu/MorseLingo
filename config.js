@@ -15,10 +15,13 @@ export const COMMIT_LETTER_GAP_MS = 400;
 
 // Oyun Ayarları
 export const MAX_HEARTS = 5;
-export const FEEDBACK_WRONG_DELAY = 3000;
+export const FEEDBACK_WRONG_DELAY = 3000; // 'Dinle' modu için varsayılan
 export const FEEDBACK_CORRECT_DELAY = 1000;
 export const FAIL_LESSON_DELAY = 2500;
 
-// YENİ: OYUNLAŞTIRMA (GAMIFICATION) AYARLARI
+// YENİ: 'Vur' modu için daha kısa geri bildirim süresi (İstek 2)
+export const FEEDBACK_WRONG_DELAY_TAP = 1500; // 1.5 saniye
+
+// OYUNLAŞTIRMA (GAMIFICATION) AYARLARI
 export const XP_PER_ANSWER = 10;
 export const XP_PER_LESSON_COMPLETE = 50;

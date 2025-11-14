@@ -3,12 +3,12 @@
 
 import * as config from "./config.js";
 
-// Bu modülün kendi içinde yönettiği durum (state)
 let audioCtx;
 let currentOscillator = null;
 let pressStartTime = 0;
+let soundEffects = {};
 
-// === YARDIMCI FONKSİYONLAR (Bu modüle özel) ===
+// === YARDIMCI FONKSİYONLAR ===
 
 function getAudioContext() {
   if (!audioCtx) {
@@ -35,12 +35,27 @@ function playSound(durationInMs) {
   oscillator.stop(now + durationInSeconds);
 }
 
-// === DIŞA AKTARILAN FONKSİYONLAR (main.js kullanacak) ===
+// === DIŞA AKTARILAN FONKSİYONLAR ===
+
+/**
+ * Ses efektleri için HTML <audio> elemanlarını ön yükler.
+ * DÜZELTME: Yeni sesler eklendi (İstek 1)
+ */
+export function initAudioEffects() {
+  soundEffects["correct"] = document.getElementById("audioCorrect");
+  soundEffects["wrong"] = document.getElementById("audioWrong");
+  soundEffects["complete"] = document.getElementById("audioComplete");
+  soundEffects["failed"] = document.getElementById("audioFailed");
+
+  Object.values(soundEffects).forEach((audio) => {
+    if (audio) {
+      audio.load();
+    }
+  });
+}
 
 /**
  * Bir harf veya kelimenin mors kodunu çalar.
- * @param {string} item - Çalınacak harf veya kelime (örn: "SOS")
- * @param {Object} MORSE_CODE - Mors kodu sözlüğü
  */
 export async function playMorseItem(item, MORSE_CODE) {
   const letters = item.split("");
@@ -74,7 +89,6 @@ export async function playMorseItem(item, MORSE_CODE) {
 
 /**
  * Mors tuşuna basıldığında tonu başlatır.
- * @returns {number} - Sese basılma zamanı (timestamp)
  */
 export function startTone() {
   const ctx = getAudioContext();
@@ -94,8 +108,6 @@ export function startTone() {
 
 /**
  * Mors tuşu bırakıldığında tonu durdurur ve vuruşu hesaplar.
- * @param {number} pStartTime - startTone() tarafından döndürülen basma zamanı
- * @returns {string} - '.' (dit) veya '-' (dah)
  */
 export function stopTone(pStartTime) {
   if (!currentOscillator) {
@@ -105,7 +117,7 @@ export function stopTone(pStartTime) {
   currentOscillator.stop(getAudioContext().currentTime);
   currentOscillator = null;
 
-  const pressDuration = Date.now() - pStartTime;
+  const pressDuration = Date.now() - pressStartTime;
   const tappedSymbol = pressDuration < config.DIT_DAH_THRESHOLD_MS ? "." : "-";
 
   return tappedSymbol;
@@ -118,5 +130,17 @@ export function stopAllAudio() {
   if (currentOscillator) {
     currentOscillator.stop(getAudioContext().currentTime);
     currentOscillator = null;
+  }
+}
+
+/**
+ * 'correct', 'wrong', 'complete' veya 'failed' ses efektini çalar.
+ * @param {string} soundId - Çalınacak sesin ID'si
+ */
+export function playEffect(soundId) {
+  const sound = soundEffects[soundId];
+  if (sound) {
+    sound.currentTime = 0;
+    sound.play();
   }
 }
