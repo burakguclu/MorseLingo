@@ -119,10 +119,8 @@ export function showAuthError(elements, screen, message) {
     screen === "login" ? elements.login.authError : elements.register.authError;
   errorEl.textContent = message;
 
-  // Hata mesajını 3 saniye sonra temizle
   setTimeout(() => {
     if (errorEl.textContent === message) {
-      // Başka bir hata gelmediyse
       errorEl.textContent = "";
     }
   }, 3000);
@@ -130,7 +128,6 @@ export function showAuthError(elements, screen, message) {
 
 /**
  * Kullanıcı giriş/çıkışına göre arayüzü günceller.
- * BUG 2 DÜZELTMESİ: 'else' bloğu artık profili doğru şekilde gizliyor.
  */
 export function showUserUI(elements, user, progress) {
   if (user) {
@@ -141,7 +138,6 @@ export function showUserUI(elements, user, progress) {
       updateStreak(elements, progress.streak || 0);
     }
   } else {
-    // Çıkış yapıldığında, profili gizle.
     elements.userProfile.classList.add("hidden");
   }
 }
@@ -329,7 +325,7 @@ export function showCompleteScreen(
 }
 
 /**
- * YENİ (BUG 3 DÜZELTMESİ): Alıştırma butonlarını kilitleyen fonksiyon.
+ * Alıştırma butonlarını kilitleyen fonksiyon.
  */
 export function setExerciseControlsDisabled(elements, type, disabled) {
   if (type === "listen") {
@@ -341,4 +337,51 @@ export function setExerciseControlsDisabled(elements, type, disabled) {
     elements.tap.btnClear.disabled = disabled;
     elements.tap.btnMorseKey.disabled = disabled;
   }
+}
+
+/**
+ * Bir alıştırma modülüne animasyon sınıfı ekler.
+ */
+export function triggerAnimation(elements, type, animationClass) {
+  const element =
+    type === "listen" ? elements.moduleListen : elements.moduleTap;
+
+  element.classList.remove(animationClass);
+  void element.offsetWidth;
+  element.classList.add(animationClass);
+
+  setTimeout(() => {
+    element.classList.remove(animationClass);
+  }, 400); // 0.4s
+}
+
+/**
+ * YENİ: Ekranda konfeti patlaması başlatır.
+ */
+export function triggerConfetti() {
+  // 'confetti' fonksiyonu index.html'den yüklenen kütüphaneden gelir (window.confetti)
+  if (typeof confetti !== "function") {
+    return; // Kütüphane yüklenemediyse hata verme
+  }
+
+  // Ortadan bir patlama
+  confetti({
+    particleCount: 150,
+    spread: 90,
+    origin: { y: 0.6 },
+  });
+
+  // Ekranın sol ve sağ kenarlarından destek
+  confetti({
+    particleCount: 50,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0, y: 0.8 },
+  });
+  confetti({
+    particleCount: 50,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1, y: 0.8 },
+  });
 }

@@ -21,7 +21,6 @@ let currentLesson = {
 };
 let nextLessonIdToStart = null;
 
-// YENİ: 0.5sn beklemek için yardımcı fonksiyon
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -119,9 +118,11 @@ export async function handleAnswerCheck(e) {
   ui.showFeedback(domElements, isCorrect, feedbackMessage, type);
 
   if (isCorrect) {
+    ui.triggerAnimation(domElements, type, "animate-correct");
     await store.addXP(config.XP_PER_ANSWER);
     setTimeout(nextQuestion, config.FEEDBACK_CORRECT_DELAY);
   } else {
+    ui.triggerAnimation(domElements, type, "animate-wrong");
     loseLife(type);
   }
 }
@@ -146,6 +147,7 @@ function nextQuestion() {
 
 /**
  * Dersi başarıyla tamamlar.
+ * DÜZELTME: Konfeti eklendi.
  */
 async function completeLesson() {
   currentLesson.isActive = false;
@@ -180,14 +182,15 @@ async function completeLesson() {
   }
 
   ui.showCompleteScreen(domElements, completeText, xpMessage, hasNextLesson);
+
+  // YENİ: Konfetiyi patlat!
+  ui.triggerConfetti();
 }
 
 /**
  * Can kaybeder.
- * YENİ ÖZELLİK: Yanlışsa 0.5sn bekler ve sesi tekrar çalar.
  */
 async function loseLife(type) {
-  // Fonksiyon 'async' olarak güncellendi
   if (currentLesson.hearts <= 0) return;
   currentLesson.hearts--;
   ui.renderHearts(domElements, currentLesson.hearts, config.MAX_HEARTS);
@@ -204,17 +207,14 @@ async function loseLife(type) {
         }
       }, clearDelay);
     } else if (type === "listen") {
-      // YENİ ÖZELLİK MANTIĞI
       ui.showFeedback(domElements, false, "Yanlış! Tekrar dinle...", "listen");
 
-      // 0.5 saniye bekle
       await sleep(500);
-      if (!currentLesson.isActive) return; // Ders bu arada bittiyse dur
+      if (!currentLesson.isActive) return;
 
       const question = currentLesson.plan[currentLesson.questionIndex];
       await audio.playMorseItem(question.item, MORSE_DATA);
 
-      // Ses bittikten sonra
       if (currentLesson.isActive) {
         domElements.listen.input.value = "";
         ui.showFeedback(domElements, false, "", "listen");
