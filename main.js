@@ -4,7 +4,7 @@
 // Config ve modülleri içe aktar
 import * as config from "./config.js";
 import * as ui from "./ui.js";
-import * as audio from "./audio.js"; // (Şu an doğrudan kullanılmıyor ama ileride gerekebilir)
+import * as audio from "./audio.js";
 import * as auth from "./auth.js";
 import * as store from "./store.js";
 import * as lesson from "./lesson.js";
@@ -63,7 +63,7 @@ function onLessonSelect(lessonId, isLocked) {
 // --- 3. OLAY DİNLEYİCİLERİNİ BAĞLAMA ---
 
 function bindEventListeners() {
-  // Giriş/Kayıt Linkleri (BUG 4 DÜZELTMESİ)
+  // Giriş/Kayıt Linkleri
   domElements.login.linkToRegister.addEventListener("click", () => {
     ui.showScreen(domElements, "screenRegister");
     ui.showAuthError(domElements, "login", "");
@@ -107,14 +107,11 @@ function bindEventListeners() {
   domElements.btnNextLesson.addEventListener("click", lesson.startNextLesson);
 
   // 'Dinle' Modülü Olayları
-  domElements.listen.btnPlaySound.addEventListener("click", () => {
-    // 'lesson.js' state tutmadığı için MORSE_DATA'yı dışarıdan almalı
-    const q = lesson.getCurrentLessonQuestion(); // (Bu fonksiyonu eklemeliyiz)
-    // Düzeltme: lesson.js'in state tutması daha iyi.
-    // Bu yüzden 'playMorseItem'ı lesson.js'in içine taşıyalım.
-    // Şimdilik basit tutalım:
-    lesson.handlePlaySound(MORSE_DATA);
-  });
+  // BUG 3 DÜZELTMESİ: 'lesson.handlePlaySound()' çağrılıyor
+  domElements.listen.btnPlaySound.addEventListener(
+    "click",
+    lesson.handlePlaySound
+  );
   domElements.listen.btnCheckAnswer.addEventListener(
     "click",
     lesson.handleAnswerCheck

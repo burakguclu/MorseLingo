@@ -121,7 +121,10 @@ export function showAuthError(elements, screen, message) {
 
   // Hata mesajını 3 saniye sonra temizle
   setTimeout(() => {
-    errorEl.textContent = "";
+    if (errorEl.textContent === message) {
+      // Başka bir hata gelmediyse
+      errorEl.textContent = "";
+    }
   }, 3000);
 }
 
@@ -237,7 +240,6 @@ export function renderHearts(elements, currentHearts, maxHearts) {
 
 /**
  * 'Dinle' modülü arayüzünü soruya göre hazırlar.
- * BUG 3 DÜZELTMESİ: Butonları/inputları tekrar etkinleştirir.
  */
 export function setupListenUI(elements, questionItem) {
   elements.moduleListen.classList.remove("hidden");
@@ -261,11 +263,10 @@ export function setupListenUI(elements, questionItem) {
 
 /**
  * 'Vur' modülü arayüzünü soruya göre hazırlar.
- * BUG 3 DÜZELTMESİ: Butonları tekrar etkinleştirir.
  */
 export function setupTapUI(elements, questionItem) {
   elements.moduleListen.classList.add("hidden");
-  elements.moduleTap.classList.add("hidden");
+  elements.moduleTap.classList.remove("hidden");
 
   elements.tap.btnCheckAnswer.disabled = false;
   elements.tap.btnClear.disabled = false;

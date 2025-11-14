@@ -56,6 +56,7 @@ export function startLesson(lessonId) {
 
 /**
  * Sıradaki soruyu gösterir.
+ * BUG 3 DÜZELTMESİ: Ses çaldıktan sonra butonları etkinleştirir.
  */
 function showQuestion() {
   if (!currentLesson.isActive) return;
@@ -65,20 +66,22 @@ function showQuestion() {
   ui.showFeedback(domElements, true, "", "tap");
 
   if (question.type === "listen") {
-    ui.setupListenUI(domElements, question.item);
+    ui.setupListenUI(domElements, question.item); // Bu, butonları 'disabled' yapar
     audio.playMorseItem(question.item, MORSE_DATA).then(() => {
       if (currentLesson.isActive) {
+        // Ses bittiğinde butonları etkinleştir
         ui.setExerciseControlsDisabled(domElements, "listen", false);
       }
     });
   } else if (question.type === "tap") {
     resetTapState(); // 'Vur' modülü durumunu sıfırla
-    ui.setupTapUI(domElements, question.item);
+    ui.setupTapUI(domElements, question.item); // Bu, butonları 'enabled' yapar
   }
 }
 
 /**
  * Kullanıcının cevabını kontrol eder.
+ * BUG 3 DÜZELTMESİ: Cevap işlenirken butonları kilitler.
  * @param {Event} e - Olay
  */
 export async function handleAnswerCheck(e) {
@@ -186,6 +189,7 @@ async function completeLesson() {
 
 /**
  * Can kaybeder.
+ * BUG 3 DÜZELTMESİ: Hata sonrası butonları tekrar etkinleştirir.
  * @param {string} type - 'listen' veya 'tap'
  */
 function loseLife(type) {
@@ -289,6 +293,26 @@ export function startNextLesson() {
       onLessonSelect
     );
     ui.showScreen(domElements, "screenMenu");
+  }
+}
+
+/**
+ * YENİ FONKSİYON (BUG 3 DÜZELTMESİ)
+ * 'Sesi Tekrar Çal' butonuna basıldığında çalışır.
+ */
+export function handlePlaySound() {
+  if (!currentLesson.isActive) return;
+  const question = currentLesson.plan[currentLesson.questionIndex];
+  if (question.type === "listen") {
+    // Butonları geçici olarak kilitle
+    ui.setExerciseControlsDisabled(domElements, "listen", true);
+    audio.playMorseItem(question.item, MORSE_DATA).then(() => {
+      // Ses bitince geri aç
+      if (currentLesson.isActive) {
+        ui.setExerciseControlsDisabled(domElements, "listen", false);
+        domElements.listen.input.focus();
+      }
+    });
   }
 }
 
