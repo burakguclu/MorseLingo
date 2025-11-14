@@ -18,17 +18,31 @@ main {
     width: 100%;
     background-color: #ffffff;
     border-bottom: 2px solid #e0e0e0;
-    text-align: center;
-    padding: 10px 0;
+    padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
 }
 h1 {
     color: #005a9c;
     margin: 0;
+    font-size: 24px;
 }
 h2 {
     text-align: center;
     color: #333;
+    margin-top: 0;
+}
+button {
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+}
+/* YENİ: Devre dışı bırakılmış butonlar */
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 /* --- 2. EKRAN YÖNETİMİ --- */
@@ -40,12 +54,108 @@ h2 {
     padding: 25px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
+    box-sizing: border-box;
 }
 .hidden {
     display: none;
 }
 
-/* --- 3. EKRAN 1: ANA MENÜ STİLLERİ --- */
+/* --- 3. KULLANICI PROFİLİ (HEADER) --- */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.user-profile span {
+    font-size: 14px;
+    color: #555;
+}
+#userXpDisplay {
+    font-weight: bold;
+    color: #007bff;
+}
+#userStreakDisplay {
+    font-weight: bold;
+    color: #ff4500;
+}
+#btnLogout {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* --- 4. GİRİŞ/KAYIT EKRANLARI --- */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.auth-form input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+/* YENİ: Form içindeki butonların stilleri */
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #007bff;
+    margin-top: 5px;
+}
+#screenLogin .auth-form button {
+    background-color: #007bff;
+}
+#screenRegister .auth-form button {
+    background-color: #28a745;
+}
+.separator {
+    text-align: center;
+    color: #888;
+    margin: 15px 0;
+}
+#btnLoginGoogle {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#btnLoginGoogle::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE3LjY0IDkuMjA0YTAgMCAwIDAgMC0uNDE4SC0uMDAydi0uMDAxSDkuMzg4VjYuNTUyaDQuNzU3YTEgMSAwIDAgMS0uNTE1IDIuNTUxIDEgMSAwIDAgMS0xLjcxMS43MzdBNS4yNiA1LjI2IDAgMCAxIDUuMjUgOS45YTUuMjYgNS4yNiAwIDAgMSAyLjkwMi00Ljc5IDEgMSAwIDAgMSAuOTQ4LS4wMDIgMSAxIDAgMCAxIC43MDguOTUgMy4zMyAzLjMzIDAgMCAxIDMuMTA4IDIuODk1aC4wMDJ6IiBmaWxsPSIjRkJCQzA1Ii8+PHBhdGggZD0iTTkuMzg4IDE4YTkuMTUgOS4xNSAwIDAgMC4wMS04Ljk5M2gtLjAwMlY2LjU1MmwtNC43NTcgMS40MDhhMSAxIDAgMCAwLS41MTUgMi41NTEgNS4yNiA1LjI2IDAgMCAwIDAgNi4wMDRBMSAxIDAgMCAwIDQuMTIgMTcuMDIgMSAxIDAgMCAwIDUuMjUgMTcuNWE1LjI2IDUuMjYgMCAwIDAgNC4xMzgtMy4yNDl6IiBmaWxsPSIjM0E4OUU5Ii8+PHBhdGggZD0iTTkuMzg4IDE4YTkuMTUgOS4xNSAwIDAgMS0uMDEtOC45OTMgMSAxIDAgMCAxIDEuMjIgMS4xODQgNS4yNiA1LjI2IDAgMCAwIDMuNDY1IDEuMTA5IDEgMSAwIDAgMSAxLjIyIDEuMTg0IDkgOSAwIDAgMS01Ljg5NSA1LjUxem0tLjAwMi04LjY3NGExIDEgMCAwIDEgMS42Ni0uNzg4IDUgNSAwIDAgMCAzLjc5Mi0zLjQ2NSAxIDEgMCAwIDEgMS43MS0uNTE1IDkgOSAwIDAgMS03LjE2MiA0Ljc2OHoiIGZpbGw9IiNFMTQzMzUiLz48cGF0aCBkPSJNMCA4LjY2N2ExIDEgMCAwIDAgLjc0OCAxLjI5OEE1LjI2IDUuMjYgMCAwIDAgNC4xMiAxNy4wMiA5IDkgMCAwIDAgMCA4LjY2N3oiIGZpbGw9IiM0Mjg1RjQiLz48L3N2Zz4=');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.auth-link-container {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+.auth-link {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* --- 5. EKRAN 1: ANA MENÜ STİLLERİ --- */
 .lesson-list {
     display: flex;
     flex-direction: column;
@@ -108,7 +218,7 @@ h2 {
     color: rgba(0, 0, 0, 0.3);
 }
 
-/* --- 4. EKRAN 2: ALIŞTIRMA STİLLERİ --- */
+/* --- 6. EKRAN 2: ALIŞTIRMA STİLLERİ --- */
 .lesson-header {
     display: flex;
     align-items: center;
@@ -152,7 +262,7 @@ h2 {
 .feedback-correct { color: #28a745; }
 .feedback-wrong { color: #dc3545; }
 
-/* --- 4a. ALIŞTIRMA 1: DİNLE & YAZ --- */
+/* --- 6a. ALIŞTIRMA 1: DİNLE & YAZ --- */
 #exerciseListen {
     text-align: center;
 }
@@ -164,7 +274,6 @@ h2 {
     margin: 10px 5px;
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
 }
 #listen_btnPlaySound { background-color: #28a745; }
 #listen_input {
@@ -178,8 +287,13 @@ h2 {
     margin-top: 15px;
     text-transform: uppercase; 
 }
+/* YENİ: Alıştırma inputları devre dışı bırakıldığında */
+#listen_input:disabled {
+    background-color: #eee;
+    opacity: 0.7;
+}
 
-/* --- 4b. ALIŞTIRMA 2: GÖR & VUR (STİLLER GÜNCELLENDİ) --- */
+/* --- 6b. ALIŞTIRMA 2: GÖR & VUR --- */
 #exerciseTap {
     text-align: center;
 }
@@ -187,13 +301,11 @@ h2 {
     margin-bottom: 15px;
     font-size: 18px;
 }
-/* Ayrı vuruş alanları için */
 .taps-display {
     margin-bottom: 10px;
     font-size: 16px;
     color: #555;
 }
-/* Soru ve cevap kutuları için ortak stil */
 #tap_challenge, .tap-display-box {
     display: block;
     font-size: 36px;
@@ -202,24 +314,21 @@ h2 {
     margin-top: 5px;
     letter-spacing: 2px;
     min-height: 50px;
-    background-color: #f0f4f8; /* Arka plan rengi */
+    background-color: #f0f4f8;
     padding: 10px;
     border-radius: 5px;
-    /* Kelimelerin sığması için */
     word-break: break-all;
 }
-/* Mevcut vuruş (daha az belirgin) */
 #tap_currentTapsDisplay {
     color: #007bff;
     font-size: 28px;
     min-height: 40px;
 }
-/* Tamamlanan vuruşlar (daha belirgin) */
 #tap_committedWordDisplay {
      color: #005a9c;
 }
 #tap_btnMorseKey {
-    width: 150px; /* Butonu biraz küçülttük */
+    width: 150px;
     height: 150px;
     background-color: #dc3545;
     color: white;
@@ -246,11 +355,10 @@ h2 {
     margin: 5px;
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
 }
 #tap_btnClear { background-color: #6c757d; }
 
-/* --- 5. EKRAN 3: TAMAMLAMA EKRANI --- */
+/* --- 7. EKRAN 3: TAMAMLAMA EKRANI --- */
 #screenComplete {
     text-align: center;
 }
@@ -262,11 +370,16 @@ h2 {
     margin: 10px;
     border-radius: 5px;
     font-size: 18px;
-    cursor: pointer;
 }
 #btnMenuAfterComplete { background-color: #007bff; }
+.xp-gained {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+}
 
-/* --- 6. CAN SİSTEMİ STİLLERİ --- */
+/* --- 8. CAN SİSTEMİ STİLLERİ --- */
 .heart-display {
     display: flex;
     gap: 4px;
@@ -287,7 +400,7 @@ h2 {
     font-size: 20px !important;
 }
 
-/* --- 7. SIFIRLAMA BUTONU STİLLERİ --- */
+/* --- 9. SIFIRLAMA BUTONU STİLLERİ --- */
 .menu-header {
     display: flex;
     justify-content: space-between;
@@ -305,8 +418,6 @@ h2 {
     border-radius: 5px;
     font-size: 14px;
     font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s;
 }
 #btnResetProgress:hover {
     background-color: #c82333;

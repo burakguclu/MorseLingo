@@ -3,16 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MorseLingo - Ana Menü</title>
+    <title>MorseLingo</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header class="main-header">
       <h1>MorseLingo</h1>
+      <div id="userProfile" class="user-profile hidden">
+        <span id="userEmailDisplay"></span>
+        <span id="userXpDisplay">0 XP</span>
+        <span id="userStreakDisplay">🔥 0</span>
+        <button id="btnLogout">Çıkış Yap</button>
+      </div>
     </header>
 
     <main>
-      <div id="screenMenu" class="screen">
+      <div id="screenLogin" class="screen">
+        <h2>Giriş Yapın</h2>
+        <form id="loginForm" class="auth-form" action="javascript:void(0);">
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="E-posta"
+            required
+            autocomplete="username"
+          />
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Şifre"
+            required
+            autocomplete="current-password"
+          />
+          <button id="btnLoginEmail" type="submit">Giriş Yap</button>
+        </form>
+
+        <p class="separator">veya</p>
+
+        <button id="btnLoginGoogle">Google ile Giriş Yap</button>
+        <p id="loginAuthError" class="feedback-area feedback-wrong"></p>
+
+        <p class="auth-link-container">
+          Hesabın yok mu?
+          <span id="linkToRegister" class="auth-link">Kayıt Ol</span>
+        </p>
+      </div>
+
+      <div id="screenRegister" class="screen hidden">
+        <h2>Yeni Hesap Oluştur</h2>
+        <form id="registerForm" class="auth-form" action="javascript:void(0);">
+          <input
+            type="email"
+            id="registerEmail"
+            placeholder="E-posta"
+            required
+            autocomplete="email"
+          />
+          <input
+            type="password"
+            id="registerPassword"
+            placeholder="Şifre (en az 6 karakter)"
+            required
+            autocomplete="new-password"
+          />
+          <input
+            type="password"
+            id="registerPasswordConfirm"
+            placeholder="Şifreyi Tekrarla"
+            required
+            autocomplete="new-password"
+          />
+          <button id="btnRegisterEmail" type="submit">Kayıt Ol</button>
+        </form>
+
+        <p id="registerAuthError" class="feedback-area feedback-wrong"></p>
+
+        <p class="auth-link-container">
+          Zaten hesabın var mı?
+          <span id="linkToLogin" class="auth-link">Giriş Yap</span>
+        </p>
+      </div>
+
+      <div id="screenMenu" class="screen hidden">
         <div class="menu-header">
           <h2>Dersler</h2>
           <button id="btnResetProgress" title="Tüm ilerlemeyi sıfırla">
@@ -25,13 +97,7 @@
       <div id="screenExercise" class="screen hidden">
         <div class="lesson-header">
           <button id="btnBackToMenu">← Menüye Dön</button>
-          <div id="heartDisplay" class="heart-display">
-            <span class="heart">❤️</span>
-            <span class="heart">❤️</span>
-            <span class="heart">❤️</span>
-            <span class="heart">❤️</span>
-            <span class="heart">❤️</span>
-          </div>
+          <div id="heartDisplay" class="heart-display"></div>
           <div class="progress-bar">
             <div id="progressFill" class="progress-fill"></div>
           </div>
@@ -70,6 +136,7 @@
       <div id="screenComplete" class="screen hidden">
         <h2>Harika!</h2>
         <p id="completeMessage">Dersi tamamladın!</p>
+        <p id="xpGainedMessage" class="xp-gained"></p>
         <button id="btnNextLesson" class="hidden">Sıradaki Derse Geç</button>
         <button id="btnMenuAfterComplete">Ana Menüye Dön</button>
       </div>

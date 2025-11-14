@@ -4,28 +4,72 @@
 /**
  * Tüm HTML elemanlarını bir nesne içinde toplar.
  */
-export function initDOMElements() {
+export function initDOMElements(maxHearts) {
+  // Canları dinamik olarak oluştur
+  const heartContainer = document.getElementById("heartDisplay");
+  heartContainer.innerHTML = "";
+  for (let i = 0; i < maxHearts; i++) {
+    const heart = document.createElement("span");
+    heart.className = "heart";
+    heart.textContent = "❤️";
+    heartContainer.appendChild(heart);
+  }
+
   return {
     // Ekranlar
+    screenLogin: document.getElementById("screenLogin"),
+    screenRegister: document.getElementById("screenRegister"),
     screenMenu: document.getElementById("screenMenu"),
     screenExercise: document.getElementById("screenExercise"),
     screenComplete: document.getElementById("screenComplete"),
+
+    // Formlar
+    loginForm: document.getElementById("loginForm"),
+    registerForm: document.getElementById("registerForm"),
 
     // Modüller
     moduleListen: document.getElementById("exerciseListen"),
     moduleTap: document.getElementById("exerciseTap"),
 
+    // Kullanıcı Profili (Header)
+    userProfile: document.getElementById("userProfile"),
+    userEmailDisplay: document.getElementById("userEmailDisplay"),
+    userXpDisplay: document.getElementById("userXpDisplay"),
+    userStreakDisplay: document.getElementById("userStreakDisplay"),
+    btnLogout: document.getElementById("btnLogout"),
+
+    // Giriş Ekranı
+    login: {
+      inputEmail: document.getElementById("loginEmail"),
+      inputPassword: document.getElementById("loginPassword"),
+      btnLoginEmail: document.getElementById("btnLoginEmail"),
+      btnLoginGoogle: document.getElementById("btnLoginGoogle"),
+      authError: document.getElementById("loginAuthError"),
+      linkToRegister: document.getElementById("linkToRegister"),
+    },
+
+    // Kayıt Ekranı
+    register: {
+      inputEmail: document.getElementById("registerEmail"),
+      inputPassword: document.getElementById("registerPassword"),
+      inputPasswordConfirm: document.getElementById("registerPasswordConfirm"),
+      btnRegisterEmail: document.getElementById("btnRegisterEmail"),
+      authError: document.getElementById("registerAuthError"),
+      linkToLogin: document.getElementById("linkToLogin"),
+    },
+
     // Menü
     lessonListContainer: document.getElementById("lessonList"),
     btnResetProgress: document.getElementById("btnResetProgress"),
 
-    // Alıştırma Ekranı
+    // Alıştırma
     btnBackToMenu: document.getElementById("btnBackToMenu"),
     progressFill: document.getElementById("progressFill"),
     heartDisplaySpans: document.querySelectorAll("#heartDisplay .heart"),
 
-    // Tamamlandı Ekranı
+    // Tamamlandı
     completeMessage: document.getElementById("completeMessage"),
+    xpGainedMessage: document.getElementById("xpGainedMessage"),
     btnNextLesson: document.getElementById("btnNextLesson"),
     btnMenuAfterComplete: document.getElementById("btnMenuAfterComplete"),
 
@@ -55,18 +99,52 @@ export function initDOMElements() {
  * İstenen ekranı gösterir, diğerlerini gizler.
  */
 export function showScreen(elements, screenId) {
+  elements.screenLogin.classList.add("hidden");
+  elements.screenRegister.classList.add("hidden");
   elements.screenMenu.classList.add("hidden");
   elements.screenExercise.classList.add("hidden");
   elements.screenComplete.classList.add("hidden");
 
-  const activeScreen = elements[screenId]; // örn: elements['screenMenu']
+  const activeScreen = elements[screenId];
   if (activeScreen) {
     activeScreen.classList.remove("hidden");
   }
 }
 
 /**
- * Ders listesini 'LESSON_DATA'ya göre dinamik olarak çizer.
+ * Giriş/Kayıt ekranında hata mesajı gösterir.
+ */
+export function showAuthError(elements, screen, message) {
+  const errorEl =
+    screen === "login" ? elements.login.authError : elements.register.authError;
+  errorEl.textContent = message;
+
+  // Hata mesajını 3 saniye sonra temizle
+  setTimeout(() => {
+    errorEl.textContent = "";
+  }, 3000);
+}
+
+/**
+ * Kullanıcı giriş/çıkışına göre arayüzü günceller.
+ * BUG 2 DÜZELTMESİ: 'else' bloğu artık profili doğru şekilde gizliyor.
+ */
+export function showUserUI(elements, user, progress) {
+  if (user) {
+    elements.userProfile.classList.remove("hidden");
+    elements.userEmailDisplay.textContent = user.email;
+    if (progress) {
+      updateXP(elements, progress.xp || 0);
+      updateStreak(elements, progress.streak || 0);
+    }
+  } else {
+    // Çıkış yapıldığında, profili gizle.
+    elements.userProfile.classList.add("hidden");
+  }
+}
+
+/**
+ * Ders listesini 'LESSON_DATA'ya ve kullanıcının ilerlemesine göre çizer.
  */
 export function renderLessonMenu(
   elements,
@@ -75,7 +153,7 @@ export function renderLessonMenu(
   onLessonSelectCallback
 ) {
   const container = elements.lessonListContainer;
-  container.innerHTML = ""; // Listeyi temizle
+  container.innerHTML = "";
 
   const lessonKeys = Object.keys(LESSON_DATA);
 
@@ -101,13 +179,26 @@ export function renderLessonMenu(
             </div>
         `;
 
-    // Tıklama olayını ana mantığa (main.js) geri bildir
     button.addEventListener("click", () => {
       onLessonSelectCallback(lessonId, isLocked);
     });
 
     container.appendChild(button);
   }
+}
+
+/**
+ * XP göstergesini günceller.
+ */
+export function updateXP(elements, xp) {
+  elements.userXpDisplay.textContent = `${xp} XP`;
+}
+
+/**
+ * Seri göstergesini günceller.
+ */
+export function updateStreak(elements, streak) {
+  elements.userStreakDisplay.textContent = `🔥 ${streak}`;
 }
 
 /**
@@ -120,7 +211,21 @@ export function updateProgress(elements, percent) {
 /**
  * Kalp göstergesini günceller.
  */
-export function renderHearts(elements, currentHearts) {
+export function renderHearts(elements, currentHearts, maxHearts) {
+  if (elements.heartDisplaySpans.length !== maxHearts) {
+    const heartContainer = document.getElementById("heartDisplay");
+    heartContainer.innerHTML = "";
+    for (let i = 0; i < maxHearts; i++) {
+      const heart = document.createElement("span");
+      heart.className = "heart";
+      heart.textContent = "❤️";
+      heartContainer.appendChild(heart);
+    }
+    elements.heartDisplaySpans = document.querySelectorAll(
+      "#heartDisplay .heart"
+    );
+  }
+
   elements.heartDisplaySpans.forEach((span, index) => {
     if (index < currentHearts) {
       span.classList.remove("lost");
@@ -132,6 +237,7 @@ export function renderHearts(elements, currentHearts) {
 
 /**
  * 'Dinle' modülü arayüzünü soruya göre hazırlar.
+ * BUG 3 DÜZELTMESİ: Butonları/inputları tekrar etkinleştirir.
  */
 export function setupListenUI(elements, questionItem) {
   elements.moduleListen.classList.remove("hidden");
@@ -140,6 +246,10 @@ export function setupListenUI(elements, questionItem) {
   elements.listen.input.value = "";
   elements.listen.input.focus();
 
+  elements.listen.input.disabled = false;
+  elements.listen.btnPlaySound.disabled = true;
+  elements.listen.btnCheckAnswer.disabled = true;
+
   if (questionItem.length > 1) {
     elements.listen.input.placeholder = "Kelimeyi yaz";
     elements.listen.instruction.textContent = "Duyduğun kelimeyi buraya yaz:";
@@ -147,17 +257,19 @@ export function setupListenUI(elements, questionItem) {
     elements.listen.input.placeholder = "Harfi yaz";
     elements.listen.instruction.textContent = "Duyduğun harfi buraya yaz:";
   }
-
-  elements.listen.btnPlaySound.disabled = true;
-  elements.listen.btnCheckAnswer.disabled = true;
 }
 
 /**
  * 'Vur' modülü arayüzünü soruya göre hazırlar.
+ * BUG 3 DÜZELTMESİ: Butonları tekrar etkinleştirir.
  */
 export function setupTapUI(elements, questionItem) {
   elements.moduleListen.classList.add("hidden");
-  elements.moduleTap.classList.remove("hidden");
+  elements.moduleTap.classList.add("hidden");
+
+  elements.tap.btnCheckAnswer.disabled = false;
+  elements.tap.btnClear.disabled = false;
+  elements.tap.btnMorseKey.disabled = false;
 
   elements.tap.challenge.textContent = questionItem;
   clearTapUI(elements);
@@ -199,12 +311,33 @@ export function showFailScreen(elements, type) {
 /**
  * Tamamlandı ekranını gösterir.
  */
-export function showCompleteScreen(elements, message, hasNextLesson) {
+export function showCompleteScreen(
+  elements,
+  message,
+  xpMessage,
+  hasNextLesson
+) {
   elements.completeMessage.textContent = message;
+  elements.xpGainedMessage.textContent = xpMessage;
   if (hasNextLesson) {
     elements.btnNextLesson.classList.remove("hidden");
   } else {
     elements.btnNextLesson.classList.add("hidden");
   }
   showScreen(elements, "screenComplete");
+}
+
+/**
+ * BUG 3 DÜZELTMESİ: Alıştırma butonlarını kilitleyen fonksiyon.
+ */
+export function setExerciseControlsDisabled(elements, type, disabled) {
+  if (type === "listen") {
+    elements.listen.btnCheckAnswer.disabled = disabled;
+    elements.listen.btnPlaySound.disabled = disabled;
+    elements.listen.input.disabled = disabled;
+  } else if (type === "tap") {
+    elements.tap.btnCheckAnswer.disabled = disabled;
+    elements.tap.btnClear.disabled = disabled;
+    elements.tap.btnMorseKey.disabled = disabled;
+  }
 }
