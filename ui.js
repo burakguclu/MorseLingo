@@ -329,7 +329,7 @@ export function showCompleteScreen(
 }
 
 /**
- * BUG 3 DÜZELTMESİ: Alıştırma butonlarını kilitleyen fonksiyon.
+ * YENİ (BUG 3 DÜZELTMESİ): Alıştırma butonlarını kilitleyen fonksiyon.
  */
 export function setExerciseControlsDisabled(elements, type, disabled) {
   if (type === "listen") {

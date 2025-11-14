@@ -39,7 +39,6 @@ button {
     cursor: pointer;
     font-family: Arial, sans-serif;
 }
-/* YENİ: Devre dışı bırakılmış butonlar */
 button:disabled {
     cursor: not-allowed;
     opacity: 0.6;
@@ -56,8 +55,9 @@ button:disabled {
     margin-bottom: 20px;
     box-sizing: border-box;
 }
+/* BUG 2 DÜZELTMESİ: !important eklendi */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* --- 3. KULLANICI PROFİLİ (HEADER) --- */
@@ -100,7 +100,6 @@ button:disabled {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-/* YENİ: Form içindeki butonların stilleri */
 .auth-form button {
     width: 100%;
     padding: 12px;
@@ -287,7 +286,6 @@ button:disabled {
     margin-top: 15px;
     text-transform: uppercase; 
 }
-/* YENİ: Alıştırma inputları devre dışı bırakıldığında */
 #listen_input:disabled {
     background-color: #eee;
     opacity: 0.7;

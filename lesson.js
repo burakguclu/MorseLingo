@@ -24,9 +24,6 @@ let nextLessonIdToStart = null;
 
 /**
  * Lesson modülünü başlatır ve DOM/veri'yi alır.
- * @param {object} elements
- * @param {object} morseData
- * @param {object} lessonData
  */
 export function initLesson(elements, morseData, lessonData) {
   domElements = elements;
@@ -36,7 +33,6 @@ export function initLesson(elements, morseData, lessonData) {
 
 /**
  * Dersi başlatır.
- * @param {string} lessonId - Başlatılacak dersin ID'si
  */
 export function startLesson(lessonId) {
   currentLesson = {
@@ -71,6 +67,7 @@ function showQuestion() {
       if (currentLesson.isActive) {
         // Ses bittiğinde butonları etkinleştir
         ui.setExerciseControlsDisabled(domElements, "listen", false);
+        domElements.listen.input.focus();
       }
     });
   } else if (question.type === "tap") {
@@ -82,7 +79,6 @@ function showQuestion() {
 /**
  * Kullanıcının cevabını kontrol eder.
  * BUG 3 DÜZELTMESİ: Cevap işlenirken butonları kilitler.
- * @param {Event} e - Olay
  */
 export async function handleAnswerCheck(e) {
   if (e) e.preventDefault();
@@ -190,7 +186,6 @@ async function completeLesson() {
 /**
  * Can kaybeder.
  * BUG 3 DÜZELTMESİ: Hata sonrası butonları tekrar etkinleştirir.
- * @param {string} type - 'listen' veya 'tap'
  */
 function loseLife(type) {
   if (currentLesson.hearts <= 0) return;
@@ -228,7 +223,6 @@ function loseLife(type) {
 
 /**
  * Derste başarısız olur.
- * @param {string} type - 'listen' veya 'tap'
  */
 function failLesson(type) {
   currentLesson.isActive = false;
@@ -284,7 +278,6 @@ export function startNextLesson() {
   if (nextLessonIdToStart) {
     startLesson(nextLessonIdToStart);
   } else {
-    // Hata durumu, ana menüye dön
     let userProgress = store.getUserProgress();
     ui.renderLessonMenu(
       domElements,
