@@ -12,15 +12,21 @@
     <link rel="stylesheet" href="css/5-tap-module.css" />
     <link rel="stylesheet" href="css/6-mobile.css" />
     <link rel="stylesheet" href="css/7-animations.css" />
+    <link rel="stylesheet" href="css/8-leaderboard.css" />
   </head>
   <body>
     <header class="main-header">
       <h1>MorseLingo</h1>
-      <div id="userProfile" class="user-profile hidden">
-        <span id="userEmailDisplay"></span>
-        <span id="userXpDisplay">0 XP</span>
-        <span id="userStreakDisplay">🔥 0</span>
-        <button id="btnLogout">Çıkış Yap</button>
+      <div
+        class="header-right-group"
+        style="display: flex; align-items: center"
+      >
+        <div id="userProfile" class="user-profile hidden">
+          <span id="userEmailDisplay"></span>
+          <span id="userXpDisplay">0 XP</span>
+          <span id="userStreakDisplay">🔥 0</span>
+          <button id="btnLogout">Çıkış Yap</button>
+        </div>
       </div>
     </header>
 
@@ -57,6 +63,13 @@
         <h2>Yeni Hesap Oluştur</h2>
         <form id="registerForm" class="auth-form" action="javascript:void(0);">
           <input
+            type="text"
+            id="registerUsername"
+            placeholder="Kullanıcı Adı (en az 3 karakter)"
+            required
+            autocomplete="username"
+          />
+          <input
             type="email"
             id="registerEmail"
             placeholder="E-posta"
@@ -89,16 +102,21 @@
       <div id="screenMenu" class="screen hidden">
         <div class="menu-header">
           <h2>Dersler</h2>
-          <button id="btnResetProgress" title="Tüm ilerlemeyi sıfırla">
-            Sıfırla
-          </button>
+          <div class="menu-buttons-group">
+            <button id="btnLeaderboard" title="Lider Tablosu">🏆</button>
+            <button id="btnResetProgress" title="Tüm ilerlemeyi sıfırla">
+              Sıfırla
+            </button>
+          </div>
         </div>
         <div id="lessonList" class="lesson-list"></div>
       </div>
 
       <div id="screenExercise" class="screen hidden">
         <div class="lesson-header">
-          <button id="btnBackToMenu" title="Menüye Dön">←</button>
+          <button id="btnBackToMenu" title="Menüye Dön" class="btn-icon-back">
+            ←
+          </button>
           <div id="heartDisplay" class="heart-display"></div>
           <div class="progress-bar">
             <div id="progressFill" class="progress-fill"></div>
@@ -132,23 +150,37 @@
               >
             </div>
           </div>
-
           <div class="controls">
             <button id="tap_btnClear">Temizle</button>
             <button id="tap_btnCheckAnswer">Kontrol Et</button>
           </div>
-
           <p id="tap_pFeedback" class="feedback-area"></p>
-
           <button id="tap_btnMorseKey">MORS TUŞU</button>
         </div>
       </div>
+
       <div id="screenComplete" class="screen hidden">
         <h2>Harika!</h2>
         <p id="completeMessage">Dersi tamamladın!</p>
         <p id="xpGainedMessage" class="xp-gained"></p>
         <button id="btnNextLesson" class="hidden">Sıradaki Derse Geç</button>
         <button id="btnMenuAfterComplete">Ana Menüye Dön</button>
+      </div>
+
+      <div id="screenLeaderboard" class="screen hidden">
+        <div class="menu-header">
+          <h2>🏆 Lider Tablosu</h2>
+          <button
+            id="btnBackFromLeaderboard"
+            title="Menüye Dön"
+            class="btn-icon-back"
+          >
+            ←
+          </button>
+        </div>
+        <ol id="leaderboardList" class="leaderboard-list">
+          <li id="leaderboardLoading">Yükleniyor...</li>
+        </ol>
       </div>
     </main>
 

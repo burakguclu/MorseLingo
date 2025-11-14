@@ -4,6 +4,10 @@
 import * as ui from "./ui.js";
 import {
   auth,
+  db,
+  doc,
+  setDoc,
+  serverTimestamp, // Firestore fonksiyonları eklendi
   GoogleAuthProvider,
   signInWithPopup,
   createUserWithEmailAndPassword,
@@ -16,7 +20,6 @@ let domElements;
 
 /**
  * Auth modülünü başlatır ve DOM elementlerini alır.
- * @param {object} elements - ui.initDOMElements() tarafından döndürülen nesne
  */
 export function initAuth(elements) {
   domElements = elements;
@@ -34,31 +37,55 @@ export function handleGoogleLogin() {
 
 /**
  * E-posta ile kaydı yönetir.
- * @param {Event} e - Form gönderme olayı
+ * DÜZELTME: Kullanıcı adı eklendi.
  */
 export async function handleEmailRegister(e) {
   if (e) e.preventDefault();
 
+  // YENİ: Kullanıcı adı alanı okundu
+  const username = domElements.register.inputUsername.value.trim();
   const email = domElements.register.inputEmail.value;
   const password = domElements.register.inputPassword.value;
   const confirm = domElements.register.inputPasswordConfirm.value;
 
+  // YENİ: Kullanıcı adı doğrulaması
+  if (username.length < 3) {
+    handleAuthError({ code: "auth/username-too-short" }, "register");
+    return;
+  }
   if (password !== confirm) {
     handleAuthError({ code: "auth/password-mismatch" }, "register");
     return;
   }
 
   try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    alert("Kayıt başarılı! Lütfen şimdi giriş yapın.");
+    // 1. Auth kullanıcısını oluştur
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
 
-    // Başarılı kayıttan sonra giriş ekranına yönlendir ve formu temizle
+    // 2. Auth kullanıcısı oluşur oluşmaz, Firestore belgesini de oluştur
+    const userRef = doc(db, "users", user.uid);
+    await setDoc(userRef, {
+      username: username, // Yeni kullanıcı adını kaydet
+      email: user.email,
+      unlockedLessons: ["lesson1"],
+      xp: 0,
+      streak: 1,
+      lastLessonDate: serverTimestamp(),
+    });
+
+    // 3. Başarılı kayıttan sonra yönlendir
+    alert("Kayıt başarılı! Lütfen şimdi giriş yapın.");
     ui.showScreen(domElements, "screenLogin");
     domElements.loginForm.reset();
     domElements.registerForm.reset();
-    domElements.login.inputEmail.value = email; // E-postayı hazır getir
-    domElements.login.inputPassword.focus(); // Şifreye odaklan
-    ui.showAuthError(domElements, "register", ""); // Hata mesajını temizle
+    domElements.login.inputEmail.value = email;
+    domElements.login.inputPassword.focus();
+    ui.showAuthError(domElements, "register", "");
   } catch (error) {
     handleAuthError(error, "register");
   }
@@ -66,7 +93,6 @@ export async function handleEmailRegister(e) {
 
 /**
  * E-posta ile girişi yönetir.
- * @param {Event} e - Form gönderme olayı
  */
 export function handleEmailLogin(e) {
   if (e) e.preventDefault();
@@ -86,8 +112,7 @@ export function handleLogout() {
 
 /**
  * Firebase Auth hatalarını yakalar ve kullanıcıya anlamslı mesajlar gösterir.
- * @param {Error} error - Firebase'den gelen hata nesnesi
- * @param {string} screen - 'login' veya 'register'
+ * DÜZELTME: Yeni hata kodları eklendi.
  */
 export function handleAuthError(error, screen) {
   let message = "Bilinmeyen bir hata oluştu.";
@@ -107,8 +132,11 @@ export function handleAuthError(error, screen) {
     case "auth/weak-password":
       message = "Şifre çok zayıf. En az 6 karakter olmalı.";
       break;
-    case "auth/password-mismatch": // Özel hata kodumuz
+    case "auth/password-mismatch": // Özel
       message = "Hata: Şifreler eşleşmiyor!";
+      break;
+    case "auth/username-too-short": // Özel
+      message = "Kullanıcı adı en az 3 karakter olmalı.";
       break;
   }
 
@@ -117,15 +145,13 @@ export function handleAuthError(error, screen) {
 
 /**
  * Kullanıcı oturum durumundaki değişiklikleri dinler.
- * @param {function} onLogin - Kullanıcı giriş yaptığında çalışacak callback
- * @param {function} onLogout - Kullanıcı çıkış yaptığında çalışacak callback
  */
 export function listenForAuthChanges(onLogin, onLogout) {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      await onLogin(user); // main.js'deki onUserLogin fonksiyonu
+      await onLogin(user);
     } else {
-      onLogout(); // main.js'deki onUserLogout fonksiyonu
+      onLogout();
     }
   });
 }

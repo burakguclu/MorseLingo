@@ -89,7 +89,7 @@
     color: rgba(0, 0, 0, 0.3);
 }
 
-/* --- 9. SIFIRLAMA BUTONU STİLLERİ --- */
+/* --- 9. SIFIRLAMA & KUPA BUTONU STİLLERİ --- */
 .menu-header {
     display: flex;
     justify-content: space-between;
@@ -99,15 +99,51 @@
 .menu-header h2 {
     margin: 0;
 }
-#btnResetProgress {
-    background-color: #dc3545;
+
+/* Buton grubu (Kupa ve Sıfırla) */
+.menu-buttons-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* YENİ: Kupa Butonu */
+#btnLeaderboard {
+    background-color: #007bff; /* Mavi */
     color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 14px;
+    padding: 10px 15px; /* Ders butonu kadar olmasa da daha dolgun */
+    border-radius: 8px;
+    font-size: 16px; /* Ders butonu başlık boyutu */
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    border-bottom: 4px solid #0056b3; /* Koyu Mavi alt çizgi */
+    display: flex; /* İçindeki ikonu ortalamak için */
+    align-items: center;
+    justify-content: center;
+}
+#btnLeaderboard:hover {
+    background-color: #0069d9; /* Koyu Mavi */
+    transform: translateY(-2px);
+}
+
+/* YENİ: Sıfırla Butonu */
+#btnResetProgress {
+    background-color: #dc3545; /* Kırmızı */
+    color: white;
+    border: none;
+    padding: 10px 15px; /* Kupa butonuyla aynı */
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    border-bottom: 4px solid #c82333; /* Koyu Kırmızı alt çizgi */
+    display: flex; /* İçindeki metni ortalamak için */
+    align-items: center;
+    justify-content: center;
 }
 #btnResetProgress:hover {
-    background-color: #c82333;
+    background-color: #c82333; /* Koyu Kırmızı */
+    transform: translateY(-2px);
 }

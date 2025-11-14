@@ -1,0 +1,83 @@
+/* --- 12. YENİ: LİDER TABLOSU EKRANI --- */
+
+/* Kupa butonu stili (id="btnLeaderboard") kaldırıldı,
+  çünkü buton artık .menu-buttons-group içinde
+  (Bu kural css/3-menu.css içinde)
+*/
+
+/* YENİ: İkonlu Geri Butonları (Lider Tablosu & Alıştırma) */
+.btn-icon-back {
+    background: none;
+    border: 2px solid #ccc;
+    color: #555;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    margin-right: 15px;
+    flex-shrink: 0;
+    transition: background-color 0.2s;
+}
+.btn-icon-back:hover { 
+    background-color: #f0f0f0; 
+}
+
+
+/* Lider tablosu listesi */
+.leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto; /* Liste taşarsa kaydır */
+    max-height: 60vh;
+}
+.leaderboard-list li {
+    display: flex;
+    align-items: center;
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+}
+.leaderboard-list li:last-child {
+    border-bottom: none;
+}
+
+/* Sıra numarası (1., 2., 3.) */
+.leaderboard-list .rank {
+    font-weight: bold;
+    font-size: 20px;
+    color: #888;
+    width: 40px;
+    flex-shrink: 0;
+    text-align: center;
+}
+.leaderboard-list li:nth-child(1) .rank { color: #FFD700; }
+.leaderboard-list li:nth-child(2) .rank { color: #C0C0C0; }
+.leaderboard-list li:nth-child(3) .rank { color: #CD7F32; }
+
+/* Kullanıcı adı */
+.leaderboard-list .name {
+    flex-grow: 1;
+    padding: 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold; /* Kullanıcı adları belirgin olsun */
+}
+
+/* XP Puanı */
+.leaderboard-list .xp {
+    font-weight: bold;
+    color: #007bff;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+/* Yükleniyor... mesajı */
+#leaderboardLoading {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+    font-style: italic;
+}

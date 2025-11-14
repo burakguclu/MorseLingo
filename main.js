@@ -1,7 +1,6 @@
 // main.js
 // Uygulamanın ana beyni (Orkestra Şefi)
 
-// Config ve modülleri içe aktar
 import * as config from "./config.js";
 import * as ui from "./ui.js";
 import * as audio from "./audio.js";
@@ -34,7 +33,8 @@ async function onUserLogin(user) {
 
 function onUserLogout() {
   store.setCurrentUser(null);
-  let userProgress = store.getNewUserProgress();
+  // DÜZELTME: getNewUserProgress parametreleri
+  let userProgress = store.getNewUserProgress(null, null);
 
   ui.showUserUI(domElements, null, userProgress);
   ui.showScreen(domElements, "screenLogin");
@@ -84,6 +84,20 @@ function bindEventListeners() {
       userProgress,
       onLessonSelect
     );
+  });
+
+  // Lider Tablosu Butonu (Menü'de)
+  domElements.btnLeaderboard.addEventListener("click", async () => {
+    domElements.leaderboard.list.innerHTML =
+      '<li id="leaderboardLoading">Yükleniyor...</li>';
+    ui.showScreen(domElements, "screenLeaderboard");
+    const data = await store.fetchLeaderboard();
+    ui.renderLeaderboard(domElements, data);
+  });
+
+  // Lider Tablosu Geri Butonu
+  domElements.leaderboard.btnBack.addEventListener("click", () => {
+    ui.showScreen(domElements, "screenMenu");
   });
 
   // Alıştırma Butonları
@@ -139,7 +153,7 @@ async function init() {
   // 1. DOM elemanlarını bul
   domElements = ui.initDOMElements(config.MAX_HEARTS);
 
-  // 2. YENİ: Ses efektlerini DOM'a bağla
+  // 2. Ses efektlerini DOM'a bağla
   audio.initAudioEffects();
 
   // 3. JSON verisini çek

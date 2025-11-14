@@ -22,6 +22,7 @@ export function initDOMElements(maxHearts) {
     screenMenu: document.getElementById("screenMenu"),
     screenExercise: document.getElementById("screenExercise"),
     screenComplete: document.getElementById("screenComplete"),
+    screenLeaderboard: document.getElementById("screenLeaderboard"),
 
     // Formlar
     loginForm: document.getElementById("loginForm"),
@@ -50,6 +51,8 @@ export function initDOMElements(maxHearts) {
 
     // Kayıt Ekranı
     register: {
+      // YENİ
+      inputUsername: document.getElementById("registerUsername"),
       inputEmail: document.getElementById("registerEmail"),
       inputPassword: document.getElementById("registerPassword"),
       inputPasswordConfirm: document.getElementById("registerPasswordConfirm"),
@@ -61,6 +64,7 @@ export function initDOMElements(maxHearts) {
     // Menü
     lessonListContainer: document.getElementById("lessonList"),
     btnResetProgress: document.getElementById("btnResetProgress"),
+    btnLeaderboard: document.getElementById("btnLeaderboard"), // YENİ
 
     // Alıştırma
     btnBackToMenu: document.getElementById("btnBackToMenu"),
@@ -72,6 +76,13 @@ export function initDOMElements(maxHearts) {
     xpGainedMessage: document.getElementById("xpGainedMessage"),
     btnNextLesson: document.getElementById("btnNextLesson"),
     btnMenuAfterComplete: document.getElementById("btnMenuAfterComplete"),
+
+    // Lider Tablosu
+    leaderboard: {
+      list: document.getElementById("leaderboardList"),
+      loading: document.getElementById("leaderboardLoading"),
+      btnBack: document.getElementById("btnBackFromLeaderboard"),
+    },
 
     // 'Dinle' Modülü
     listen: {
@@ -104,6 +115,7 @@ export function showScreen(elements, screenId) {
   elements.screenMenu.classList.add("hidden");
   elements.screenExercise.classList.add("hidden");
   elements.screenComplete.classList.add("hidden");
+  elements.screenLeaderboard.classList.add("hidden");
 
   const activeScreen = elements[screenId];
   if (activeScreen) {
@@ -151,6 +163,7 @@ export function renderLessonMenu(
   userProgress,
   onLessonSelectCallback
 ) {
+  // ... (fonksiyonun içeriği değişmedi) ...
   const container = elements.lessonListContainer;
   container.innerHTML = "";
 
@@ -187,6 +200,31 @@ export function renderLessonMenu(
 }
 
 /**
+ * Lider tablosu listesini çizer.
+ * DÜZELTME: 'user.username' kullanır
+ */
+export function renderLeaderboard(elements, leaderboardData) {
+  const listEl = elements.leaderboard.list;
+  listEl.innerHTML = "";
+
+  if (leaderboardData.length === 0) {
+    listEl.innerHTML = "<li>Henüz kimse puan almamış. İlk sen ol!</li>";
+    return;
+  }
+
+  leaderboardData.forEach((user, index) => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+            <span class="rank">${index + 1}.</span>
+            <span class="name">${user.username}</span>
+            <span class="xp">${user.xp} XP</span>
+        `;
+    listEl.appendChild(li);
+  });
+}
+
+/**
  * XP göstergesini günceller.
  */
 export function updateXP(elements, xp) {
@@ -211,6 +249,7 @@ export function updateProgress(elements, percent) {
  * Kalp göstergesini günceller.
  */
 export function renderHearts(elements, currentHearts, maxHearts) {
+  // ... (fonksiyonun içeriği değişmedi) ...
   if (elements.heartDisplaySpans.length !== maxHearts) {
     const heartContainer = document.getElementById("heartDisplay");
     heartContainer.innerHTML = "";
@@ -238,6 +277,7 @@ export function renderHearts(elements, currentHearts, maxHearts) {
  * 'Dinle' modülü arayüzünü soruya göre hazırlar.
  */
 export function setupListenUI(elements, questionItem) {
+  // ... (fonksiyonun içeriği değişmedi) ...
   elements.moduleListen.classList.remove("hidden");
   elements.moduleTap.classList.add("hidden");
 
@@ -261,6 +301,7 @@ export function setupListenUI(elements, questionItem) {
  * 'Vur' modülü arayüzünü soruya göre hazırlar.
  */
 export function setupTapUI(elements, questionItem) {
+  // ... (fonksiyonun içeriği değişmedi) ...
   elements.moduleListen.classList.add("hidden");
   elements.moduleTap.classList.remove("hidden");
 
@@ -284,6 +325,7 @@ export function clearTapUI(elements) {
  * Doğru/Yanlış geri bildirim mesajını gösterir.
  */
 export function showFeedback(elements, isCorrect, message, type) {
+  // ... (fonksiyonun içeriği değişmedi) ...
   const feedbackEl =
     type === "listen" ? elements.listen.feedback : elements.tap.feedback;
 
@@ -299,6 +341,7 @@ export function showFeedback(elements, isCorrect, message, type) {
  * Başarısız ders ekranını gösterir.
  */
 export function showFailScreen(elements, type) {
+  // ... (fonksiyonun içeriği değişmedi) ...
   const feedbackEl =
     type === "listen" ? elements.listen.feedback : elements.tap.feedback;
   feedbackEl.textContent = "Canların bitti! Tekrar dene.";
@@ -314,6 +357,7 @@ export function showCompleteScreen(
   xpMessage,
   hasNextLesson
 ) {
+  // ... (fonksiyonun içeriği değişmedi) ...
   elements.completeMessage.textContent = message;
   elements.xpGainedMessage.textContent = xpMessage;
   if (hasNextLesson) {
@@ -328,6 +372,7 @@ export function showCompleteScreen(
  * Alıştırma butonlarını kilitleyen fonksiyon.
  */
 export function setExerciseControlsDisabled(elements, type, disabled) {
+  // ... (fonksiyonun içeriği değişmedi) ...
   if (type === "listen") {
     elements.listen.btnCheckAnswer.disabled = disabled;
     elements.listen.btnPlaySound.disabled = disabled;
@@ -343,6 +388,7 @@ export function setExerciseControlsDisabled(elements, type, disabled) {
  * Bir alıştırma modülüne animasyon sınıfı ekler.
  */
 export function triggerAnimation(elements, type, animationClass) {
+  // ... (fonksiyonun içeriği değişmedi) ...
   const element =
     type === "listen" ? elements.moduleListen : elements.moduleTap;
 
@@ -352,26 +398,22 @@ export function triggerAnimation(elements, type, animationClass) {
 
   setTimeout(() => {
     element.classList.remove(animationClass);
-  }, 400); // 0.4s
+  }, 400);
 }
 
 /**
- * YENİ: Ekranda konfeti patlaması başlatır.
+ * Ekranda konfeti patlaması başlatır.
  */
 export function triggerConfetti() {
-  // 'confetti' fonksiyonu index.html'den yüklenen kütüphaneden gelir (window.confetti)
+  // ... (fonksiyonun içeriği değişmedi) ...
   if (typeof confetti !== "function") {
-    return; // Kütüphane yüklenemediyse hata verme
+    return;
   }
-
-  // Ortadan bir patlama
   confetti({
     particleCount: 150,
     spread: 90,
     origin: { y: 0.6 },
   });
-
-  // Ekranın sol ve sağ kenarlarından destek
   confetti({
     particleCount: 50,
     angle: 60,

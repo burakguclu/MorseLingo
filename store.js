@@ -8,6 +8,11 @@ import {
   setDoc,
   updateDoc,
   serverTimestamp,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs,
 } from "./firebase.js";
 import * as ui from "./ui.js";
 
@@ -18,11 +23,12 @@ let userProgress = {
   xp: 0,
   streak: 0,
   lastLessonDate: null,
+  username: "Ziyaretçi",
+  email: "",
 };
 
 /**
- * Store modülünü başlatır ve DOM elementlerini/kullanıcıyı alır.
- * @param {object} elements - ui.initDOMElements() tarafından döndürülen nesne
+ * Store modülünü başlatır.
  */
 export function initStore(elements) {
   domElements = elements;
@@ -30,7 +36,6 @@ export function initStore(elements) {
 
 /**
  * Mevcut kullanıcıyı ayarlar.
- * @param {object} user - Firebase'den gelen kullanıcı nesnesi
  */
 export function setCurrentUser(user) {
   currentUser = user;
@@ -45,9 +50,12 @@ export function getUserProgress() {
 
 /**
  * Yeni kullanıcı için varsayılan ilerleme nesnesini döndürür.
+ * DÜZELTME: Parametreler eklendi.
  */
-export function getNewUserProgress() {
+export function getNewUserProgress(username, email) {
   userProgress = {
+    username: username || "Bilinmeyen",
+    email: email || "",
     unlockedLessons: ["lesson1"],
     xp: 0,
     streak: 1,
@@ -58,6 +66,7 @@ export function getNewUserProgress() {
 
 /**
  * Kullanıcının ilerleme verisini Firestore'dan yükler.
+ * DÜZELTME: Google/eski kullanıcılar için 'username' oluşturur.
  */
 export async function loadProgress() {
   if (!currentUser) return;
@@ -67,19 +76,32 @@ export async function loadProgress() {
 
   if (docSnap.exists()) {
     userProgress = docSnap.data();
+
+    // YENİ: Eski (Google) kullanıcılar için 'username' alanı ekle
+    if (!userProgress.username) {
+      const defaultUsername = currentUser.email.split("@")[0];
+      userProgress.username = defaultUsername;
+      // E-postayı da kaydet (eğer o da eksikse)
+      userProgress.email = currentUser.email;
+      await saveProgress({
+        username: defaultUsername,
+        email: currentUser.email,
+      });
+    }
+
     await checkStreak(userRef);
   } else {
-    userProgress = getNewUserProgress();
+    // Bu artık SADECE Google ile ilk kez giriş yapan kullanıcılar için çalışır
+    const defaultUsername = currentUser.email.split("@")[0];
+    userProgress = getNewUserProgress(defaultUsername, currentUser.email);
     await setDoc(userRef, userProgress);
   }
 
-  // UI'ı yüklenen veriyle güncelle
   ui.showUserUI(domElements, currentUser, userProgress);
 }
 
 /**
  * Kullanıcının ilerlemesini Firestore'a kaydeder (kısmi güncelleme).
- * @param {object} dataToUpdate - Güncellenecek veri (örn: { xp: 100 })
  */
 export async function saveProgress(dataToUpdate) {
   if (!currentUser) return;
@@ -93,7 +115,6 @@ export async function saveProgress(dataToUpdate) {
 
 /**
  * Kullanıcının günlük serisini kontrol eder ve günceller.
- * @param {DocumentReference} userRef - Kullanıcının Firestore'daki döküman referansı
  */
 async function checkStreak(userRef) {
   if (!userProgress.lastLessonDate) {
@@ -141,7 +162,6 @@ async function checkStreak(userRef) {
 
 /**
  * Kullanıcının XP puanına ekleme yapar ve kaydeder.
- * @param {number} amount - Eklenecek XP miktarı
  */
 export async function addXP(amount) {
   if (!currentUser) return;
@@ -164,6 +184,33 @@ export async function resetProgress() {
     userProgress.unlockedLessons = ["lesson1"];
     await saveProgress({ unlockedLessons: ["lesson1"] });
     alert("Ders ilerlemesi sıfırlandı.");
-    // 'main.js' renderLessonMenu'yü çağıracak
+  }
+}
+
+/**
+ * En yüksek XP'ye sahip 10 kullanıcıyı Firestore'dan çeker.
+ * DÜZELTME: 'username' çeker.
+ */
+export async function fetchLeaderboard() {
+  const usersRef = collection(db, "users");
+  const q = query(usersRef, orderBy("xp", "desc"), limit(10));
+
+  try {
+    const querySnapshot = await getDocs(q);
+    const leaderboardData = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      leaderboardData.push({
+        // 'username' kullan, yoksa e-postayı yedek olarak al
+        username:
+          data.username ||
+          (data.email ? data.email.split("@")[0] : "Bilinmeyen"),
+        xp: data.xp || 0,
+      });
+    });
+    return leaderboardData;
+  } catch (e) {
+    console.error("Lider tablosu çekilemedi:", e);
+    return [];
   }
 }

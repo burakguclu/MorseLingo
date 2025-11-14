@@ -1,10 +1,6 @@
 // firebase.js
 // Firebase'i başlatır ve hizmetleri dışa aktarır.
 
-// YENİ İÇE AKTARMA YÖNTEMİ (v9 MODÜLER)
-// Script'leri CDN'den (internet) değil, 'node_modules' paketinden
-// alır gibi davranacağız, ancak 'import' URL'leri tarayıcı tarafından
-// doğrudan Firebase sunucularından alınacak.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { firebaseConfig } from "./firebaseConfig.js";
 import {
@@ -23,6 +19,12 @@ import {
   setDoc,
   updateDoc,
   serverTimestamp,
+  // YENİ: Lider tablosu sorguları için
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 // Firebase'i başlat
@@ -45,4 +47,9 @@ export {
   setDoc,
   updateDoc,
   serverTimestamp,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs,
 };
