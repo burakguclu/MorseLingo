@@ -1,7 +1,7 @@
 // service-worker.js
 // Temel PWA offline cache desteği
 
-const CACHE_NAME = "morselingo-v1";
+const CACHE_NAME = "morselingo-v2";
 const ASSETS_TO_CACHE = [
   "/",
   "/index.html",

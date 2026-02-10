@@ -441,7 +441,12 @@ export function setupReverseUI(elements, morseCode, choices, onSelect) {
 /**
  * Reverse seçim sonucunu gösterir.
  */
-export function showReverseResult(elements, selectedItem, correctItem, isCorrect) {
+export function showReverseResult(
+  elements,
+  selectedItem,
+  correctItem,
+  isCorrect,
+) {
   const buttons = elements.reverse.options.querySelectorAll(".mcq-option");
   buttons.forEach((btn) => {
     btn.disabled = true;
