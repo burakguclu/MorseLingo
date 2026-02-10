@@ -157,11 +157,17 @@
   margin-bottom: 0;
 }
 .flashcard {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-light)
+  );
   color: #fff;
   border-radius: var(--radius-lg);
   padding: 28px 36px;
-  box-shadow: var(--shadow-md), 0 0 30px rgba(88, 86, 214, 0.15);
+  box-shadow:
+    var(--shadow-md),
+    0 0 30px rgba(88, 86, 214, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -174,7 +180,7 @@
   font-size: 72px;
   font-weight: 800;
   line-height: 1;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 .flashcard-code {
   font-size: 32px;
@@ -210,7 +216,9 @@
   font-size: 18px;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .flashcard-play-btn:hover {
   transform: translateY(-2px);
@@ -225,13 +233,104 @@
   font-size: 18px;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .flashcard-continue-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 @keyframes flashcardIn {
-  from { opacity: 0; transform: scale(0.85) translateY(20px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* --- 10. ÇOKTAN SEÇMELİ (MCQ) & TERS (REVERSE) MODÜLÜ --- */
+#exerciseMcq,
+#exerciseReverse {
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 20px;
+  align-items: center;
+  gap: 14px;
+}
+.mcq-play-btn {
+  background-color: var(--color-success) !important;
+  color: #fff !important;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.mcq-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 90%;
+  max-width: 360px;
+}
+.mcq-option {
+  padding: 14px 10px;
+  font-size: 20px;
+  font-weight: 700;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mcq-option:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  background: #f0eeff;
+  transform: translateY(-1px);
+}
+.mcq-option:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+.mcq-option.selected-correct {
+  border-color: var(--color-success);
+  background: #e8f5e9;
+  color: var(--color-success);
+}
+.mcq-option.selected-wrong {
+  border-color: var(--color-danger);
+  background: #ffebee;
+  color: var(--color-danger);
+}
+.mcq-option.reveal-correct {
+  border-color: var(--color-success);
+  background: #e8f5e9;
+}
+
+/* Ters modül - mors kodu gösterimi */
+.reverse-code-display {
+  background: linear-gradient(135deg, #37474f, #546e7a);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 20px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: var(--shadow-md);
+}
+.reverse-code-text {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 8px;
 }

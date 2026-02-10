@@ -60,6 +60,28 @@ export function startLesson(lessonId) {
 }
 
 /**
+ * Verilen doğru cevap hariç rastgele 3 yanlış seçenek üretir.
+ */
+function generateMcqChoices(correctItem, allItems) {
+  const choices = [correctItem];
+  const pool = allItems.filter((item) => item !== correctItem);
+  // Shuffle pool
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  for (let i = 0; i < 3 && i < pool.length; i++) {
+    choices.push(pool[i]);
+  }
+  // Shuffle choices
+  for (let i = choices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [choices[i], choices[j]] = [choices[j], choices[i]];
+  }
+  return choices;
+}
+
+/**
  * Sıradaki soruyu gösterir.
  */
 function showQuestion() {
@@ -68,6 +90,8 @@ function showQuestion() {
 
   ui.showFeedback(domElements, true, "", "listen");
   ui.showFeedback(domElements, true, "", "tap");
+  ui.showFeedback(domElements, true, "", "mcq");
+  ui.showFeedback(domElements, true, "", "reverse");
 
   if (question.type === "flashcard") {
     const morseCode = MORSE_DATA[question.item] || "";
@@ -84,6 +108,20 @@ function showQuestion() {
   } else if (question.type === "tap") {
     resetTapState();
     ui.setupTapUI(domElements, question.item);
+  } else if (question.type === "mcq") {
+    const allLetters = Object.keys(MORSE_DATA);
+    const choices = generateMcqChoices(question.item, allLetters);
+    ui.setupMcqUI(domElements, choices, question.item, handleMcqSelect);
+    audio.playMorseItem(question.item, MORSE_DATA).then(() => {
+      if (currentLesson.isActive) {
+        domElements.mcq.btnPlaySound.disabled = false;
+      }
+    });
+  } else if (question.type === "reverse") {
+    const morseCode = MORSE_DATA[question.item] || "";
+    const allLetters = Object.keys(MORSE_DATA);
+    const choices = generateMcqChoices(question.item, allLetters);
+    ui.setupReverseUI(domElements, morseCode, choices, handleReverseSelect);
   }
 }
 
@@ -93,6 +131,62 @@ function showQuestion() {
 export function handleFlashcardContinue() {
   if (!currentLesson.isActive) return;
   nextQuestion();
+}
+
+/**
+ * Çoktan seçmeli bir seçenek tıklandığında çağrılır.
+ */
+async function handleMcqSelect(selectedItem) {
+  if (!currentLesson.isActive) return;
+  const question = currentLesson.plan[currentLesson.questionIndex];
+  const correctItem = question.item;
+  const isCorrect = selectedItem === correctItem;
+
+  const feedbackMessage = isCorrect
+    ? "Doğru!"
+    : `Yanlış! Doğru cevap '${correctItem}' idi.`;
+
+  ui.showMcqResult(domElements, selectedItem, correctItem, isCorrect);
+  ui.showFeedback(domElements, isCorrect, feedbackMessage, "mcq");
+
+  if (isCorrect) {
+    audio.playEffect("correct");
+    ui.triggerAnimation(domElements, "mcq", "animate-correct");
+    await store.addXP(config.XP_PER_ANSWER);
+    setTimeout(nextQuestion, config.FEEDBACK_CORRECT_DELAY);
+  } else {
+    audio.playEffect("wrong");
+    ui.triggerAnimation(domElements, "mcq", "animate-wrong");
+    loseLife("mcq");
+  }
+}
+
+/**
+ * Ters (Mors→Harf) bir seçenek tıklandığında çağrılır.
+ */
+async function handleReverseSelect(selectedItem) {
+  if (!currentLesson.isActive) return;
+  const question = currentLesson.plan[currentLesson.questionIndex];
+  const correctItem = question.item;
+  const isCorrect = selectedItem === correctItem;
+
+  const feedbackMessage = isCorrect
+    ? "Doğru!"
+    : `Yanlış! Doğru cevap '${correctItem}' idi.`;
+
+  ui.showReverseResult(domElements, selectedItem, correctItem, isCorrect);
+  ui.showFeedback(domElements, isCorrect, feedbackMessage, "reverse");
+
+  if (isCorrect) {
+    audio.playEffect("correct");
+    ui.triggerAnimation(domElements, "reverse", "animate-correct");
+    await store.addXP(config.XP_PER_ANSWER);
+    setTimeout(nextQuestion, config.FEEDBACK_CORRECT_DELAY);
+  } else {
+    audio.playEffect("wrong");
+    ui.triggerAnimation(domElements, "reverse", "animate-wrong");
+    loseLife("reverse");
+  }
 }
 
 /**
@@ -245,6 +339,13 @@ async function loseLife(type) {
         ui.setExerciseControlsDisabled(domElements, "listen", false);
         domElements.listen.input.focus();
       }
+    } else if (type === "mcq" || type === "reverse") {
+      // Sonuç 1.5sn gösterilir, sonra soru tekrar gösterilir
+      setTimeout(() => {
+        if (currentLesson.isActive) {
+          showQuestion();
+        }
+      }, config.FEEDBACK_WRONG_DELAY_TAP);
     }
   }
 
@@ -338,7 +439,7 @@ export function handlePlaySound() {
         domElements.listen.input.focus();
       }
     });
-  } else if (question.type === "flashcard") {
+  } else if (question.type === "flashcard" || question.type === "mcq") {
     audio.playMorseItem(question.item, MORSE_DATA);
   }
 }

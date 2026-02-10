@@ -32,6 +32,8 @@ export function initDOMElements(maxHearts) {
     moduleListen: document.getElementById("exerciseListen"),
     moduleTap: document.getElementById("exerciseTap"),
     moduleFlashcard: document.getElementById("exerciseFlashcard"),
+    moduleMcq: document.getElementById("exerciseMcq"),
+    moduleReverse: document.getElementById("exerciseReverse"),
 
     // Kullanıcı Profili (Header)
     userProfile: document.getElementById("userProfile"),
@@ -112,6 +114,22 @@ export function initDOMElements(maxHearts) {
       visual: document.getElementById("flashcard_visual"),
       btnPlaySound: document.getElementById("flashcard_btnPlaySound"),
       btnContinue: document.getElementById("flashcard_btnContinue"),
+    },
+
+    // Çoktan Seçmeli Modülü
+    mcq: {
+      instruction: document.getElementById("mcq_instruction"),
+      btnPlaySound: document.getElementById("mcq_btnPlaySound"),
+      options: document.getElementById("mcq_options"),
+      feedback: document.getElementById("mcq_pFeedback"),
+    },
+
+    // Ters (Mors→Harf) Modülü
+    reverse: {
+      code: document.getElementById("reverse_code"),
+      visual: document.getElementById("reverse_visual"),
+      options: document.getElementById("reverse_options"),
+      feedback: document.getElementById("reverse_pFeedback"),
     },
   };
 }
@@ -286,11 +304,18 @@ export function renderHearts(elements, currentHearts, maxHearts) {
 /**
  * 'Dinle' modülü arayüzünü soruya göre hazırlar.
  */
-export function setupListenUI(elements, questionItem) {
-  // ... (fonksiyonun içeriği değişmedi) ...
-  elements.moduleListen.classList.remove("hidden");
+function hideAllModules(elements) {
+  elements.moduleListen.classList.add("hidden");
   elements.moduleTap.classList.add("hidden");
   elements.moduleFlashcard.classList.add("hidden");
+  elements.moduleMcq.classList.add("hidden");
+  elements.moduleReverse.classList.add("hidden");
+}
+
+export function setupListenUI(elements, questionItem) {
+  // ... (fonksiyonun içeriği değişmedi) ...
+  hideAllModules(elements);
+  elements.moduleListen.classList.remove("hidden");
 
   elements.listen.input.value = "";
   elements.listen.input.focus();
@@ -312,8 +337,7 @@ export function setupListenUI(elements, questionItem) {
  * Flashcard modülünü hazırlar — öğrenme kartı gösterir.
  */
 export function setupFlashcardUI(elements, item, morseCode) {
-  elements.moduleListen.classList.add("hidden");
-  elements.moduleTap.classList.add("hidden");
+  hideAllModules(elements);
   elements.moduleFlashcard.classList.remove("hidden");
 
   elements.flashcard.letter.textContent = item;
@@ -333,13 +357,113 @@ export function setupFlashcardUI(elements, item, morseCode) {
 }
 
 /**
+ * Çoktan seçmeli modülünü hazırlar.
+ * @param {object} elements
+ * @param {string[]} choices - 4 seçenek
+ * @param {string} correctItem - doğru cevap
+ * @param {function} onSelect - seçim callback(selectedItem)
+ */
+export function setupMcqUI(elements, choices, correctItem, onSelect) {
+  hideAllModules(elements);
+  elements.moduleMcq.classList.remove("hidden");
+
+  elements.mcq.options.innerHTML = "";
+  elements.mcq.feedback.textContent = "";
+  elements.mcq.feedback.className = "feedback-area";
+  elements.mcq.btnPlaySound.disabled = true;
+
+  choices.forEach((choice) => {
+    const btn = document.createElement("button");
+    btn.className = "mcq-option";
+    btn.textContent = choice;
+    btn.addEventListener("click", () => {
+      onSelect(choice);
+    });
+    elements.mcq.options.appendChild(btn);
+  });
+}
+
+/**
+ * MCQ seçim sonucunu gösterir (butonları kilitler, doğru/yanlışı işaretler).
+ */
+export function showMcqResult(elements, selectedItem, correctItem, isCorrect) {
+  const buttons = elements.mcq.options.querySelectorAll(".mcq-option");
+  buttons.forEach((btn) => {
+    btn.disabled = true;
+    if (btn.textContent === correctItem) {
+      btn.classList.add("reveal-correct");
+    }
+    if (btn.textContent === selectedItem && !isCorrect) {
+      btn.classList.add("selected-wrong");
+    }
+    if (btn.textContent === selectedItem && isCorrect) {
+      btn.classList.add("selected-correct");
+    }
+  });
+}
+
+/**
+ * Ters (Mors→Harf) modülünü hazırlar.
+ * @param {object} elements
+ * @param {string} morseCode - gösterilecek mors kodu
+ * @param {string[]} choices - 4 seçenek
+ * @param {function} onSelect - seçim callback(selectedItem)
+ */
+export function setupReverseUI(elements, morseCode, choices, onSelect) {
+  hideAllModules(elements);
+  elements.moduleReverse.classList.remove("hidden");
+
+  elements.reverse.code.textContent = morseCode;
+  elements.reverse.options.innerHTML = "";
+  elements.reverse.feedback.textContent = "";
+  elements.reverse.feedback.className = "feedback-area";
+
+  // Görsel dit/dah
+  elements.reverse.visual.innerHTML = "";
+  for (const ch of morseCode) {
+    const span = document.createElement("span");
+    if (ch === ".") span.className = "dit";
+    else if (ch === "-") span.className = "dah";
+    elements.reverse.visual.appendChild(span);
+  }
+
+  choices.forEach((choice) => {
+    const btn = document.createElement("button");
+    btn.className = "mcq-option";
+    btn.textContent = choice;
+    btn.addEventListener("click", () => {
+      onSelect(choice);
+    });
+    elements.reverse.options.appendChild(btn);
+  });
+}
+
+/**
+ * Reverse seçim sonucunu gösterir.
+ */
+export function showReverseResult(elements, selectedItem, correctItem, isCorrect) {
+  const buttons = elements.reverse.options.querySelectorAll(".mcq-option");
+  buttons.forEach((btn) => {
+    btn.disabled = true;
+    if (btn.textContent === correctItem) {
+      btn.classList.add("reveal-correct");
+    }
+    if (btn.textContent === selectedItem && !isCorrect) {
+      btn.classList.add("selected-wrong");
+    }
+    if (btn.textContent === selectedItem && isCorrect) {
+      btn.classList.add("selected-correct");
+    }
+  });
+}
+
+/**
  * 'Vur' modülü arayüzünü soruya göre hazırlar.
  */
 export function setupTapUI(elements, questionItem) {
   // ... (fonksiyonun içeriği değişmedi) ...
-  elements.moduleListen.classList.add("hidden");
+  hideAllModules(elements);
   elements.moduleTap.classList.remove("hidden");
-  elements.moduleFlashcard.classList.add("hidden");
 
   elements.tap.btnCheckAnswer.disabled = false;
   elements.tap.btnClear.disabled = false;
@@ -361,9 +485,12 @@ export function clearTapUI(elements) {
  * Doğru/Yanlış geri bildirim mesajını gösterir.
  */
 export function showFeedback(elements, isCorrect, message, type) {
-  // ... (fonksiyonun içeriği değişmedi) ...
-  const feedbackEl =
-    type === "listen" ? elements.listen.feedback : elements.tap.feedback;
+  let feedbackEl;
+  if (type === "listen") feedbackEl = elements.listen.feedback;
+  else if (type === "tap") feedbackEl = elements.tap.feedback;
+  else if (type === "mcq") feedbackEl = elements.mcq.feedback;
+  else if (type === "reverse") feedbackEl = elements.reverse.feedback;
+  else return;
 
   feedbackEl.textContent = message;
   if (isCorrect) {
@@ -377,9 +504,12 @@ export function showFeedback(elements, isCorrect, message, type) {
  * Başarısız ders ekranını gösterir.
  */
 export function showFailScreen(elements, type) {
-  // ... (fonksiyonun içeriği değişmedi) ...
-  const feedbackEl =
-    type === "listen" ? elements.listen.feedback : elements.tap.feedback;
+  let feedbackEl;
+  if (type === "listen") feedbackEl = elements.listen.feedback;
+  else if (type === "tap") feedbackEl = elements.tap.feedback;
+  else if (type === "mcq") feedbackEl = elements.mcq.feedback;
+  else if (type === "reverse") feedbackEl = elements.reverse.feedback;
+  else return;
   feedbackEl.textContent = "Canların bitti! Tekrar dene.";
   feedbackEl.className = "feedback-area feedback-failed";
 }
@@ -424,9 +554,12 @@ export function setExerciseControlsDisabled(elements, type, disabled) {
  * Bir alıştırma modülüne animasyon sınıfı ekler.
  */
 export function triggerAnimation(elements, type, animationClass) {
-  // ... (fonksiyonun içeriği değişmedi) ...
-  const element =
-    type === "listen" ? elements.moduleListen : elements.moduleTap;
+  let element;
+  if (type === "listen") element = elements.moduleListen;
+  else if (type === "tap") element = elements.moduleTap;
+  else if (type === "mcq") element = elements.moduleMcq;
+  else if (type === "reverse") element = elements.moduleReverse;
+  else return;
 
   element.classList.remove(animationClass);
   void element.offsetWidth;

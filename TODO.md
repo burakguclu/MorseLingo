@@ -85,7 +85,7 @@
   - Her derse **"Öğrenme kartı"** (flashcard) ekranı ekle: Harfin mors kodu gösterilip sesi dinletilmeli (alıştırmadan ÖNCE)
   - Ders başlıklarına mors kodu referansı ekle (örn: "E = ." , "T = -")
 
-- [ ] **D2.** Yeni ders tipleri ekle
+- [x] **D2.** Yeni ders tipleri ekle
   - **"Çoktan seçmeli" (multiple-choice):** Ses çalar, 4 seçenekten doğru harfi seçtir
   - **"Eşleştirme" (matching):** Harf-mors kod eşleştirmesi
   - **"Mors→Harf" ters alıştırma:** Mors kodu yazılı gösterilir, harfi yazması istenir

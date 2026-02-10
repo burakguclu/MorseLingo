@@ -26,7 +26,7 @@ async function onUserLogin(user) {
     domElements,
     LESSON_DATA_MAP,
     userProgress,
-    onLessonSelect
+    onLessonSelect,
   );
   ui.showScreen(domElements, "screenMenu");
 }
@@ -70,7 +70,7 @@ function bindEventListeners() {
   domElements.registerForm.addEventListener("submit", auth.handleEmailRegister);
   domElements.login.btnLoginGoogle.addEventListener(
     "click",
-    auth.handleGoogleLogin
+    auth.handleGoogleLogin,
   );
   domElements.btnLogout.addEventListener("click", auth.handleLogout);
 
@@ -82,7 +82,7 @@ function bindEventListeners() {
       domElements,
       LESSON_DATA_MAP,
       userProgress,
-      onLessonSelect
+      onLessonSelect,
     );
   });
 
@@ -110,11 +110,11 @@ function bindEventListeners() {
   // 'Dinle' Modülü Olayları
   domElements.listen.btnPlaySound.addEventListener(
     "click",
-    lesson.handlePlaySound
+    lesson.handlePlaySound,
   );
   domElements.listen.btnCheckAnswer.addEventListener(
     "click",
-    lesson.handleAnswerCheck
+    lesson.handleAnswerCheck,
   );
   domElements.listen.input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") lesson.handleAnswerCheck(e);
@@ -123,32 +123,44 @@ function bindEventListeners() {
   // 'Vur' Modülü Olayları
   domElements.tap.btnMorseKey.addEventListener(
     "mousedown",
-    tapInput.handleTapDown
+    tapInput.handleTapDown,
   );
   domElements.tap.btnMorseKey.addEventListener("mouseup", tapInput.handleTapUp);
   domElements.tap.btnMorseKey.addEventListener(
     "mouseleave",
-    tapInput.handleTapLeave
+    tapInput.handleTapLeave,
   );
   domElements.tap.btnMorseKey.addEventListener(
     "touchstart",
     tapInput.handleTapDown,
-    { passive: false }
+    { passive: false },
   );
   domElements.tap.btnMorseKey.addEventListener(
     "touchend",
     tapInput.handleTapUp,
-    { passive: false }
+    { passive: false },
   );
   domElements.tap.btnCheckAnswer.addEventListener(
     "click",
-    lesson.handleAnswerCheck
+    lesson.handleAnswerCheck,
   );
   domElements.tap.btnClear.addEventListener("click", tapInput.handleTapClear);
 
   // Flashcard Modülü Olayları
-  domElements.flashcard.btnPlaySound.addEventListener("click", lesson.handlePlaySound);
-  domElements.flashcard.btnContinue.addEventListener("click", lesson.handleFlashcardContinue);
+  domElements.flashcard.btnPlaySound.addEventListener(
+    "click",
+    lesson.handlePlaySound,
+  );
+  domElements.flashcard.btnContinue.addEventListener(
+    "click",
+    lesson.handleFlashcardContinue,
+  );
+
+  // Çoktan Seçmeli (MCQ) Modülü Olayları
+  domElements.mcq.btnPlaySound.addEventListener(
+    "click",
+    lesson.handlePlaySound,
+  );
 }
 
 // --- 4. UYGULAMAYI BAŞLATMA ---

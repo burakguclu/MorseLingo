@@ -44,12 +44,14 @@
       "questions": [
         { "type": "flashcard", "item": "E" },
         { "type": "flashcard", "item": "T" },
+        { "type": "mcq", "item": "E" },
+        { "type": "mcq", "item": "T" },
         { "type": "listen", "item": "E" },
         { "type": "tap", "item": "E" },
+        { "type": "reverse", "item": "T" },
         { "type": "listen", "item": "T" },
         { "type": "tap", "item": "T" },
-        { "type": "listen", "item": "E" },
-        { "type": "listen", "item": "T" }
+        { "type": "reverse", "item": "E" }
       ]
     },
     "lesson2": {
@@ -58,13 +60,16 @@
       "questions": [
         { "type": "flashcard", "item": "I" },
         { "type": "flashcard", "item": "M" },
+        { "type": "mcq", "item": "I" },
+        { "type": "mcq", "item": "M" },
         { "type": "listen", "item": "I" },
         { "type": "tap", "item": "I" },
         { "type": "listen", "item": "M" },
         { "type": "tap", "item": "M" },
+        { "type": "reverse", "item": "I" },
+        { "type": "reverse", "item": "M" },
         { "type": "listen", "item": "T" },
-        { "type": "tap", "item": "E" },
-        { "type": "listen", "item": "M" }
+        { "type": "tap", "item": "E" }
       ]
     },
     "lesson3": {
@@ -73,13 +78,15 @@
       "questions": [
         { "type": "flashcard", "item": "A" },
         { "type": "flashcard", "item": "N" },
+        { "type": "mcq", "item": "A" },
+        { "type": "mcq", "item": "N" },
         { "type": "listen", "item": "A" },
         { "type": "tap", "item": "N" },
+        { "type": "reverse", "item": "A" },
         { "type": "listen", "item": "N" },
         { "type": "tap", "item": "A" },
-        { "type": "listen", "item": "M" },
-        { "type": "tap", "item": "I" },
-        { "type": "listen", "item": "A" }
+        { "type": "reverse", "item": "N" },
+        { "type": "listen", "item": "M" }
       ]
     },
     "lesson4": {
@@ -101,19 +108,22 @@
       "questions": [
         { "type": "flashcard", "item": "S" },
         { "type": "flashcard", "item": "O" },
+        { "type": "mcq", "item": "S" },
+        { "type": "mcq", "item": "O" },
         { "type": "listen", "item": "S" },
         { "type": "tap", "item": "S" },
         { "type": "listen", "item": "O" },
         { "type": "tap", "item": "O" },
-        { "type": "listen", "item": "A" },
-        { "type": "tap", "item": "S" },
-        { "type": "listen", "item": "O" }
+        { "type": "reverse", "item": "S" },
+        { "type": "reverse", "item": "O" }
       ]
     },
     "lesson6": {
       "title": "Kelime Pratiği 2",
       "content": "SO, SOS, SON, ON, NO, SOON",
       "questions": [
+        { "type": "mcq", "item": "S" },
+        { "type": "reverse", "item": "O" },
         { "type": "listen", "item": "SOS" },
         { "type": "tap", "item": "SO" },
         { "type": "listen", "item": "ON" },
@@ -131,13 +141,14 @@
         { "type": "flashcard", "item": "U" },
         { "type": "flashcard", "item": "D" },
         { "type": "flashcard", "item": "K" },
+        { "type": "mcq", "item": "R" },
+        { "type": "mcq", "item": "D" },
         { "type": "listen", "item": "R" },
         { "type": "tap", "item": "U" },
         { "type": "listen", "item": "D" },
         { "type": "tap", "item": "K" },
-        { "type": "listen", "item": "R" },
-        { "type": "tap", "item": "D" },
-        { "type": "listen", "item": "K" }
+        { "type": "reverse", "item": "U" },
+        { "type": "reverse", "item": "K" }
       ]
     },
     "lesson8": {
@@ -160,12 +171,14 @@
         { "type": "flashcard", "item": "W" },
         { "type": "flashcard", "item": "P" },
         { "type": "flashcard", "item": "B" },
+        { "type": "mcq", "item": "G" },
+        { "type": "mcq", "item": "B" },
         { "type": "listen", "item": "G" },
         { "type": "tap", "item": "W" },
         { "type": "listen", "item": "P" },
         { "type": "tap", "item": "B" },
-        { "type": "listen", "item": "G" },
-        { "type": "tap", "item": "P" }
+        { "type": "reverse", "item": "W" },
+        { "type": "reverse", "item": "P" }
       ]
     },
     "lesson10": {
@@ -188,12 +201,14 @@
         { "type": "flashcard", "item": "V" },
         { "type": "flashcard", "item": "F" },
         { "type": "flashcard", "item": "L" },
+        { "type": "mcq", "item": "H" },
+        { "type": "mcq", "item": "F" },
         { "type": "listen", "item": "H" },
         { "type": "tap", "item": "V" },
         { "type": "listen", "item": "F" },
         { "type": "tap", "item": "L" },
-        { "type": "listen", "item": "H" },
-        { "type": "tap", "item": "F" }
+        { "type": "reverse", "item": "V" },
+        { "type": "reverse", "item": "L" }
       ]
     },
     "lesson12": {
@@ -214,11 +229,14 @@
       "questions": [
         { "type": "flashcard", "item": "J" },
         { "type": "flashcard", "item": "Y" },
+        { "type": "mcq", "item": "J" },
+        { "type": "mcq", "item": "Y" },
         { "type": "listen", "item": "J" },
         { "type": "tap", "item": "J" },
         { "type": "listen", "item": "Y" },
         { "type": "tap", "item": "Y" },
-        { "type": "listen", "item": "J" }
+        { "type": "reverse", "item": "J" },
+        { "type": "reverse", "item": "Y" }
       ]
     },
     "lesson14": {
@@ -227,11 +245,14 @@
       "questions": [
         { "type": "flashcard", "item": "Q" },
         { "type": "flashcard", "item": "Z" },
+        { "type": "mcq", "item": "Q" },
+        { "type": "mcq", "item": "Z" },
         { "type": "listen", "item": "Q" },
         { "type": "tap", "item": "Q" },
         { "type": "listen", "item": "Z" },
         { "type": "tap", "item": "Z" },
-        { "type": "listen", "item": "Q" }
+        { "type": "reverse", "item": "Q" },
+        { "type": "reverse", "item": "Z" }
       ]
     },
     "lesson15": {
@@ -240,11 +261,14 @@
       "questions": [
         { "type": "flashcard", "item": "X" },
         { "type": "flashcard", "item": "C" },
+        { "type": "mcq", "item": "X" },
+        { "type": "mcq", "item": "C" },
         { "type": "listen", "item": "X" },
         { "type": "tap", "item": "X" },
         { "type": "listen", "item": "C" },
         { "type": "tap", "item": "C" },
-        { "type": "listen", "item": "X" }
+        { "type": "reverse", "item": "X" },
+        { "type": "reverse", "item": "C" }
       ]
     },
     "lesson16": {
@@ -268,12 +292,14 @@
         { "type": "flashcard", "item": "3" },
         { "type": "flashcard", "item": "4" },
         { "type": "flashcard", "item": "5" },
+        { "type": "mcq", "item": "1" },
+        { "type": "mcq", "item": "3" },
         { "type": "listen", "item": "1" },
         { "type": "tap", "item": "2" },
         { "type": "listen", "item": "3" },
         { "type": "tap", "item": "4" },
-        { "type": "listen", "item": "5" },
-        { "type": "tap", "item": "1" }
+        { "type": "reverse", "item": "5" },
+        { "type": "reverse", "item": "2" }
       ]
     },
     "lesson18": {
@@ -285,12 +311,14 @@
         { "type": "flashcard", "item": "8" },
         { "type": "flashcard", "item": "9" },
         { "type": "flashcard", "item": "0" },
+        { "type": "mcq", "item": "7" },
+        { "type": "mcq", "item": "9" },
         { "type": "listen", "item": "6" },
         { "type": "tap", "item": "7" },
         { "type": "listen", "item": "8" },
         { "type": "tap", "item": "9" },
-        { "type": "listen", "item": "0" },
-        { "type": "tap", "item": "6" }
+        { "type": "reverse", "item": "0" },
+        { "type": "reverse", "item": "8" }
       ]
     },
     "lesson19": {
@@ -309,15 +337,17 @@
       "title": "Final Sınavı",
       "content": "Tüm harf ve kelimelerle karışık",
       "questions": [
+        { "type": "mcq", "item": "K" },
+        { "type": "reverse", "item": "W" },
         { "type": "listen", "item": "HELLO" },
         { "type": "tap", "item": "WORLD" },
+        { "type": "mcq", "item": "Q" },
+        { "type": "reverse", "item": "Z" },
         { "type": "listen", "item": "QUICK" },
         { "type": "tap", "item": "BROWN" },
         { "type": "listen", "item": "FOX" },
         { "type": "tap", "item": "JUMPS" },
         { "type": "listen", "item": "OVER" },
-        { "type": "tap", "item": "LAZY" },
-        { "type": "listen", "item": "DOG" },
         { "type": "tap", "item": "SOS" }
       ]
     }
