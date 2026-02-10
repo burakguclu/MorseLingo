@@ -69,7 +69,11 @@ function showQuestion() {
   ui.showFeedback(domElements, true, "", "listen");
   ui.showFeedback(domElements, true, "", "tap");
 
-  if (question.type === "listen") {
+  if (question.type === "flashcard") {
+    const morseCode = MORSE_DATA[question.item] || "";
+    ui.setupFlashcardUI(domElements, question.item, morseCode);
+    audio.playMorseItem(question.item, MORSE_DATA);
+  } else if (question.type === "listen") {
     ui.setupListenUI(domElements, question.item);
     audio.playMorseItem(question.item, MORSE_DATA).then(() => {
       if (currentLesson.isActive) {
@@ -81,6 +85,14 @@ function showQuestion() {
     resetTapState();
     ui.setupTapUI(domElements, question.item);
   }
+}
+
+/**
+ * Flashcard "Devam Et" butonuna basıldığında çağrılır.
+ */
+export function handleFlashcardContinue() {
+  if (!currentLesson.isActive) return;
+  nextQuestion();
 }
 
 /**
@@ -326,6 +338,8 @@ export function handlePlaySound() {
         domElements.listen.input.focus();
       }
     });
+  } else if (question.type === "flashcard") {
+    audio.playMorseItem(question.item, MORSE_DATA);
   }
 }
 

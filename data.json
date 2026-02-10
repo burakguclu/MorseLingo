@@ -40,8 +40,10 @@
   "LESSON_DATA": {
     "lesson1": {
       "title": "Ders 1: En Temeller",
-      "content": "E, T",
+      "content": "E (·)  —  T (−)",
       "questions": [
+        { "type": "flashcard", "item": "E" },
+        { "type": "flashcard", "item": "T" },
         { "type": "listen", "item": "E" },
         { "type": "tap", "item": "E" },
         { "type": "listen", "item": "T" },
@@ -52,8 +54,10 @@
     },
     "lesson2": {
       "title": "Ders 2: Kısa Zıtlar",
-      "content": "I, M",
+      "content": "I (··)  —  M (−−)",
       "questions": [
+        { "type": "flashcard", "item": "I" },
+        { "type": "flashcard", "item": "M" },
         { "type": "listen", "item": "I" },
         { "type": "tap", "item": "I" },
         { "type": "listen", "item": "M" },
@@ -65,8 +69,10 @@
     },
     "lesson3": {
       "title": "Ders 3: Uzun Zıtlar",
-      "content": "A, N",
+      "content": "A (·−)  —  N (−·)",
       "questions": [
+        { "type": "flashcard", "item": "A" },
+        { "type": "flashcard", "item": "N" },
         { "type": "listen", "item": "A" },
         { "type": "tap", "item": "N" },
         { "type": "listen", "item": "N" },
@@ -91,8 +97,10 @@
     },
     "lesson5": {
       "title": "Ders 5: Sadece Noktalar/Çizgiler",
-      "content": "S, O",
+      "content": "S (···)  —  O (−−−)",
       "questions": [
+        { "type": "flashcard", "item": "S" },
+        { "type": "flashcard", "item": "O" },
         { "type": "listen", "item": "S" },
         { "type": "tap", "item": "S" },
         { "type": "listen", "item": "O" },
@@ -117,8 +125,12 @@
     },
     "lesson7": {
       "title": "Ders 7: Ayna Görüntüleri",
-      "content": "R, U, D, K",
+      "content": "R (·−·)  U (··−)  D (−··)  K (−·−)",
       "questions": [
+        { "type": "flashcard", "item": "R" },
+        { "type": "flashcard", "item": "U" },
+        { "type": "flashcard", "item": "D" },
+        { "type": "flashcard", "item": "K" },
         { "type": "listen", "item": "R" },
         { "type": "tap", "item": "U" },
         { "type": "listen", "item": "D" },
@@ -142,8 +154,12 @@
     },
     "lesson9": {
       "title": "Ders 9: Başı Çizgili",
-      "content": "G, W, P, B",
+      "content": "G (−−·)  W (·−−)  P (·−−·)  B (−···)",
       "questions": [
+        { "type": "flashcard", "item": "G" },
+        { "type": "flashcard", "item": "W" },
+        { "type": "flashcard", "item": "P" },
+        { "type": "flashcard", "item": "B" },
         { "type": "listen", "item": "G" },
         { "type": "tap", "item": "W" },
         { "type": "listen", "item": "P" },
@@ -166,8 +182,12 @@
     },
     "lesson11": {
       "title": "Ders 11: Dört Vuruşlular",
-      "content": "H, V, F, L",
+      "content": "H (····)  V (···−)  F (··−·)  L (·−··)",
       "questions": [
+        { "type": "flashcard", "item": "H" },
+        { "type": "flashcard", "item": "V" },
+        { "type": "flashcard", "item": "F" },
+        { "type": "flashcard", "item": "L" },
         { "type": "listen", "item": "H" },
         { "type": "tap", "item": "V" },
         { "type": "listen", "item": "F" },
@@ -190,8 +210,10 @@
     },
     "lesson13": {
       "title": "Ders 13: Geri Kalanlar 1",
-      "content": "J, Y",
+      "content": "J (·−−−)  —  Y (−·−−)",
       "questions": [
+        { "type": "flashcard", "item": "J" },
+        { "type": "flashcard", "item": "Y" },
         { "type": "listen", "item": "J" },
         { "type": "tap", "item": "J" },
         { "type": "listen", "item": "Y" },
@@ -201,8 +223,10 @@
     },
     "lesson14": {
       "title": "Ders 14: Geri Kalanlar 2",
-      "content": "Q, Z",
+      "content": "Q (−−·−)  —  Z (−−··)",
       "questions": [
+        { "type": "flashcard", "item": "Q" },
+        { "type": "flashcard", "item": "Z" },
         { "type": "listen", "item": "Q" },
         { "type": "tap", "item": "Q" },
         { "type": "listen", "item": "Z" },
@@ -212,8 +236,10 @@
     },
     "lesson15": {
       "title": "Ders 15: Geri Kalanlar 3",
-      "content": "X, C",
+      "content": "X (−··−)  —  C (−·−·)",
       "questions": [
+        { "type": "flashcard", "item": "X" },
+        { "type": "flashcard", "item": "C" },
         { "type": "listen", "item": "X" },
         { "type": "tap", "item": "X" },
         { "type": "listen", "item": "C" },
@@ -235,8 +261,13 @@
     },
     "lesson17": {
       "title": "Ders 17: Rakamlar 1",
-      "content": "1, 2, 3, 4, 5",
+      "content": "1 (·−−−−)  2 (··−−−)  3 (···−−)  4 (····−)  5 (·····)",
       "questions": [
+        { "type": "flashcard", "item": "1" },
+        { "type": "flashcard", "item": "2" },
+        { "type": "flashcard", "item": "3" },
+        { "type": "flashcard", "item": "4" },
+        { "type": "flashcard", "item": "5" },
         { "type": "listen", "item": "1" },
         { "type": "tap", "item": "2" },
         { "type": "listen", "item": "3" },
@@ -247,8 +278,13 @@
     },
     "lesson18": {
       "title": "Ders 18: Rakamlar 2",
-      "content": "6, 7, 8, 9, 0",
+      "content": "6 (−····)  7 (−−···)  8 (−−−··)  9 (−−−−·)  0 (−−−−−)",
       "questions": [
+        { "type": "flashcard", "item": "6" },
+        { "type": "flashcard", "item": "7" },
+        { "type": "flashcard", "item": "8" },
+        { "type": "flashcard", "item": "9" },
+        { "type": "flashcard", "item": "0" },
         { "type": "listen", "item": "6" },
         { "type": "tap", "item": "7" },
         { "type": "listen", "item": "8" },

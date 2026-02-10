@@ -145,6 +145,10 @@ function bindEventListeners() {
     lesson.handleAnswerCheck
   );
   domElements.tap.btnClear.addEventListener("click", tapInput.handleTapClear);
+
+  // Flashcard Modülü Olayları
+  domElements.flashcard.btnPlaySound.addEventListener("click", lesson.handlePlaySound);
+  domElements.flashcard.btnContinue.addEventListener("click", lesson.handleFlashcardContinue);
 }
 
 // --- 4. UYGULAMAYI BAŞLATMA ---

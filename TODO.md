@@ -80,7 +80,7 @@
 
 ## 🟢 BÖLÜM D: DERS İÇERİKLERİ İYİLEŞTİRME
 
-- [ ] **D1.** Ders yapısını pedagojik olarak yeniden düzenle
+- [x] **D1.** Ders yapısını pedagojik olarak yeniden düzenle
   - **Mevcut durum:** 20 ders var, mantıklı bir sıralama izliyor ama bazı eksikler var
   - Her derse **"Öğrenme kartı"** (flashcard) ekranı ekle: Harfin mors kodu gösterilip sesi dinletilmeli (alıştırmadan ÖNCE)
   - Ders başlıklarına mors kodu referansı ekle (örn: "E = ." , "T = -")

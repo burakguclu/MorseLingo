@@ -139,3 +139,99 @@
   font-weight: bold;
   font-size: 20px !important;
 }
+
+/* --- 9. FLASHCARD MODÜLÜ --- */
+#exerciseFlashcard {
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 20px;
+  align-items: center;
+  gap: 16px;
+}
+#exerciseFlashcard .exercise-instruction {
+  font-size: 16px;
+  color: var(--color-text-light);
+  margin-bottom: 0;
+}
+.flashcard {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 28px 36px;
+  box-shadow: var(--shadow-md), 0 0 30px rgba(88, 86, 214, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 90%;
+  max-width: 320px;
+  animation: flashcardIn 0.4s ease;
+}
+.flashcard-letter {
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.flashcard-code {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 10px;
+  opacity: 0.9;
+}
+.flashcard-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.flashcard-visual .dit {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+}
+.flashcard-visual .dah {
+  width: 44px;
+  height: 16px;
+  border-radius: 8px;
+  background: #fff;
+}
+.flashcard-play-btn {
+  background-color: var(--color-success) !important;
+  color: #fff !important;
+  border: none;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.flashcard-play-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.flashcard-continue-btn {
+  background-color: var(--color-primary) !important;
+  color: #fff !important;
+  border: none;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.flashcard-continue-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+@keyframes flashcardIn {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}

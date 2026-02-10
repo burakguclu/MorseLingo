@@ -31,7 +31,7 @@ export function initAuth(elements) {
 export function handleGoogleLogin() {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider).catch((error) =>
-    handleAuthError(error, "login")
+    handleAuthError(error, "login"),
   );
 }
 
@@ -63,7 +63,7 @@ export async function handleEmailRegister(e) {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
-      password
+      password,
     );
     const user = userCredential.user;
 
@@ -99,7 +99,7 @@ export function handleEmailLogin(e) {
   const email = domElements.login.inputEmail.value;
   const password = domElements.login.inputPassword.value;
   signInWithEmailAndPassword(auth, email, password).catch((error) =>
-    handleAuthError(error, "login")
+    handleAuthError(error, "login"),
   );
 }
 
@@ -134,7 +134,8 @@ export function handleAuthError(error, screen) {
       message = "Şifre çok zayıf. En az 6 karakter olmalı.";
       break;
     case "auth/operation-not-allowed":
-      message = "Bu giriş yöntemi etkin değil. Lütfen yöneticiyle iletişime geçin.";
+      message =
+        "Bu giriş yöntemi etkin değil. Lütfen yöneticiyle iletişime geçin.";
       break;
     case "auth/too-many-requests":
       message = "Çok fazla deneme yapıldı. Lütfen biraz bekleyin.";

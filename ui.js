@@ -31,6 +31,7 @@ export function initDOMElements(maxHearts) {
     // Modüller
     moduleListen: document.getElementById("exerciseListen"),
     moduleTap: document.getElementById("exerciseTap"),
+    moduleFlashcard: document.getElementById("exerciseFlashcard"),
 
     // Kullanıcı Profili (Header)
     userProfile: document.getElementById("userProfile"),
@@ -102,6 +103,15 @@ export function initDOMElements(maxHearts) {
       btnCheckAnswer: document.getElementById("tap_btnCheckAnswer"),
       btnClear: document.getElementById("tap_btnClear"),
       feedback: document.getElementById("tap_pFeedback"),
+    },
+
+    // Flashcard Modülü
+    flashcard: {
+      letter: document.getElementById("flashcard_letter"),
+      code: document.getElementById("flashcard_code"),
+      visual: document.getElementById("flashcard_visual"),
+      btnPlaySound: document.getElementById("flashcard_btnPlaySound"),
+      btnContinue: document.getElementById("flashcard_btnContinue"),
     },
   };
 }
@@ -280,6 +290,7 @@ export function setupListenUI(elements, questionItem) {
   // ... (fonksiyonun içeriği değişmedi) ...
   elements.moduleListen.classList.remove("hidden");
   elements.moduleTap.classList.add("hidden");
+  elements.moduleFlashcard.classList.add("hidden");
 
   elements.listen.input.value = "";
   elements.listen.input.focus();
@@ -298,12 +309,37 @@ export function setupListenUI(elements, questionItem) {
 }
 
 /**
+ * Flashcard modülünü hazırlar — öğrenme kartı gösterir.
+ */
+export function setupFlashcardUI(elements, item, morseCode) {
+  elements.moduleListen.classList.add("hidden");
+  elements.moduleTap.classList.add("hidden");
+  elements.moduleFlashcard.classList.remove("hidden");
+
+  elements.flashcard.letter.textContent = item;
+  elements.flashcard.code.textContent = morseCode;
+
+  // Görsel dit/dah gösterimi
+  elements.flashcard.visual.innerHTML = "";
+  for (const ch of morseCode) {
+    const span = document.createElement("span");
+    if (ch === ".") {
+      span.className = "dit";
+    } else if (ch === "-") {
+      span.className = "dah";
+    }
+    elements.flashcard.visual.appendChild(span);
+  }
+}
+
+/**
  * 'Vur' modülü arayüzünü soruya göre hazırlar.
  */
 export function setupTapUI(elements, questionItem) {
   // ... (fonksiyonun içeriği değişmedi) ...
   elements.moduleListen.classList.add("hidden");
   elements.moduleTap.classList.remove("hidden");
+  elements.moduleFlashcard.classList.add("hidden");
 
   elements.tap.btnCheckAnswer.disabled = false;
   elements.tap.btnClear.disabled = false;
