@@ -269,7 +269,7 @@ async function init() {
   // 4. Modülleri DOM ve Veri ile başlat
   auth.initAuth(domElements);
   store.initStore(domElements);
-  lesson.initLesson(domElements, MORSE_DATA, LESSON_DATA_MAP, () => {
+  lesson.initLesson(domElements, MORSE_DATA, LESSON_DATA_MAP, CATEGORIES_DATA, () => {
     updateReviewCardUI();
     const userProgress = store.getUserProgress();
     updateMenuProgressUI(userProgress);

@@ -11,6 +11,7 @@ import { showToast } from "./toast.js";
 let domElements;
 let MORSE_DATA;
 let LESSON_DATA_MAP;
+let CATEGORIES_DATA = [];
 
 let currentLesson = {
   id: null,
@@ -30,10 +31,11 @@ function sleep(ms) {
 /**
  * Lesson modülünü başlatır ve DOM/veri'yi alır.
  */
-export function initLesson(elements, morseData, lessonData, onMenuReturn) {
+export function initLesson(elements, morseData, lessonData, categoriesData, onMenuReturn) {
   domElements = elements;
   MORSE_DATA = morseData;
   LESSON_DATA_MAP = lessonData;
+  CATEGORIES_DATA = categoriesData || [];
   onMenuReturnCallback = onMenuReturn || null;
 }
 
@@ -509,6 +511,7 @@ function failLesson(type) {
     ui.renderLessonMenu(
       domElements,
       LESSON_DATA_MAP,
+      CATEGORIES_DATA,
       userProgress,
       onLessonSelect,
     );
@@ -539,6 +542,7 @@ export function exitLesson() {
   ui.renderLessonMenu(
     domElements,
     LESSON_DATA_MAP,
+    CATEGORIES_DATA,
     userProgress,
     onLessonSelect,
   );
@@ -557,6 +561,7 @@ export function startNextLesson() {
     ui.renderLessonMenu(
       domElements,
       LESSON_DATA_MAP,
+      CATEGORIES_DATA,
       userProgress,
       onLessonSelect,
     );

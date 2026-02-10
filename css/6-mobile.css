@@ -432,6 +432,8 @@
     grid-template-columns: 280px 1fr;
     gap: 24px;
     padding: 28px;
+    max-height: calc(100vh - 120px);
+    overflow: hidden;
   }
 
   .menu-sidebar {
@@ -443,6 +445,7 @@
 
   .menu-main {
     min-height: 0;
+    overflow: hidden;
   }
 
   .menu-main .lesson-list {

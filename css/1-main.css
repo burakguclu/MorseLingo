@@ -146,7 +146,7 @@ main {
   padding: 32px 24px;
   width: 100%;
   height: calc(100vh - 60px);
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .main-header {
