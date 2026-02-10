@@ -460,6 +460,8 @@ function hideAllModules(elements) {
   elements.moduleFlashcard.classList.add("hidden");
   elements.moduleMcq.classList.add("hidden");
   elements.moduleReverse.classList.add("hidden");
+  // Mors tuşunu gizle (sadece tap modülünde gösterilecek)
+  elements.tap.btnMorseKey.classList.add("hidden");
 }
 
 export function setupListenUI(elements, questionItem) {
@@ -623,6 +625,7 @@ export function setupTapUI(elements, questionItem) {
   elements.tap.btnCheckAnswer.disabled = false;
   elements.tap.btnClear.disabled = false;
   elements.tap.btnMorseKey.disabled = false;
+  elements.tap.btnMorseKey.classList.remove("hidden");
 
   elements.tap.challenge.textContent = questionItem;
   clearTapUI(elements);

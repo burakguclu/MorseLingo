@@ -490,6 +490,14 @@
     margin-bottom: 0;
   }
 
+  /* Mors tuşu sidebar'da */
+  .exercise-sidebar #tap_btnMorseKey {
+    width: 140px;
+    height: 140px;
+    font-size: 15px;
+    margin: 12px auto 0;
+  }
+
   /* Tamamlandı ekranı */
   #screenComplete {
     max-width: 640px;
