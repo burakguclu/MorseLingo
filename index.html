@@ -91,15 +91,23 @@
           <button id="btnLoginEmail" type="submit">Giriş Yap</button>
         </form>
         <p class="separator">veya</p>
-        <button id="btnLoginGoogle" aria-label="Google ile giriş yap">Google ile Giriş Yap</button>
+        <button id="btnLoginGoogle" aria-label="Google ile giriş yap">
+          Google ile Giriş Yap
+        </button>
         <p id="loginAuthError" class="feedback-area feedback-wrong"></p>
         <p class="auth-link-container">
           Hesabın yok mu?
-          <span id="linkToRegister" class="auth-link" role="button" tabindex="0">Kayıt Ol</span>
+          <span id="linkToRegister" class="auth-link" role="button" tabindex="0"
+            >Kayıt Ol</span
+          >
         </p>
       </section>
 
-      <section id="screenRegister" class="screen hidden" aria-label="Kayıt ekranı">
+      <section
+        id="screenRegister"
+        class="screen hidden"
+        aria-label="Kayıt ekranı"
+      >
         <h2>Yeni Hesap Oluştur</h2>
         <form id="registerForm" class="auth-form" action="javascript:void(0);">
           <label for="registerUsername" class="sr-only">Kullanıcı Adı</label>
@@ -126,7 +134,9 @@
             required
             autocomplete="new-password"
           />
-          <label for="registerPasswordConfirm" class="sr-only">Şifre Tekrar</label>
+          <label for="registerPasswordConfirm" class="sr-only"
+            >Şifre Tekrar</label
+          >
           <input
             type="password"
             id="registerPasswordConfirm"
@@ -139,7 +149,9 @@
         <p id="registerAuthError" class="feedback-area feedback-wrong"></p>
         <p class="auth-link-container">
           Zaten hesabın var mı?
-          <span id="linkToLogin" class="auth-link" role="button" tabindex="0">Giriş Yap</span>
+          <span id="linkToLogin" class="auth-link" role="button" tabindex="0"
+            >Giriş Yap</span
+          >
         </p>
       </section>
 
@@ -147,22 +159,52 @@
         <div class="menu-header">
           <h2>Dersler</h2>
           <div class="menu-buttons-group">
-          <button id="btnLeaderboard" title="Lider Tablosu" aria-label="Lider tablosunu gör">🏆</button>
-          <button id="btnResetProgress" title="Tüm ilerlemeyi sıfırla" aria-label="İlerlemeyi sıfırla">
+            <button
+              id="btnLeaderboard"
+              title="Lider Tablosu"
+              aria-label="Lider tablosunu gör"
+            >
+              🏆
+            </button>
+            <button
+              id="btnResetProgress"
+              title="Tüm ilerlemeyi sıfırla"
+              aria-label="İlerlemeyi sıfırla"
+            >
               Sıfırla
             </button>
           </div>
         </div>
-        <nav id="lessonList" class="lesson-list" aria-label="Ders listesi"></nav>
+        <nav
+          id="lessonList"
+          class="lesson-list"
+          aria-label="Ders listesi"
+        ></nav>
       </section>
 
       <section id="screenExercise" class="screen hidden" aria-label="Alıştırma">
         <div class="lesson-header">
-          <button id="btnBackToMenu" title="Menüye Dön" class="btn-icon-back" aria-label="Menüye dön">
+          <button
+            id="btnBackToMenu"
+            title="Menüye Dön"
+            class="btn-icon-back"
+            aria-label="Menüye dön"
+          >
             ←
           </button>
-          <div id="heartDisplay" class="heart-display" role="status" aria-label="Kalan canlar"></div>
-          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div
+            id="heartDisplay"
+            class="heart-display"
+            role="status"
+            aria-label="Kalan canlar"
+          ></div>
+          <div
+            class="progress-bar"
+            role="progressbar"
+            aria-valuenow="0"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
             <div id="progressFill" class="progress-fill"></div>
           </div>
         </div>
@@ -171,10 +213,14 @@
           <p id="listen_instruction" class="exercise-instruction">
             Duyduğunu buraya yaz:
           </p>
-          <button id="listen_btnPlaySound" aria-label="Mors sesini çal">Sesi Çal</button>
+          <button id="listen_btnPlaySound" aria-label="Mors sesini çal">
+            Sesi Çal
+          </button>
           <label for="listen_input" class="sr-only">Cevabınızı yazın</label>
           <input type="text" id="listen_input" placeholder="Harf veya kelime" />
-          <button id="listen_btnCheckAnswer" aria-label="Cevabı kontrol et">Kontrol Et</button>
+          <button id="listen_btnCheckAnswer" aria-label="Cevabı kontrol et">
+            Kontrol Et
+          </button>
           <p id="listen_pFeedback" class="feedback-area" aria-live="polite"></p>
         </div>
 
@@ -196,15 +242,28 @@
             </div>
           </div>
           <div class="controls">
-            <button id="tap_btnClear" aria-label="Vuruşları temizle">Temizle</button>
-            <button id="tap_btnCheckAnswer" aria-label="Cevabı kontrol et">Kontrol Et</button>
+            <button id="tap_btnClear" aria-label="Vuruşları temizle">
+              Temizle
+            </button>
+            <button id="tap_btnCheckAnswer" aria-label="Cevabı kontrol et">
+              Kontrol Et
+            </button>
           </div>
           <p id="tap_pFeedback" class="feedback-area" aria-live="polite"></p>
-          <button id="tap_btnMorseKey" aria-label="Mors tuşu - basılı tut ve bırak">MORS TUŞU</button>
+          <button
+            id="tap_btnMorseKey"
+            aria-label="Mors tuşu - basılı tut ve bırak"
+          >
+            MORS TUŞU
+          </button>
         </div>
       </section>
 
-      <section id="screenComplete" class="screen hidden" aria-label="Ders tamamlandı">
+      <section
+        id="screenComplete"
+        class="screen hidden"
+        aria-label="Ders tamamlandı"
+      >
         <h2>Harika!</h2>
         <p id="completeMessage">Dersi tamamladın!</p>
         <p id="xpGainedMessage" class="xp-gained"></p>
@@ -212,7 +271,11 @@
         <button id="btnMenuAfterComplete">Ana Menüye Dön</button>
       </section>
 
-      <section id="screenLeaderboard" class="screen hidden" aria-label="Lider tablosu">
+      <section
+        id="screenLeaderboard"
+        class="screen hidden"
+        aria-label="Lider tablosu"
+      >
         <div class="menu-header">
           <h2>🏆 Lider Tablosu</h2>
           <button
@@ -231,7 +294,15 @@
     </main>
 
     <footer class="main-footer">
-      <p>© 2025 MorseLingo — <a href="https://github.com/burakguclu/MorseLingo" target="_blank" rel="noopener">GitHub</a></p>
+      <p>
+        © 2025 MorseLingo —
+        <a
+          href="https://github.com/burakguclu/MorseLingo"
+          target="_blank"
+          rel="noopener"
+          >GitHub</a
+        >
+      </p>
     </footer>
 
     <audio id="audioCorrect" src="sounds/correct.mp3" preload="auto"></audio>

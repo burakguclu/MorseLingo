@@ -143,7 +143,7 @@ function nextQuestion() {
   currentLesson.questionIndex++;
   ui.updateProgress(
     domElements,
-    (currentLesson.questionIndex / currentLesson.totalQuestions) * 100
+    (currentLesson.questionIndex / currentLesson.totalQuestions) * 100,
   );
 
   if (currentLesson.questionIndex < currentLesson.totalQuestions) {
@@ -260,7 +260,7 @@ function failLesson(type) {
       domElements,
       LESSON_DATA_MAP,
       userProgress,
-      onLessonSelect
+      onLessonSelect,
     );
     ui.showScreen(domElements, "screenMenu");
   }, config.FAIL_LESSON_DELAY);
@@ -289,7 +289,7 @@ export function exitLesson() {
     domElements,
     LESSON_DATA_MAP,
     userProgress,
-    onLessonSelect
+    onLessonSelect,
   );
   ui.showScreen(domElements, "screenMenu");
 }
@@ -306,7 +306,7 @@ export function startNextLesson() {
       domElements,
       LESSON_DATA_MAP,
       userProgress,
-      onLessonSelect
+      onLessonSelect,
     );
     ui.showScreen(domElements, "screenMenu");
   }

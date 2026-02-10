@@ -104,10 +104,11 @@ export async function loadProgress() {
     // Varsayılan ilerleme ile devam et
     userProgress = getNewUserProgress(
       currentUser.email ? currentUser.email.split("@")[0] : "Bilinmeyen",
-      currentUser.email || ""
+      currentUser.email || "",
     );
     ui.showUserUI(domElements, currentUser, userProgress);
-  }}
+  }
+}
 /**
  * Kullanıcının ilerlemesini Firestore'a kaydeder (kısmi güncelleme).
  */
@@ -138,12 +139,12 @@ async function checkStreak(userRef) {
   const lastLessonDay = new Date(
     lastDate.getFullYear(),
     lastDate.getMonth(),
-    lastDate.getDate()
+    lastDate.getDate(),
   );
   const todayDay = new Date(
     today.getFullYear(),
     today.getMonth(),
-    today.getDate()
+    today.getDate(),
   );
 
   const diffTime = todayDay - lastLessonDay;
@@ -186,7 +187,7 @@ export async function resetProgress() {
   if (!currentUser) return;
   if (
     confirm(
-      "Emin misin? Sadece ders ilerlemen (açılan kilitler) sıfırlanacak. XP ve Serin korunacak."
+      "Emin misin? Sadece ders ilerlemen (açılan kilitler) sıfırlanacak. XP ve Serin korunacak.",
     )
   ) {
     userProgress.unlockedLessons = ["lesson1"];

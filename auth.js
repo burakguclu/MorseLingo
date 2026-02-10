@@ -115,6 +115,7 @@ export function handleLogout() {
  * DÜZELTME: Yeni hata kodları eklendi.
  */
 export function handleAuthError(error, screen) {
+  console.error("Auth hatası:", error.code, error.message);
   let message = "Bilinmeyen bir hata oluştu.";
 
   switch (error.code) {
@@ -131,6 +132,15 @@ export function handleAuthError(error, screen) {
       break;
     case "auth/weak-password":
       message = "Şifre çok zayıf. En az 6 karakter olmalı.";
+      break;
+    case "auth/operation-not-allowed":
+      message = "Bu giriş yöntemi etkin değil. Lütfen yöneticiyle iletişime geçin.";
+      break;
+    case "auth/too-many-requests":
+      message = "Çok fazla deneme yapıldı. Lütfen biraz bekleyin.";
+      break;
+    case "auth/network-request-failed":
+      message = "İnternet bağlantınızı kontrol edin.";
       break;
     case "auth/password-mismatch": // Özel
       message = "Hata: Şifreler eşleşmiyor!";

@@ -1,131 +1,141 @@
 /* --- 6. EKRAN 2: ALIŞTIRMA STİLLERİ --- */
 #screenExercise {
-    flex-grow: 1; 
-    padding-bottom: 15px;
+  flex-grow: 1;
+  padding-bottom: 15px;
 }
 .lesson-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 #btnBackToMenu {
-    background: none;
-    border: 2px solid var(--color-border);
-    color: var(--color-text-light);
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-size: 20px;
-    line-height: 1;
-    margin-right: 15px;
-    flex-shrink: 0;
+  background: none;
+  border: 2px solid var(--color-border);
+  color: var(--color-text-light);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  margin-right: 15px;
+  flex-shrink: 0;
 }
-#btnBackToMenu:hover { background-color: #f0f0f0; }
+#btnBackToMenu:hover {
+  background-color: #f0f0f0;
+}
 .progress-bar {
-    flex-grow: 1;
-    height: 20px;
-    background-color: var(--color-border-light);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+  flex-grow: 1;
+  height: 20px;
+  background-color: var(--color-border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 .progress-fill {
-    height: 100%;
-    width: 0%;
-    background-color: var(--color-success);
-    border-radius: var(--radius-lg);
-    transition: width 0.3s ease-in-out;
+  height: 100%;
+  width: 0%;
+  background-color: var(--color-success);
+  border-radius: var(--radius-lg);
+  transition: width 0.3s ease-in-out;
 }
 .feedback-area {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 15px;
-    min-height: 2.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    flex-shrink: 0;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-shrink: 0;
 }
-.feedback-correct { color: var(--color-success); }
-.feedback-wrong { color: var(--color-danger); }
+.feedback-correct {
+  color: var(--color-success);
+}
+.feedback-wrong {
+  color: var(--color-danger);
+}
 
 /* --- 6a. ALIŞTIRMA 1: DİNLE & YAZ --- */
 #exerciseListen {
-    text-align: center;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    /* DÜZELTME: Üste yaslandı */
-    justify-content: flex-start; 
-    padding-top: 20px;
-    align-items: center;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  /* DÜZELTME: Üste yaslandı */
+  justify-content: flex-start;
+  padding-top: 20px;
+  align-items: center;
 }
 #exerciseListen button {
-    background-color: var(--color-primary-light);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    margin: 10px 5px;
-    border-radius: var(--radius-sm);
-    font-size: 16px;
+  background-color: var(--color-primary-light);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin: 10px 5px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
 }
-#listen_btnPlaySound { background-color: var(--color-success); }
+#listen_btnPlaySound {
+  background-color: var(--color-success);
+}
 #listen_input {
-    font-size: 24px;
-    padding: 10px;
-    width: 90%;
-    max-width: 250px;
-    text-align: center;
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    margin-top: 15px;
-    text-transform: uppercase; 
+  font-size: 24px;
+  padding: 10px;
+  width: 90%;
+  max-width: 250px;
+  text-align: center;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  margin-top: 15px;
+  text-transform: uppercase;
 }
 #listen_input:disabled {
-    background-color: #eee;
-    opacity: 0.7;
+  background-color: #eee;
+  opacity: 0.7;
 }
 
 /* --- 7. EKRAN 3: TAMAMLAMA EKRANI --- */
 #screenComplete {
-    text-align: center;
+  text-align: center;
 }
 #screenComplete button {
-    background-color: var(--color-success);
-    color: white;
-    border: none;
-    padding: 15px 25px;
-    margin: 10px;
-    border-radius: var(--radius-sm);
-    font-size: 18px;
+  background-color: var(--color-success);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  margin: 10px;
+  border-radius: var(--radius-sm);
+  font-size: 18px;
 }
-#btnMenuAfterComplete { background-color: var(--color-primary-light); }
+#btnMenuAfterComplete {
+  background-color: var(--color-primary-light);
+}
 .xp-gained {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--color-primary-light);
-    margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--color-primary-light);
+  margin-top: 10px;
 }
 
 /* --- 8. CAN SİSTEMİ STİLLERİ --- */
 .heart-display {
-    display: flex;
-    gap: 4px;
-    margin: 0 15px;
-    flex-shrink: 0;
+  display: flex;
+  gap: 4px;
+  margin: 0 15px;
+  flex-shrink: 0;
 }
 .heart {
-    font-size: 24px;
-    opacity: 1;
-    transition: all 0.2s;
+  font-size: 24px;
+  opacity: 1;
+  transition: all 0.2s;
 }
 .heart.lost {
-    opacity: 0.2;
-    transform: scale(0.9);
+  opacity: 0.2;
+  transform: scale(0.9);
 }
 .feedback-failed {
-    color: var(--color-danger);
-    font-weight: bold;
-    font-size: 20px !important;
+  color: var(--color-danger);
+  font-weight: bold;
+  font-size: 20px !important;
 }
