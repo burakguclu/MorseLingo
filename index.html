@@ -147,8 +147,8 @@
         <div class="menu-header">
           <h2>Dersler</h2>
           <div class="menu-buttons-group">
-            <button id="btnLeaderboard" title="Lider Tablosu">🏆</button>
-            <button id="btnResetProgress" title="Tüm ilerlemeyi sıfırla">
+          <button id="btnLeaderboard" title="Lider Tablosu" aria-label="Lider tablosunu gör">🏆</button>
+          <button id="btnResetProgress" title="Tüm ilerlemeyi sıfırla" aria-label="İlerlemeyi sıfırla">
               Sıfırla
             </button>
           </div>
@@ -158,11 +158,11 @@
 
       <section id="screenExercise" class="screen hidden" aria-label="Alıştırma">
         <div class="lesson-header">
-          <button id="btnBackToMenu" title="Menüye Dön" class="btn-icon-back">
+          <button id="btnBackToMenu" title="Menüye Dön" class="btn-icon-back" aria-label="Menüye dön">
             ←
           </button>
-          <div id="heartDisplay" class="heart-display"></div>
-          <div class="progress-bar">
+          <div id="heartDisplay" class="heart-display" role="status" aria-label="Kalan canlar"></div>
+          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
             <div id="progressFill" class="progress-fill"></div>
           </div>
         </div>
@@ -175,7 +175,7 @@
           <label for="listen_input" class="sr-only">Cevabınızı yazın</label>
           <input type="text" id="listen_input" placeholder="Harf veya kelime" />
           <button id="listen_btnCheckAnswer" aria-label="Cevabı kontrol et">Kontrol Et</button>
-          <p id="listen_pFeedback" class="feedback-area"></p>
+          <p id="listen_pFeedback" class="feedback-area" aria-live="polite"></p>
         </div>
 
         <div id="exerciseTap" class="exercise-module hidden">
@@ -196,10 +196,10 @@
             </div>
           </div>
           <div class="controls">
-            <button id="tap_btnClear">Temizle</button>
-            <button id="tap_btnCheckAnswer">Kontrol Et</button>
+            <button id="tap_btnClear" aria-label="Vuruşları temizle">Temizle</button>
+            <button id="tap_btnCheckAnswer" aria-label="Cevabı kontrol et">Kontrol Et</button>
           </div>
-          <p id="tap_pFeedback" class="feedback-area"></p>
+          <p id="tap_pFeedback" class="feedback-area" aria-live="polite"></p>
           <button id="tap_btnMorseKey" aria-label="Mors tuşu - basılı tut ve bırak">MORS TUŞU</button>
         </div>
       </section>
@@ -219,6 +219,7 @@
             id="btnBackFromLeaderboard"
             title="Menüye Dön"
             class="btn-icon-back"
+            aria-label="Menüye dön"
           >
             ←
           </button>
