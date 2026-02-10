@@ -2,6 +2,7 @@
 // Tüm Firebase Authentication mantığını yönetir.
 
 import * as ui from "./ui.js";
+import { showToast } from "./toast.js";
 import {
   auth,
   db,
@@ -79,7 +80,7 @@ export async function handleEmailRegister(e) {
     });
 
     // 3. Başarılı kayıttan sonra yönlendir
-    alert("Kayıt başarılı! Lütfen şimdi giriş yapın.");
+    showToast("Kayıt başarılı! Lütfen giriş yapın.", "success");
     ui.showScreen(domElements, "screenLogin");
     domElements.loginForm.reset();
     domElements.registerForm.reset();

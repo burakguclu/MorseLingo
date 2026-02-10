@@ -38,10 +38,22 @@
   overflow: hidden;
 }
 
+.question-counter {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--color-bg);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border-light);
+}
+
 .progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--color-success), #34D399);
+  background: linear-gradient(90deg, var(--color-success), #34d399);
   border-radius: var(--radius-full);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -115,7 +127,11 @@
 }
 
 #listen_btnPlaySound {
-  background: linear-gradient(135deg, var(--color-success), var(--color-success-dark)) !important;
+  background: linear-gradient(
+    135deg,
+    var(--color-success),
+    var(--color-success-dark)
+  ) !important;
   padding: 14px 32px !important;
   font-size: 17px !important;
   border-radius: var(--radius-lg) !important;
@@ -153,21 +169,89 @@
 /* --- 7. TAMAMLAMA EKRANI --- */
 #screenComplete {
   text-align: center;
-  padding: 40px 32px;
+  padding: 32px 24px;
   animation: fadeSlideUp 0.4s ease;
 }
 
-#screenComplete h2 {
-  font-size: 28px;
-  margin-bottom: 8px;
+.complete-hero {
+  margin-bottom: 24px;
 }
 
-#screenComplete button {
-  background: linear-gradient(135deg, var(--color-success), var(--color-success-dark));
+.complete-trophy {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 8px;
+  animation: bounce-correct 0.6s ease;
+}
+
+.complete-hero h2 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.complete-hero p {
+  font-size: 16px;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+.complete-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.complete-stat-card {
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.complete-stat-icon {
+  font-size: 24px;
+}
+
+.complete-stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.complete-stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.complete-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.complete-actions button {
+  width: 100%;
+}
+
+#screenComplete button,
+.complete-actions button {
+  background: linear-gradient(
+    135deg,
+    var(--color-success),
+    var(--color-success-dark)
+  );
   color: white;
   border: none;
   padding: 14px 28px;
-  margin: 8px;
   border-radius: var(--radius-md);
   font-size: 16px;
   font-weight: 700;
@@ -234,7 +318,7 @@
 }
 
 .flashcard {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #818CF8 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, #818cf8 100%);
   color: #fff;
   border-radius: var(--radius-xl);
   padding: 32px 40px;
@@ -285,7 +369,11 @@
 }
 
 .flashcard-play-btn {
-  background: linear-gradient(135deg, var(--color-success), var(--color-success-dark)) !important;
+  background: linear-gradient(
+    135deg,
+    var(--color-success),
+    var(--color-success-dark)
+  ) !important;
   color: #fff !important;
   border: none;
   padding: 14px 32px;
@@ -345,7 +433,11 @@
 }
 
 .mcq-play-btn {
-  background: linear-gradient(135deg, var(--color-success), var(--color-success-dark)) !important;
+  background: linear-gradient(
+    135deg,
+    var(--color-success),
+    var(--color-success-dark)
+  ) !important;
   color: #fff !important;
   border: none;
   padding: 12px 28px;
@@ -470,7 +562,7 @@
   border-radius: var(--radius-md);
   background: var(--color-warning-bg);
   border: 1.5px solid var(--color-warning);
-  color: #92400E;
+  color: #92400e;
   font-size: 15px;
   font-weight: 600;
   animation: hintFadeIn 0.3s ease;
@@ -495,14 +587,14 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #92400E;
+  background: #92400e;
 }
 
 .hint-display .hint-visual .dah {
   width: 32px;
   height: 12px;
   border-radius: 6px;
-  background: #92400E;
+  background: #92400e;
 }
 
 @keyframes hintFadeIn {
@@ -638,8 +730,12 @@
 }
 
 @keyframes modalFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes modalSlideIn {

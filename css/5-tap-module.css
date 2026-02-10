@@ -53,7 +53,7 @@
 #tap_btnMorseKey {
   width: 170px;
   height: 170px;
-  background: linear-gradient(145deg, #EF4444, #DC2626);
+  background: linear-gradient(145deg, #ef4444, #dc2626);
   color: white;
   font-size: 18px;
   font-weight: 800;
@@ -73,7 +73,7 @@
 }
 
 #tap_btnMorseKey:active {
-  background: linear-gradient(145deg, #F87171, #EF4444);
+  background: linear-gradient(145deg, #f87171, #ef4444);
   transform: scale(0.93);
   border-width: 8px;
   box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);

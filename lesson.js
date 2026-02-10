@@ -6,6 +6,7 @@ import * as audio from "./audio.js";
 import * as ui from "./ui.js";
 import * as store from "./store.js";
 import { resetTapState, getCommittedTaps } from "./tap-input.js";
+import { showToast } from "./toast.js";
 
 let domElements;
 let MORSE_DATA;
@@ -40,7 +41,7 @@ export function initLesson(elements, morseData, lessonData) {
 export function startLesson(lessonId) {
   if (!LESSON_DATA_MAP[lessonId]) {
     console.error("Geçersiz ders ID:", lessonId);
-    alert("Bu ders bulunamadı.");
+    showToast("Bu ders bulunamadı.", "error");
     return;
   }
 
@@ -87,6 +88,13 @@ function generateMcqChoices(correctItem, allItems) {
 function showQuestion() {
   if (!currentLesson.isActive) return;
   const question = currentLesson.plan[currentLesson.questionIndex];
+
+  // Soru sayacını güncelle
+  ui.updateQuestionCounter(
+    domElements,
+    currentLesson.questionIndex + 1,
+    currentLesson.totalQuestions,
+  );
 
   ui.showFeedback(domElements, true, "", "listen");
   ui.showFeedback(domElements, true, "", "tap");
@@ -300,7 +308,13 @@ async function completeLesson() {
     completeText = "Tebrikler! Tüm dersleri tamamladın!";
   }
 
-  ui.showCompleteScreen(domElements, completeText, xpMessage, hasNextLesson);
+  ui.showCompleteScreen(
+    domElements,
+    completeText,
+    xpMessage,
+    hasNextLesson,
+    currentLesson.hearts,
+  );
   ui.triggerConfetti();
 
   // 'correct' yerine 'complete' sesini çal
@@ -389,7 +403,7 @@ function failLesson(type) {
  */
 function onLessonSelect(lessonId, isLocked) {
   if (isLocked) {
-    alert("Bu ders kilitli! Önceki dersleri tamamlamalısın.");
+    showToast("Bu ders kilitli! Önceki dersleri tamamlamalısın.", "warning");
   } else {
     startLesson(lessonId);
   }

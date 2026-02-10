@@ -15,6 +15,7 @@ import {
   getDocs,
 } from "./firebase.js";
 import * as ui from "./ui.js";
+import { showToast } from "./toast.js";
 
 let domElements;
 let currentUser;
@@ -177,6 +178,9 @@ export async function addXP(amount) {
   const newXP = (userProgress.xp || 0) + amount;
   userProgress.xp = newXP;
   ui.updateXP(domElements, newXP);
+  if (amount >= 50) {
+    showToast(`+${amount} XP kazandın!`, "xp");
+  }
   await saveProgress({ xp: newXP });
 }
 
@@ -192,7 +196,7 @@ export async function resetProgress() {
   ) {
     userProgress.unlockedLessons = ["lesson1"];
     await saveProgress({ unlockedLessons: ["lesson1"] });
-    alert("Ders ilerlemesi sıfırlandı.");
+    showToast("Ders ilerlemesi sıfırlandı.", "warning");
   }
 }
 

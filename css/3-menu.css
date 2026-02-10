@@ -51,6 +51,58 @@
   padding: 24px;
 }
 
+/* Menu Progress Card */
+.menu-progress-card {
+  background: linear-gradient(135deg, var(--color-primary-bg), #e0e7ff);
+  border: 1.5px solid rgba(79, 70, 229, 0.15);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+
+[data-theme="dark"] .menu-progress-card {
+  background: linear-gradient(135deg, var(--color-primary-bg), #1e1b4b);
+  border-color: rgba(79, 70, 229, 0.3);
+}
+
+.menu-progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.menu-progress-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.menu-progress-count {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.menu-progress-bar {
+  height: 8px;
+  background: rgba(79, 70, 229, 0.12);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.menu-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-primary-hover)
+  );
+  border-radius: var(--radius-full);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .lesson-list {
   display: flex;
   flex-direction: column;

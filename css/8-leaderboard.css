@@ -68,9 +68,15 @@
   text-align: center;
 }
 
-.leaderboard-list li:nth-child(1) .rank { color: #F59E0B; }
-.leaderboard-list li:nth-child(2) .rank { color: #94A3B8; }
-.leaderboard-list li:nth-child(3) .rank { color: #D97706; }
+.leaderboard-list li:nth-child(1) .rank {
+  color: #f59e0b;
+}
+.leaderboard-list li:nth-child(2) .rank {
+  color: #94a3b8;
+}
+.leaderboard-list li:nth-child(3) .rank {
+  color: #d97706;
+}
 
 .leaderboard-list li:nth-child(1) {
   background: var(--color-warning-bg);

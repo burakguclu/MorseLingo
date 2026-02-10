@@ -81,9 +81,6 @@
 ## 🟢 BÖLÜM D: DERS İÇERİKLERİ İYİLEŞTİRME
 
 - [x] **D1.** Ders yapısını pedagojik olarak yeniden düzenle
-  - **Mevcut durum:** 20 ders var, mantıklı bir sıralama izliyor ama bazı eksikler var
-  - Her derse **"Öğrenme kartı"** (flashcard) ekranı ekle: Harfin mors kodu gösterilip sesi dinletilmeli (alıştırmadan ÖNCE)
-  - Ders başlıklarına mors kodu referansı ekle (örn: "E = ." , "T = -")
 
 - [x] **D2.** Yeni ders tipleri ekle
   - **"Çoktan seçmeli" (multiple-choice):** Ses çalar, 4 seçenekten doğru harfi seçtir
@@ -109,23 +106,23 @@
 
 ## 🔵 BÖLÜM E: UX / KULLANICI DENEYİMİ
 
-- [ ] **E1.** Loading/Splash ekranı
+- [x] **E1.** Loading/Splash ekranı
   - Uygulama yüklenirken bir loading animasyonu göster
   - Firebase bağlantısı kurulana kadar bekle
 
-- [ ] **E2.** Ses seviyesi kontrolü
+- [x] **E2.** Ses seviyesi kontrolü
   - Mors sesi frekansı (700Hz) kullanıcı tarafından ayarlanabilir olmalı
   - Ses açma/kapama butonu
 
-- [ ] **E3.** Dark mode desteği
+- [x] **E3.** Dark mode desteği
   - CSS değişkenleri üzerinden kolay geçiş
   - Kullanıcı tercihini localStorage'da sakla
 
-- [ ] **E4.** Bildirim / Toast mesajları
+- [x] **E4.** Bildirim / Toast mesajları
   - `alert()` çağrılarını modern toast bildirimlerine dönüştür
   - XP kazanımı, seri bildirimi gibi durumlar için
 
-- [ ] **E5.** Onboarding / İlk kullanıcı deneyimi
+- [x] **E5.** Onboarding / İlk kullanıcı deneyimi
   - İlk girişte kısa bir "Nasıl kullanılır?" rehberi göster
   - Mors alfabesi nedir? kısa bir tanıtım
 

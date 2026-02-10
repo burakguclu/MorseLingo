@@ -7,6 +7,11 @@ let audioCtx;
 let currentOscillator = null;
 let pressStartTime = 0;
 let soundEffects = {};
+let gainNode = null;
+
+// Dinamik ayarlar
+let currentVolume = 0.8; // 0-1 arası
+let currentFrequency = config.MORSE_TONE;
 
 // === YARDIMCI FONKSİYONLAR ===
 
@@ -18,6 +23,9 @@ function getAudioContext() {
       return null;
     }
     audioCtx = new AudioCtx();
+    gainNode = audioCtx.createGain();
+    gainNode.gain.value = currentVolume;
+    gainNode.connect(audioCtx.destination);
   }
   return audioCtx;
 }
@@ -31,14 +39,37 @@ function playSound(durationInMs) {
   if (!ctx) return;
   const oscillator = ctx.createOscillator();
   oscillator.type = "sine";
-  oscillator.frequency.value = config.MORSE_TONE;
-  oscillator.connect(ctx.destination);
+  oscillator.frequency.value = currentFrequency;
+  oscillator.connect(gainNode);
 
   const now = ctx.currentTime;
   const durationInSeconds = durationInMs / 1000.0;
 
   oscillator.start(now);
   oscillator.stop(now + durationInSeconds);
+}
+
+// === DIŞA AKTARILAN FONKSİYONLAR ===
+
+/**
+ * Ses seviyesini ayarlar (0-100 arası).
+ */
+export function setVolume(volumePercent) {
+  currentVolume = Math.max(0, Math.min(1, volumePercent / 100));
+  if (gainNode) {
+    gainNode.gain.value = currentVolume;
+  }
+  // HTML audio efektlerinin sesini de ayarla
+  Object.values(soundEffects).forEach((audio) => {
+    if (audio) audio.volume = currentVolume;
+  });
+}
+
+/**
+ * Mors frekansını ayarlar (Hz).
+ */
+export function setFrequency(freq) {
+  currentFrequency = freq;
 }
 
 // === DIŞA AKTARILAN FONKSİYONLAR ===
@@ -105,8 +136,8 @@ export function startTone() {
 
   currentOscillator = ctx.createOscillator();
   currentOscillator.type = "sine";
-  currentOscillator.frequency.value = config.MORSE_TONE;
-  currentOscillator.connect(ctx.destination);
+  currentOscillator.frequency.value = currentFrequency;
+  currentOscillator.connect(gainNode);
   currentOscillator.start(ctx.currentTime);
 
   pressStartTime = Date.now();

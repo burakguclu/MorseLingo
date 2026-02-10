@@ -233,13 +233,30 @@
 
   /* TAMAMLAMA */
   #screenComplete {
-    padding: 28px 16px;
+    padding: 24px 16px;
   }
 
-  #screenComplete h2 {
+  .complete-trophy {
+    font-size: 48px;
+  }
+
+  .complete-hero h2 {
     font-size: 22px;
   }
 
+  .complete-stats {
+    gap: 8px;
+  }
+
+  .complete-stat-card {
+    padding: 12px 8px;
+  }
+
+  .complete-stat-value {
+    font-size: 18px;
+  }
+
+  .complete-actions button,
   #screenComplete button {
     padding: 12px 20px;
     font-size: 15px;
@@ -247,6 +264,40 @@
 
   .xp-gained {
     font-size: 20px;
+  }
+
+  /* QUESTION COUNTER */
+  .question-counter {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  /* AUTH BRANDING */
+  .auth-branding-icon {
+    font-size: 36px;
+  }
+
+  .auth-branding h2 {
+    font-size: 22px;
+  }
+
+  /* MENU PROGRESS */
+  .menu-progress-card {
+    padding: 10px 14px;
+    margin-bottom: 10px;
+  }
+
+  /* TOAST */
+  .toast-container {
+    top: 58px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .toast {
+    max-width: 100%;
+    font-size: 13px;
+    padding: 10px 14px;
   }
 
   /* MODAL */

@@ -139,6 +139,16 @@ export function initDOMElements(maxHearts) {
     morseTableModal: document.getElementById("morseTableModal"),
     morseTableBody: document.getElementById("morseTableBody"),
     btnCloseMorseTable: document.getElementById("btnCloseMorseTable"),
+
+    // Question Counter
+    questionCounter: document.getElementById("questionCounter"),
+
+    // Menu Progress
+    menuProgressCount: document.getElementById("menuProgressCount"),
+    menuProgressFill: document.getElementById("menuProgressFill"),
+
+    // Complete Screen Hearts
+    completeHeartsValue: document.getElementById("completeHeartsValue"),
   };
 }
 
@@ -272,6 +282,28 @@ export function updateXP(elements, xp) {
  */
 export function updateStreak(elements, streak) {
   elements.userStreakDisplay.textContent = `🔥 ${streak}`;
+}
+
+/**
+ * Soru sayacını günceller.
+ */
+export function updateQuestionCounter(elements, current, total) {
+  if (elements.questionCounter) {
+    elements.questionCounter.textContent = `${current}/${total}`;
+  }
+}
+
+/**
+ * Menü ilerleme kartını günceller.
+ */
+export function updateMenuProgress(elements, completedCount, totalCount) {
+  if (elements.menuProgressCount) {
+    elements.menuProgressCount.textContent = `${completedCount} / ${totalCount}`;
+  }
+  if (elements.menuProgressFill) {
+    const percent = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
+    elements.menuProgressFill.style.width = `${percent}%`;
+  }
 }
 
 /**
@@ -535,10 +567,15 @@ export function showCompleteScreen(
   message,
   xpMessage,
   hasNextLesson,
+  heartsRemaining,
 ) {
   // ... (fonksiyonun içeriği değişmedi) ...
   elements.completeMessage.textContent = message;
   elements.xpGainedMessage.textContent = xpMessage;
+  if (elements.completeHeartsValue) {
+    elements.completeHeartsValue.textContent =
+      heartsRemaining !== undefined ? `${heartsRemaining}/5` : "";
+  }
   if (hasNextLesson) {
     elements.btnNextLesson.classList.remove("hidden");
   } else {

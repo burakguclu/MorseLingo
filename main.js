@@ -8,6 +8,8 @@ import * as auth from "./auth.js";
 import * as store from "./store.js";
 import * as lesson from "./lesson.js";
 import * as tapInput from "./tap-input.js";
+import { initToast, showToast } from "./toast.js";
+import { initSettings, showOnboarding, getSettings } from "./settings.js";
 
 // --- 1. UYGULAMA DURUMU (STATE) ---
 let MORSE_DATA = {};
@@ -28,7 +30,13 @@ async function onUserLogin(user) {
     userProgress,
     onLessonSelect,
   );
+  updateMenuProgressUI(userProgress);
   ui.showScreen(domElements, "screenMenu");
+
+  showToast(`Hoş geldin, ${userProgress.username || "Kullanıcı"}!`, "success");
+
+  // İlk kullanıcı için onboarding
+  showOnboarding();
 }
 
 function onUserLogout() {
@@ -42,10 +50,25 @@ function onUserLogout() {
 
 function onLessonSelect(lessonId, isLocked) {
   if (isLocked) {
-    alert("Bu ders kilitli! Önceki dersleri tamamlamalısın.");
+    showToast("Bu ders kilitli! Önceki dersleri tamamlamalısın.", "warning");
   } else {
     lesson.startLesson(lessonId);
   }
+}
+
+/**
+ * Menü ilerleme çubuğunu günceller.
+ */
+function updateMenuProgressUI(userProgress) {
+  const totalLessons = Object.keys(LESSON_DATA_MAP).length;
+  // Kilidi açılmış ders sayısından 1 çıkar (lesson1 zaten açık başlar)
+  // Aslında completedCount = unlocked - 1 (mevcut başladığın hariç) ama
+  // daha doğrusu: tamamlanmış = unlocked.length - 1 (eğer unlocked > totalLessons ise totalLessons)
+  const completedCount = Math.min(
+    userProgress.unlockedLessons.length - 1,
+    totalLessons,
+  );
+  ui.updateMenuProgress(domElements, Math.max(0, completedCount), totalLessons);
 }
 
 // --- 3. OLAY DİNLEYİCİLERİNİ BAĞLAMA ---
@@ -84,6 +107,7 @@ function bindEventListeners() {
       userProgress,
       onLessonSelect,
     );
+    updateMenuProgressUI(userProgress);
   });
 
   // Lider Tablosu Butonu (Menü'de)
@@ -183,6 +207,9 @@ function bindEventListeners() {
 // --- 4. UYGULAMAYI BAŞLATMA ---
 
 async function init() {
+  // 0. Toast sistemini başlat
+  initToast();
+
   // 1. DOM elemanlarını bul
   domElements = ui.initDOMElements(config.MAX_HEARTS);
 
@@ -198,6 +225,7 @@ async function init() {
     LESSON_DATA_MAP = data.LESSON_DATA;
   } catch (e) {
     console.error("Veri yüklenemedi!", e);
+    hideLoadingScreen();
     document.body.innerHTML = "<h1>Hata: data.json yüklenemedi.</h1>";
     return;
   }
@@ -208,11 +236,30 @@ async function init() {
   lesson.initLesson(domElements, MORSE_DATA, LESSON_DATA_MAP);
   tapInput.initTapInput(domElements);
 
-  // 5. Olay dinleyicilerini bağla
+  // 5. Ayarları başlat (volume, frequency, dark mode)
+  initSettings({
+    onVolumeChange: (vol) => audio.setVolume(vol),
+    onFrequencyChange: (freq) => audio.setFrequency(freq),
+  });
+
+  // 6. Olay dinleyicilerini bağla
   bindEventListeners();
 
-  // 6. Auth durumunu dinlemeye başla
+  // 7. Auth durumunu dinlemeye başla
   auth.listenForAuthChanges(onUserLogin, onUserLogout);
+
+  // 8. Loading ekranını gizle
+  hideLoadingScreen();
+}
+
+function hideLoadingScreen() {
+  const loadingScreen = document.getElementById("loadingScreen");
+  if (loadingScreen) {
+    loadingScreen.classList.add("fade-out");
+    setTimeout(() => {
+      loadingScreen.remove();
+    }, 400);
+  }
 }
 
 // Uygulamayı çalıştır
