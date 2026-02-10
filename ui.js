@@ -161,7 +161,7 @@ export function renderLessonMenu(
   elements,
   LESSON_DATA,
   userProgress,
-  onLessonSelectCallback
+  onLessonSelectCallback,
 ) {
   // ... (fonksiyonun içeriği değişmedi) ...
   const container = elements.lessonListContainer;
@@ -260,7 +260,7 @@ export function renderHearts(elements, currentHearts, maxHearts) {
       heartContainer.appendChild(heart);
     }
     elements.heartDisplaySpans = document.querySelectorAll(
-      "#heartDisplay .heart"
+      "#heartDisplay .heart",
     );
   }
 
@@ -355,7 +355,7 @@ export function showCompleteScreen(
   elements,
   message,
   xpMessage,
-  hasNextLesson
+  hasNextLesson,
 ) {
   // ... (fonksiyonun içeriği değişmedi) ...
   elements.completeMessage.textContent = message;
