@@ -1,0 +1,26 @@
+{
+  "name": "morselingo",
+  "version": "1.0.0",
+  "description": "Mors alfabesini interaktif derslerle öğreten web uygulaması",
+  "main": "main.js",
+  "scripts": {
+    "serve": "npx serve .",
+    "deploy": "firebase deploy",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:rules": "firebase deploy --only firestore:rules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/burakguclu/MorseLingo.git"
+  },
+  "keywords": [
+    "morse-code",
+    "learning",
+    "education",
+    "gamification",
+    "firebase",
+    "web-audio-api"
+  ],
+  "author": "Burak Güçlü",
+  "license": "MIT"
+}
