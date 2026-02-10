@@ -14,6 +14,7 @@ import { initSettings, showOnboarding, getSettings } from "./settings.js";
 // --- 1. UYGULAMA DURUMU (STATE) ---
 let MORSE_DATA = {};
 let LESSON_DATA_MAP = {};
+let CATEGORIES_DATA = [];
 let domElements = {};
 
 // --- 2. AUTH GERİ BİLDİRİMLERİ (Callbacks) ---
@@ -27,6 +28,7 @@ async function onUserLogin(user) {
   ui.renderLessonMenu(
     domElements,
     LESSON_DATA_MAP,
+    CATEGORIES_DATA,
     userProgress,
     onLessonSelect,
   );
@@ -125,6 +127,7 @@ function bindEventListeners() {
     ui.renderLessonMenu(
       domElements,
       LESSON_DATA_MAP,
+      CATEGORIES_DATA,
       userProgress,
       onLessonSelect,
     );
@@ -255,6 +258,7 @@ async function init() {
     const data = await response.json();
     MORSE_DATA = data.MORSE_CODE;
     LESSON_DATA_MAP = data.LESSON_DATA;
+    CATEGORIES_DATA = data.CATEGORIES || [];
   } catch (e) {
     console.error("Veri yüklenemedi!", e);
     hideLoadingScreen();

@@ -232,16 +232,19 @@ export async function handleAnswerCheck(e) {
   let feedbackMessage = "";
 
   if (type === "listen") {
-    const userGuess = domElements.listen.input.value.toUpperCase();
+    const userGuess = domElements.listen.input.value.trim().toUpperCase();
     isCorrect = userGuess === correctItem;
     feedbackMessage = isCorrect
       ? "Doğru!"
       : `Yanlış! Doğru cevap '${correctItem}' olacaktı.`;
   } else if (type === "tap") {
     const userTaps = getCommittedTaps();
+    // Boşlukları atla — tap modunda kullanıcı tüm harfleri ardışık vurur
     let correctCode = correctItem
       .split("")
+      .filter((letter) => letter !== " ")
       .map((letter) => MORSE_DATA[letter])
+      .filter(Boolean)
       .join("");
     isCorrect = userTaps === correctCode;
 
@@ -606,9 +609,13 @@ export function handleHintRequest() {
     const morseCode = MORSE_DATA[item] || "";
     ui.showHint(domElements, item, morseCode);
   } else {
-    // Çok harfli kelime: her harf için mors kodunu al
+    // Çok harfli kelime/cümle: her harf için mors kodunu al
     const letterCodes = [];
     for (const ch of item.toUpperCase()) {
+      if (ch === " ") {
+        letterCodes.push({ letter: " ", code: "boşluk" });
+        continue;
+      }
       const code = MORSE_DATA[ch];
       if (code) {
         letterCodes.push({ letter: ch, code });

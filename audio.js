@@ -92,13 +92,21 @@ export function initAudioEffects() {
 }
 
 /**
- * Bir harf veya kelimenin mors kodunu çalar.
+ * Bir harf, kelime veya cümlenin mors kodunu çalar.
+ * Boşluklar kelime arası gap olarak çalınır.
  */
 export async function playMorseItem(item, MORSE_CODE) {
   const letters = item.split("");
 
   for (let i = 0; i < letters.length; i++) {
     const letter = letters[i];
+
+    // Boşluk = kelimeler arası gap
+    if (letter === " ") {
+      await sleep(config.WORD_GAP);
+      continue;
+    }
+
     const code = MORSE_CODE[letter];
     if (!code) continue;
 
@@ -118,7 +126,8 @@ export async function playMorseItem(item, MORSE_CODE) {
       }
     }
 
-    if (i < letters.length - 1) {
+    // Sonraki karakter boşluk değilse ve son harf değilse letter gap
+    if (i < letters.length - 1 && letters[i + 1] !== " ") {
       await sleep(config.LETTER_GAP);
     }
   }

@@ -10,6 +10,7 @@ export const DIT_DURATION = UNIT_DURATION_MS;
 export const DAH_DURATION = UNIT_DURATION_MS * 3;
 export const SYMBOL_GAP = UNIT_DURATION_MS;
 export const LETTER_GAP = UNIT_DURATION_MS * 3;
+export const WORD_GAP = UNIT_DURATION_MS * 7;
 export const DIT_DAH_THRESHOLD_MS = 150;
 export const COMMIT_LETTER_GAP_MS = 400;
 

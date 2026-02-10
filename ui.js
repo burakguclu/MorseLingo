@@ -220,47 +220,150 @@ export function showUserUI(elements, user, progress) {
 }
 
 /**
- * Ders listesini 'LESSON_DATA'ya ve kullanıcının ilerlemesine göre çizer.
+ * Ders listesini kategorilere göre gruplandırarak çizer.
  */
 export function renderLessonMenu(
   elements,
   LESSON_DATA,
+  CATEGORIES,
   userProgress,
   onLessonSelectCallback,
 ) {
-  // ... (fonksiyonun içeriği değişmedi) ...
   const container = elements.lessonListContainer;
   container.innerHTML = "";
 
   const lessonKeys = Object.keys(LESSON_DATA);
 
-  for (let i = 0; i < lessonKeys.length; i++) {
-    const lessonId = lessonKeys[i];
-    const lesson = LESSON_DATA[lessonId];
-    const lessonNumber = i + 1;
+  // Kategorileri göster (varsa), yoksa düz liste
+  if (CATEGORIES && CATEGORIES.length > 0) {
+    CATEGORIES.forEach((cat) => {
+      const [startNum, endNum] = cat.lessonRange;
 
-    const button = document.createElement("button");
-    button.id = lessonId;
-    button.className = "lesson-button";
+      // Kategori başlığı
+      const section = document.createElement("div");
+      section.className = "category-section";
 
-    const isLocked = !userProgress.unlockedLessons.includes(lessonId);
-    if (isLocked) {
-      button.classList.add("locked");
-    }
+      // Kategoriye ait ders sayısı ve tamamlanan ders sayısı
+      let totalInCat = 0;
+      let completedInCat = 0;
+      for (let n = startNum; n <= endNum; n++) {
+        const lid = `lesson${n}`;
+        if (LESSON_DATA[lid]) {
+          totalInCat++;
+          if (userProgress.unlockedLessons.includes(lid) && n < endNum) {
+            completedInCat++;
+          }
+          // Son dersin kilidinin açılması tamamlandığı anlamına gelmez
+          // ama ilerleme göstergesi olarak unlocked - 1 mantığı zaten var
+        }
+      }
+      // Son ders de unlocked ise, tamamlanmış olabilir
+      const lastLessonId = `lesson${endNum}`;
+      const nextAfterLast = `lesson${endNum + 1}`;
+      if (
+        userProgress.unlockedLessons.includes(lastLessonId) &&
+        (userProgress.unlockedLessons.includes(nextAfterLast) ||
+          endNum === lessonKeys.length)
+      ) {
+        completedInCat++;
+      }
+      completedInCat = Math.min(completedInCat, totalInCat);
 
-    button.innerHTML = `
-            <span class="lesson-number">${lessonNumber}</span>
-            <div>
-                <span class="lesson-title">${lesson.title}</span>
-                <span class="lesson-content">${lesson.content}</span>
-            </div>
+      // İlk ders kilitli mi?
+      const firstLessonId = `lesson${startNum}`;
+      const isCategoryLocked =
+        !userProgress.unlockedLessons.includes(firstLessonId);
+
+      const header = document.createElement("button");
+      header.className = "category-header";
+      if (isCategoryLocked) header.classList.add("locked");
+      if (completedInCat === totalInCat && totalInCat > 0)
+        header.classList.add("completed");
+
+      header.innerHTML = `
+        <span class="category-icon">${cat.icon}</span>
+        <div class="category-info">
+          <span class="category-name">${cat.name}</span>
+          <span class="category-progress">${completedInCat}/${totalInCat} ders</span>
+        </div>
+        <span class="category-arrow">▼</span>
+      `;
+
+      const lessonsContainer = document.createElement("div");
+      lessonsContainer.className = "category-lessons";
+      // Başlangıçta kapalı — eğer kullanıcının aktif dersi bu kategorideyse aç
+      let shouldOpen = false;
+
+      for (let n = startNum; n <= endNum; n++) {
+        const lessonId = `lesson${n}`;
+        const lesson = LESSON_DATA[lessonId];
+        if (!lesson) continue;
+
+        const isLocked = !userProgress.unlockedLessons.includes(lessonId);
+        if (!isLocked && !shouldOpen) shouldOpen = true;
+
+        const button = document.createElement("button");
+        button.id = lessonId;
+        button.className = "lesson-button";
+        if (isLocked) button.classList.add("locked");
+
+        button.innerHTML = `
+          <span class="lesson-number">${n}</span>
+          <div>
+            <span class="lesson-title">${lesson.title}</span>
+            <span class="lesson-content">${lesson.content}</span>
+          </div>
         `;
 
-    button.addEventListener("click", () => {
-      onLessonSelectCallback(lessonId, isLocked);
-    });
+        button.addEventListener("click", () => {
+          onLessonSelectCallback(lessonId, isLocked);
+        });
 
-    container.appendChild(button);
+        lessonsContainer.appendChild(button);
+      }
+
+      // Aktif kategoriyi aç
+      if (shouldOpen) {
+        lessonsContainer.classList.add("open");
+        header.classList.add("open");
+      }
+
+      header.addEventListener("click", () => {
+        lessonsContainer.classList.toggle("open");
+        header.classList.toggle("open");
+      });
+
+      section.appendChild(header);
+      section.appendChild(lessonsContainer);
+      container.appendChild(section);
+    });
+  } else {
+    // Kategorisiz fallback (eski davranış)
+    for (let i = 0; i < lessonKeys.length; i++) {
+      const lessonId = lessonKeys[i];
+      const lesson = LESSON_DATA[lessonId];
+      const lessonNumber = i + 1;
+      const isLocked = !userProgress.unlockedLessons.includes(lessonId);
+
+      const button = document.createElement("button");
+      button.id = lessonId;
+      button.className = "lesson-button";
+      if (isLocked) button.classList.add("locked");
+
+      button.innerHTML = `
+        <span class="lesson-number">${lessonNumber}</span>
+        <div>
+          <span class="lesson-title">${lesson.title}</span>
+          <span class="lesson-content">${lesson.content}</span>
+        </div>
+      `;
+
+      button.addEventListener("click", () => {
+        onLessonSelectCallback(lessonId, isLocked);
+      });
+
+      container.appendChild(button);
+    }
   }
 }
 

@@ -37,10 +37,55 @@
     "8": "---..",
     "9": "----."
   },
+  "CATEGORIES": [
+    {
+      "id": "basics",
+      "name": "Temel Harfler",
+      "icon": "🔤",
+      "lessonRange": [1, 26]
+    },
+    {
+      "id": "numbers",
+      "name": "Rakamlar",
+      "icon": "🔢",
+      "lessonRange": [27, 32]
+    },
+    {
+      "id": "short-words",
+      "name": "Kısa Kelimeler",
+      "icon": "📝",
+      "lessonRange": [33, 50]
+    },
+    {
+      "id": "medium-words",
+      "name": "Orta Kelimeler",
+      "icon": "📖",
+      "lessonRange": [51, 68]
+    },
+    {
+      "id": "long-words",
+      "name": "Uzun Kelimeler",
+      "icon": "📚",
+      "lessonRange": [69, 80]
+    },
+    {
+      "id": "short-sentences",
+      "name": "Kısa Cümleler",
+      "icon": "💬",
+      "lessonRange": [81, 90]
+    },
+    {
+      "id": "advanced",
+      "name": "İleri Seviye",
+      "icon": "🏆",
+      "lessonRange": [91, 100]
+    }
+  ],
   "LESSON_DATA": {
     "lesson1": {
-      "title": "Ders 1: En Temeller",
-      "content": "E (·)  —  T (−)",
+      "title": "En Temeller",
+      "category": "basics",
+      "content": "E (·)  T (−)",
       "questions": [
         { "type": "flashcard", "item": "E" },
         { "type": "flashcard", "item": "T" },
@@ -55,8 +100,9 @@
       ]
     },
     "lesson2": {
-      "title": "Ders 2: Kısa Zıtlar",
-      "content": "I (··)  —  M (−−)",
+      "title": "Kısa Zıtlar",
+      "category": "basics",
+      "content": "I (··)  M (−−)",
       "questions": [
         { "type": "flashcard", "item": "I" },
         { "type": "flashcard", "item": "M" },
@@ -73,8 +119,9 @@
       ]
     },
     "lesson3": {
-      "title": "Ders 3: Uzun Zıtlar",
-      "content": "A (·−)  —  N (−·)",
+      "title": "Uzun Zıtlar",
+      "category": "basics",
+      "content": "A (·−)  N (−·)",
       "questions": [
         { "type": "flashcard", "item": "A" },
         { "type": "flashcard", "item": "N" },
@@ -90,201 +137,393 @@
       ]
     },
     "lesson4": {
-      "title": "Kelime Pratiği 1",
-      "content": "ME, IN, MAN, NET, EAT",
+      "title": "İlk Kelimeler",
+      "category": "basics",
+      "content": "E, T, I, M, A, N tekrar — ME, IN, MAN",
       "questions": [
+        { "type": "mcq", "item": "E" },
+        { "type": "reverse", "item": "M" },
         { "type": "listen", "item": "IN" },
         { "type": "tap", "item": "IN" },
-        { "type": "listen", "item": "EAT" },
-        { "type": "tap", "item": "EAT" },
+        { "type": "listen", "item": "ME" },
+        { "type": "tap", "item": "ME" },
         { "type": "listen", "item": "MAN" },
-        { "type": "tap", "item": "NET" },
-        { "type": "listen", "item": "ME" }
+        { "type": "tap", "item": "MAN" },
+        { "type": "reverse", "item": "A" },
+        { "type": "listen", "item": "AN" }
       ]
     },
     "lesson5": {
-      "title": "Ders 5: Sadece Noktalar/Çizgiler",
-      "content": "S (···)  —  O (−−−)",
+      "title": "Sadece Noktalar",
+      "category": "basics",
+      "content": "S (···)  H (····)",
       "questions": [
         { "type": "flashcard", "item": "S" },
-        { "type": "flashcard", "item": "O" },
+        { "type": "flashcard", "item": "H" },
         { "type": "mcq", "item": "S" },
-        { "type": "mcq", "item": "O" },
+        { "type": "mcq", "item": "H" },
         { "type": "listen", "item": "S" },
         { "type": "tap", "item": "S" },
-        { "type": "listen", "item": "O" },
-        { "type": "tap", "item": "O" },
+        { "type": "listen", "item": "H" },
+        { "type": "tap", "item": "H" },
         { "type": "reverse", "item": "S" },
-        { "type": "reverse", "item": "O" }
+        { "type": "reverse", "item": "H" }
       ]
     },
     "lesson6": {
-      "title": "Kelime Pratiği 2",
-      "content": "SO, SOS, SON, ON, NO, SOON",
+      "title": "Sadece Çizgiler",
+      "category": "basics",
+      "content": "O (−−−)",
       "questions": [
-        { "type": "mcq", "item": "S" },
+        { "type": "flashcard", "item": "O" },
+        { "type": "mcq", "item": "O" },
+        { "type": "listen", "item": "O" },
+        { "type": "tap", "item": "O" },
         { "type": "reverse", "item": "O" },
+        { "type": "listen", "item": "S" },
+        { "type": "tap", "item": "H" },
+        { "type": "reverse", "item": "S" },
         { "type": "listen", "item": "SOS" },
-        { "type": "tap", "item": "SO" },
-        { "type": "listen", "item": "ON" },
-        { "type": "tap", "item": "SOS" },
-        { "type": "listen", "item": "NO" },
-        { "type": "tap", "item": "SOON" },
-        { "type": "listen", "item": "SON" }
+        { "type": "tap", "item": "SOS" }
       ]
     },
     "lesson7": {
-      "title": "Ders 7: Ayna Görüntüleri",
-      "content": "R (·−·)  U (··−)  D (−··)  K (−·−)",
+      "title": "Kelime Pratiği: S, H, O",
+      "category": "basics",
+      "content": "SO, ON, SON, HIS, SHE, SOON",
       "questions": [
-        { "type": "flashcard", "item": "R" },
-        { "type": "flashcard", "item": "U" },
-        { "type": "flashcard", "item": "D" },
-        { "type": "flashcard", "item": "K" },
-        { "type": "mcq", "item": "R" },
-        { "type": "mcq", "item": "D" },
-        { "type": "listen", "item": "R" },
-        { "type": "tap", "item": "U" },
-        { "type": "listen", "item": "D" },
-        { "type": "tap", "item": "K" },
-        { "type": "reverse", "item": "U" },
-        { "type": "reverse", "item": "K" }
+        { "type": "listen", "item": "SO" },
+        { "type": "tap", "item": "SO" },
+        { "type": "listen", "item": "ON" },
+        { "type": "tap", "item": "SON" },
+        { "type": "listen", "item": "HIS" },
+        { "type": "tap", "item": "SHE" },
+        { "type": "listen", "item": "SOON" },
+        { "type": "tap", "item": "SOON" }
       ]
     },
     "lesson8": {
-      "title": "Kelime Pratiği 3",
-      "content": "RUN, USE, RED, DARK, END",
+      "title": "Ayna Çifti 1",
+      "category": "basics",
+      "content": "R (·−·)  K (−·−)",
+      "questions": [
+        { "type": "flashcard", "item": "R" },
+        { "type": "flashcard", "item": "K" },
+        { "type": "mcq", "item": "R" },
+        { "type": "mcq", "item": "K" },
+        { "type": "listen", "item": "R" },
+        { "type": "tap", "item": "R" },
+        { "type": "listen", "item": "K" },
+        { "type": "tap", "item": "K" },
+        { "type": "reverse", "item": "R" },
+        { "type": "reverse", "item": "K" }
+      ]
+    },
+    "lesson9": {
+      "title": "Ayna Çifti 2",
+      "category": "basics",
+      "content": "U (··−)  D (−··)",
+      "questions": [
+        { "type": "flashcard", "item": "U" },
+        { "type": "flashcard", "item": "D" },
+        { "type": "mcq", "item": "U" },
+        { "type": "mcq", "item": "D" },
+        { "type": "listen", "item": "U" },
+        { "type": "tap", "item": "U" },
+        { "type": "listen", "item": "D" },
+        { "type": "tap", "item": "D" },
+        { "type": "reverse", "item": "U" },
+        { "type": "reverse", "item": "D" }
+      ]
+    },
+    "lesson10": {
+      "title": "R, K, U, D Kelimeler",
+      "category": "basics",
+      "content": "RUN, RED, USE, DARK, DUSK",
       "questions": [
         { "type": "listen", "item": "RUN" },
         { "type": "tap", "item": "RUN" },
         { "type": "listen", "item": "RED" },
         { "type": "tap", "item": "USE" },
-        { "type": "listen", "item": "END" },
-        { "type": "tap", "item": "DARK" }
-      ]
-    },
-    "lesson9": {
-      "title": "Ders 9: Başı Çizgili",
-      "content": "G (−−·)  W (·−−)  P (·−−·)  B (−···)",
-      "questions": [
-        { "type": "flashcard", "item": "G" },
-        { "type": "flashcard", "item": "W" },
-        { "type": "flashcard", "item": "P" },
-        { "type": "flashcard", "item": "B" },
-        { "type": "mcq", "item": "G" },
-        { "type": "mcq", "item": "B" },
-        { "type": "listen", "item": "G" },
-        { "type": "tap", "item": "W" },
-        { "type": "listen", "item": "P" },
-        { "type": "tap", "item": "B" },
-        { "type": "reverse", "item": "W" },
-        { "type": "reverse", "item": "P" }
-      ]
-    },
-    "lesson10": {
-      "title": "Kelime Pratiği 4",
-      "content": "GO, WE, BIG, UP, BED, WAR",
-      "questions": [
-        { "type": "listen", "item": "GO" },
-        { "type": "tap", "item": "WE" },
-        { "type": "listen", "item": "UP" },
-        { "type": "tap", "item": "BED" },
-        { "type": "listen", "item": "WAR" },
-        { "type": "tap", "item": "BIG" }
+        { "type": "listen", "item": "DARK" },
+        { "type": "tap", "item": "DARK" },
+        { "type": "listen", "item": "DUSK" },
+        { "type": "tap", "item": "DUSK" }
       ]
     },
     "lesson11": {
-      "title": "Ders 11: Dört Vuruşlular",
-      "content": "H (····)  V (···−)  F (··−·)  L (·−··)",
+      "title": "Nokta + Çizgi 1",
+      "category": "basics",
+      "content": "G (−−·)  W (·−−)",
       "questions": [
-        { "type": "flashcard", "item": "H" },
-        { "type": "flashcard", "item": "V" },
-        { "type": "flashcard", "item": "F" },
-        { "type": "flashcard", "item": "L" },
-        { "type": "mcq", "item": "H" },
-        { "type": "mcq", "item": "F" },
-        { "type": "listen", "item": "H" },
-        { "type": "tap", "item": "V" },
-        { "type": "listen", "item": "F" },
-        { "type": "tap", "item": "L" },
-        { "type": "reverse", "item": "V" },
-        { "type": "reverse", "item": "L" }
+        { "type": "flashcard", "item": "G" },
+        { "type": "flashcard", "item": "W" },
+        { "type": "mcq", "item": "G" },
+        { "type": "mcq", "item": "W" },
+        { "type": "listen", "item": "G" },
+        { "type": "tap", "item": "G" },
+        { "type": "listen", "item": "W" },
+        { "type": "tap", "item": "W" },
+        { "type": "reverse", "item": "G" },
+        { "type": "reverse", "item": "W" }
       ]
     },
     "lesson12": {
-      "title": "Kelime Pratiği 5",
-      "content": "HAVE, FIVE, LIFE, FEEL",
+      "title": "G, W Kelimeler",
+      "category": "basics",
+      "content": "GO, WAR, WE, GUN, DOG, WAG",
       "questions": [
-        { "type": "listen", "item": "HAVE" },
-        { "type": "tap", "item": "HAVE" },
-        { "type": "listen", "item": "FIVE" },
-        { "type": "tap", "item": "LIFE" },
-        { "type": "listen", "item": "FEEL" },
-        { "type": "tap", "item": "FEEL" }
+        { "type": "listen", "item": "GO" },
+        { "type": "tap", "item": "GO" },
+        { "type": "listen", "item": "WAR" },
+        { "type": "tap", "item": "WE" },
+        { "type": "listen", "item": "GUN" },
+        { "type": "tap", "item": "DOG" },
+        { "type": "listen", "item": "WAG" },
+        { "type": "tap", "item": "WAG" }
       ]
     },
     "lesson13": {
-      "title": "Ders 13: Geri Kalanlar 1",
-      "content": "J (·−−−)  —  Y (−·−−)",
+      "title": "Dört Vuruş 1",
+      "category": "basics",
+      "content": "F (··−·)  L (·−··)",
       "questions": [
-        { "type": "flashcard", "item": "J" },
-        { "type": "flashcard", "item": "Y" },
-        { "type": "mcq", "item": "J" },
-        { "type": "mcq", "item": "Y" },
-        { "type": "listen", "item": "J" },
-        { "type": "tap", "item": "J" },
-        { "type": "listen", "item": "Y" },
-        { "type": "tap", "item": "Y" },
-        { "type": "reverse", "item": "J" },
-        { "type": "reverse", "item": "Y" }
+        { "type": "flashcard", "item": "F" },
+        { "type": "flashcard", "item": "L" },
+        { "type": "mcq", "item": "F" },
+        { "type": "mcq", "item": "L" },
+        { "type": "listen", "item": "F" },
+        { "type": "tap", "item": "F" },
+        { "type": "listen", "item": "L" },
+        { "type": "tap", "item": "L" },
+        { "type": "reverse", "item": "F" },
+        { "type": "reverse", "item": "L" }
       ]
     },
     "lesson14": {
-      "title": "Ders 14: Geri Kalanlar 2",
-      "content": "Q (−−·−)  —  Z (−−··)",
+      "title": "Dört Vuruş 2",
+      "category": "basics",
+      "content": "V (···−)  B (−···)",
       "questions": [
-        { "type": "flashcard", "item": "Q" },
-        { "type": "flashcard", "item": "Z" },
-        { "type": "mcq", "item": "Q" },
-        { "type": "mcq", "item": "Z" },
-        { "type": "listen", "item": "Q" },
-        { "type": "tap", "item": "Q" },
-        { "type": "listen", "item": "Z" },
-        { "type": "tap", "item": "Z" },
-        { "type": "reverse", "item": "Q" },
-        { "type": "reverse", "item": "Z" }
+        { "type": "flashcard", "item": "V" },
+        { "type": "flashcard", "item": "B" },
+        { "type": "mcq", "item": "V" },
+        { "type": "mcq", "item": "B" },
+        { "type": "listen", "item": "V" },
+        { "type": "tap", "item": "V" },
+        { "type": "listen", "item": "B" },
+        { "type": "tap", "item": "B" },
+        { "type": "reverse", "item": "V" },
+        { "type": "reverse", "item": "B" }
       ]
     },
     "lesson15": {
-      "title": "Ders 15: Geri Kalanlar 3",
-      "content": "X (−··−)  —  C (−·−·)",
+      "title": "F, L, V, B Kelimeler",
+      "category": "basics",
+      "content": "FIVE, LIFE, LOVE, BLUE, FEEL",
       "questions": [
-        { "type": "flashcard", "item": "X" },
-        { "type": "flashcard", "item": "C" },
-        { "type": "mcq", "item": "X" },
-        { "type": "mcq", "item": "C" },
-        { "type": "listen", "item": "X" },
-        { "type": "tap", "item": "X" },
-        { "type": "listen", "item": "C" },
-        { "type": "tap", "item": "C" },
-        { "type": "reverse", "item": "X" },
-        { "type": "reverse", "item": "C" }
+        { "type": "listen", "item": "FIVE" },
+        { "type": "tap", "item": "FIVE" },
+        { "type": "listen", "item": "LIFE" },
+        { "type": "tap", "item": "LOVE" },
+        { "type": "listen", "item": "BLUE" },
+        { "type": "tap", "item": "FEEL" },
+        { "type": "listen", "item": "FEEL" },
+        { "type": "tap", "item": "BLUE" }
       ]
     },
     "lesson16": {
-      "title": "Kelime Pratiği 6 (Zor)",
-      "content": "YES, YOU, ZONE, QUIZ, FOX",
+      "title": "P ve Tekrar",
+      "category": "basics",
+      "content": "P (·−−·)",
       "questions": [
-        { "type": "listen", "item": "YES" },
-        { "type": "tap", "item": "YES" },
-        { "type": "listen", "item": "ZONE" },
-        { "type": "tap", "item": "FOX" },
-        { "type": "listen", "item": "QUIZ" },
-        { "type": "tap", "item": "QUIZ" }
+        { "type": "flashcard", "item": "P" },
+        { "type": "mcq", "item": "P" },
+        { "type": "listen", "item": "P" },
+        { "type": "tap", "item": "P" },
+        { "type": "reverse", "item": "P" },
+        { "type": "mcq", "item": "F" },
+        { "type": "reverse", "item": "L" },
+        { "type": "listen", "item": "UP" },
+        { "type": "tap", "item": "UP" },
+        { "type": "listen", "item": "PEN" }
       ]
     },
     "lesson17": {
-      "title": "Ders 17: Rakamlar 1",
+      "title": "Zor Harfler 1",
+      "category": "basics",
+      "content": "J (·−−−)  X (−··−)",
+      "questions": [
+        { "type": "flashcard", "item": "J" },
+        { "type": "flashcard", "item": "X" },
+        { "type": "mcq", "item": "J" },
+        { "type": "mcq", "item": "X" },
+        { "type": "listen", "item": "J" },
+        { "type": "tap", "item": "J" },
+        { "type": "listen", "item": "X" },
+        { "type": "tap", "item": "X" },
+        { "type": "reverse", "item": "J" },
+        { "type": "reverse", "item": "X" }
+      ]
+    },
+    "lesson18": {
+      "title": "Zor Harfler 2",
+      "category": "basics",
+      "content": "Y (−·−−)  Q (−−·−)",
+      "questions": [
+        { "type": "flashcard", "item": "Y" },
+        { "type": "flashcard", "item": "Q" },
+        { "type": "mcq", "item": "Y" },
+        { "type": "mcq", "item": "Q" },
+        { "type": "listen", "item": "Y" },
+        { "type": "tap", "item": "Y" },
+        { "type": "listen", "item": "Q" },
+        { "type": "tap", "item": "Q" },
+        { "type": "reverse", "item": "Y" },
+        { "type": "reverse", "item": "Q" }
+      ]
+    },
+    "lesson19": {
+      "title": "Son Harfler",
+      "category": "basics",
+      "content": "Z (−−··)  C (−·−·)",
+      "questions": [
+        { "type": "flashcard", "item": "Z" },
+        { "type": "flashcard", "item": "C" },
+        { "type": "mcq", "item": "Z" },
+        { "type": "mcq", "item": "C" },
+        { "type": "listen", "item": "Z" },
+        { "type": "tap", "item": "Z" },
+        { "type": "listen", "item": "C" },
+        { "type": "tap", "item": "C" },
+        { "type": "reverse", "item": "Z" },
+        { "type": "reverse", "item": "C" }
+      ]
+    },
+    "lesson20": {
+      "title": "J, X, Y, Q, Z, C Kelimeler",
+      "category": "basics",
+      "content": "YES, FOX, QUIZ, ZONE, JOY, CUP",
+      "questions": [
+        { "type": "listen", "item": "YES" },
+        { "type": "tap", "item": "YES" },
+        { "type": "listen", "item": "FOX" },
+        { "type": "tap", "item": "FOX" },
+        { "type": "listen", "item": "QUIZ" },
+        { "type": "tap", "item": "JOY" },
+        { "type": "listen", "item": "ZONE" },
+        { "type": "tap", "item": "CUP" }
+      ]
+    },
+    "lesson21": {
+      "title": "A-F Tekrar",
+      "category": "basics",
+      "content": "A, B, C, D, E, F harf tekrarı",
+      "questions": [
+        { "type": "mcq", "item": "A" },
+        { "type": "mcq", "item": "B" },
+        { "type": "mcq", "item": "C" },
+        { "type": "mcq", "item": "D" },
+        { "type": "reverse", "item": "E" },
+        { "type": "reverse", "item": "F" },
+        { "type": "listen", "item": "A" },
+        { "type": "listen", "item": "B" },
+        { "type": "tap", "item": "C" },
+        { "type": "tap", "item": "D" }
+      ]
+    },
+    "lesson22": {
+      "title": "G-L Tekrar",
+      "category": "basics",
+      "content": "G, H, I, J, K, L harf tekrarı",
+      "questions": [
+        { "type": "mcq", "item": "G" },
+        { "type": "mcq", "item": "H" },
+        { "type": "mcq", "item": "I" },
+        { "type": "reverse", "item": "J" },
+        { "type": "reverse", "item": "K" },
+        { "type": "reverse", "item": "L" },
+        { "type": "listen", "item": "G" },
+        { "type": "listen", "item": "H" },
+        { "type": "tap", "item": "I" },
+        { "type": "tap", "item": "J" }
+      ]
+    },
+    "lesson23": {
+      "title": "M-R Tekrar",
+      "category": "basics",
+      "content": "M, N, O, P, Q, R harf tekrarı",
+      "questions": [
+        { "type": "mcq", "item": "M" },
+        { "type": "mcq", "item": "N" },
+        { "type": "mcq", "item": "O" },
+        { "type": "reverse", "item": "P" },
+        { "type": "reverse", "item": "Q" },
+        { "type": "reverse", "item": "R" },
+        { "type": "listen", "item": "M" },
+        { "type": "listen", "item": "N" },
+        { "type": "tap", "item": "O" },
+        { "type": "tap", "item": "P" }
+      ]
+    },
+    "lesson24": {
+      "title": "S-Z Tekrar",
+      "category": "basics",
+      "content": "S, T, U, V, W, X, Y, Z harf tekrarı",
+      "questions": [
+        { "type": "mcq", "item": "S" },
+        { "type": "mcq", "item": "T" },
+        { "type": "mcq", "item": "U" },
+        { "type": "reverse", "item": "V" },
+        { "type": "reverse", "item": "W" },
+        { "type": "reverse", "item": "X" },
+        { "type": "listen", "item": "Y" },
+        { "type": "listen", "item": "Z" },
+        { "type": "tap", "item": "S" },
+        { "type": "tap", "item": "T" }
+      ]
+    },
+    "lesson25": {
+      "title": "Tüm Harfler Karışık 1",
+      "category": "basics",
+      "content": "A-Z karışık alıştırma",
+      "questions": [
+        { "type": "mcq", "item": "E" },
+        { "type": "reverse", "item": "T" },
+        { "type": "listen", "item": "A" },
+        { "type": "tap", "item": "N" },
+        { "type": "mcq", "item": "S" },
+        { "type": "reverse", "item": "O" },
+        { "type": "listen", "item": "R" },
+        { "type": "tap", "item": "I" },
+        { "type": "listen", "item": "D" },
+        { "type": "reverse", "item": "H" },
+        { "type": "tap", "item": "L" },
+        { "type": "mcq", "item": "U" }
+      ]
+    },
+    "lesson26": {
+      "title": "Tüm Harfler Karışık 2",
+      "category": "basics",
+      "content": "A-Z karışık ileri alıştırma",
+      "questions": [
+        { "type": "listen", "item": "W" },
+        { "type": "tap", "item": "F" },
+        { "type": "reverse", "item": "G" },
+        { "type": "mcq", "item": "P" },
+        { "type": "listen", "item": "B" },
+        { "type": "tap", "item": "V" },
+        { "type": "reverse", "item": "K" },
+        { "type": "listen", "item": "J" },
+        { "type": "tap", "item": "X" },
+        { "type": "mcq", "item": "Q" },
+        { "type": "reverse", "item": "Y" },
+        { "type": "listen", "item": "Z" }
+      ]
+    },
+    "lesson27": {
+      "title": "Rakamlar 1-5",
+      "category": "numbers",
       "content": "1 (·−−−−)  2 (··−−−)  3 (···−−)  4 (····−)  5 (·····)",
       "questions": [
         { "type": "flashcard", "item": "1" },
@@ -294,16 +533,15 @@
         { "type": "flashcard", "item": "5" },
         { "type": "mcq", "item": "1" },
         { "type": "mcq", "item": "3" },
-        { "type": "listen", "item": "1" },
-        { "type": "tap", "item": "2" },
-        { "type": "listen", "item": "3" },
+        { "type": "listen", "item": "2" },
         { "type": "tap", "item": "4" },
         { "type": "reverse", "item": "5" },
-        { "type": "reverse", "item": "2" }
+        { "type": "reverse", "item": "1" }
       ]
     },
-    "lesson18": {
-      "title": "Ders 18: Rakamlar 2",
+    "lesson28": {
+      "title": "Rakamlar 6-0",
+      "category": "numbers",
       "content": "6 (−····)  7 (−−···)  8 (−−−··)  9 (−−−−·)  0 (−−−−−)",
       "questions": [
         { "type": "flashcard", "item": "6" },
@@ -314,41 +552,1019 @@
         { "type": "mcq", "item": "7" },
         { "type": "mcq", "item": "9" },
         { "type": "listen", "item": "6" },
-        { "type": "tap", "item": "7" },
-        { "type": "listen", "item": "8" },
-        { "type": "tap", "item": "9" },
+        { "type": "tap", "item": "8" },
         { "type": "reverse", "item": "0" },
-        { "type": "reverse", "item": "8" }
+        { "type": "reverse", "item": "6" }
       ]
     },
-    "lesson19": {
-      "title": "Kelime Pratiği 7 (Rakamlar)",
-      "content": "10, 25, 73, 198, 2024",
+    "lesson29": {
+      "title": "Tüm Rakamlar Tekrar",
+      "category": "numbers",
+      "content": "0-9 karışık tekrar",
+      "questions": [
+        { "type": "mcq", "item": "0" },
+        { "type": "reverse", "item": "1" },
+        { "type": "listen", "item": "2" },
+        { "type": "tap", "item": "3" },
+        { "type": "mcq", "item": "4" },
+        { "type": "reverse", "item": "5" },
+        { "type": "listen", "item": "6" },
+        { "type": "tap", "item": "7" },
+        { "type": "mcq", "item": "8" },
+        { "type": "reverse", "item": "9" }
+      ]
+    },
+    "lesson30": {
+      "title": "Sayı Pratiği 1",
+      "category": "numbers",
+      "content": "10, 25, 42, 73, 99",
       "questions": [
         { "type": "listen", "item": "10" },
         { "type": "tap", "item": "10" },
         { "type": "listen", "item": "25" },
+        { "type": "tap", "item": "25" },
+        { "type": "listen", "item": "42" },
         { "type": "tap", "item": "73" },
-        { "type": "listen", "item": "198" },
-        { "type": "tap", "item": "198" }
+        { "type": "listen", "item": "99" },
+        { "type": "tap", "item": "99" }
       ]
     },
-    "lesson20": {
-      "title": "Final Sınavı",
-      "content": "Tüm harf ve kelimelerle karışık",
+    "lesson31": {
+      "title": "Sayı Pratiği 2",
+      "category": "numbers",
+      "content": "100, 256, 911, 2025",
+      "questions": [
+        { "type": "listen", "item": "100" },
+        { "type": "tap", "item": "100" },
+        { "type": "listen", "item": "256" },
+        { "type": "tap", "item": "256" },
+        { "type": "listen", "item": "911" },
+        { "type": "tap", "item": "911" },
+        { "type": "listen", "item": "2025" },
+        { "type": "tap", "item": "2025" }
+      ]
+    },
+    "lesson32": {
+      "title": "Harfler + Rakamlar Karışık",
+      "category": "numbers",
+      "content": "A1, B2, C3 — harf ve rakam karışık",
+      "questions": [
+        { "type": "listen", "item": "A" },
+        { "type": "tap", "item": "1" },
+        { "type": "listen", "item": "B" },
+        { "type": "tap", "item": "2" },
+        { "type": "reverse", "item": "5" },
+        { "type": "mcq", "item": "K" },
+        { "type": "listen", "item": "7" },
+        { "type": "tap", "item": "R" },
+        { "type": "reverse", "item": "0" },
+        { "type": "mcq", "item": "Z" }
+      ]
+    },
+    "lesson33": {
+      "title": "2 Harfli Kelimeler 1",
+      "category": "short-words",
+      "content": "GO, ME, NO, UP, IN, SO",
+      "questions": [
+        { "type": "listen", "item": "GO" },
+        { "type": "tap", "item": "GO" },
+        { "type": "listen", "item": "ME" },
+        { "type": "tap", "item": "NO" },
+        { "type": "listen", "item": "UP" },
+        { "type": "tap", "item": "IN" },
+        { "type": "listen", "item": "SO" },
+        { "type": "tap", "item": "SO" }
+      ]
+    },
+    "lesson34": {
+      "title": "2 Harfli Kelimeler 2",
+      "category": "short-words",
+      "content": "ON, IT, IS, AT, IF, AN",
+      "questions": [
+        { "type": "listen", "item": "ON" },
+        { "type": "tap", "item": "ON" },
+        { "type": "listen", "item": "IT" },
+        { "type": "tap", "item": "IS" },
+        { "type": "listen", "item": "AT" },
+        { "type": "tap", "item": "IF" },
+        { "type": "listen", "item": "AN" },
+        { "type": "tap", "item": "AN" }
+      ]
+    },
+    "lesson35": {
+      "title": "2 Harfli Kelimeler 3",
+      "category": "short-words",
+      "content": "HE, WE, DO, OR, TO, OF",
+      "questions": [
+        { "type": "listen", "item": "HE" },
+        { "type": "tap", "item": "HE" },
+        { "type": "listen", "item": "WE" },
+        { "type": "tap", "item": "DO" },
+        { "type": "listen", "item": "OR" },
+        { "type": "tap", "item": "TO" },
+        { "type": "listen", "item": "OF" },
+        { "type": "tap", "item": "OF" }
+      ]
+    },
+    "lesson36": {
+      "title": "3 Harfli Kelimeler 1",
+      "category": "short-words",
+      "content": "THE, AND, FOR, ARE, NOT, BUT",
+      "questions": [
+        { "type": "listen", "item": "THE" },
+        { "type": "tap", "item": "THE" },
+        { "type": "listen", "item": "AND" },
+        { "type": "tap", "item": "AND" },
+        { "type": "listen", "item": "FOR" },
+        { "type": "tap", "item": "ARE" },
+        { "type": "listen", "item": "NOT" },
+        { "type": "tap", "item": "BUT" }
+      ]
+    },
+    "lesson37": {
+      "title": "3 Harfli Kelimeler 2",
+      "category": "short-words",
+      "content": "HAS, HAD, CAN, ALL, HER, WAS",
+      "questions": [
+        { "type": "listen", "item": "HAS" },
+        { "type": "tap", "item": "HAS" },
+        { "type": "listen", "item": "HAD" },
+        { "type": "tap", "item": "CAN" },
+        { "type": "listen", "item": "ALL" },
+        { "type": "tap", "item": "HER" },
+        { "type": "listen", "item": "WAS" },
+        { "type": "tap", "item": "WAS" }
+      ]
+    },
+    "lesson38": {
+      "title": "3 Harfli Kelimeler 3",
+      "category": "short-words",
+      "content": "HIS, HOW, MAN, NEW, NOW, OLD",
+      "questions": [
+        { "type": "listen", "item": "HIS" },
+        { "type": "tap", "item": "HIS" },
+        { "type": "listen", "item": "HOW" },
+        { "type": "tap", "item": "MAN" },
+        { "type": "listen", "item": "NEW" },
+        { "type": "tap", "item": "NOW" },
+        { "type": "listen", "item": "OLD" },
+        { "type": "tap", "item": "OLD" }
+      ]
+    },
+    "lesson39": {
+      "title": "3 Harfli Kelimeler 4",
+      "category": "short-words",
+      "content": "OUR, OUT, OWN, SAY, SHE, DAY",
+      "questions": [
+        { "type": "listen", "item": "OUR" },
+        { "type": "tap", "item": "OUR" },
+        { "type": "listen", "item": "OUT" },
+        { "type": "tap", "item": "OWN" },
+        { "type": "listen", "item": "SAY" },
+        { "type": "tap", "item": "SHE" },
+        { "type": "listen", "item": "DAY" },
+        { "type": "tap", "item": "DAY" }
+      ]
+    },
+    "lesson40": {
+      "title": "3 Harfli Kelimeler 5",
+      "category": "short-words",
+      "content": "WAY, WHO, BOY, DID, ITS, LET",
+      "questions": [
+        { "type": "listen", "item": "WAY" },
+        { "type": "tap", "item": "WAY" },
+        { "type": "listen", "item": "WHO" },
+        { "type": "tap", "item": "BOY" },
+        { "type": "listen", "item": "DID" },
+        { "type": "tap", "item": "ITS" },
+        { "type": "listen", "item": "LET" },
+        { "type": "tap", "item": "LET" }
+      ]
+    },
+    "lesson41": {
+      "title": "3 Harfli Kelimeler 6",
+      "category": "short-words",
+      "content": "MAY, RUN, SEE, SET, TRY, TWO",
+      "questions": [
+        { "type": "listen", "item": "MAY" },
+        { "type": "tap", "item": "MAY" },
+        { "type": "listen", "item": "RUN" },
+        { "type": "tap", "item": "SEE" },
+        { "type": "listen", "item": "SET" },
+        { "type": "tap", "item": "TRY" },
+        { "type": "listen", "item": "TWO" },
+        { "type": "tap", "item": "TWO" }
+      ]
+    },
+    "lesson42": {
+      "title": "3 Harfli Kelimeler 7",
+      "category": "short-words",
+      "content": "USE, BIG, END, FAR, FEW, GOT",
+      "questions": [
+        { "type": "listen", "item": "USE" },
+        { "type": "tap", "item": "USE" },
+        { "type": "listen", "item": "BIG" },
+        { "type": "tap", "item": "END" },
+        { "type": "listen", "item": "FAR" },
+        { "type": "tap", "item": "FEW" },
+        { "type": "listen", "item": "GOT" },
+        { "type": "tap", "item": "GOT" }
+      ]
+    },
+    "lesson43": {
+      "title": "Karışık Kısa Kelimeler 1",
+      "category": "short-words",
+      "content": "SOS, WAR, SKI, KEY, MAP, NET",
+      "questions": [
+        { "type": "listen", "item": "SOS" },
+        { "type": "tap", "item": "SOS" },
+        { "type": "listen", "item": "WAR" },
+        { "type": "tap", "item": "SKI" },
+        { "type": "listen", "item": "KEY" },
+        { "type": "tap", "item": "MAP" },
+        { "type": "listen", "item": "NET" },
+        { "type": "tap", "item": "NET" }
+      ]
+    },
+    "lesson44": {
+      "title": "Karışık Kısa Kelimeler 2",
+      "category": "short-words",
+      "content": "SUN, WIN, FLY, ICE, JOB, MIX",
+      "questions": [
+        { "type": "listen", "item": "SUN" },
+        { "type": "tap", "item": "SUN" },
+        { "type": "listen", "item": "WIN" },
+        { "type": "tap", "item": "FLY" },
+        { "type": "listen", "item": "ICE" },
+        { "type": "tap", "item": "JOB" },
+        { "type": "listen", "item": "MIX" },
+        { "type": "tap", "item": "MIX" }
+      ]
+    },
+    "lesson45": {
+      "title": "Acil Durum Kodları",
+      "category": "short-words",
+      "content": "SOS, CQD — acil durum kodları",
+      "questions": [
+        { "type": "listen", "item": "SOS" },
+        { "type": "tap", "item": "SOS" },
+        { "type": "listen", "item": "CQD" },
+        { "type": "tap", "item": "CQD" },
+        { "type": "listen", "item": "SOS" },
+        { "type": "tap", "item": "SOS" },
+        { "type": "listen", "item": "CQD" },
+        { "type": "tap", "item": "CQD" }
+      ]
+    },
+    "lesson46": {
+      "title": "Kısaltmalar",
+      "category": "short-words",
+      "content": "OK, HI, BYE, TNX (teşekkür)",
+      "questions": [
+        { "type": "listen", "item": "OK" },
+        { "type": "tap", "item": "OK" },
+        { "type": "listen", "item": "HI" },
+        { "type": "tap", "item": "HI" },
+        { "type": "listen", "item": "BYE" },
+        { "type": "tap", "item": "BYE" },
+        { "type": "listen", "item": "TNX" },
+        { "type": "tap", "item": "TNX" }
+      ]
+    },
+    "lesson47": {
+      "title": "Hayvanlar",
+      "category": "short-words",
+      "content": "CAT, DOG, FOX, OWL, BEE, ANT",
+      "questions": [
+        { "type": "listen", "item": "CAT" },
+        { "type": "tap", "item": "CAT" },
+        { "type": "listen", "item": "DOG" },
+        { "type": "tap", "item": "FOX" },
+        { "type": "listen", "item": "OWL" },
+        { "type": "tap", "item": "BEE" },
+        { "type": "listen", "item": "ANT" },
+        { "type": "tap", "item": "ANT" }
+      ]
+    },
+    "lesson48": {
+      "title": "Renkler",
+      "category": "short-words",
+      "content": "RED, TAN, SKY — renk kısa kelimeleri",
+      "questions": [
+        { "type": "listen", "item": "RED" },
+        { "type": "tap", "item": "RED" },
+        { "type": "listen", "item": "TAN" },
+        { "type": "tap", "item": "TAN" },
+        { "type": "listen", "item": "SKY" },
+        { "type": "tap", "item": "SKY" },
+        { "type": "reverse", "item": "R" },
+        { "type": "mcq", "item": "S" }
+      ]
+    },
+    "lesson49": {
+      "title": "Kısa Kelime Yarışması 1",
+      "category": "short-words",
+      "content": "Karışık kısa kelimeler — tüm tekrar",
+      "questions": [
+        { "type": "listen", "item": "THE" },
+        { "type": "tap", "item": "AND" },
+        { "type": "listen", "item": "FOR" },
+        { "type": "tap", "item": "SOS" },
+        { "type": "listen", "item": "DAY" },
+        { "type": "tap", "item": "OLD" },
+        { "type": "listen", "item": "BIG" },
+        { "type": "tap", "item": "NOW" },
+        { "type": "listen", "item": "HER" },
+        { "type": "tap", "item": "SAY" }
+      ]
+    },
+    "lesson50": {
+      "title": "Kısa Kelime Yarışması 2",
+      "category": "short-words",
+      "content": "Karışık kısa kelimeler — son test",
+      "questions": [
+        { "type": "listen", "item": "WHO" },
+        { "type": "tap", "item": "BOY" },
+        { "type": "listen", "item": "KEY" },
+        { "type": "tap", "item": "MAP" },
+        { "type": "listen", "item": "JOB" },
+        { "type": "tap", "item": "WIN" },
+        { "type": "listen", "item": "FLY" },
+        { "type": "tap", "item": "ICE" },
+        { "type": "listen", "item": "MIX" },
+        { "type": "tap", "item": "RUN" }
+      ]
+    },
+    "lesson51": {
+      "title": "4 Harfli Kelimeler 1",
+      "category": "medium-words",
+      "content": "HELP, SEND, STOP, FIRE, SAFE",
+      "questions": [
+        { "type": "listen", "item": "HELP" },
+        { "type": "tap", "item": "HELP" },
+        { "type": "listen", "item": "SEND" },
+        { "type": "tap", "item": "STOP" },
+        { "type": "listen", "item": "FIRE" },
+        { "type": "tap", "item": "SAFE" },
+        { "type": "listen", "item": "SAFE" },
+        { "type": "tap", "item": "FIRE" }
+      ]
+    },
+    "lesson52": {
+      "title": "4 Harfli Kelimeler 2",
+      "category": "medium-words",
+      "content": "LOVE, LIFE, GOOD, BEST, HOPE",
+      "questions": [
+        { "type": "listen", "item": "LOVE" },
+        { "type": "tap", "item": "LOVE" },
+        { "type": "listen", "item": "LIFE" },
+        { "type": "tap", "item": "GOOD" },
+        { "type": "listen", "item": "BEST" },
+        { "type": "tap", "item": "HOPE" },
+        { "type": "listen", "item": "HOPE" },
+        { "type": "tap", "item": "BEST" }
+      ]
+    },
+    "lesson53": {
+      "title": "4 Harfli Kelimeler 3",
+      "category": "medium-words",
+      "content": "WORK, HOME, TIME, FIND, KNOW",
+      "questions": [
+        { "type": "listen", "item": "WORK" },
+        { "type": "tap", "item": "WORK" },
+        { "type": "listen", "item": "HOME" },
+        { "type": "tap", "item": "TIME" },
+        { "type": "listen", "item": "FIND" },
+        { "type": "tap", "item": "KNOW" },
+        { "type": "listen", "item": "KNOW" },
+        { "type": "tap", "item": "FIND" }
+      ]
+    },
+    "lesson54": {
+      "title": "4 Harfli Kelimeler 4",
+      "category": "medium-words",
+      "content": "DARK, BLUE, WIND, RAIN, MOON",
+      "questions": [
+        { "type": "listen", "item": "DARK" },
+        { "type": "tap", "item": "DARK" },
+        { "type": "listen", "item": "BLUE" },
+        { "type": "tap", "item": "WIND" },
+        { "type": "listen", "item": "RAIN" },
+        { "type": "tap", "item": "MOON" },
+        { "type": "listen", "item": "MOON" },
+        { "type": "tap", "item": "RAIN" }
+      ]
+    },
+    "lesson55": {
+      "title": "4 Harfli Kelimeler 5",
+      "category": "medium-words",
+      "content": "SHIP, STAR, LAND, TREE, FLAG",
+      "questions": [
+        { "type": "listen", "item": "SHIP" },
+        { "type": "tap", "item": "SHIP" },
+        { "type": "listen", "item": "STAR" },
+        { "type": "tap", "item": "LAND" },
+        { "type": "listen", "item": "TREE" },
+        { "type": "tap", "item": "FLAG" },
+        { "type": "listen", "item": "FLAG" },
+        { "type": "tap", "item": "TREE" }
+      ]
+    },
+    "lesson56": {
+      "title": "4 Harfli Kelime Tekrar",
+      "category": "medium-words",
+      "content": "HELP, LOVE, WORK, DARK, SHIP tekrar",
+      "questions": [
+        { "type": "listen", "item": "HELP" },
+        { "type": "tap", "item": "LOVE" },
+        { "type": "listen", "item": "WORK" },
+        { "type": "tap", "item": "DARK" },
+        { "type": "listen", "item": "SHIP" },
+        { "type": "tap", "item": "STAR" },
+        { "type": "listen", "item": "GOOD" },
+        { "type": "tap", "item": "SAFE" }
+      ]
+    },
+    "lesson57": {
+      "title": "5 Harfli Kelimeler 1",
+      "category": "medium-words",
+      "content": "HELLO, WORLD, WATER, EARTH, LIGHT",
+      "questions": [
+        { "type": "listen", "item": "HELLO" },
+        { "type": "tap", "item": "HELLO" },
+        { "type": "listen", "item": "WORLD" },
+        { "type": "tap", "item": "WATER" },
+        { "type": "listen", "item": "EARTH" },
+        { "type": "tap", "item": "LIGHT" }
+      ]
+    },
+    "lesson58": {
+      "title": "5 Harfli Kelimeler 2",
+      "category": "medium-words",
+      "content": "BRAVE, STORM, OCEAN, PEACE, NORTH",
+      "questions": [
+        { "type": "listen", "item": "BRAVE" },
+        { "type": "tap", "item": "BRAVE" },
+        { "type": "listen", "item": "STORM" },
+        { "type": "tap", "item": "OCEAN" },
+        { "type": "listen", "item": "PEACE" },
+        { "type": "tap", "item": "NORTH" }
+      ]
+    },
+    "lesson59": {
+      "title": "5 Harfli Kelimeler 3",
+      "category": "medium-words",
+      "content": "TOWER, POINT, SOUTH, RIVER, MOUNT",
+      "questions": [
+        { "type": "listen", "item": "TOWER" },
+        { "type": "tap", "item": "TOWER" },
+        { "type": "listen", "item": "POINT" },
+        { "type": "tap", "item": "SOUTH" },
+        { "type": "listen", "item": "RIVER" },
+        { "type": "tap", "item": "MOUNT" }
+      ]
+    },
+    "lesson60": {
+      "title": "5 Harfli Kelimeler 4",
+      "category": "medium-words",
+      "content": "RADIO, MORSE, QUICK, BROWN, FOXES",
+      "questions": [
+        { "type": "listen", "item": "RADIO" },
+        { "type": "tap", "item": "RADIO" },
+        { "type": "listen", "item": "MORSE" },
+        { "type": "tap", "item": "QUICK" },
+        { "type": "listen", "item": "BROWN" },
+        { "type": "tap", "item": "FOXES" }
+      ]
+    },
+    "lesson61": {
+      "title": "5 Harfli Kelimeler 5",
+      "category": "medium-words",
+      "content": "NIGHT, DREAM, SUNNY, HAPPY, SMILE",
+      "questions": [
+        { "type": "listen", "item": "NIGHT" },
+        { "type": "tap", "item": "NIGHT" },
+        { "type": "listen", "item": "DREAM" },
+        { "type": "tap", "item": "SUNNY" },
+        { "type": "listen", "item": "HAPPY" },
+        { "type": "tap", "item": "SMILE" }
+      ]
+    },
+    "lesson62": {
+      "title": "5 Harfli Kelimeler 6",
+      "category": "medium-words",
+      "content": "THINK, LEARN, STUDY, SKILL, WORLD",
+      "questions": [
+        { "type": "listen", "item": "THINK" },
+        { "type": "tap", "item": "THINK" },
+        { "type": "listen", "item": "LEARN" },
+        { "type": "tap", "item": "STUDY" },
+        { "type": "listen", "item": "SKILL" },
+        { "type": "tap", "item": "WORLD" }
+      ]
+    },
+    "lesson63": {
+      "title": "Denizcilik Terimleri 1",
+      "category": "medium-words",
+      "content": "PORT, CREW, DECK, HELM, MAST",
+      "questions": [
+        { "type": "listen", "item": "PORT" },
+        { "type": "tap", "item": "PORT" },
+        { "type": "listen", "item": "CREW" },
+        { "type": "tap", "item": "DECK" },
+        { "type": "listen", "item": "HELM" },
+        { "type": "tap", "item": "MAST" }
+      ]
+    },
+    "lesson64": {
+      "title": "Denizcilik Terimleri 2",
+      "category": "medium-words",
+      "content": "SAIL, WAVE, KNOT, REEF, TIDE",
+      "questions": [
+        { "type": "listen", "item": "SAIL" },
+        { "type": "tap", "item": "SAIL" },
+        { "type": "listen", "item": "WAVE" },
+        { "type": "tap", "item": "KNOT" },
+        { "type": "listen", "item": "REEF" },
+        { "type": "tap", "item": "TIDE" }
+      ]
+    },
+    "lesson65": {
+      "title": "Havacılık Terimleri",
+      "category": "medium-words",
+      "content": "LIMA, TANGO, OSCAR, HOTEL, ALPHA",
+      "questions": [
+        { "type": "listen", "item": "LIMA" },
+        { "type": "tap", "item": "LIMA" },
+        { "type": "listen", "item": "OSCAR" },
+        { "type": "tap", "item": "OSCAR" },
+        { "type": "listen", "item": "HOTEL" },
+        { "type": "tap", "item": "ALPHA" }
+      ]
+    },
+    "lesson66": {
+      "title": "NATO Alfabesi 1",
+      "category": "medium-words",
+      "content": "BRAVO, DELTA, GOLF",
+      "questions": [
+        { "type": "listen", "item": "BRAVO" },
+        { "type": "tap", "item": "BRAVO" },
+        { "type": "listen", "item": "DELTA" },
+        { "type": "tap", "item": "DELTA" },
+        { "type": "listen", "item": "GOLF" },
+        { "type": "tap", "item": "GOLF" }
+      ]
+    },
+    "lesson67": {
+      "title": "NATO Alfabesi 2",
+      "category": "medium-words",
+      "content": "KILO, MIKE, ROMEO, SIERRA",
+      "questions": [
+        { "type": "listen", "item": "KILO" },
+        { "type": "tap", "item": "KILO" },
+        { "type": "listen", "item": "MIKE" },
+        { "type": "tap", "item": "MIKE" },
+        { "type": "listen", "item": "ROMEO" },
+        { "type": "tap", "item": "SIERRA" }
+      ]
+    },
+    "lesson68": {
+      "title": "Orta Kelime Final",
+      "category": "medium-words",
+      "content": "Tüm 4-5 harfli kelimeler karışık",
+      "questions": [
+        { "type": "listen", "item": "HELLO" },
+        { "type": "tap", "item": "RADIO" },
+        { "type": "listen", "item": "BRAVE" },
+        { "type": "tap", "item": "PEACE" },
+        { "type": "listen", "item": "TOWER" },
+        { "type": "tap", "item": "LIGHT" },
+        { "type": "listen", "item": "STORM" },
+        { "type": "tap", "item": "THINK" }
+      ]
+    },
+    "lesson69": {
+      "title": "6 Harfli Kelimeler 1",
+      "category": "long-words",
+      "content": "RESCUE, DANGER, SIGNAL, BEACON",
+      "questions": [
+        { "type": "listen", "item": "RESCUE" },
+        { "type": "tap", "item": "RESCUE" },
+        { "type": "listen", "item": "DANGER" },
+        { "type": "tap", "item": "SIGNAL" },
+        { "type": "listen", "item": "BEACON" },
+        { "type": "tap", "item": "BEACON" }
+      ]
+    },
+    "lesson70": {
+      "title": "6 Harfli Kelimeler 2",
+      "category": "long-words",
+      "content": "ISLAND, HARBOR, VOYAGE, ANCHOR",
+      "questions": [
+        { "type": "listen", "item": "ISLAND" },
+        { "type": "tap", "item": "ISLAND" },
+        { "type": "listen", "item": "HARBOR" },
+        { "type": "tap", "item": "VOYAGE" },
+        { "type": "listen", "item": "ANCHOR" },
+        { "type": "tap", "item": "ANCHOR" }
+      ]
+    },
+    "lesson71": {
+      "title": "6 Harfli Kelimeler 3",
+      "category": "long-words",
+      "content": "WINTER, SUMMER, SPRING, FROZEN",
+      "questions": [
+        { "type": "listen", "item": "WINTER" },
+        { "type": "tap", "item": "WINTER" },
+        { "type": "listen", "item": "SUMMER" },
+        { "type": "tap", "item": "SPRING" },
+        { "type": "listen", "item": "FROZEN" },
+        { "type": "tap", "item": "FROZEN" }
+      ]
+    },
+    "lesson72": {
+      "title": "7+ Harfli Kelimeler 1",
+      "category": "long-words",
+      "content": "CAPTAIN, COMPASS, FREEDOM, STATION",
+      "questions": [
+        { "type": "listen", "item": "CAPTAIN" },
+        { "type": "tap", "item": "CAPTAIN" },
+        { "type": "listen", "item": "COMPASS" },
+        { "type": "tap", "item": "FREEDOM" },
+        { "type": "listen", "item": "STATION" },
+        { "type": "tap", "item": "STATION" }
+      ]
+    },
+    "lesson73": {
+      "title": "7+ Harfli Kelimeler 2",
+      "category": "long-words",
+      "content": "WEATHER, THUNDER, HORIZON, MISSION",
+      "questions": [
+        { "type": "listen", "item": "WEATHER" },
+        { "type": "tap", "item": "WEATHER" },
+        { "type": "listen", "item": "THUNDER" },
+        { "type": "tap", "item": "HORIZON" },
+        { "type": "listen", "item": "MISSION" },
+        { "type": "tap", "item": "MISSION" }
+      ]
+    },
+    "lesson74": {
+      "title": "7+ Harfli Kelimeler 3",
+      "category": "long-words",
+      "content": "JOURNEY, COURAGE, EXPLORE, SURVIVE",
+      "questions": [
+        { "type": "listen", "item": "JOURNEY" },
+        { "type": "tap", "item": "JOURNEY" },
+        { "type": "listen", "item": "COURAGE" },
+        { "type": "tap", "item": "EXPLORE" },
+        { "type": "listen", "item": "SURVIVE" },
+        { "type": "tap", "item": "SURVIVE" }
+      ]
+    },
+    "lesson75": {
+      "title": "8+ Harfli Kelimeler",
+      "category": "long-words",
+      "content": "TELEGRAM, MARITIME, NAVIGATE",
+      "questions": [
+        { "type": "listen", "item": "TELEGRAM" },
+        { "type": "tap", "item": "TELEGRAM" },
+        { "type": "listen", "item": "MARITIME" },
+        { "type": "tap", "item": "MARITIME" },
+        { "type": "listen", "item": "NAVIGATE" },
+        { "type": "tap", "item": "NAVIGATE" }
+      ]
+    },
+    "lesson76": {
+      "title": "Teknik Terimler 1",
+      "category": "long-words",
+      "content": "ANTENNA, CIRCUIT, BATTERY, CHANNEL",
+      "questions": [
+        { "type": "listen", "item": "ANTENNA" },
+        { "type": "tap", "item": "ANTENNA" },
+        { "type": "listen", "item": "CIRCUIT" },
+        { "type": "tap", "item": "BATTERY" },
+        { "type": "listen", "item": "CHANNEL" },
+        { "type": "tap", "item": "CHANNEL" }
+      ]
+    },
+    "lesson77": {
+      "title": "Teknik Terimler 2",
+      "category": "long-words",
+      "content": "VOLTAGE, CURRENT, DIGITAL, NETWORK",
+      "questions": [
+        { "type": "listen", "item": "VOLTAGE" },
+        { "type": "tap", "item": "VOLTAGE" },
+        { "type": "listen", "item": "CURRENT" },
+        { "type": "tap", "item": "DIGITAL" },
+        { "type": "listen", "item": "NETWORK" },
+        { "type": "tap", "item": "NETWORK" }
+      ]
+    },
+    "lesson78": {
+      "title": "Coğrafya Terimleri",
+      "category": "long-words",
+      "content": "MOUNTAIN, ATLANTIC, PACIFIC, EQUATOR",
+      "questions": [
+        { "type": "listen", "item": "MOUNTAIN" },
+        { "type": "tap", "item": "MOUNTAIN" },
+        { "type": "listen", "item": "ATLANTIC" },
+        { "type": "tap", "item": "PACIFIC" },
+        { "type": "listen", "item": "EQUATOR" },
+        { "type": "tap", "item": "EQUATOR" }
+      ]
+    },
+    "lesson79": {
+      "title": "Uzun Kelime Karışık",
+      "category": "long-words",
+      "content": "Tüm uzun kelimeler tekrar",
+      "questions": [
+        { "type": "listen", "item": "RESCUE" },
+        { "type": "tap", "item": "CAPTAIN" },
+        { "type": "listen", "item": "WEATHER" },
+        { "type": "tap", "item": "DANGER" },
+        { "type": "listen", "item": "SIGNAL" },
+        { "type": "tap", "item": "JOURNEY" },
+        { "type": "listen", "item": "FREEDOM" },
+        { "type": "tap", "item": "COMPASS" }
+      ]
+    },
+    "lesson80": {
+      "title": "Uzun Kelime Final",
+      "category": "long-words",
+      "content": "En zor kelimeler",
+      "questions": [
+        { "type": "listen", "item": "TELEGRAM" },
+        { "type": "tap", "item": "NAVIGATE" },
+        { "type": "listen", "item": "MARITIME" },
+        { "type": "tap", "item": "ANTENNA" },
+        { "type": "listen", "item": "CIRCUIT" },
+        { "type": "tap", "item": "VOLTAGE" },
+        { "type": "listen", "item": "MOUNTAIN" },
+        { "type": "tap", "item": "ATLANTIC" }
+      ]
+    },
+    "lesson81": {
+      "title": "İlk Cümleler",
+      "category": "short-sentences",
+      "content": "HI, HELLO, GOOD, OK — giriş",
+      "questions": [
+        { "type": "listen", "item": "HI" },
+        { "type": "tap", "item": "HI" },
+        { "type": "listen", "item": "HELLO" },
+        { "type": "tap", "item": "HELLO" },
+        { "type": "listen", "item": "OK" },
+        { "type": "tap", "item": "OK" },
+        { "type": "listen", "item": "GOOD" },
+        { "type": "tap", "item": "GOOD" }
+      ]
+    },
+    "lesson82": {
+      "title": "Kısa Cümle 1",
+      "category": "short-sentences",
+      "content": "SEND HELP, COME NOW",
+      "questions": [
+        { "type": "listen", "item": "SEND HELP" },
+        { "type": "tap", "item": "SEND HELP" },
+        { "type": "listen", "item": "COME NOW" },
+        { "type": "tap", "item": "COME NOW" },
+        { "type": "listen", "item": "SEND HELP" },
+        { "type": "tap", "item": "COME NOW" }
+      ]
+    },
+    "lesson83": {
+      "title": "Kısa Cümle 2",
+      "category": "short-sentences",
+      "content": "ALL SAFE, GOOD JOB",
+      "questions": [
+        { "type": "listen", "item": "ALL SAFE" },
+        { "type": "tap", "item": "ALL SAFE" },
+        { "type": "listen", "item": "GOOD JOB" },
+        { "type": "tap", "item": "GOOD JOB" },
+        { "type": "listen", "item": "ALL SAFE" },
+        { "type": "tap", "item": "GOOD JOB" }
+      ]
+    },
+    "lesson84": {
+      "title": "Kısa Cümle 3",
+      "category": "short-sentences",
+      "content": "GO NORTH, HEAD WEST",
+      "questions": [
+        { "type": "listen", "item": "GO NORTH" },
+        { "type": "tap", "item": "GO NORTH" },
+        { "type": "listen", "item": "HEAD WEST" },
+        { "type": "tap", "item": "HEAD WEST" },
+        { "type": "listen", "item": "GO NORTH" },
+        { "type": "tap", "item": "HEAD WEST" }
+      ]
+    },
+    "lesson85": {
+      "title": "Kısa Cümle 4",
+      "category": "short-sentences",
+      "content": "WELL DONE, STAY SAFE",
+      "questions": [
+        { "type": "listen", "item": "WELL DONE" },
+        { "type": "tap", "item": "WELL DONE" },
+        { "type": "listen", "item": "STAY SAFE" },
+        { "type": "tap", "item": "STAY SAFE" },
+        { "type": "listen", "item": "WELL DONE" },
+        { "type": "tap", "item": "STAY SAFE" }
+      ]
+    },
+    "lesson86": {
+      "title": "Kısa Cümle 5",
+      "category": "short-sentences",
+      "content": "I AM OK, WE WIN, NO FEAR",
+      "questions": [
+        { "type": "listen", "item": "I AM OK" },
+        { "type": "tap", "item": "I AM OK" },
+        { "type": "listen", "item": "WE WIN" },
+        { "type": "tap", "item": "WE WIN" },
+        { "type": "listen", "item": "NO FEAR" },
+        { "type": "tap", "item": "NO FEAR" }
+      ]
+    },
+    "lesson87": {
+      "title": "Kısa Cümle 6",
+      "category": "short-sentences",
+      "content": "STOP NOW, COME IN, GET OUT",
+      "questions": [
+        { "type": "listen", "item": "STOP NOW" },
+        { "type": "tap", "item": "STOP NOW" },
+        { "type": "listen", "item": "COME IN" },
+        { "type": "tap", "item": "COME IN" },
+        { "type": "listen", "item": "GET OUT" },
+        { "type": "tap", "item": "GET OUT" }
+      ]
+    },
+    "lesson88": {
+      "title": "Kısa Cümle 7",
+      "category": "short-sentences",
+      "content": "MAN DOWN, HOLD ON, STAND BY",
+      "questions": [
+        { "type": "listen", "item": "MAN DOWN" },
+        { "type": "tap", "item": "MAN DOWN" },
+        { "type": "listen", "item": "HOLD ON" },
+        { "type": "tap", "item": "HOLD ON" },
+        { "type": "listen", "item": "STAND BY" },
+        { "type": "tap", "item": "STAND BY" }
+      ]
+    },
+    "lesson89": {
+      "title": "Mors Mesajları",
+      "category": "short-sentences",
+      "content": "SOS SOS, MAYDAY, OVER AND OUT",
+      "questions": [
+        { "type": "listen", "item": "SOS" },
+        { "type": "tap", "item": "SOS" },
+        { "type": "listen", "item": "MAYDAY" },
+        { "type": "tap", "item": "MAYDAY" },
+        { "type": "listen", "item": "OVER" },
+        { "type": "tap", "item": "OVER" }
+      ]
+    },
+    "lesson90": {
+      "title": "Kısa Cümle Final",
+      "category": "short-sentences",
+      "content": "Tüm kısa cümleler tekrar",
+      "questions": [
+        { "type": "listen", "item": "SEND HELP" },
+        { "type": "tap", "item": "ALL SAFE" },
+        { "type": "listen", "item": "GO NORTH" },
+        { "type": "tap", "item": "STAY SAFE" },
+        { "type": "listen", "item": "I AM OK" },
+        { "type": "tap", "item": "STOP NOW" },
+        { "type": "listen", "item": "MAN DOWN" },
+        { "type": "tap", "item": "HOLD ON" }
+      ]
+    },
+    "lesson91": {
+      "title": "Uzun Cümle 1",
+      "category": "advanced",
+      "content": "THE QUICK BROWN FOX",
+      "questions": [
+        { "type": "listen", "item": "THE QUICK BROWN FOX" },
+        { "type": "tap", "item": "THE QUICK BROWN FOX" },
+        { "type": "listen", "item": "THE QUICK BROWN FOX" },
+        { "type": "tap", "item": "THE QUICK BROWN FOX" }
+      ]
+    },
+    "lesson92": {
+      "title": "Uzun Cümle 2",
+      "category": "advanced",
+      "content": "JUMPS OVER THE DOG",
+      "questions": [
+        { "type": "listen", "item": "JUMPS OVER THE DOG" },
+        { "type": "tap", "item": "JUMPS OVER THE DOG" },
+        { "type": "listen", "item": "JUMPS OVER THE DOG" },
+        { "type": "tap", "item": "JUMPS OVER THE DOG" }
+      ]
+    },
+    "lesson93": {
+      "title": "Uzun Cümle 3",
+      "category": "advanced",
+      "content": "I LOVE MORSE CODE",
+      "questions": [
+        { "type": "listen", "item": "I LOVE MORSE CODE" },
+        { "type": "tap", "item": "I LOVE MORSE CODE" },
+        { "type": "listen", "item": "I LOVE MORSE CODE" },
+        { "type": "tap", "item": "I LOVE MORSE CODE" }
+      ]
+    },
+    "lesson94": {
+      "title": "Uzun Cümle 4",
+      "category": "advanced",
+      "content": "LEARNING IS FUN",
+      "questions": [
+        { "type": "listen", "item": "LEARNING IS FUN" },
+        { "type": "tap", "item": "LEARNING IS FUN" },
+        { "type": "listen", "item": "LEARNING IS FUN" },
+        { "type": "tap", "item": "LEARNING IS FUN" }
+      ]
+    },
+    "lesson95": {
+      "title": "Uzun Cümle 5",
+      "category": "advanced",
+      "content": "DANGER AHEAD STOP",
+      "questions": [
+        { "type": "listen", "item": "DANGER AHEAD STOP" },
+        { "type": "tap", "item": "DANGER AHEAD STOP" },
+        { "type": "listen", "item": "DANGER AHEAD STOP" },
+        { "type": "tap", "item": "DANGER AHEAD STOP" }
+      ]
+    },
+    "lesson96": {
+      "title": "Uzun Cümle 6",
+      "category": "advanced",
+      "content": "SHIP IN DISTRESS",
+      "questions": [
+        { "type": "listen", "item": "SHIP IN DISTRESS" },
+        { "type": "tap", "item": "SHIP IN DISTRESS" },
+        { "type": "listen", "item": "SHIP IN DISTRESS" },
+        { "type": "tap", "item": "SHIP IN DISTRESS" }
+      ]
+    },
+    "lesson97": {
+      "title": "Uzun Cümle 7",
+      "category": "advanced",
+      "content": "MISSION COMPLETE",
+      "questions": [
+        { "type": "listen", "item": "MISSION COMPLETE" },
+        { "type": "tap", "item": "MISSION COMPLETE" },
+        { "type": "listen", "item": "MISSION COMPLETE" },
+        { "type": "tap", "item": "MISSION COMPLETE" }
+      ]
+    },
+    "lesson98": {
+      "title": "Final Sınavı 1",
+      "category": "advanced",
+      "content": "Karışık harf, kelime, cümle",
       "questions": [
         { "type": "mcq", "item": "K" },
         { "type": "reverse", "item": "W" },
         { "type": "listen", "item": "HELLO" },
         { "type": "tap", "item": "WORLD" },
-        { "type": "mcq", "item": "Q" },
-        { "type": "reverse", "item": "Z" },
+        { "type": "listen", "item": "SEND HELP" },
+        { "type": "tap", "item": "ALL SAFE" },
         { "type": "listen", "item": "QUICK" },
         { "type": "tap", "item": "BROWN" },
-        { "type": "listen", "item": "FOX" },
-        { "type": "tap", "item": "JUMPS" },
-        { "type": "listen", "item": "OVER" },
-        { "type": "tap", "item": "SOS" }
+        { "type": "mcq", "item": "Z" },
+        { "type": "reverse", "item": "Q" }
+      ]
+    },
+    "lesson99": {
+      "title": "Final Sınavı 2",
+      "category": "advanced",
+      "content": "En zor alıştırmalar",
+      "questions": [
+        { "type": "listen", "item": "NAVIGATE" },
+        { "type": "tap", "item": "TELEGRAM" },
+        { "type": "listen", "item": "MAYDAY" },
+        { "type": "tap", "item": "CAPTAIN" },
+        { "type": "listen", "item": "STAY SAFE" },
+        { "type": "tap", "item": "GO NORTH" },
+        { "type": "listen", "item": "FREEDOM" },
+        { "type": "tap", "item": "COURAGE" },
+        { "type": "mcq", "item": "X" },
+        { "type": "reverse", "item": "J" }
+      ]
+    },
+    "lesson100": {
+      "title": "Büyük Final",
+      "category": "advanced",
+      "content": "Her şey karışık — Mors ustası ol!",
+      "questions": [
+        { "type": "mcq", "item": "E" },
+        { "type": "reverse", "item": "T" },
+        { "type": "listen", "item": "SOS" },
+        { "type": "tap", "item": "HELLO" },
+        { "type": "listen", "item": "RESCUE" },
+        { "type": "tap", "item": "DANGER" },
+        { "type": "listen", "item": "THE QUICK BROWN FOX" },
+        { "type": "tap", "item": "I LOVE MORSE CODE" },
+        { "type": "listen", "item": "MISSION COMPLETE" },
+        { "type": "tap", "item": "SEND HELP" },
+        { "type": "mcq", "item": "Q" },
+        { "type": "reverse", "item": "Z" }
       ]
     }
   }

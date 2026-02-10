@@ -85,6 +85,18 @@
   background-color: var(--color-bg-white);
 }
 
+[data-theme="dark"] .category-header {
+  background: linear-gradient(135deg, var(--color-primary), #312e81);
+}
+
+[data-theme="dark"] .category-header.locked {
+  background: linear-gradient(135deg, #475569, #334155);
+}
+
+[data-theme="dark"] .category-header.completed {
+  background: linear-gradient(135deg, #059669, #047857);
+}
+
 [data-theme="dark"] .mcq-option {
   background: var(--color-bg-white);
   color: var(--color-text);

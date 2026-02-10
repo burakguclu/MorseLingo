@@ -153,10 +153,115 @@
 .lesson-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   max-height: 68vh;
   overflow-y: auto;
   padding-right: 4px;
+}
+
+/* --- KATEGORİ STİLLERİ --- */
+.category-section {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.category-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-dark, #3730a3)
+  );
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-family);
+  text-align: left;
+}
+
+.category-header:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.category-header.locked {
+  background: linear-gradient(135deg, var(--color-locked), #94a3b8);
+  cursor: default;
+  opacity: 0.75;
+}
+
+.category-header.locked:hover {
+  filter: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.category-header.completed {
+  background: linear-gradient(135deg, var(--color-correct), #059669);
+}
+
+.category-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.category-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.category-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.category-progress {
+  font-size: 12px;
+  opacity: 0.85;
+  font-weight: 500;
+}
+
+.category-arrow {
+  font-size: 12px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.category-header.open .category-arrow {
+  transform: rotate(180deg);
+}
+
+.category-lessons {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0 0 0;
+}
+
+.category-lessons.open {
+  display: flex;
+  animation: categorySlideDown 0.3s ease;
+}
+
+@keyframes categorySlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .lesson-list::-webkit-scrollbar {
