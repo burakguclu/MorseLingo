@@ -1,143 +1,219 @@
 /* --- 6. EKRAN 2: ALIŞTIRMA STİLLERİ --- */
 #screenExercise {
   flex-grow: 1;
-  padding-bottom: 15px;
+  padding: 20px 24px;
 }
+
 .lesson-header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 16px;
   flex-shrink: 0;
 }
+
 #btnBackToMenu {
   background: none;
-  border: 2px solid var(--color-border);
-  color: var(--color-text-light);
+  border: 2px solid var(--color-border-light);
+  color: var(--color-text-muted);
   padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 20px;
+  border-radius: var(--radius-md);
+  font-size: 18px;
   line-height: 1;
-  margin-right: 15px;
   flex-shrink: 0;
+  transition: all 0.15s ease;
 }
+
 #btnBackToMenu:hover {
-  background-color: #f0f0f0;
+  background: var(--color-bg);
+  border-color: var(--color-border);
+  color: var(--color-text);
 }
+
 .progress-bar {
   flex-grow: 1;
-  height: 20px;
+  height: 14px;
   background-color: var(--color-border-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-full);
   overflow: hidden;
 }
+
 .progress-fill {
   height: 100%;
   width: 0%;
-  background-color: var(--color-success);
-  border-radius: var(--radius-lg);
-  transition: width 0.3s ease-in-out;
+  background: linear-gradient(90deg, var(--color-success), #34D399);
+  border-radius: var(--radius-full);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.exercise-instruction {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
 .feedback-area {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 15px;
-  min-height: 2.5em;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 16px;
+  min-height: 2em;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   flex-shrink: 0;
-}
-.feedback-correct {
-  color: var(--color-success);
-}
-.feedback-wrong {
-  color: var(--color-danger);
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
 }
 
-/* --- 6a. ALIŞTIRMA 1: DİNLE & YAZ --- */
+.feedback-correct {
+  color: var(--color-success-dark);
+  background: var(--color-success-bg);
+}
+
+.feedback-wrong {
+  color: var(--color-danger-dark);
+  background: var(--color-danger-bg);
+}
+
+.feedback-failed {
+  color: var(--color-danger);
+  font-weight: 800;
+  font-size: 18px !important;
+  background: var(--color-danger-bg);
+}
+
+/* --- 6a. DİNLE & YAZ --- */
 #exerciseListen {
   text-align: center;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  /* DÜZELTME: Üste yaslandı */
   justify-content: flex-start;
-  padding-top: 20px;
+  padding-top: 24px;
   align-items: center;
-}
-#exerciseListen button {
-  background-color: var(--color-primary-light);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  margin: 10px 5px;
-  border-radius: var(--radius-sm);
-  font-size: 16px;
-}
-#listen_btnPlaySound {
-  background-color: var(--color-success);
-}
-#listen_input {
-  font-size: 24px;
-  padding: 10px;
-  width: 90%;
-  max-width: 250px;
-  text-align: center;
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  margin-top: 15px;
-  text-transform: uppercase;
-}
-#listen_input:disabled {
-  background-color: #eee;
-  opacity: 0.7;
+  gap: 12px;
 }
 
-/* --- 7. EKRAN 3: TAMAMLAMA EKRANI --- */
+#exerciseListen button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-family);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease;
+}
+
+#exerciseListen button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+#listen_btnPlaySound {
+  background: linear-gradient(135deg, var(--color-success), var(--color-success-dark)) !important;
+  padding: 14px 32px !important;
+  font-size: 17px !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3) !important;
+}
+
+#listen_input {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--font-family);
+  padding: 14px 16px;
+  width: 90%;
+  max-width: 260px;
+  text-align: center;
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: var(--color-bg);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+#listen_input:focus {
+  border-color: var(--color-primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--color-primary-bg);
+}
+
+#listen_input:disabled {
+  background-color: var(--color-border-lightest);
+  opacity: 0.6;
+}
+
+/* --- 7. TAMAMLAMA EKRANI --- */
 #screenComplete {
   text-align: center;
-}
-#screenComplete button {
-  background-color: var(--color-success);
-  color: white;
-  border: none;
-  padding: 15px 25px;
-  margin: 10px;
-  border-radius: var(--radius-sm);
-  font-size: 18px;
-}
-#btnMenuAfterComplete {
-  background-color: var(--color-primary-light);
-}
-.xp-gained {
-  font-size: 20px;
-  font-weight: bold;
-  color: var(--color-primary-light);
-  margin-top: 10px;
+  padding: 40px 32px;
+  animation: fadeSlideUp 0.4s ease;
 }
 
-/* --- 8. CAN SİSTEMİ STİLLERİ --- */
+#screenComplete h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+#screenComplete button {
+  background: linear-gradient(135deg, var(--color-success), var(--color-success-dark));
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  margin: 8px;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-family);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  transition: all 0.2s ease;
+}
+
+#screenComplete button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+#btnMenuAfterComplete {
+  background: var(--color-primary) !important;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3) !important;
+}
+
+#btnMenuAfterComplete:hover {
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4) !important;
+}
+
+.xp-gained {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 12px 0;
+}
+
+/* --- 8. CAN SİSTEMİ --- */
 .heart-display {
   display: flex;
-  gap: 4px;
-  margin: 0 15px;
+  gap: 3px;
   flex-shrink: 0;
 }
+
 .heart {
-  font-size: 24px;
+  font-size: 22px;
   opacity: 1;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
 }
+
 .heart.lost {
-  opacity: 0.2;
-  transform: scale(0.9);
-}
-.feedback-failed {
-  color: var(--color-danger);
-  font-weight: bold;
-  font-size: 20px !important;
+  opacity: 0.15;
+  transform: scale(0.8);
+  filter: grayscale(1);
 }
 
 /* --- 9. FLASHCARD MODÜLÜ --- */
@@ -149,45 +225,43 @@
   justify-content: flex-start;
   padding-top: 20px;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
+
 #exerciseFlashcard .exercise-instruction {
-  font-size: 16px;
-  color: var(--color-text-light);
-  margin-bottom: 0;
+  font-size: 15px;
+  color: var(--color-text-muted);
 }
+
 .flashcard {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-primary-light)
-  );
+  background: linear-gradient(135deg, var(--color-primary) 0%, #818CF8 100%);
   color: #fff;
-  border-radius: var(--radius-lg);
-  padding: 28px 36px;
-  box-shadow:
-    var(--shadow-md),
-    0 0 30px rgba(88, 86, 214, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 32px 40px;
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   width: 90%;
-  max-width: 320px;
+  max-width: 300px;
   animation: flashcardIn 0.4s ease;
 }
+
 .flashcard-letter {
-  font-size: 72px;
+  font-size: 80px;
   font-weight: 800;
   line-height: 1;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .flashcard-code {
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 600;
-  letter-spacing: 10px;
+  letter-spacing: 12px;
   opacity: 0.9;
 }
+
 .flashcard-visual {
   display: flex;
   align-items: center;
@@ -195,52 +269,57 @@
   gap: 8px;
   margin-top: 8px;
 }
+
 .flashcard-visual .dit {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
 }
+
 .flashcard-visual .dah {
   width: 44px;
   height: 16px;
   border-radius: 8px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
 }
+
 .flashcard-play-btn {
-  background-color: var(--color-success) !important;
+  background: linear-gradient(135deg, var(--color-success), var(--color-success-dark)) !important;
   color: #fff !important;
   border: none;
-  padding: 14px 28px;
-  border-radius: var(--radius-md);
-  font-size: 18px;
+  padding: 14px 32px;
+  border-radius: var(--radius-lg);
+  font-size: 17px;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition:
-    transform 0.15s,
-    box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  transition: all 0.2s ease;
 }
+
 .flashcard-play-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
+
 .flashcard-continue-btn {
-  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
   color: #fff !important;
   border: none;
-  padding: 14px 28px;
-  border-radius: var(--radius-md);
-  font-size: 18px;
+  padding: 14px 32px;
+  border-radius: var(--radius-lg);
+  font-size: 17px;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition:
-    transform 0.15s,
-    box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+  transition: all 0.2s ease;
 }
+
 .flashcard-continue-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
 }
+
 @keyframes flashcardIn {
   from {
     opacity: 0;
@@ -262,144 +341,170 @@
   justify-content: flex-start;
   padding-top: 20px;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
+
 .mcq-play-btn {
-  background-color: var(--color-success) !important;
+  background: linear-gradient(135deg, var(--color-success), var(--color-success-dark)) !important;
   color: #fff !important;
   border: none;
-  padding: 12px 24px;
-  border-radius: var(--radius-md);
-  font-size: 17px;
+  padding: 12px 28px;
+  border-radius: var(--radius-lg);
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  transition: all 0.2s ease;
 }
+
+.mcq-play-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
 .mcq-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  width: 90%;
+  width: 92%;
   max-width: 360px;
 }
+
 .mcq-option {
-  padding: 14px 10px;
-  font-size: 20px;
-  font-weight: 700;
-  border: 2px solid var(--color-border);
+  padding: 16px 12px;
+  font-size: 22px;
+  font-weight: 800;
+  font-family: var(--font-family);
+  border: 2.5px solid var(--color-border-light);
   border-radius: var(--radius-md);
   background: #fff;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.15s ease;
 }
+
 .mcq-option:hover:not(:disabled) {
   border-color: var(--color-primary);
-  background: #f0eeff;
-  transform: translateY(-1px);
+  background: var(--color-primary-bg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
+
 .mcq-option:disabled {
   cursor: default;
-  opacity: 0.7;
 }
+
 .mcq-option.selected-correct {
   border-color: var(--color-success);
-  background: #e8f5e9;
-  color: var(--color-success);
+  background: var(--color-success-bg);
+  color: var(--color-success-dark);
 }
+
 .mcq-option.selected-wrong {
   border-color: var(--color-danger);
-  background: #ffebee;
-  color: var(--color-danger);
+  background: var(--color-danger-bg);
+  color: var(--color-danger-dark);
 }
+
 .mcq-option.reveal-correct {
   border-color: var(--color-success);
-  background: #e8f5e9;
+  background: var(--color-success-bg);
 }
 
 /* Ters modül - mors kodu gösterimi */
 .reverse-code-display {
-  background: linear-gradient(135deg, #37474f, #546e7a);
+  background: linear-gradient(135deg, #334155, #475569);
   color: #fff;
-  border-radius: var(--radius-lg);
-  padding: 20px 32px;
+  border-radius: var(--radius-xl);
+  padding: 24px 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   width: 90%;
-  max-width: 320px;
-  box-shadow: var(--shadow-md);
+  max-width: 300px;
+  box-shadow: 0 8px 24px rgba(51, 65, 85, 0.25);
 }
+
 .reverse-code-text {
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: 8px;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 10px;
 }
 
 /* --- 11. İPUCU & MORS TABLOSU --- */
 .exercise-tools {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 8px;
 }
+
 .btn-hint,
 .btn-morse-table {
-  background: none;
-  border: 1.5px solid var(--color-border);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border-light);
   color: var(--color-text-light);
   padding: 6px 14px;
-  border-radius: var(--radius-lg);
-  font-size: 14px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.15s ease;
 }
-.btn-hint:hover,
+
+.btn-hint:hover:not(:disabled),
 .btn-morse-table:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  background: #f0eeff;
+  background: var(--color-primary-bg);
 }
+
 .btn-hint:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: default;
 }
+
 .hint-display {
   text-align: center;
-  padding: 10px 16px;
+  padding: 12px 18px;
   margin-bottom: 10px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, #fff8e1, #ffecb3);
-  border: 1.5px solid #ffc107;
-  color: #5d4037;
-  font-size: 16px;
+  background: var(--color-warning-bg);
+  border: 1.5px solid var(--color-warning);
+  color: #92400E;
+  font-size: 15px;
   font-weight: 600;
   animation: hintFadeIn 0.3s ease;
 }
+
 .hint-display .hint-code {
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 4px;
   display: block;
   margin-top: 4px;
 }
+
 .hint-display .hint-visual {
   display: flex;
   justify-content: center;
   gap: 6px;
   margin-top: 6px;
 }
+
 .hint-display .hint-visual .dit {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #5d4037;
+  background: #92400E;
 }
+
 .hint-display .hint-visual .dah {
   width: 32px;
   height: 12px;
   border-radius: 6px;
-  background: #5d4037;
+  background: #92400E;
 }
+
 @keyframes hintFadeIn {
   from {
     opacity: 0;
@@ -411,113 +516,136 @@
   }
 }
 
-/* Modal Overlay */
+/* Modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   animation: modalFadeIn 0.2s ease;
 }
+
 .modal-overlay.hidden {
   display: none;
 }
+
 .modal-content {
   background: var(--color-bg-white);
-  border-radius: var(--radius-lg);
-  padding: 24px;
+  border-radius: var(--radius-xl);
+  padding: 28px;
   width: 92%;
-  max-width: 480px;
-  max-height: 85vh;
+  max-width: 520px;
+  max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-xl);
   animation: modalSlideIn 0.3s ease;
 }
+
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--color-border-light);
-  padding-bottom: 12px;
 }
+
 .modal-header h3 {
   margin: 0;
   font-size: 18px;
+  font-weight: 700;
   color: var(--color-text);
 }
+
 .btn-close-modal {
-  background: none;
+  background: var(--color-bg);
   border: none;
-  font-size: 22px;
+  font-size: 18px;
   cursor: pointer;
   color: var(--color-text-muted);
-  padding: 4px 8px;
-  border-radius: var(--radius-sm);
-  transition: all 0.15s;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
 }
+
 .btn-close-modal:hover {
-  background: #f0f0f0;
+  background: var(--color-border-light);
   color: var(--color-text);
 }
+
 .morse-table-body {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   gap: 8px;
 }
+
 .morse-table-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px 6px;
-  border: 1px solid var(--color-border-light);
+  border: 1.5px solid var(--color-border-light);
   border-radius: var(--radius-md);
-  background: #fafafa;
-  transition: all 0.15s;
+  background: var(--color-bg);
+  transition: all 0.15s ease;
 }
+
 .morse-table-item:hover {
   border-color: var(--color-primary);
-  background: #f0eeff;
+  background: var(--color-primary-bg);
 }
+
 .morse-table-letter {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 800;
   color: var(--color-primary);
 }
+
 .morse-table-code {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--color-text-light);
   letter-spacing: 2px;
   margin-top: 2px;
+  font-weight: 600;
 }
+
 .morse-table-visual {
   display: flex;
   gap: 3px;
   margin-top: 4px;
 }
+
 .morse-table-visual .dit {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--color-text-muted);
 }
+
 .morse-table-visual .dah {
   width: 20px;
   height: 8px;
   border-radius: 4px;
   background: var(--color-text-muted);
 }
+
 @keyframes modalFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
 @keyframes modalSlideIn {
   from {
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
+    transform: translateY(20px) scale(0.95);
   }
   to {
     opacity: 1;

@@ -1,88 +1,103 @@
-/* --- 12. YENİ: LİDER TABLOSU EKRANI --- */
+/* --- LİDER TABLOSU EKRANI --- */
 
-/* Kupa butonu stili (id="btnLeaderboard") kaldırıldı,
-  çünkü buton artık .menu-buttons-group içinde
-  (Bu kural css/3-menu.css içinde)
-*/
+#screenLeaderboard {
+  animation: fadeSlideUp 0.3s ease;
+}
 
-/* YENİ: İkonlu Geri Butonları (Lider Tablosu & Alıştırma) */
 .btn-icon-back {
   background: none;
-  border: 2px solid var(--color-border);
-  color: var(--color-text-light);
+  border: 2px solid var(--color-border-light);
+  color: var(--color-text-muted);
   padding: 8px 12px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1;
-  margin-right: 15px;
+  margin-right: 12px;
   flex-shrink: 0;
-  transition: background-color 0.2s;
-}
-.btn-icon-back:hover {
-  background-color: #f0f0f0;
+  transition: all 0.15s ease;
 }
 
-/* Lider tablosu listesi */
+.btn-icon-back:hover {
+  background: var(--color-bg);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
 .leaderboard-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  overflow-y: auto; /* Liste taşarsa kaydır */
-  max-height: 60vh;
+  overflow-y: auto;
+  max-height: 64vh;
 }
+
+.leaderboard-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.leaderboard-list::-webkit-scrollbar-thumb {
+  background: var(--color-border-light);
+  border-radius: var(--radius-full);
+}
+
 .leaderboard-list li {
   display: flex;
   align-items: center;
-  padding: 12px 10px;
+  padding: 14px 12px;
   border-bottom: 1px solid var(--color-border-lightest);
-  font-size: 16px;
+  font-size: 15px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s ease;
 }
+
+.leaderboard-list li:hover {
+  background: var(--color-bg);
+}
+
 .leaderboard-list li:last-child {
   border-bottom: none;
 }
 
-/* Sıra numarası (1., 2., 3.) */
 .leaderboard-list .rank {
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: 800;
+  font-size: 18px;
   color: var(--color-text-muted);
   width: 40px;
   flex-shrink: 0;
   text-align: center;
 }
-.leaderboard-list li:nth-child(1) .rank {
-  color: #ffd700;
-}
-.leaderboard-list li:nth-child(2) .rank {
-  color: #c0c0c0;
-}
-.leaderboard-list li:nth-child(3) .rank {
-  color: #cd7f32;
+
+.leaderboard-list li:nth-child(1) .rank { color: #F59E0B; }
+.leaderboard-list li:nth-child(2) .rank { color: #94A3B8; }
+.leaderboard-list li:nth-child(3) .rank { color: #D97706; }
+
+.leaderboard-list li:nth-child(1) {
+  background: var(--color-warning-bg);
+  border-radius: var(--radius-md);
 }
 
-/* Kullanıcı adı */
 .leaderboard-list .name {
   flex-grow: 1;
-  padding: 0 10px;
+  padding: 0 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: bold; /* Kullanıcı adları belirgin olsun */
+  font-weight: 700;
+  color: var(--color-text);
 }
 
-/* XP Puanı */
 .leaderboard-list .xp {
-  font-weight: bold;
-  color: #007bff;
-  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-primary);
+  font-size: 16px;
   flex-shrink: 0;
 }
 
-/* Yükleniyor... mesajı */
 #leaderboardLoading {
   text-align: center;
-  color: #888;
-  padding: 20px;
+  color: var(--color-text-muted);
+  padding: 24px;
   font-style: italic;
+  font-size: 14px;
 }

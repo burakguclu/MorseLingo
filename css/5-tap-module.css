@@ -1,89 +1,111 @@
-/* --- 6b. ALIŞTIRMA 2: GÖR & VUR (Masaüstü) --- */
+/* --- 6b. GÖR & VUR (Tap) --- */
 #exerciseTap {
   text-align: center;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
+
 .tap-info-group {
   flex-shrink: 0;
 }
+
 #exerciseTap .question-display {
-  margin-bottom: 15px;
-  font-size: 18px;
-}
-.taps-display {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-size: 16px;
+  font-weight: 600;
   color: var(--color-text-light);
 }
+
+.taps-display {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
 #tap_challenge,
 .tap-display-box {
   display: block;
-  font-size: 36px;
-  font-weight: bold;
+  font-size: 32px;
+  font-weight: 800;
   color: var(--color-primary);
-  margin-top: 5px;
-  letter-spacing: 2px;
-  min-height: 50px;
+  margin-top: 4px;
+  letter-spacing: 3px;
+  min-height: 44px;
   background-color: var(--color-bg);
-  padding: 10px;
-  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-border-light);
   word-break: break-all;
 }
+
 #tap_currentTapsDisplay {
   color: var(--color-primary-light);
-  font-size: 28px;
-  min-height: 40px;
+  font-size: 26px;
+  min-height: 38px;
 }
+
 #tap_committedWordDisplay {
   color: var(--color-primary);
 }
 
-/* .tap-spacer kuralı kaldırıldı */
-
 #tap_btnMorseKey {
-  width: 190px;
-  height: 190px;
-  background-color: var(--color-danger);
+  width: 170px;
+  height: 170px;
+  background: linear-gradient(145deg, #EF4444, #DC2626);
   color: white;
-  font-size: 20px;
-  font-weight: bold;
-  border: 5px solid var(--color-danger-dark);
+  font-size: 18px;
+  font-weight: 800;
+  font-family: var(--font-family);
+  border: 6px solid var(--color-danger-dark);
   border-radius: 50%;
   cursor: pointer;
-  /* DÜZELTME: margin-top: auto tuşu aşağı iter, margin-bottom onu yukarı çeker */
   margin: auto auto 30px auto;
-  transition: all 0.1s;
+  transition: all 0.1s ease;
   touch-action: manipulation;
   align-self: center;
   flex-grow: 0;
   flex-shrink: 0;
   aspect-ratio: 1 / 1;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
+  letter-spacing: 1px;
 }
+
 #tap_btnMorseKey:active {
-  background-color: #ff475a;
-  transform: scale(0.95);
+  background: linear-gradient(145deg, #F87171, #EF4444);
+  transform: scale(0.93);
   border-width: 8px;
+  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
 }
+
 #exerciseTap .controls {
   flex-shrink: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 10px;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  margin-top: 14px;
+  margin-bottom: 6px;
 }
+
 #exerciseTap .controls button {
-  background-color: var(--color-primary-light);
+  background: var(--color-primary);
   color: white;
   border: none;
-  padding: 12px 20px;
-  margin: 0;
-  border-radius: var(--radius-sm);
-  font-size: 16px;
-  width: 48%;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-family);
+  width: 46%;
+  transition: all 0.15s ease;
 }
+
+#exerciseTap .controls button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
 #tap_btnClear {
-  background-color: var(--color-muted);
+  background: var(--color-muted) !important;
 }

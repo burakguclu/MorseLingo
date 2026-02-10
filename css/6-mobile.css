@@ -1,130 +1,312 @@
-/* -------------------------------------------------
---- 10. MOBİL UYUMLULUK (Responsive Design) ---
--------------------------------------------------
-*/
+/* --- MOBİL UYUMLULUK (Responsive Design) --- */
 
-/* 600px'den küçük ekranlar için (Telefonlar) */
+/* Telefonlar (600px ve altı) */
 @media (max-width: 600px) {
-    main {
-        padding: 10px 5px 0 5px;
-        height: 100vh;
-        overflow: hidden;
-    }
-    
-    .screen {
-        padding: 15px;
-        margin-bottom: 0;
-        flex-grow: 1;
-        border-radius: 8px 8px 0 0;
-        height: 100%;
-        overflow: hidden;
-    }
-        
-    .main-header {
-        padding: 10px 15px;
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-    }
-    .user-profile {
-        gap: 10px;
-        width: 100%;
-        justify-content: space-between;
-    }
-    h1 {
-        font-size: 22px;
-    }
-    
-    .lesson-button {
-        padding: 15px;
-    }
-    .lesson-button .lesson-title {
-        font-size: 18px;
-    }
-    .lesson-button .lesson-content {
-        font-size: 14px;
-    }
-    
-    .lesson-header {
-        gap: 10px;
-        margin-bottom: 15px;
-        flex-shrink: 0;
-    }
-    #btnBackToMenu {
-        margin-right: 0;
-        padding: 8px 12px;
-        font-size: 20px;
-        line-height: 1;
-    }
-    .heart {
-        font-size: 20px;
-    }
-    .heart-display {
-        margin: 0 5px;
-        gap: 2px;
-    }
-    
-    /* VURMA MODÜLÜ (YENİ MOBİL YERLEŞİM) */
-    #exerciseTap {
-        height: 100%;
-        flex-grow: 1;
-        justify-content: flex-start;
-        padding-bottom: 15px;
-        overflow: hidden;
-    }
-    .tap-info-group {
-        flex-shrink: 0;
-    }
-    #tap_challenge, .tap-display-box {
-        font-size: 24px;
-        min-height: 30px;
-        padding: 5px 8px;
-    }
-    #tap_currentTapsDisplay {
-        font-size: 22px;
-        min-height: 30px;
-    }
-    
-    #exerciseTap .controls {
-        flex-shrink: 0;
-        width: 100%;
-        margin-top: 10px;
-        margin-bottom: 5px;
-    }
-    #exerciseTap .controls button {
-        width: 48%;
-        padding: 10px 10px; 
-        font-size: 18px;
-    }
+  .main-header {
+    height: 52px;
+    padding: 0 14px;
+  }
 
-    #exerciseTap .feedback-area {
-        flex-shrink: 0;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    
-    /* .tap-spacer kuralı kaldırıldı */
+  .main-header h1 {
+    font-size: 18px;
+  }
 
-    #tap_btnMorseKey {
-        width: 85%;
-        max-width: 150px; 
-        height: auto;
-        aspect-ratio: 1 / 1;
-        font-size: 18px; 
-        flex-grow: 0;
-        flex-shrink: 0;
-        /* DÜZELTME: 'auto' tuşu aşağı iter, '70px' sizin istediğiniz boşluk */
-        margin: auto auto 70px auto; 
-    }
-    
-    /* DİNLEME MODÜLÜ */
-    #exerciseListen {
-        flex-grow: 1;
-        justify-content: flex-start; 
-        padding-top: 20px;
-    }
-    #listen_input {
-        width: 95%;
-        font-size: 20px;
-    }
+  .user-profile {
+    gap: 6px;
+  }
+
+  #userEmailDisplay {
+    display: none;
+  }
+
+  #userXpDisplay,
+  #userStreakDisplay {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  #btnLogout {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+
+  main {
+    padding: 10px 8px 0;
+    height: calc(100vh - 52px);
+    overflow: hidden;
+  }
+
+  .screen {
+    padding: 18px 14px;
+    margin-bottom: 0;
+    flex-grow: 1;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    box-shadow: var(--shadow-sm);
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  h2 {
+    font-size: 19px;
+  }
+
+  /* MENÜ */
+  #screenMenu {
+    padding: 16px 12px;
+  }
+
+  .lesson-list {
+    max-height: calc(100vh - 190px);
+    gap: 8px;
+  }
+
+  .lesson-button {
+    padding: 14px 12px;
+    gap: 12px;
+    border-left-width: 4px;
+  }
+
+  .lesson-button .lesson-title {
+    font-size: 14px;
+  }
+
+  .lesson-button .lesson-content {
+    font-size: 12px;
+  }
+
+  .lesson-button .lesson-number {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .menu-header {
+    margin-bottom: 12px;
+  }
+
+  #btnLeaderboard {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  #btnResetProgress {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  /* ALIŞTIRMA HEADER */
+  .lesson-header {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  #btnBackToMenu {
+    padding: 6px 10px;
+    font-size: 16px;
+  }
+
+  .progress-bar {
+    height: 10px;
+  }
+
+  .heart {
+    font-size: 18px;
+  }
+
+  .heart-display {
+    gap: 2px;
+  }
+
+  /* ARAÇLAR */
+  .exercise-tools {
+    margin-bottom: 4px;
+  }
+
+  .btn-hint,
+  .btn-morse-table {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  /* DİNLEME */
+  #exerciseListen {
+    padding-top: 14px;
+    gap: 8px;
+  }
+
+  #listen_input {
+    width: 95%;
+    font-size: 24px;
+    padding: 12px;
+  }
+
+  #exerciseListen button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  /* FLASHCARD */
+  .flashcard {
+    padding: 24px 28px;
+    max-width: 260px;
+  }
+
+  .flashcard-letter {
+    font-size: 64px;
+  }
+
+  .flashcard-code {
+    font-size: 26px;
+    letter-spacing: 8px;
+  }
+
+  .flashcard-play-btn,
+  .flashcard-continue-btn {
+    padding: 12px 24px !important;
+    font-size: 15px !important;
+  }
+
+  /* MCQ / REVERSE */
+  .mcq-options {
+    width: 95%;
+    gap: 8px;
+  }
+
+  .mcq-option {
+    padding: 14px 8px;
+    font-size: 20px;
+  }
+
+  .reverse-code-display {
+    padding: 18px 24px;
+    max-width: 260px;
+  }
+
+  .reverse-code-text {
+    font-size: 30px;
+    letter-spacing: 8px;
+  }
+
+  /* TAP */
+  #exerciseTap {
+    overflow: hidden;
+  }
+
+  #tap_challenge,
+  .tap-display-box {
+    font-size: 22px;
+    min-height: 28px;
+    padding: 6px 8px;
+  }
+
+  #tap_currentTapsDisplay {
+    font-size: 20px;
+    min-height: 28px;
+  }
+
+  #exerciseTap .controls {
+    margin-top: 10px;
+  }
+
+  #exerciseTap .controls button {
+    padding: 10px 14px;
+    font-size: 14px;
+    width: 46%;
+  }
+
+  #tap_btnMorseKey {
+    width: 80%;
+    max-width: 140px;
+    height: auto;
+    font-size: 16px;
+    margin: auto auto 50px auto;
+    border-width: 5px;
+  }
+
+  /* FEEDBACK */
+  .feedback-area {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-top: 10px;
+    min-height: 1.8em;
+  }
+
+  /* TAMAMLAMA */
+  #screenComplete {
+    padding: 28px 16px;
+  }
+
+  #screenComplete h2 {
+    font-size: 22px;
+  }
+
+  #screenComplete button {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+  .xp-gained {
+    font-size: 20px;
+  }
+
+  /* MODAL */
+  .modal-content {
+    width: 95%;
+    padding: 18px;
+    max-height: 85vh;
+    border-radius: var(--radius-lg);
+  }
+
+  .morse-table-body {
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    gap: 6px;
+  }
+
+  .morse-table-item {
+    padding: 8px 4px;
+  }
+
+  .morse-table-letter {
+    font-size: 16px;
+  }
+
+  .morse-table-code {
+    font-size: 11px;
+  }
+
+  /* LİDER TABLOSU */
+  .leaderboard-list {
+    max-height: calc(100vh - 200px);
+  }
+
+  /* FOOTER */
+  .main-footer {
+    padding: 6px;
+    font-size: 11px;
+  }
+}
+
+/* Tablet ve Masaüstü */
+@media (min-width: 768px) {
+  main {
+    padding: 40px 24px;
+  }
+
+  .screen {
+    max-width: 520px;
+  }
+
+  #screenExercise {
+    max-width: 560px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .screen {
+    max-width: 540px;
+  }
+
+  #screenExercise {
+    max-width: 600px;
+  }
 }

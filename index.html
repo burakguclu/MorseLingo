@@ -16,7 +16,7 @@
     />
     <meta name="author" content="Burak Güçlü" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#005a9c" />
+    <meta name="theme-color" content="#4F46E5" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="MorseLingo - Mors Alfabesini Öğren" />
@@ -43,6 +43,14 @@
     />
     <meta name="apple-mobile-web-app-title" content="MorseLingo" />
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="css/1-main.css" />
     <link rel="stylesheet" href="css/2-auth.css" />
     <link rel="stylesheet" href="css/3-menu.css" />
@@ -55,10 +63,7 @@
   <body>
     <header class="main-header">
       <h1>MorseLingo</h1>
-      <div
-        class="header-right-group"
-        style="display: flex; align-items: center"
-      >
+      <div class="header-right-group">
         <div id="userProfile" class="user-profile hidden">
           <span id="userEmailDisplay"></span>
           <span id="userXpDisplay">0 XP</span>
@@ -221,7 +226,11 @@
             📋 Tablo
           </button>
         </div>
-        <div id="hintDisplay" class="hint-display hidden" aria-live="polite"></div>
+        <div
+          id="hintDisplay"
+          class="hint-display hidden"
+          aria-live="polite"
+        ></div>
 
         <div id="exerciseListen" class="exercise-module hidden">
           <p id="listen_instruction" class="exercise-instruction">
