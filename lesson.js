@@ -598,8 +598,24 @@ export function handleHintRequest() {
   if (!currentLesson.isActive) return;
   const question = currentLesson.plan[currentLesson.questionIndex];
   if (question.type === "flashcard") return; // flashcard'da ipucu gerekmez
-  const morseCode = MORSE_DATA[question.item] || "";
-  ui.showHint(domElements, question.item, morseCode);
+
+  const item = question.item;
+
+  // Tek karakter ise direkt MORSE_DATA'dan al
+  if (item.length === 1) {
+    const morseCode = MORSE_DATA[item] || "";
+    ui.showHint(domElements, item, morseCode);
+  } else {
+    // Çok harfli kelime: her harf için mors kodunu al
+    const letterCodes = [];
+    for (const ch of item.toUpperCase()) {
+      const code = MORSE_DATA[ch];
+      if (code) {
+        letterCodes.push({ letter: ch, code });
+      }
+    }
+    ui.showWordHint(domElements, item, letterCodes);
+  }
 }
 
 /**

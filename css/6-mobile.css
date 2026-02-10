@@ -451,7 +451,43 @@
 
   /* Alıştırma ekranı genişlet */
   #screenExercise {
-    max-width: 700px;
+    max-width: 900px;
+  }
+
+  /* Alıştırma 2-kolon layout */
+  .exercise-layout {
+    flex-direction: row;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .exercise-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .exercise-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 20px;
+  }
+
+  .exercise-sidebar .exercise-tools {
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+
+  .exercise-sidebar .btn-hint,
+  .exercise-sidebar .btn-morse-table {
+    width: 100%;
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .exercise-sidebar .hint-display {
+    margin-bottom: 0;
   }
 
   /* Tamamlandı ekranı */
@@ -477,7 +513,11 @@
   }
 
   #screenExercise {
-    max-width: 740px;
+    max-width: 960px;
+  }
+
+  .exercise-sidebar {
+    width: 240px;
   }
 
   #screenComplete {

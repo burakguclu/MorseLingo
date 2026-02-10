@@ -648,7 +648,10 @@ export function showFeedback(elements, isCorrect, message, type) {
   else return;
 
   feedbackEl.textContent = message;
-  if (isCorrect) {
+  if (!message) {
+    // Mesaj boşsa renkleri temizle
+    feedbackEl.className = "feedback-area";
+  } else if (isCorrect) {
     feedbackEl.className = "feedback-area feedback-correct";
   } else {
     feedbackEl.className = "feedback-area feedback-wrong";
@@ -763,6 +766,35 @@ export function showHint(elements, item, morseCode) {
     <span class="hint-code">${morseCode}</span>
     <span class="hint-visual">${visualHTML}</span>
   `;
+  elements.hintDisplay.classList.remove("hidden");
+  elements.btnHint.disabled = true;
+}
+
+/**
+ * Kelime ipucu gösterir — her harfin mors kodunu ayrı ayrı gösterir.
+ */
+export function showWordHint(elements, word, letterCodes) {
+  let html = `<div style="text-align:center;font-weight:600;margin-bottom:6px;">İpucu: <strong>${word}</strong></div>`;
+  html += '<div class="hint-word-breakdown">';
+  for (const { letter, code } of letterCodes) {
+    let visualHTML = "";
+    for (const ch of code) {
+      if (ch === ".") {
+        visualHTML += '<span class="dit"></span>';
+      } else if (ch === "-") {
+        visualHTML += '<span class="dah"></span>';
+      }
+    }
+    html += `
+      <div class="hint-letter-item">
+        <span class="hint-letter-char">${letter}</span>
+        <span class="hint-code">${code}</span>
+        <span class="hint-visual">${visualHTML}</span>
+      </div>`;
+  }
+  html += "</div>";
+
+  elements.hintDisplay.innerHTML = html;
   elements.hintDisplay.classList.remove("hidden");
   elements.btnHint.disabled = true;
 }

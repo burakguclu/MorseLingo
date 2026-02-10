@@ -302,140 +302,169 @@
             </div>
           </div>
 
-          <div class="exercise-tools">
-            <button id="btnHint" class="btn-hint" aria-label="İpucu göster">
-              💡 İpucu
-            </button>
-            <button
-              id="btnMorseTable"
-              class="btn-morse-table"
-              aria-label="Mors tablosunu aç"
-            >
-              📋 Tablo
-            </button>
-          </div>
-          <div
-            id="hintDisplay"
-            class="hint-display hidden"
-            aria-live="polite"
-          ></div>
-
-          <div id="exerciseListen" class="exercise-module hidden">
-            <p id="listen_instruction" class="exercise-instruction">
-              Duyduğunu buraya yaz:
-            </p>
-            <button id="listen_btnPlaySound" aria-label="Mors sesini çal">
-              Sesi Çal
-            </button>
-            <label for="listen_input" class="sr-only">Cevabınızı yazın</label>
-            <input
-              type="text"
-              id="listen_input"
-              placeholder="Harf veya kelime"
-            />
-            <button id="listen_btnCheckAnswer" aria-label="Cevabı kontrol et">
-              Kontrol Et
-            </button>
-            <p
-              id="listen_pFeedback"
-              class="feedback-area"
-              aria-live="polite"
-            ></p>
-          </div>
-
-          <div id="exerciseFlashcard" class="exercise-module hidden">
-            <p class="exercise-instruction">Bu derste öğreneceğin:</p>
-            <div class="flashcard">
-              <span id="flashcard_letter" class="flashcard-letter">E</span>
-              <span id="flashcard_code" class="flashcard-code">.</span>
-              <div class="flashcard-visual" id="flashcard_visual"></div>
-            </div>
-            <button
-              id="flashcard_btnPlaySound"
-              aria-label="Mors sesini dinle"
-              class="flashcard-play-btn"
-            >
-              🔊 Dinle
-            </button>
-            <button id="flashcard_btnContinue" class="flashcard-continue-btn">
-              Devam Et →
-            </button>
-          </div>
-
-          <div id="exerciseMcq" class="exercise-module hidden">
-            <p id="mcq_instruction" class="exercise-instruction">
-              Duyduğun harf hangisi?
-            </p>
-            <button
-              id="mcq_btnPlaySound"
-              class="mcq-play-btn"
-              aria-label="Mors sesini çal"
-            >
-              🔊 Sesi Çal
-            </button>
-            <div
-              id="mcq_options"
-              class="mcq-options"
-              role="radiogroup"
-              aria-label="Şıklar"
-            ></div>
-            <p id="mcq_pFeedback" class="feedback-area" aria-live="polite"></p>
-          </div>
-
-          <div id="exerciseReverse" class="exercise-module hidden">
-            <p class="exercise-instruction">Bu mors kodunu oku:</p>
-            <div class="reverse-code-display">
-              <span id="reverse_code" class="reverse-code-text">.-</span>
-              <div id="reverse_visual" class="flashcard-visual"></div>
-            </div>
-            <div
-              id="reverse_options"
-              class="mcq-options"
-              role="radiogroup"
-              aria-label="Şıklar"
-            ></div>
-            <p
-              id="reverse_pFeedback"
-              class="feedback-area"
-              aria-live="polite"
-            ></p>
-          </div>
-
-          <div id="exerciseTap" class="exercise-module hidden">
-            <div class="tap-info-group">
-              <div class="question-display">
-                Vurman gereken:
-                <span id="tap_challenge" class="tap-display-box">A</span>
-              </div>
-              <div class="taps-display">
-                Mevcut vuruş (Harf):
-                <span id="tap_currentTapsDisplay" class="tap-display-box"
-                  >_</span
+          <div class="exercise-layout">
+            <!-- Sol: Soru ve cevap alanı -->
+            <div class="exercise-main">
+              <div id="exerciseListen" class="exercise-module hidden">
+                <p id="listen_instruction" class="exercise-instruction">
+                  Duyduğunu buraya yaz:
+                </p>
+                <button id="listen_btnPlaySound" aria-label="Mors sesini çal">
+                  Sesi Çal
+                </button>
+                <label for="listen_input" class="sr-only"
+                  >Cevabınızı yazın</label
                 >
-              </div>
-              <div class="taps-display">
-                Tamamlanan vuruşlar (Kelime):
-                <span id="tap_committedWordDisplay" class="tap-display-box"
-                  >_</span
+                <input
+                  type="text"
+                  id="listen_input"
+                  placeholder="Harf veya kelime"
+                />
+                <button
+                  id="listen_btnCheckAnswer"
+                  aria-label="Cevabı kontrol et"
                 >
+                  Kontrol Et
+                </button>
+                <p
+                  id="listen_pFeedback"
+                  class="feedback-area"
+                  aria-live="polite"
+                ></p>
+              </div>
+
+              <div id="exerciseFlashcard" class="exercise-module hidden">
+                <p class="exercise-instruction">Bu derste öğreneceğin:</p>
+                <div class="flashcard">
+                  <span id="flashcard_letter" class="flashcard-letter">E</span>
+                  <span id="flashcard_code" class="flashcard-code">.</span>
+                  <div class="flashcard-visual" id="flashcard_visual"></div>
+                </div>
+                <button
+                  id="flashcard_btnPlaySound"
+                  aria-label="Mors sesini dinle"
+                  class="flashcard-play-btn"
+                >
+                  🔊 Dinle
+                </button>
+                <button
+                  id="flashcard_btnContinue"
+                  class="flashcard-continue-btn"
+                >
+                  Devam Et →
+                </button>
+              </div>
+
+              <div id="exerciseMcq" class="exercise-module hidden">
+                <p id="mcq_instruction" class="exercise-instruction">
+                  Duyduğun harf hangisi?
+                </p>
+                <button
+                  id="mcq_btnPlaySound"
+                  class="mcq-play-btn"
+                  aria-label="Mors sesini çal"
+                >
+                  🔊 Sesi Çal
+                </button>
+                <div
+                  id="mcq_options"
+                  class="mcq-options"
+                  role="radiogroup"
+                  aria-label="Şıklar"
+                ></div>
+                <p
+                  id="mcq_pFeedback"
+                  class="feedback-area"
+                  aria-live="polite"
+                ></p>
+              </div>
+
+              <div id="exerciseReverse" class="exercise-module hidden">
+                <p class="exercise-instruction">Bu mors kodunu oku:</p>
+                <div class="reverse-code-display">
+                  <span id="reverse_code" class="reverse-code-text">.-</span>
+                  <div id="reverse_visual" class="flashcard-visual"></div>
+                </div>
+                <div
+                  id="reverse_options"
+                  class="mcq-options"
+                  role="radiogroup"
+                  aria-label="Şıklar"
+                ></div>
+                <p
+                  id="reverse_pFeedback"
+                  class="feedback-area"
+                  aria-live="polite"
+                ></p>
+              </div>
+
+              <div id="exerciseTap" class="exercise-module hidden">
+                <div class="tap-info-group">
+                  <div class="question-display">
+                    Vurman gereken:
+                    <span id="tap_challenge" class="tap-display-box">A</span>
+                  </div>
+                  <div class="taps-display">
+                    Mevcut vuruş (Harf):
+                    <span id="tap_currentTapsDisplay" class="tap-display-box"
+                      >_</span
+                    >
+                  </div>
+                  <div class="taps-display">
+                    Tamamlanan vuruşlar (Kelime):
+                    <span id="tap_committedWordDisplay" class="tap-display-box"
+                      >_</span
+                    >
+                  </div>
+                </div>
+                <div class="controls">
+                  <button id="tap_btnClear" aria-label="Vuruşları temizle">
+                    Temizle
+                  </button>
+                  <button
+                    id="tap_btnCheckAnswer"
+                    aria-label="Cevabı kontrol et"
+                  >
+                    Kontrol Et
+                  </button>
+                </div>
+                <p
+                  id="tap_pFeedback"
+                  class="feedback-area"
+                  aria-live="polite"
+                ></p>
+                <button
+                  id="tap_btnMorseKey"
+                  aria-label="Mors tuşu - basılı tut ve bırak"
+                >
+                  MORS TUŞU
+                </button>
               </div>
             </div>
-            <div class="controls">
-              <button id="tap_btnClear" aria-label="Vuruşları temizle">
-                Temizle
-              </button>
-              <button id="tap_btnCheckAnswer" aria-label="Cevabı kontrol et">
-                Kontrol Et
-              </button>
-            </div>
-            <p id="tap_pFeedback" class="feedback-area" aria-live="polite"></p>
-            <button
-              id="tap_btnMorseKey"
-              aria-label="Mors tuşu - basılı tut ve bırak"
-            >
-              MORS TUŞU
-            </button>
+            <!-- /exercise-main -->
+
+            <!-- Sağ: Araçlar paneli -->
+            <aside class="exercise-sidebar">
+              <div class="exercise-tools">
+                <button id="btnHint" class="btn-hint" aria-label="İpucu göster">
+                  💡 İpucu
+                </button>
+                <button
+                  id="btnMorseTable"
+                  class="btn-morse-table"
+                  aria-label="Mors tablosunu aç"
+                >
+                  📋 Tablo
+                </button>
+              </div>
+              <div
+                id="hintDisplay"
+                class="hint-display hidden"
+                aria-live="polite"
+              ></div>
+            </aside>
           </div>
+          <!-- /exercise-layout -->
         </div>
         <!-- /exerciseArea -->
       </section>
@@ -594,7 +623,7 @@
 
     <footer class="main-footer">
       <p>
-        © 2025 MorseLingo v1.6 —
+        © 2025 MorseLingo v1.7 —
         <a
           href="https://github.com/burakguclu/MorseLingo"
           target="_blank"

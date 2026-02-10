@@ -523,6 +523,27 @@
 }
 
 /* --- 11. İPUCU & MORS TABLOSU --- */
+
+/* Exercise Layout: mobilde tek kolon, masaüstünde 2 kolon */
+.exercise-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.exercise-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.exercise-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .exercise-tools {
   display: flex;
   justify-content: center;
@@ -594,6 +615,64 @@
   width: 32px;
   height: 12px;
   border-radius: 6px;
+  background: #92400e;
+}
+
+/* Kelime ipucu breakdown */
+.hint-word-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.hint-letter-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-md);
+  min-width: 48px;
+}
+
+[data-theme="dark"] .hint-letter-item {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.hint-letter-char {
+  font-size: 18px;
+  font-weight: 800;
+  color: #92400e;
+}
+
+.hint-letter-item .hint-code {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-top: 0;
+}
+
+.hint-letter-item .hint-visual {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.hint-letter-item .hint-visual .dit {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #92400e;
+}
+
+.hint-letter-item .hint-visual .dah {
+  width: 22px;
+  height: 8px;
+  border-radius: 4px;
   background: #92400e;
 }
 
