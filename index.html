@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
   <head>
     <meta charset="UTF-8" />
@@ -6,26 +6,41 @@
     <title>MorseLingo - Mors Alfabesini Öğren</title>
 
     <!-- SEO -->
-    <meta name="description" content="Mors alfabesini interaktif dersler, sesli alıştırmalar ve oyunlaştırılmış bir sistemle öğrenin. Dinle & yaz, mors tuşuyla vur, XP kazan!" />
-    <meta name="keywords" content="mors alfabesi, morse code, öğren, interaktif, eğitim, oyun" />
+    <meta
+      name="description"
+      content="Mors alfabesini interaktif dersler, sesli alıştırmalar ve oyunlaştırılmış bir sistemle öğrenin. Dinle & yaz, mors tuşuyla vur, XP kazan!"
+    />
+    <meta
+      name="keywords"
+      content="mors alfabesi, morse code, öğren, interaktif, eğitim, oyun"
+    />
     <meta name="author" content="Burak Güçlü" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#005a9c" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="MorseLingo - Mors Alfabesini Öğren" />
-    <meta property="og:description" content="İnteraktif derslerle mors alfabesini öğrenin. Dinle, yaz, vur ve XP kazan!" />
+    <meta
+      property="og:description"
+      content="İnteraktif derslerle mors alfabesini öğrenin. Dinle, yaz, vur ve XP kazan!"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://morselingo.web.app" />
     <meta property="og:locale" content="tr_TR" />
 
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>"
+    />
 
     <!-- PWA -->
     <link rel="manifest" href="manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="apple-mobile-web-app-title" content="MorseLingo" />
 
     <link rel="stylesheet" href="css/1-main.css" />
@@ -54,9 +69,10 @@
     </header>
 
     <main>
-      <div id="screenLogin" class="screen">
+      <section id="screenLogin" class="screen" aria-label="Giriş ekranı">
         <h2>Giriş Yapın</h2>
         <form id="loginForm" class="auth-form" action="javascript:void(0);">
+          <label for="loginEmail" class="sr-only">E-posta</label>
           <input
             type="email"
             id="loginEmail"
@@ -64,6 +80,7 @@
             required
             autocomplete="username"
           />
+          <label for="loginPassword" class="sr-only">Şifre</label>
           <input
             type="password"
             id="loginPassword"
@@ -74,17 +91,18 @@
           <button id="btnLoginEmail" type="submit">Giriş Yap</button>
         </form>
         <p class="separator">veya</p>
-        <button id="btnLoginGoogle">Google ile Giriş Yap</button>
+        <button id="btnLoginGoogle" aria-label="Google ile giriş yap">Google ile Giriş Yap</button>
         <p id="loginAuthError" class="feedback-area feedback-wrong"></p>
         <p class="auth-link-container">
           Hesabın yok mu?
-          <span id="linkToRegister" class="auth-link">Kayıt Ol</span>
+          <span id="linkToRegister" class="auth-link" role="button" tabindex="0">Kayıt Ol</span>
         </p>
-      </div>
+      </section>
 
-      <div id="screenRegister" class="screen hidden">
+      <section id="screenRegister" class="screen hidden" aria-label="Kayıt ekranı">
         <h2>Yeni Hesap Oluştur</h2>
         <form id="registerForm" class="auth-form" action="javascript:void(0);">
+          <label for="registerUsername" class="sr-only">Kullanıcı Adı</label>
           <input
             type="text"
             id="registerUsername"
@@ -92,6 +110,7 @@
             required
             autocomplete="username"
           />
+          <label for="registerEmail" class="sr-only">E-posta</label>
           <input
             type="email"
             id="registerEmail"
@@ -99,6 +118,7 @@
             required
             autocomplete="email"
           />
+          <label for="registerPassword" class="sr-only">Şifre</label>
           <input
             type="password"
             id="registerPassword"
@@ -106,6 +126,7 @@
             required
             autocomplete="new-password"
           />
+          <label for="registerPasswordConfirm" class="sr-only">Şifre Tekrar</label>
           <input
             type="password"
             id="registerPasswordConfirm"
@@ -118,11 +139,11 @@
         <p id="registerAuthError" class="feedback-area feedback-wrong"></p>
         <p class="auth-link-container">
           Zaten hesabın var mı?
-          <span id="linkToLogin" class="auth-link">Giriş Yap</span>
+          <span id="linkToLogin" class="auth-link" role="button" tabindex="0">Giriş Yap</span>
         </p>
-      </div>
+      </section>
 
-      <div id="screenMenu" class="screen hidden">
+      <section id="screenMenu" class="screen hidden" aria-label="Ders menüsü">
         <div class="menu-header">
           <h2>Dersler</h2>
           <div class="menu-buttons-group">
@@ -132,10 +153,10 @@
             </button>
           </div>
         </div>
-        <div id="lessonList" class="lesson-list"></div>
-      </div>
+        <nav id="lessonList" class="lesson-list" aria-label="Ders listesi"></nav>
+      </section>
 
-      <div id="screenExercise" class="screen hidden">
+      <section id="screenExercise" class="screen hidden" aria-label="Alıştırma">
         <div class="lesson-header">
           <button id="btnBackToMenu" title="Menüye Dön" class="btn-icon-back">
             ←
@@ -150,9 +171,10 @@
           <p id="listen_instruction" class="exercise-instruction">
             Duyduğunu buraya yaz:
           </p>
-          <button id="listen_btnPlaySound">Sesi Çal</button>
+          <button id="listen_btnPlaySound" aria-label="Mors sesini çal">Sesi Çal</button>
+          <label for="listen_input" class="sr-only">Cevabınızı yazın</label>
           <input type="text" id="listen_input" placeholder="Harf veya kelime" />
-          <button id="listen_btnCheckAnswer">Kontrol Et</button>
+          <button id="listen_btnCheckAnswer" aria-label="Cevabı kontrol et">Kontrol Et</button>
           <p id="listen_pFeedback" class="feedback-area"></p>
         </div>
 
@@ -178,19 +200,19 @@
             <button id="tap_btnCheckAnswer">Kontrol Et</button>
           </div>
           <p id="tap_pFeedback" class="feedback-area"></p>
-          <button id="tap_btnMorseKey">MORS TUŞU</button>
+          <button id="tap_btnMorseKey" aria-label="Mors tuşu - basılı tut ve bırak">MORS TUŞU</button>
         </div>
-      </div>
+      </section>
 
-      <div id="screenComplete" class="screen hidden">
+      <section id="screenComplete" class="screen hidden" aria-label="Ders tamamlandı">
         <h2>Harika!</h2>
         <p id="completeMessage">Dersi tamamladın!</p>
         <p id="xpGainedMessage" class="xp-gained"></p>
         <button id="btnNextLesson" class="hidden">Sıradaki Derse Geç</button>
         <button id="btnMenuAfterComplete">Ana Menüye Dön</button>
-      </div>
+      </section>
 
-      <div id="screenLeaderboard" class="screen hidden">
+      <section id="screenLeaderboard" class="screen hidden" aria-label="Lider tablosu">
         <div class="menu-header">
           <h2>🏆 Lider Tablosu</h2>
           <button
@@ -204,8 +226,12 @@
         <ol id="leaderboardList" class="leaderboard-list">
           <li id="leaderboardLoading">Yükleniyor...</li>
         </ol>
-      </div>
+      </section>
     </main>
+
+    <footer class="main-footer">
+      <p>© 2025 MorseLingo — <a href="https://github.com/burakguclu/MorseLingo" target="_blank" rel="noopener">GitHub</a></p>
+    </footer>
 
     <audio id="audioCorrect" src="sounds/correct.mp3" preload="auto"></audio>
     <audio id="audioWrong" src="sounds/wrong.mp3" preload="auto"></audio>
@@ -217,7 +243,9 @@
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker.register("/service-worker.js").catch(() => {});
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .catch(() => {});
         });
       }
     </script>
