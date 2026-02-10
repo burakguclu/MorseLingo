@@ -26,6 +26,7 @@ let userProgress = {
   lastLessonDate: null,
   username: "Ziyaretçi",
   email: "",
+  wrongAnswers: {},
 };
 
 /**
@@ -61,6 +62,7 @@ export function getNewUserProgress(username, email) {
     xp: 0,
     streak: 1,
     lastLessonDate: serverTimestamp(),
+    wrongAnswers: {},
   };
   return userProgress;
 }
@@ -78,6 +80,11 @@ export async function loadProgress() {
 
     if (docSnap.exists()) {
       userProgress = docSnap.data();
+
+      // Eski kullanıcılar için wrongAnswers alanı yoksa ekle
+      if (!userProgress.wrongAnswers) {
+        userProgress.wrongAnswers = {};
+      }
 
       // YENİ: Eski (Google) kullanıcılar için 'username' alanı ekle
       if (!userProgress.username) {
@@ -198,6 +205,35 @@ export async function resetProgress() {
     await saveProgress({ unlockedLessons: ["lesson1"] });
     showToast("Ders ilerlemesi sıfırlandı.", "warning");
   }
+}
+
+/**
+ * Yanlış cevap verilen harfi kaydeder (Spaced Repetition).
+ */
+export async function recordWrongAnswer(item) {
+  if (!currentUser) return;
+  // Sadece tek harfleri takip et (kelimeleri değil)
+  if (item.length !== 1) return;
+
+  if (!userProgress.wrongAnswers) {
+    userProgress.wrongAnswers = {};
+  }
+  userProgress.wrongAnswers[item] = (userProgress.wrongAnswers[item] || 0) + 1;
+  await saveProgress({ wrongAnswers: userProgress.wrongAnswers });
+}
+
+/**
+ * En çok yanlış yapılan harfleri döndürür (en kötüden en iyiye).
+ * @param {number} count - Kaç harf döndürülecek (varsayılan 8)
+ * @returns {Array<{letter: string, count: number}>}
+ */
+export function getWeakLetters(count = 8) {
+  const wa = userProgress.wrongAnswers || {};
+  const entries = Object.entries(wa)
+    .map(([letter, cnt]) => ({ letter, count: cnt }))
+    .filter((e) => e.count > 0)
+    .sort((a, b) => b.count - a.count);
+  return entries.slice(0, count);
 }
 
 /**

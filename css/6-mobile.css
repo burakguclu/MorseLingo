@@ -335,6 +335,69 @@
     padding: 6px;
     font-size: 11px;
   }
+
+  /* DERS GİRİŞİ */
+  .lesson-intro {
+    padding: 24px 16px;
+    min-height: 50vh;
+  }
+
+  .lesson-intro-icon {
+    font-size: 36px;
+  }
+
+  .lesson-intro-header h2 {
+    font-size: 18px;
+  }
+
+  .intro-letter-card {
+    padding: 12px 14px;
+    min-width: 75px;
+  }
+
+  .intro-letter {
+    font-size: 22px;
+  }
+
+  .intro-code {
+    font-size: 13px;
+  }
+
+  .btn-start-exercise {
+    padding: 12px 32px;
+    font-size: 15px;
+    width: 100%;
+  }
+
+  /* TEKRAR KARTI */
+  .review-card {
+    padding: 16px;
+  }
+
+  .review-card-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .review-card-header h3 {
+    font-size: 15px;
+  }
+
+  .weak-letter-tag {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+
+  /* TAMAMLANDI ÖZETİ */
+  .complete-summary-letters {
+    gap: 6px;
+  }
+
+  .summary-letter-tag {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
 }
 
 /* Tablet ve Masaüstü */

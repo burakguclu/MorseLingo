@@ -748,3 +748,203 @@
     transform: translateY(0) scale(1);
   }
 }
+
+/* --- DERS GİRİŞİ (PRE-LESSON) --- */
+.lesson-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  min-height: 60vh;
+  animation: fadeSlideUp 0.4s ease;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lesson-intro-header {
+  margin-bottom: 24px;
+}
+
+.lesson-intro-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.lesson-intro-header h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.lesson-intro-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin: 0 0 20px 0;
+}
+
+.lesson-intro-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  max-width: 400px;
+}
+
+.intro-letter-card {
+  background: var(--color-bg-white);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  min-width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.intro-letter-card:hover {
+  border-color: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.intro-letter {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.intro-code {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  letter-spacing: 3px;
+  font-family: monospace;
+}
+
+.intro-visual {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.intro-visual .dit {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.intro-visual .dah {
+  width: 24px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-primary);
+}
+
+.intro-content-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  background: var(--color-bg-white);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+  letter-spacing: 1px;
+}
+
+.lesson-intro-info {
+  margin-bottom: 24px;
+}
+
+.lesson-intro-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid rgba(79, 70, 229, 0.2);
+}
+
+.btn-start-exercise {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  color: #fff;
+  border: none;
+  padding: 14px 40px;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-family);
+}
+
+.btn-start-exercise:hover {
+  background: linear-gradient(135deg, var(--color-primary-hover), #3730a3);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.exercise-area.hidden {
+  display: none;
+}
+
+/* --- TAMAMLANDI ÖZETİ --- */
+.complete-summary {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.complete-summary-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin: 0 0 12px 0;
+}
+
+.complete-summary-letters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.summary-letter-tag {
+  background: var(--color-primary-bg);
+  border: 1.5px solid rgba(79, 70, 229, 0.2);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.summary-letter-tag strong {
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+.summary-letter-tag small {
+  color: var(--color-text-muted);
+  font-family: monospace;
+  letter-spacing: 1px;
+}

@@ -149,6 +149,25 @@ export function initDOMElements(maxHearts) {
 
     // Complete Screen Hearts
     completeHeartsValue: document.getElementById("completeHeartsValue"),
+
+    // Review Card
+    reviewCard: document.getElementById("reviewCard"),
+    weakLettersList: document.getElementById("weakLettersList"),
+    btnStartReview: document.getElementById("btnStartReview"),
+
+    // Lesson Intro
+    lessonIntro: document.getElementById("lessonIntro"),
+    exerciseArea: document.getElementById("exerciseArea"),
+    lessonIntroTitle: document.getElementById("lessonIntroTitle"),
+    lessonIntroContent: document.getElementById("lessonIntroContent"),
+    lessonIntroQuestionCount: document.getElementById(
+      "lessonIntroQuestionCount",
+    ),
+    btnStartExercise: document.getElementById("btnStartExercise"),
+
+    // Complete Summary
+    completeSummary: document.getElementById("completeSummary"),
+    completeSummaryLetters: document.getElementById("completeSummaryLetters"),
   };
 }
 
@@ -304,6 +323,97 @@ export function updateMenuProgress(elements, completedCount, totalCount) {
     const percent = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
     elements.menuProgressFill.style.width = `${percent}%`;
   }
+}
+
+/**
+ * Ders giriş ekranını gösterir (ne öğrenileceği).
+ * @param {object} elements
+ * @param {object} lessonData - { title, content, questions }
+ * @param {object} morseData - MORSE_CODE nesnesi
+ */
+export function showLessonIntro(elements, lessonData, morseData) {
+  if (!elements.lessonIntro || !elements.exerciseArea) return;
+
+  elements.lessonIntro.classList.remove("hidden");
+  elements.exerciseArea.classList.add("hidden");
+
+  elements.lessonIntroTitle.textContent = lessonData.title;
+  elements.lessonIntroQuestionCount.textContent = `${lessonData.questions.length} Soru`;
+
+  // İçerik kartları oluştur
+  elements.lessonIntroContent.innerHTML = "";
+
+  // Derste geçen benzersiz harfleri bul
+  const uniqueItems = [
+    ...new Set(
+      lessonData.questions
+        .map((q) => q.item)
+        .filter((item) => item.length === 1),
+    ),
+  ];
+
+  if (uniqueItems.length > 0) {
+    uniqueItems.forEach((item) => {
+      const code = morseData[item] || "";
+      const card = document.createElement("div");
+      card.className = "intro-letter-card";
+
+      // Visual dit/dah
+      let visualHTML = "";
+      for (const ch of code) {
+        if (ch === ".") visualHTML += '<span class="dit"></span>';
+        else if (ch === "-") visualHTML += '<span class="dah"></span>';
+      }
+
+      card.innerHTML = `
+        <span class="intro-letter">${item}</span>
+        <span class="intro-code">${code}</span>
+        <span class="intro-visual">${visualHTML}</span>
+      `;
+      elements.lessonIntroContent.appendChild(card);
+    });
+  } else {
+    // Kelime pratiği dersleri — içeriği sadece metin olarak göster
+    const textEl = document.createElement("p");
+    textEl.className = "intro-content-text";
+    textEl.textContent = lessonData.content;
+    elements.lessonIntroContent.appendChild(textEl);
+  }
+}
+
+/**
+ * Ders girişini gizler, egzersiz alanını gösterir.
+ */
+export function hideLessonIntro(elements) {
+  if (!elements.lessonIntro || !elements.exerciseArea) return;
+  elements.lessonIntro.classList.add("hidden");
+  elements.exerciseArea.classList.remove("hidden");
+}
+
+/**
+ * Tekrar dersi kartını günceller (zayıf harfleri gösterir).
+ * @param {object} elements
+ * @param {Array<{letter: string, count: number}>} weakLetters
+ * @param {object} morseData - MORSE_CODE verisi
+ */
+export function renderReviewCard(elements, weakLetters, morseData) {
+  if (!elements.reviewCard) return;
+
+  if (weakLetters.length < 2) {
+    elements.reviewCard.classList.add("hidden");
+    return;
+  }
+
+  elements.reviewCard.classList.remove("hidden");
+  elements.weakLettersList.innerHTML = "";
+
+  weakLetters.forEach((item) => {
+    const tag = document.createElement("span");
+    tag.className = "weak-letter-tag";
+    const morseCode = morseData[item.letter] || "";
+    tag.innerHTML = `<strong>${item.letter}</strong> <small>${morseCode}</small> <span class="weak-count">×${item.count}</span>`;
+    elements.weakLettersList.appendChild(tag);
+  });
 }
 
 /**
@@ -700,6 +810,39 @@ export function openMorseTable(elements, morseData) {
  */
 export function closeMorseTable(elements) {
   elements.morseTableModal.classList.add("hidden");
+}
+
+/**
+ * Tamamlandı ekranında öğrenilen harflerin özet kartını gösterir.
+ * @param {object} elements
+ * @param {string[]} learnedItems - Derste geçen benzersiz harfler
+ * @param {object} morseData - MORSE_CODE nesnesi
+ */
+export function showCompleteSummary(elements, learnedItems, morseData) {
+  if (!elements.completeSummary || !elements.completeSummaryLetters) return;
+
+  if (learnedItems.length === 0) {
+    elements.completeSummary.classList.add("hidden");
+    return;
+  }
+
+  elements.completeSummary.classList.remove("hidden");
+  elements.completeSummaryLetters.innerHTML = "";
+
+  learnedItems.forEach((item) => {
+    const code = morseData[item] || "";
+    const tag = document.createElement("span");
+    tag.className = "summary-letter-tag";
+
+    let visualHTML = "";
+    for (const ch of code) {
+      if (ch === ".") visualHTML += '<span class="dit"></span>';
+      else if (ch === "-") visualHTML += '<span class="dah"></span>';
+    }
+
+    tag.innerHTML = `<strong>${item}</strong> <small>${code}</small>`;
+    elements.completeSummaryLetters.appendChild(tag);
+  });
 }
 
 /**

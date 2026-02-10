@@ -257,3 +257,109 @@
   color: var(--color-danger);
   background: var(--color-danger-bg);
 }
+
+/* --- TEKRAR DERSİ KARTI --- */
+.review-card {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .review-card {
+  background: linear-gradient(135deg, #451a03, #78350f);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.review-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.review-card-icon {
+  font-size: 28px;
+  background: rgba(245, 158, 11, 0.15);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.review-card-header h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.review-card-desc {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.weak-letters-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.weak-letter-tag {
+  background: var(--color-bg-white);
+  border: 1.5px solid rgba(245, 158, 11, 0.3);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.weak-letter-tag strong {
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+.weak-letter-tag small {
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+.weak-letter-tag .weak-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+.btn-start-review {
+  width: 100%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-family);
+}
+
+.btn-start-review:hover {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}

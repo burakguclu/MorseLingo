@@ -31,9 +31,22 @@ async function onUserLogin(user) {
     onLessonSelect,
   );
   updateMenuProgressUI(userProgress);
+  updateReviewCardUI();
   ui.showScreen(domElements, "screenMenu");
 
   showToast(`Hoş geldin, ${userProgress.username || "Kullanıcı"}!`, "success");
+
+  // Günlük tekrar önerisi — zayıf harfler varsa
+  const weakLetters = store.getWeakLetters(3);
+  if (weakLetters.length >= 2) {
+    const letterList = weakLetters.map((w) => w.letter).join(", ");
+    setTimeout(() => {
+      showToast(
+        `📝 Günlük tekrar: ${letterList} harflerini tekrar et!`,
+        "warning",
+      );
+    }, 2500);
+  }
 
   // İlk kullanıcı için onboarding
   showOnboarding();
@@ -54,6 +67,14 @@ function onLessonSelect(lessonId, isLocked) {
   } else {
     lesson.startLesson(lessonId);
   }
+}
+
+/**
+ * Tekrar kartını günceller (zayıf harfleri gösterir).
+ */
+function updateReviewCardUI() {
+  const weakLetters = store.getWeakLetters(6);
+  ui.renderReviewCard(domElements, weakLetters, MORSE_DATA);
 }
 
 /**
@@ -108,6 +129,17 @@ function bindEventListeners() {
       onLessonSelect,
     );
     updateMenuProgressUI(userProgress);
+    updateReviewCardUI();
+  });
+
+  // Tekrar Dersi Butonu
+  domElements.btnStartReview.addEventListener("click", () => {
+    lesson.startReviewLesson();
+  });
+
+  // Ders Girişi "Derse Başla" Butonu
+  domElements.btnStartExercise.addEventListener("click", () => {
+    lesson.beginExercise();
   });
 
   // Lider Tablosu Butonu (Menü'de)
@@ -233,7 +265,11 @@ async function init() {
   // 4. Modülleri DOM ve Veri ile başlat
   auth.initAuth(domElements);
   store.initStore(domElements);
-  lesson.initLesson(domElements, MORSE_DATA, LESSON_DATA_MAP);
+  lesson.initLesson(domElements, MORSE_DATA, LESSON_DATA_MAP, () => {
+    updateReviewCardUI();
+    const userProgress = store.getUserProgress();
+    updateMenuProgressUI(userProgress);
+  });
   tapInput.initTapInput(domElements);
 
   // 5. Ayarları başlat (volume, frequency, dark mode)

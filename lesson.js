@@ -21,6 +21,7 @@ let currentLesson = {
   hearts: config.MAX_HEARTS,
 };
 let nextLessonIdToStart = null;
+let onMenuReturnCallback = null;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -29,10 +30,11 @@ function sleep(ms) {
 /**
  * Lesson modülünü başlatır ve DOM/veri'yi alır.
  */
-export function initLesson(elements, morseData, lessonData) {
+export function initLesson(elements, morseData, lessonData, onMenuReturn) {
   domElements = elements;
   MORSE_DATA = morseData;
   LESSON_DATA_MAP = lessonData;
+  onMenuReturnCallback = onMenuReturn || null;
 }
 
 /**
@@ -50,12 +52,21 @@ export function startLesson(lessonId) {
     plan: LESSON_DATA_MAP[lessonId].questions,
     questionIndex: 0,
     totalQuestions: LESSON_DATA_MAP[lessonId].questions.length,
-    isActive: true,
+    isActive: false,
     hearts: config.MAX_HEARTS,
   };
 
   ui.renderHearts(domElements, currentLesson.hearts, config.MAX_HEARTS);
   ui.showScreen(domElements, "screenExercise");
+  ui.showLessonIntro(domElements, LESSON_DATA_MAP[lessonId], MORSE_DATA);
+}
+
+/**
+ * Ders girişinden "Derse Başla" butonuna basıldığında çağrılır.
+ */
+export function beginExercise() {
+  ui.hideLessonIntro(domElements);
+  currentLesson.isActive = true;
   ui.updateProgress(domElements, 0);
   showQuestion();
 }
@@ -170,6 +181,7 @@ async function handleMcqSelect(selectedItem) {
   } else {
     audio.playEffect("wrong");
     ui.triggerAnimation(domElements, "mcq", "animate-wrong");
+    store.recordWrongAnswer(correctItem);
     loseLife("mcq");
   }
 }
@@ -198,6 +210,7 @@ async function handleReverseSelect(selectedItem) {
   } else {
     audio.playEffect("wrong");
     ui.triggerAnimation(domElements, "reverse", "animate-wrong");
+    store.recordWrongAnswer(correctItem);
     loseLife("reverse");
   }
 }
@@ -250,6 +263,7 @@ export async function handleAnswerCheck(e) {
   } else {
     audio.playEffect("wrong");
     ui.triggerAnimation(domElements, type, "animate-wrong");
+    store.recordWrongAnswer(correctItem);
     loseLife(type);
   }
 }
@@ -273,6 +287,71 @@ function nextQuestion() {
 }
 
 /**
+ * Tekrar dersi oluşturur — en çok yanlış yapılan harflerden otomatik ders planı yapar.
+ * @returns {boolean} Ders başladıysa true, yeterli veri yoksa false
+ */
+export function startReviewLesson() {
+  const weakLetters = store.getWeakLetters(6);
+  if (weakLetters.length < 2) {
+    showToast(
+      "Henüz yeterli tekrar verisi yok. Birkaç ders tamamla!",
+      "warning",
+    );
+    return false;
+  }
+
+  const letters = weakLetters.map((w) => w.letter);
+  const questions = [];
+
+  // Her zayıf harf için karışık soru tipleri
+  letters.forEach((letter) => {
+    questions.push({ type: "flashcard", item: letter });
+  });
+  letters.forEach((letter) => {
+    questions.push({ type: "mcq", item: letter });
+  });
+  letters.forEach((letter) => {
+    questions.push({ type: "listen", item: letter });
+  });
+  // İlk 4 harf için reverse & tap
+  letters.slice(0, 4).forEach((letter) => {
+    questions.push({ type: "reverse", item: letter });
+  });
+  letters.slice(0, 4).forEach((letter) => {
+    questions.push({ type: "tap", item: letter });
+  });
+
+  // Plan'ı karıştır (flashcardlar hariç — onlar başta kalsın)
+  const flashcards = questions.filter((q) => q.type === "flashcard");
+  const rest = questions.filter((q) => q.type !== "flashcard");
+  for (let i = rest.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [rest[i], rest[j]] = [rest[j], rest[i]];
+  }
+  const plan = [...flashcards, ...rest];
+
+  currentLesson = {
+    id: "review",
+    plan: plan,
+    questionIndex: 0,
+    totalQuestions: plan.length,
+    isActive: true,
+    hearts: config.MAX_HEARTS,
+  };
+
+  ui.renderHearts(domElements, currentLesson.hearts, config.MAX_HEARTS);
+  ui.showScreen(domElements, "screenExercise");
+  ui.hideLessonIntro(domElements);
+  ui.updateProgress(domElements, 0);
+  showQuestion();
+  return true;
+}
+
+/**
+ * Tekrar dersi tamamlandığında completeLesson'daki kilit açma mantığını atlar.
+ */
+
+/**
  * Dersi başarıyla tamamlar.
  * DÜZELTME: 'complete' sesini çalar (İstek 1)
  */
@@ -280,6 +359,33 @@ async function completeLesson() {
   currentLesson.isActive = false;
   audio.stopAllAudio();
   resetTapState();
+
+  // Tekrar dersi ise kilit açma mantığını atla
+  if (currentLesson.id === "review") {
+    const totalXPGained = config.XP_PER_LESSON_COMPLETE;
+    const xpMessage = `+${totalXPGained} XP kazandın!`;
+    await store.addXP(totalXPGained);
+
+    ui.showCompleteScreen(
+      domElements,
+      "Tekrar dersi tamamlandı! Harika iş!",
+      xpMessage,
+      false,
+      currentLesson.hearts,
+    );
+
+    // Öğrenilen harfler özeti
+    const learnedItems = [
+      ...new Set(
+        currentLesson.plan.map((q) => q.item).filter((i) => i.length === 1),
+      ),
+    ];
+    ui.showCompleteSummary(domElements, learnedItems, MORSE_DATA);
+
+    ui.triggerConfetti();
+    audio.playEffect("complete");
+    return;
+  }
 
   const lessonKeys = Object.keys(LESSON_DATA_MAP);
   const currentLessonIndex = lessonKeys.indexOf(currentLesson.id);
@@ -315,6 +421,15 @@ async function completeLesson() {
     hasNextLesson,
     currentLesson.hearts,
   );
+
+  // Öğrenilen harfler özeti
+  const learnedItems = [
+    ...new Set(
+      currentLesson.plan.map((q) => q.item).filter((i) => i.length === 1),
+    ),
+  ];
+  ui.showCompleteSummary(domElements, learnedItems, MORSE_DATA);
+
   ui.triggerConfetti();
 
   // 'correct' yerine 'complete' sesini çal
@@ -395,6 +510,7 @@ function failLesson(type) {
       onLessonSelect,
     );
     ui.showScreen(domElements, "screenMenu");
+    if (onMenuReturnCallback) onMenuReturnCallback();
   }, config.FAIL_LESSON_DELAY);
 }
 
@@ -424,6 +540,7 @@ export function exitLesson() {
     onLessonSelect,
   );
   ui.showScreen(domElements, "screenMenu");
+  if (onMenuReturnCallback) onMenuReturnCallback();
 }
 
 /**
@@ -441,6 +558,7 @@ export function startNextLesson() {
       onLessonSelect,
     );
     ui.showScreen(domElements, "screenMenu");
+    if (onMenuReturnCallback) onMenuReturnCallback();
   }
 }
 
