@@ -12,7 +12,12 @@ let soundEffects = {};
 
 function getAudioContext() {
   if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) {
+      console.warn("Web Audio API bu tarayıcıda desteklenmiyor.");
+      return null;
+    }
+    audioCtx = new AudioCtx();
   }
   return audioCtx;
 }
@@ -23,6 +28,7 @@ function sleep(ms) {
 
 function playSound(durationInMs) {
   const ctx = getAudioContext();
+  if (!ctx) return;
   const oscillator = ctx.createOscillator();
   oscillator.type = "sine";
   oscillator.frequency.value = config.MORSE_TONE;
@@ -92,6 +98,7 @@ export async function playMorseItem(item, MORSE_CODE) {
  */
 export function startTone() {
   const ctx = getAudioContext();
+  if (!ctx) return Date.now();
   if (currentOscillator) {
     currentOscillator.stop();
   }

@@ -38,6 +38,12 @@ export function initLesson(elements, morseData, lessonData) {
  * Dersi başlatır.
  */
 export function startLesson(lessonId) {
+  if (!LESSON_DATA_MAP[lessonId]) {
+    console.error("Geçersiz ders ID:", lessonId);
+    alert("Bu ders bulunamadı.");
+    return;
+  }
+
   currentLesson = {
     id: lessonId,
     plan: LESSON_DATA_MAP[lessonId].questions,

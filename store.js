@@ -71,35 +71,43 @@ export function getNewUserProgress(username, email) {
 export async function loadProgress() {
   if (!currentUser) return;
 
-  const userRef = doc(db, "users", currentUser.uid);
-  const docSnap = await getDoc(userRef);
+  try {
+    const userRef = doc(db, "users", currentUser.uid);
+    const docSnap = await getDoc(userRef);
 
-  if (docSnap.exists()) {
-    userProgress = docSnap.data();
+    if (docSnap.exists()) {
+      userProgress = docSnap.data();
 
-    // YENİ: Eski (Google) kullanıcılar için 'username' alanı ekle
-    if (!userProgress.username) {
+      // YENİ: Eski (Google) kullanıcılar için 'username' alanı ekle
+      if (!userProgress.username) {
+        const defaultUsername = currentUser.email.split("@")[0];
+        userProgress.username = defaultUsername;
+        // E-postayı da kaydet (eğer o da eksikse)
+        userProgress.email = currentUser.email;
+        await saveProgress({
+          username: defaultUsername,
+          email: currentUser.email,
+        });
+      }
+
+      await checkStreak(userRef);
+    } else {
+      // Bu artık SADECE Google ile ilk kez giriş yapan kullanıcılar için çalışır
       const defaultUsername = currentUser.email.split("@")[0];
-      userProgress.username = defaultUsername;
-      // E-postayı da kaydet (eğer o da eksikse)
-      userProgress.email = currentUser.email;
-      await saveProgress({
-        username: defaultUsername,
-        email: currentUser.email,
-      });
+      userProgress = getNewUserProgress(defaultUsername, currentUser.email);
+      await setDoc(userRef, userProgress);
     }
 
-    await checkStreak(userRef);
-  } else {
-    // Bu artık SADECE Google ile ilk kez giriş yapan kullanıcılar için çalışır
-    const defaultUsername = currentUser.email.split("@")[0];
-    userProgress = getNewUserProgress(defaultUsername, currentUser.email);
-    await setDoc(userRef, userProgress);
-  }
-
-  ui.showUserUI(domElements, currentUser, userProgress);
-}
-
+    ui.showUserUI(domElements, currentUser, userProgress);
+  } catch (e) {
+    console.error("İlerleme yüklenemedi:", e);
+    // Varsayılan ilerleme ile devam et
+    userProgress = getNewUserProgress(
+      currentUser.email ? currentUser.email.split("@")[0] : "Bilinmeyen",
+      currentUser.email || ""
+    );
+    ui.showUserUI(domElements, currentUser, userProgress);
+  }}
 /**
  * Kullanıcının ilerlemesini Firestore'a kaydeder (kısmi güncelleme).
  */
