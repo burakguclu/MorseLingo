@@ -90,7 +90,7 @@
   - **"Eşleştirme" (matching):** Harf-mors kod eşleştirmesi
   - **"Mors→Harf" ters alıştırma:** Mors kodu yazılı gösterilir, harfi yazması istenir
 
-- [ ] **D3.** İpucu/Yardım sistemi
+- [x] **D3.** İpucu/Yardım sistemi
   - Her soruda "İpucu Göster" butonu ekle
   - İpucu: İlgili harfin mors kodunu göster
   - Mors alfabesi referans tablosu (her zaman erişilebilir bir butonla)

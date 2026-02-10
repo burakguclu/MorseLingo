@@ -161,6 +161,23 @@ function bindEventListeners() {
     "click",
     lesson.handlePlaySound,
   );
+
+  // İpucu & Mors Tablosu Olayları
+  domElements.btnHint.addEventListener("click", lesson.handleHintRequest);
+  domElements.btnMorseTable.addEventListener(
+    "click",
+    lesson.handleMorseTableOpen,
+  );
+  domElements.btnCloseMorseTable.addEventListener(
+    "click",
+    lesson.handleMorseTableClose,
+  );
+  // Modal dışına tıklayınca kapat
+  domElements.morseTableModal.addEventListener("click", (e) => {
+    if (e.target === domElements.morseTableModal) {
+      lesson.handleMorseTableClose();
+    }
+  });
 }
 
 // --- 4. UYGULAMAYI BAŞLATMA ---

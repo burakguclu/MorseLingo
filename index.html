@@ -209,6 +209,20 @@
           </div>
         </div>
 
+        <div class="exercise-tools">
+          <button id="btnHint" class="btn-hint" aria-label="İpucu göster">
+            💡 İpucu
+          </button>
+          <button
+            id="btnMorseTable"
+            class="btn-morse-table"
+            aria-label="Mors tablosunu aç"
+          >
+            📋 Tablo
+          </button>
+        </div>
+        <div id="hintDisplay" class="hint-display hidden" aria-live="polite"></div>
+
         <div id="exerciseListen" class="exercise-module hidden">
           <p id="listen_instruction" class="exercise-instruction">
             Duyduğunu buraya yaz:
@@ -350,6 +364,22 @@
         </ol>
       </section>
     </main>
+
+    <div id="morseTableModal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Mors Alfabesi Tablosu</h3>
+          <button
+            id="btnCloseMorseTable"
+            class="btn-close-modal"
+            aria-label="Tabloyu kapat"
+          >
+            ✕
+          </button>
+        </div>
+        <div id="morseTableBody" class="morse-table-body"></div>
+      </div>
+    </div>
 
     <footer class="main-footer">
       <p>

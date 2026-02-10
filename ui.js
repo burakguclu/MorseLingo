@@ -131,6 +131,14 @@ export function initDOMElements(maxHearts) {
       options: document.getElementById("reverse_options"),
       feedback: document.getElementById("reverse_pFeedback"),
     },
+
+    // İpucu & Mors Tablosu
+    btnHint: document.getElementById("btnHint"),
+    btnMorseTable: document.getElementById("btnMorseTable"),
+    hintDisplay: document.getElementById("hintDisplay"),
+    morseTableModal: document.getElementById("morseTableModal"),
+    morseTableBody: document.getElementById("morseTableBody"),
+    btnCloseMorseTable: document.getElementById("btnCloseMorseTable"),
   };
 }
 
@@ -573,6 +581,88 @@ export function triggerAnimation(elements, type, animationClass) {
   setTimeout(() => {
     element.classList.remove(animationClass);
   }, 400);
+}
+
+/**
+ * İpucu butonunun görünürlüğünü ayarlar (flashcard'da gizle).
+ */
+export function setHintVisibility(elements, visible) {
+  if (visible) {
+    elements.btnHint.classList.remove("hidden");
+  } else {
+    elements.btnHint.classList.add("hidden");
+  }
+  // Her soru değiştiğinde ipucunu gizle
+  elements.hintDisplay.classList.add("hidden");
+  elements.hintDisplay.innerHTML = "";
+  elements.btnHint.disabled = false;
+}
+
+/**
+ * İpucu gösterir — harfin mors kodunu ve görsel dit/dah'ını gösterir.
+ */
+export function showHint(elements, item, morseCode) {
+  let visualHTML = "";
+  for (const ch of morseCode) {
+    if (ch === ".") {
+      visualHTML += '<span class="dit"></span>';
+    } else if (ch === "-") {
+      visualHTML += '<span class="dah"></span>';
+    }
+  }
+
+  elements.hintDisplay.innerHTML = `
+    İpucu: <strong>${item}</strong> =
+    <span class="hint-code">${morseCode}</span>
+    <span class="hint-visual">${visualHTML}</span>
+  `;
+  elements.hintDisplay.classList.remove("hidden");
+  elements.btnHint.disabled = true;
+}
+
+/**
+ * İpucu alanını gizler.
+ */
+export function hideHint(elements) {
+  elements.hintDisplay.classList.add("hidden");
+  elements.hintDisplay.innerHTML = "";
+}
+
+/**
+ * Mors tablosu modalini açar.
+ */
+export function openMorseTable(elements, morseData) {
+  elements.morseTableBody.innerHTML = "";
+
+  for (const [letter, code] of Object.entries(morseData)) {
+    const item = document.createElement("div");
+    item.className = "morse-table-item";
+
+    let visualHTML = "";
+    for (const ch of code) {
+      if (ch === ".") {
+        visualHTML += '<span class="dit"></span>';
+      } else if (ch === "-") {
+        visualHTML += '<span class="dah"></span>';
+      }
+    }
+
+    item.innerHTML = `
+      <span class="morse-table-letter">${letter}</span>
+      <span class="morse-table-code">${code}</span>
+      <span class="morse-table-visual">${visualHTML}</span>
+    `;
+    elements.morseTableBody.appendChild(item);
+  }
+
+  elements.morseTableModal.classList.remove("hidden");
+}
+
+/**
+ * Mors tablosu modalini kapatır.
+ */
+export function closeMorseTable(elements) {
+  elements.morseTableModal.classList.add("hidden");
 }
 
 /**

@@ -94,10 +94,12 @@ function showQuestion() {
   ui.showFeedback(domElements, true, "", "reverse");
 
   if (question.type === "flashcard") {
+    ui.setHintVisibility(domElements, false);
     const morseCode = MORSE_DATA[question.item] || "";
     ui.setupFlashcardUI(domElements, question.item, morseCode);
     audio.playMorseItem(question.item, MORSE_DATA);
   } else if (question.type === "listen") {
+    ui.setHintVisibility(domElements, true);
     ui.setupListenUI(domElements, question.item);
     audio.playMorseItem(question.item, MORSE_DATA).then(() => {
       if (currentLesson.isActive) {
@@ -106,9 +108,11 @@ function showQuestion() {
       }
     });
   } else if (question.type === "tap") {
+    ui.setHintVisibility(domElements, true);
     resetTapState();
     ui.setupTapUI(domElements, question.item);
   } else if (question.type === "mcq") {
+    ui.setHintVisibility(domElements, true);
     const allLetters = Object.keys(MORSE_DATA);
     const choices = generateMcqChoices(question.item, allLetters);
     ui.setupMcqUI(domElements, choices, question.item, handleMcqSelect);
@@ -118,6 +122,7 @@ function showQuestion() {
       }
     });
   } else if (question.type === "reverse") {
+    ui.setHintVisibility(domElements, true);
     const morseCode = MORSE_DATA[question.item] || "";
     const allLetters = Object.keys(MORSE_DATA);
     const choices = generateMcqChoices(question.item, allLetters);
@@ -452,4 +457,29 @@ function getLetterFromCode(code) {
     if (morseCode === code) return letter;
   }
   return "??";
+}
+
+/**
+ * 'İpucu Göster' butonuna basıldığında çalışır.
+ */
+export function handleHintRequest() {
+  if (!currentLesson.isActive) return;
+  const question = currentLesson.plan[currentLesson.questionIndex];
+  if (question.type === "flashcard") return; // flashcard'da ipucu gerekmez
+  const morseCode = MORSE_DATA[question.item] || "";
+  ui.showHint(domElements, question.item, morseCode);
+}
+
+/**
+ * 'Mors Tablosu' butonuna basıldığında çalışır.
+ */
+export function handleMorseTableOpen() {
+  ui.openMorseTable(domElements, MORSE_DATA);
+}
+
+/**
+ * Mors Tablosu kapatılmak istendiğinde çalışır.
+ */
+export function handleMorseTableClose() {
+  ui.closeMorseTable(domElements);
 }

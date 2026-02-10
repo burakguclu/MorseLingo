@@ -334,3 +334,193 @@
   font-weight: 700;
   letter-spacing: 8px;
 }
+
+/* --- 11. İPUCU & MORS TABLOSU --- */
+.exercise-tools {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.btn-hint,
+.btn-morse-table {
+  background: none;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-light);
+  padding: 6px 14px;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-hint:hover,
+.btn-morse-table:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: #f0eeff;
+}
+.btn-hint:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.hint-display {
+  text-align: center;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #fff8e1, #ffecb3);
+  border: 1.5px solid #ffc107;
+  color: #5d4037;
+  font-size: 16px;
+  font-weight: 600;
+  animation: hintFadeIn 0.3s ease;
+}
+.hint-display .hint-code {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  display: block;
+  margin-top: 4px;
+}
+.hint-display .hint-visual {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+.hint-display .hint-visual .dit {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #5d4037;
+}
+.hint-display .hint-visual .dah {
+  width: 32px;
+  height: 12px;
+  border-radius: 6px;
+  background: #5d4037;
+}
+@keyframes hintFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalFadeIn 0.2s ease;
+}
+.modal-overlay.hidden {
+  display: none;
+}
+.modal-content {
+  background: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 92%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: modalSlideIn 0.3s ease;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: 12px;
+}
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--color-text);
+}
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s;
+}
+.btn-close-modal:hover {
+  background: #f0f0f0;
+  color: var(--color-text);
+}
+.morse-table-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+.morse-table-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 6px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  background: #fafafa;
+  transition: all 0.15s;
+}
+.morse-table-item:hover {
+  border-color: var(--color-primary);
+  background: #f0eeff;
+}
+.morse-table-letter {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+.morse-table-code {
+  font-size: 14px;
+  color: var(--color-text-light);
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+.morse-table-visual {
+  display: flex;
+  gap: 3px;
+  margin-top: 4px;
+}
+.morse-table-visual .dit {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+}
+.morse-table-visual .dah {
+  width: 20px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-text-muted);
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
