@@ -92,12 +92,12 @@
   - İpucu: İlgili harfin mors kodunu göster
   - Mors alfabesi referans tablosu (her zaman erişilebilir bir butonla)
 
-- [ ] **D4.** Tekrar/Spaced Repetition sistemi
+- [x] **D4.** Tekrar/Spaced Repetition sistemi
   - Yanlış yapılan soruları takip et
   - "Tekrar Dersi" otomatik oluştur (en çok hata yapılan harflerden)
   - Günlük pratik önerisi
 
-- [ ] **D5.** Ders içi ilerleme göstergeleri
+- [x] **D5.** Ders içi ilerleme göstergeleri
   - Her dersin "content" alanında mors kodlarını da göster
   - Dersten önce kısa bir "Bu derste öğreneceklerin" özeti göster
   - Ders sonunda "Bu derste öğrendiklerin" özet kartı
@@ -125,6 +125,23 @@
 - [x] **E5.** Onboarding / İlk kullanıcı deneyimi
   - İlk girişte kısa bir "Nasıl kullanılır?" rehberi göster
   - Mors alfabesi nedir? kısa bir tanıtım
+
+---
+
+## 🟣 BÖLÜM F: DESKTOP LAYOUT OPTİMİZASYONU
+
+- [x] **F1.** Menü ekranı wide layout (sidebar + main)
+  - Desktop'ta (≥1024px) menü ekranını iki sütunlu yap
+  - Sol sütun: İlerleme kartı, tekrar dersi kartı, lider tablosu & sıfırla butonları
+  - Sağ sütun (ana alan): Ders listesi
+  - Menü ekranı max-width'i genişlet (≥1024px'de 900px+)
+
+- [x] **F2.** Alıştırma ekranı wide layout
+  - Desktop'ta alıştırma ekranı genişliğini artır (max-width 700px+)
+  - Mors tablosu ve ipucu alanını yan panele taşı (opsiyonel)
+
+- [x] **F3.** Tamamlandı ekranı wide layout
+  - Stat kartları ve özet harflerini yatay düzende daha geniş göster
 
 ---
 

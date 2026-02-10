@@ -192,55 +192,65 @@
       </section>
 
       <section id="screenMenu" class="screen hidden" aria-label="Ders menüsü">
-        <div class="menu-progress-card" id="menuProgressCard">
-          <div class="menu-progress-info">
-            <span class="menu-progress-label">İlerleme</span>
-            <span class="menu-progress-count" id="menuProgressCount"
-              >0 / 20</span
-            >
+        <!-- Desktop'ta sidebar olacak alan -->
+        <aside class="menu-sidebar">
+          <div class="menu-progress-card" id="menuProgressCard">
+            <div class="menu-progress-info">
+              <span class="menu-progress-label">İlerleme</span>
+              <span class="menu-progress-count" id="menuProgressCount"
+                >0 / 20</span
+              >
+            </div>
+            <div class="menu-progress-bar">
+              <div class="menu-progress-fill" id="menuProgressFill"></div>
+            </div>
           </div>
-          <div class="menu-progress-bar">
-            <div class="menu-progress-fill" id="menuProgressFill"></div>
+
+          <!-- Tekrar Dersi Kartı -->
+          <div id="reviewCard" class="review-card hidden">
+            <div class="review-card-header">
+              <span class="review-card-icon">🔄</span>
+              <div>
+                <h3>Tekrar Dersi</h3>
+                <p class="review-card-desc">Zayıf harflerini pekiştir</p>
+              </div>
+            </div>
+            <div id="weakLettersList" class="weak-letters-list"></div>
+            <button id="btnStartReview" class="btn-start-review">
+              Tekrar Dersine Başla
+            </button>
           </div>
-        </div>
-        <div class="menu-header">
-          <h2>Dersler</h2>
-          <div class="menu-buttons-group">
+
+          <div class="sidebar-actions">
             <button
               id="btnLeaderboard"
               title="Lider Tablosu"
               aria-label="Lider tablosunu gör"
+              class="sidebar-btn"
             >
-              🏆
+              🏆 Lider Tablosu
             </button>
             <button
               id="btnResetProgress"
               title="Tüm ilerlemeyi sıfırla"
               aria-label="İlerlemeyi sıfırla"
+              class="sidebar-btn sidebar-btn-danger"
             >
-              Sıfırla
+              🗑️ Sıfırla
             </button>
           </div>
-        </div>
-        <nav
-          id="lessonList"
-          class="lesson-list"
-          aria-label="Ders listesi"
-        ></nav>
+        </aside>
 
-        <!-- Tekrar Dersi Kartı -->
-        <div id="reviewCard" class="review-card hidden">
-          <div class="review-card-header">
-            <span class="review-card-icon">🔄</span>
-            <div>
-              <h3>Tekrar Dersi</h3>
-              <p class="review-card-desc">Zayıf harflerini pekiştir</p>
-            </div>
+        <!-- Desktop'ta ana içerik alanı -->
+        <div class="menu-main">
+          <div class="menu-header">
+            <h2>Dersler</h2>
           </div>
-          <div id="weakLettersList" class="weak-letters-list"></div>
-          <button id="btnStartReview" class="btn-start-review">
-            Tekrar Dersine Başla
-          </button>
+          <nav
+            id="lessonList"
+            class="lesson-list"
+            aria-label="Ders listesi"
+          ></nav>
         </div>
       </section>
 
@@ -584,7 +594,7 @@
 
     <footer class="main-footer">
       <p>
-        © 2025 MorseLingo v1.5 —
+        © 2025 MorseLingo v1.6 —
         <a
           href="https://github.com/burakguclu/MorseLingo"
           target="_blank"

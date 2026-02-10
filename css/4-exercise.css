@@ -884,7 +884,11 @@
 }
 
 .btn-start-exercise {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-hover)
+  );
   color: #fff;
   border: none;
   padding: 14px 40px;

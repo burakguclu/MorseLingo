@@ -411,16 +411,76 @@
   }
 
   #screenExercise {
+    max-width: 600px;
+  }
+
+  #screenComplete {
     max-width: 560px;
   }
 }
 
+/* Desktop Wide Layout */
 @media (min-width: 1024px) {
   .screen {
-    max-width: 540px;
+    max-width: 560px;
+  }
+
+  /* Menü ekranı geniş layout */
+  #screenMenu {
+    max-width: 920px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    padding: 28px;
+  }
+
+  .menu-sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    margin-bottom: 0;
+  }
+
+  .menu-main {
+    min-height: 0;
+  }
+
+  .menu-main .lesson-list {
+    max-height: calc(100vh - 220px);
+  }
+
+  /* Alıştırma ekranı genişlet */
+  #screenExercise {
+    max-width: 700px;
+  }
+
+  /* Tamamlandı ekranı */
+  #screenComplete {
+    max-width: 640px;
+  }
+
+  .complete-stats {
+    gap: 20px;
+  }
+
+  .complete-summary-letters {
+    gap: 10px;
+  }
+}
+
+/* Ultra-wide Desktop */
+@media (min-width: 1280px) {
+  #screenMenu {
+    max-width: 1020px;
+    grid-template-columns: 300px 1fr;
+    gap: 32px;
   }
 
   #screenExercise {
-    max-width: 600px;
+    max-width: 740px;
+  }
+
+  #screenComplete {
+    max-width: 680px;
   }
 }
