@@ -49,6 +49,7 @@
 /* --- 5. EKRAN 1: ANA MENÜ STİLLERİ --- */
 #screenMenu {
   padding: 24px;
+  overflow-y: auto;
 }
 
 /* --- WIDE LAYOUT: Sidebar + Main --- */
@@ -154,15 +155,15 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 68vh;
+  max-height: calc(100vh - 200px);
   overflow-y: auto;
   padding-right: 4px;
+  padding-bottom: 40px;
 }
 
 /* --- KATEGORİ STİLLERİ --- */
 .category-section {
   border-radius: var(--radius-lg);
-  overflow: hidden;
 }
 
 .category-header {
