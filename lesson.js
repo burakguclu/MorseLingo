@@ -31,7 +31,13 @@ function sleep(ms) {
 /**
  * Lesson modülünü başlatır ve DOM/veri'yi alır.
  */
-export function initLesson(elements, morseData, lessonData, categoriesData, onMenuReturn) {
+export function initLesson(
+  elements,
+  morseData,
+  lessonData,
+  categoriesData,
+  onMenuReturn,
+) {
   domElements = elements;
   MORSE_DATA = morseData;
   LESSON_DATA_MAP = lessonData;
