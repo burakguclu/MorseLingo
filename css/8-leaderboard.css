@@ -8,10 +8,10 @@
 /* YENİ: İkonlu Geri Butonları (Lider Tablosu & Alıştırma) */
 .btn-icon-back {
     background: none;
-    border: 2px solid #ccc;
-    color: #555;
+    border: 2px solid var(--color-border);
+    color: var(--color-text-light);
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     font-size: 20px;
     line-height: 1;
@@ -36,7 +36,7 @@
     display: flex;
     align-items: center;
     padding: 12px 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border-lightest);
     font-size: 16px;
 }
 .leaderboard-list li:last-child {
@@ -47,7 +47,7 @@
 .leaderboard-list .rank {
     font-weight: bold;
     font-size: 20px;
-    color: #888;
+    color: var(--color-text-muted);
     width: 40px;
     flex-shrink: 0;
     text-align: center;

@@ -8,37 +8,37 @@
 .auth-form input {
     padding: 12px;
     font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
 }
 .auth-form button {
     width: 100%;
     padding: 12px;
     font-size: 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     color: white;
-    background-color: #007bff;
+    background-color: var(--color-primary-light);
     margin-top: 5px;
 }
 #screenLogin .auth-form button {
-    background-color: #007bff;
+    background-color: var(--color-primary-light);
 }
 #screenRegister .auth-form button {
-    background-color: #28a745;
+    background-color: var(--color-success);
 }
 .separator {
     text-align: center;
-    color: #888;
+    color: var(--color-text-muted);
     margin: 15px 0;
 }
 #btnLoginGoogle {
     width: 100%;
     padding: 12px;
     font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg-white);
     color: #444;
     display: flex;
     align-items: center;
@@ -60,7 +60,7 @@
     font-size: 16px;
 }
 .auth-link {
-    color: #007bff;
+    color: var(--color-primary-light);
     text-decoration: underline;
     cursor: pointer;
 }
